@@ -32,6 +32,9 @@ class SettingsResourcePatch : AbstractSettingsResourcePatch(
         "biliroaming_setting_live_popups",
         "biliroaming_setting_customize_mine",
         "biliroaming_setting_customize_drawer",
+        "biliroaming_setting_customize_bottom",
+        "biliroaming_setting_customize_home",
+        "biliroaming_setting_home_tab",
     )
 
     override fun execute(context: ResourceContext): PatchResult {

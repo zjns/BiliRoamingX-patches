@@ -15,6 +15,9 @@
         <androidx.preference.SwitchPreferenceCompat
             android:key="purify_drawer_reddot"
             android:title="@string/biliroaming_purify_drawer_reddot_title" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="remove_vip_section"
+            android:title="@string/biliroaming_remove_vip_section_title" />
         <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.CustomizeDrawerFragment"
             android:key="customize_drawer"

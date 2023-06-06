@@ -1,4 +1,4 @@
-package app.revanced.patches.bilibili.misc.protofuf.patch
+package app.revanced.patches.bilibili.misc.protobuf.patch
 
 import app.revanced.extensions.toErrorResult
 import app.revanced.patcher.annotation.Description
@@ -10,7 +10,7 @@ import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.PatchResultSuccess
 import app.revanced.patcher.patch.annotations.Patch
 import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
-import app.revanced.patches.bilibili.misc.protofuf.fingerprints.MossServiceFingerprint
+import app.revanced.patches.bilibili.misc.protobuf.fingerprints.MossServiceFingerprint
 import org.jf.dexlib2.Opcode
 
 @Patch

@@ -1,4 +1,4 @@
-package app.revanced.patches.bilibili.misc.protofuf.fingerprints
+package app.revanced.patches.bilibili.misc.protobuf.fingerprints
 
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
 
