@@ -2,8 +2,10 @@ package app.revanced.util.resources
 
 import app.revanced.patcher.data.DomFileEditor
 import app.revanced.patcher.data.ResourceContext
+import app.revanced.patches.shared.settings.preference.impl.ArrayResource
 import app.revanced.patches.shared.settings.preference.impl.StringResource
 import app.revanced.patches.youtube.misc.settings.bytecode.patch.SettingsPatch
+import org.w3c.dom.Element
 import org.w3c.dom.Node
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
@@ -26,6 +28,28 @@ internal object ResourceUtils {
             val formatted = attributes.getNamedItem("formatted") == null
 
             SettingsPatch.addString(key, value, formatted)
+        }
+    }
+
+    internal fun ResourceContext.mergeArrays(host: String, pure: Boolean = true) {
+        this.iterateXmlNodeChildren(host, "resources") {
+            if (!it.hasAttributes()) return@iterateXmlNodeChildren
+
+            val attributes = it.attributes
+            val name = attributes.getNamedItem("name")!!.nodeValue!!
+            val childNodes = it.childNodes
+            val items = mutableListOf<StringResource>()
+            var raw = true
+            for (i in 0 until childNodes.length) {
+                val item = childNodes.item(i)
+                if (item !is Element) continue
+                val text = item.textContent.orEmpty()
+                if (text.startsWith("@"))
+                    raw = false
+                items.add(StringResource(text, ""))
+            }
+
+            SettingsPatch.addArray(ArrayResource(name, items, raw), pure)
         }
     }
 

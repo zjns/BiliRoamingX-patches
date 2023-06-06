@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="biliroaming_settings_title">哔哩漫游X</string>
+    <string name="biliroaming_full_screen_quality_title">视频全屏清晰度</string>
+    <string name="biliroaming_full_screen_quality_summary">设置视频全屏播放时默认的清晰度，当播放器画质选项为自动时此选项不生效</string>
+    <string name="biliroaming_block_up_rcmd_ads_title">屏蔽UP主推荐广告</string>
+    <string name="biliroaming_block_up_rcmd_ads_summary">屏蔽视频下方推荐栏及视频播放过程中，浮窗出现的UP主推荐广告，开启后会同时屏蔽评论区顶部推广横幅</string>
+    <string name="biliroaming_half_screen_quality_title">视频半屏清晰度</string>
+    <string name="biliroaming_half_screen_quality_summary">设置视频半屏播放时的清晰度，设置后会大幅降低视频的首次播放加载速度，旧版播放器（半屏时进度条在框内）仅支持跟随全屏清晰度</string>
+    <string name="biliroaming_force_old_player_title">强制使用旧版播放器</string>
+    <string name="biliroaming_need_reboot_dialog_title">需要重启才能生效</string>
+    <string name="biliroaming_need_reboot_dialog_confirm">立即重启</string>
+    <string name="biliroaming_need_reboot_dialog_later">稍后</string>
+    <string name="biliroaming_disable_story_full_title">关闭看一看按钮</string>
+    <string name="biliroaming_disable_story_full_summary">横屏稿件半屏时不显示看一看按钮</string>
+    <string name="biliroaming_purify_splash_title">净化开屏页面</string>
+    <string name="biliroaming_purify_splash_summary">去除启动客户端时的推广</string>
+    <string name="biliroaming_teenagers_mode_dialog_title">关闭青少年模式弹窗</string>
+    <string name="biliroaming_teenagers_mode_dialog_summary">仍可从侧滑菜单进入青少年模式</string>
+    <string name="biliroaming_replace_story_video_title">替换竖版视频</string>
+    <string name="biliroaming_replace_story_video_summary">替换竖版视频为正常视频</string>
+    <string name="biliroaming_purify_game_title">净化游戏中心</string>
+    <string name="biliroaming_purify_game_summary">去除首页右上角游戏中心</string>
+    <string name="biliroaming_purify_search_title">净化搜索页面</string>
+    <string name="biliroaming_purify_search_summary">去除搜索页面的热搜和推荐</string>
+    <string name="biliroaming_purify_live_popups_title">净化直播间浮窗</string>
+    <string name="biliroaming_purify_live_popups_summary">净化直播间各种浮窗</string>
+    <string name="biliroaming_forbid_switch_live_room_title">禁止滑动切换直播间</string>
+    <string name="biliroaming_forbid_switch_live_room_summary">禁止上下滑动切换直播间</string>
+    <string name="biliroaming_customize_mine_title">自定义我的页面</string>
+    <string name="biliroaming_customize_mine_summary">自定义我的页面需要展示的项目，净化红点，修改页面样式</string>
+    <string name="biliraoming_customize_drawer_title">需要展示的项目</string>
+    <string name="biliroaming_drawer_style_title">页面样式</string>
+    <string name="biliroaming_purify_drawer_reddot_title">净化红点</string>
+    <string name="biliroaming_remove_video_cmd_dms_title">移除视频浮窗</string>
+    <string name="biliroaming_remove_video_cmd_dms_summary">移除视频播放时出现的浮窗，包括三连关注、关联视频、投票弹幕、评分弹幕、投资当前UP主、跳转其他应用、免流引导等</string>
+</resources>

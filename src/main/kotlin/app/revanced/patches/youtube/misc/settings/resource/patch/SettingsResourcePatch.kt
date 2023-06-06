@@ -111,7 +111,7 @@ class SettingsResourcePatch : AbstractSettingsResourcePatch(
         private var preferencesEditor: DomFileEditor? = null
             set(value) {
                 field = value
-                preferencesNode = value.getNode("PreferenceScreen")
+                preferencesNode = value?.getNode("PreferenceScreen")
             }
 
         /* Companion delegates */
@@ -139,7 +139,8 @@ class SettingsResourcePatch : AbstractSettingsResourcePatch(
          *
          * @param arrayResource The array resource to add.
          */
-        fun addArray(arrayResource: ArrayResource) = AbstractSettingsResourcePatch.addArray(arrayResource)
+        fun addArray(arrayResource: ArrayResource, pure: Boolean = false) =
+            AbstractSettingsResourcePatch.addArray(arrayResource, pure)
 
         /**
          * Add a preference to the settings.

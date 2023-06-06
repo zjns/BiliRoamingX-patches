@@ -12,7 +12,8 @@ import org.w3c.dom.Document
  */
 internal class ArrayResource(
     name: String,
-    val items: List<StringResource>
+    val items: List<StringResource>,
+    val raw: Boolean = false,
 ) : BaseResource(name, "string-array") {
     override fun serialize(ownerDocument: Document, resourceCallback: (BaseResource) -> Unit) =
         super.serialize(ownerDocument, resourceCallback).apply {
@@ -22,7 +23,7 @@ internal class ArrayResource(
                 resourceCallback.invoke(item)
 
                 this.appendChild(ownerDocument.createElement("item").also { itemNode ->
-                    itemNode.textContent = "@string/${item.name}"
+                    itemNode.textContent = if (raw) item.name else "@string/${item.name}"
                 })
             }
         }

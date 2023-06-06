@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="biliroaming_full_screen_quality_entries">
+        <item>默认</item>
+        <item>240P</item>
+        <item>360P</item>
+        <item>480P</item>
+        <item>720P</item>
+        <item>720P 60帧</item>
+        <item>1080P</item>
+        <item>1080P 高码率</item>
+        <item>1080P 60帧</item>
+        <item>4K</item>
+        <item>8K</item>
+    </string-array>
+    <string-array name="biliroaming_full_screen_quality_values">
+        <item>0</item>
+        <item>6</item>
+        <item>16</item>
+        <item>32</item>
+        <item>64</item>
+        <item>74</item>
+        <item>80</item>
+        <item>112</item>
+        <item>116</item>
+        <item>120</item>
+        <item>127</item>
+    </string-array>
+    <string-array name="biliroaming_half_screen_quality_entries">
+        <item>默认</item>
+        <item>跟随全屏清晰度</item>
+        <item>240P</item>
+        <item>360P</item>
+        <item>480P</item>
+        <item>720P</item>
+        <item>720P 60帧</item>
+        <item>1080P</item>
+        <item>1080P 高码率</item>
+        <item>1080P 60帧</item>
+        <item>4K</item>
+        <item>8K</item>
+    </string-array>
+    <string-array name="biliroaming_half_screen_quality_values">
+        <item>0</item>
+        <item>1</item>
+        <item>6</item>
+        <item>16</item>
+        <item>32</item>
+        <item>64</item>
+        <item>74</item>
+        <item>80</item>
+        <item>112</item>
+        <item>116</item>
+        <item>120</item>
+        <item>127</item>
+    </string-array>
+    <string-array name="biliroaming_live_popup_entries">
+        <item>购物卡片</item>
+        <item>购物精选</item>
+        <item>关注提醒</item>
+        <item>直播预约</item>
+        <item>投喂支持</item>
+        <item>滚动横幅</item>
+        <item>电池任务</item>
+        <item>正在去买</item>
+    </string-array>
+    <string-array name="biliroaming_live_popup_values">
+        <item>shoppingCard</item>
+        <item>shoppingSelected</item>
+        <item>follow</item>
+        <item>reserve</item>
+        <item>gift</item>
+        <item>banner</item>
+        <item>task</item>
+        <item>gotoBuy</item>
+    </string-array>
+    <string-array name="biliroaming_drawer_style_entries">
+        <item>默认</item>
+        <item>按钮</item>
+        <item>列表</item>
+    </string-array>
+    <string-array name="biliroaming_drawer_style_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+</resources>

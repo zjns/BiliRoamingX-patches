@@ -65,17 +65,19 @@ abstract class AbstractSettingsResourcePatch(
         private var revancedPreferencesEditor: DomFileEditor? = null
             set(value) {
                 field = value
-                revancedPreferenceNode = value.getNode("PreferenceScreen")
+                revancedPreferenceNode = runCatching {
+                    value?.getNode("PreferenceScreen")
+                }.getOrNull()
             }
         private var stringsEditor: DomFileEditor? = null
             set(value) {
                 field = value
-                stringsNode = value.getNode("resources")
+                stringsNode = value?.getNode("resources")
             }
         private var arraysEditor: DomFileEditor? = null
             set(value) {
                 field = value
-                arraysNode = value.getNode("resources")
+                arraysNode = value?.getNode("resources")
             }
 
         /**
@@ -93,8 +95,8 @@ abstract class AbstractSettingsResourcePatch(
          *
          * @param arrayResource The array resource to add.
          */
-        fun addArray(arrayResource: ArrayResource) =
-            arraysNode!!.addResource(arrayResource) { it.include() }
+        fun addArray(arrayResource: ArrayResource, pure: Boolean = false) =
+            arraysNode!!.addResource(arrayResource) { if (!pure) it.include() }
 
         /**
          * Add a preference to the settings.
@@ -121,7 +123,7 @@ abstract class AbstractSettingsResourcePatch(
             }
         }
 
-        internal fun DomFileEditor?.getNode(tagName: String) = this!!.file.getElementsByTagName(tagName).item(0)
+        internal fun DomFileEditor.getNode(tagName: String) = file.getElementsByTagName(tagName).item(0)
     }
 
     override fun close() {
