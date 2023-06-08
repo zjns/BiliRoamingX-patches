@@ -5,19 +5,26 @@ import org.jf.dexlib2.iface.Method
 import org.jf.dexlib2.immutable.ImmutableMethod
 import org.jf.dexlib2.immutable.ImmutableMethodImplementation
 
-internal fun Method.clone(registerCount: Int = 0): ImmutableMethod {
+internal fun Method.clone(registerCount: Int = 0, clearImplementation: Boolean = false): ImmutableMethod {
     val clonedImplementation = implementation?.let {
         ImmutableMethodImplementation(
-            it.registerCount + registerCount,
-            it.instructions,
-            it.tryBlocks,
-            it.debugItems,
+            registerCount,
+            if (clearImplementation) emptyList() else it.instructions,
+            if (clearImplementation) emptyList() else it.tryBlocks,
+            if (clearImplementation) emptyList() else it.debugItems,
         )
     }
     return ImmutableMethod(
-        returnType, name, parameters, returnType, accessFlags, annotations, hiddenApiRestrictions, clonedImplementation
+        definingClass,
+        name,
+        parameters,
+        returnType,
+        accessFlags,
+        annotations,
+        hiddenApiRestrictions,
+        clonedImplementation
     )
 }
 
-internal fun Method.cloneMutable(registerCount: Int = 0) = clone(registerCount).toMutable()
-
+internal fun Method.cloneMutable(registerCount: Int = 0, clearImplementation: Boolean = false) =
+    clone(registerCount, clearImplementation).toMutable()

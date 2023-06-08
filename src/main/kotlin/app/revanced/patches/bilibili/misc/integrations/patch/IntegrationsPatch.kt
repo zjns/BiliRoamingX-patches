@@ -12,6 +12,6 @@ import app.revanced.patches.shared.integrations.patch.AbstractIntegrationsPatch
 @IntegrationsCompatibility
 @RequiresIntegrations
 class IntegrationsPatch : AbstractIntegrationsPatch(
-    "Lapp/revanced/bilibili/utils/ReVancedUtils;",
+    "Lapp/revanced/bilibili/utils/Utils;",
     listOf(InitFingerprint)
 )

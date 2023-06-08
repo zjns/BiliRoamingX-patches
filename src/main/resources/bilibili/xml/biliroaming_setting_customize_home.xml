@@ -11,6 +11,14 @@
             android:key="home_tab"
             android:title="@string/biliraoming_customize_home_tab_title"
             android:summary="@string/biliraoming_customize_home_tab_summary" />
+        <androidx.preference.Preference
+            android:fragment="app.revanced.bilibili.settings.fragments.FilterHomeRcmdFragment"
+            android:key="filter_home_recommend"
+            android:title="@string/biliroaming_filter_home_recommend_title" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="disable_auto_refresh"
+            android:title="@string/biliroaming_disable_auto_refresh_title"
+            android:summary="@string/biliroaming_disable_auto_refresh_summary" />
         <androidx.preference.SwitchPreferenceCompat
             android:key="add_bangumi"
             android:title="@string/biliraoming_add_bangumi_title"
