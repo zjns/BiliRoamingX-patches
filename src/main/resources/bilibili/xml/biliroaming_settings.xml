@@ -32,6 +32,10 @@
             android:title="@string/biliroaming_customize_home_title"
             android:summary="@string/biliroaming_customize_home_summary" />
         <androidx.preference.Preference
+            android:fragment="app.revanced.bilibili.settings.fragments.CustomizeDynamicFragment"
+            android:key="customize_dynamic"
+            android:title="@string/biliroaming_customize_dynamic_title" />
+        <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.CustomizeMineFragment"
             android:key="customize_mine"
             android:title="@string/biliroaming_customize_mine_title" />

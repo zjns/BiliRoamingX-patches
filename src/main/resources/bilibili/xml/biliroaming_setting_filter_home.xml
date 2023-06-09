@@ -6,8 +6,6 @@
             android:fragment="app.revanced.bilibili.settings.fragments.FilterHomeRcmdByTypeFragment"
             android:key="filter_home_recommend_by_type"
             android:title="@string/biliroaming_filter_home_recommend_by_type_title" />
-    </androidx.preference.PreferenceCategory>
-    <androidx.preference.PreferenceCategory>
         <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.FilterHomeRcmdByKeywordFragment"
             android:key="filter_home_recommend_by_keyword"

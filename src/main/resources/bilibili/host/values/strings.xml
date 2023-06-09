@@ -72,7 +72,22 @@
     <string name="biliroaming_keyword_group_name_rcmd_reason">推荐原因</string>
     <string name="biliroaming_keyword_group_name_category">分区</string>
     <string name="biliroaming_keyword_group_name_channel">频道</string>
+    <string name="biliroaming_keyword_group_name_topic">话题</string>
     <string name="biliroaming_save">保存</string>
     <string name="biliroaming_invalid_regex">保存失败，正则表达式有误</string>
-    <string name="biliroaming_save_success_and_refresh">保存成功，刷新首页生效</string>
+    <string name="biliroaming_save_success_and_refresh_home">保存成功，刷新首页生效</string>
+    <string name="biliroaming_customize_dynamic_title">自定义动态页</string>
+    <string name="biliroaming_filter_dynamic_category_title">动态过滤</string>
+    <string name="biliroaming_filter_dynamic_by_type_title">按类型过滤</string>
+    <string name="biliroaming_filter_dynamic_by_type_hint">选择需要移除的类型</string>
+    <string name="biliroaming_filter_dynamic_by_keyword_title">按关键词过滤</string>
+    <string name="biliroaming_dynamic_prefer_video_tab">首选视频标签</string>
+    <string name="biliroaming_dynamic_purify_city_title">移除同城标签</string>
+    <string name="biliroaming_dynamic_purify_campus_title">移除校园标签</string>
+    <string name="biliroaming_dynamic_all_rm_topic_title">移除热门话题（综合）</string>
+    <string name="biliroaming_dynamic_all_rm_up_title">移除最常访问（综合）</string>
+    <string name="biliroaming_dynamic_video_rm_up_title">移除最常访问（视频）</string>
+    <string name="biliroaming_dynamic_filter_apply_to_video">过滤设置同时作用于视频分区</string>
+    <string name="biliroaming_dynamic_rm_blocked_title">屏蔽无权查看动态(例如充电专属)</string>
+    <string name="biliroaming_save_success_and_refresh_dynamic">保存成功，刷新动态页生效</string>
 </resources>

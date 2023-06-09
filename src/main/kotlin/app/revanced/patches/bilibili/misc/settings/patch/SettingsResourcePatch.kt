@@ -37,6 +37,8 @@ class SettingsResourcePatch : AbstractSettingsResourcePatch(
         "biliroaming_setting_home_tab",
         "biliroaming_setting_filter_home",
         "biliroaming_setting_filter_home_by_type",
+        "biliroaming_setting_customize_dynamic",
+        "biliroaming_setting_filter_dynamic_by_type",
     )
 
     override fun execute(context: ResourceContext): PatchResult {
