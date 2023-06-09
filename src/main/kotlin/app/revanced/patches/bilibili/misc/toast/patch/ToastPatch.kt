@@ -15,7 +15,7 @@ import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
 import app.revanced.patches.bilibili.misc.toast.fingerprints.LessonsModeToastFingerprint
 import app.revanced.patches.bilibili.utils.cloneMutable
 import org.jf.dexlib2.Opcode
-import org.jf.dexlib2.builder.instruction.BuilderInstruction35c
+import org.jf.dexlib2.iface.instruction.formats.Instruction35c
 import org.jf.dexlib2.iface.reference.MethodReference
 
 @Patch
@@ -29,7 +29,7 @@ class ToastPatch : BytecodePatch(listOf(LessonsModeToastFingerprint)) {
             ?.implementation?.instructions?.firstNotNullOfOrNull { s ->
                 if (s.opcode != Opcode.INVOKE_STATIC)
                     return@firstNotNullOfOrNull null
-                ((s as BuilderInstruction35c).reference as MethodReference).let { mr ->
+                ((s as Instruction35c).reference as MethodReference).let { mr ->
                     if (mr.returnType == "V" && mr.parameterTypes.let {
                             it.size == 3 && it[0] == "Landroid/content/Context;" && it[1] == "Ljava/lang/String;" && it[2] == "I"
                         }) mr else null

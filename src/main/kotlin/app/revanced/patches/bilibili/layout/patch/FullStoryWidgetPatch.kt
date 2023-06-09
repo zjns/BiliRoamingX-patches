@@ -12,7 +12,7 @@ import app.revanced.patcher.patch.annotations.Patch
 import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
 import app.revanced.patches.bilibili.layout.fingerprints.FullStoryWidgetFingerprint
 import org.jf.dexlib2.Opcode
-import org.jf.dexlib2.builder.instruction.BuilderInstruction35c
+import org.jf.dexlib2.iface.instruction.formats.Instruction35c
 import org.jf.dexlib2.iface.reference.MethodReference
 
 @Patch
@@ -34,7 +34,7 @@ class FullStoryWidgetPatch(
                 }?.run {
                     ((implementation?.instructions?.find {
                         it.opcode == Opcode.INVOKE_DIRECT
-                    } as? BuilderInstruction35c)?.reference as? MethodReference)?.let { r ->
+                    } as? Instruction35c)?.reference as? MethodReference)?.let { r ->
                         clazz.methods.find {
                             it.name == r.name && it.returnType == r.returnType && it.parameterTypes == r.parameterTypes
                         }
