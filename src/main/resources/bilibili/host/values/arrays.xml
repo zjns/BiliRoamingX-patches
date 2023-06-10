@@ -63,6 +63,7 @@
         <item>滚动横幅</item>
         <item>电池任务</item>
         <item>正在去买</item>
+        <item>礼物星球</item>
     </string-array>
     <string-array name="biliroaming_live_popup_values">
         <item>shoppingCard</item>
@@ -73,6 +74,7 @@
         <item>banner</item>
         <item>task</item>
         <item>gotoBuy</item>
+        <item>giftStar</item>
     </string-array>
     <string-array name="biliroaming_drawer_style_entries">
         <item>默认</item>

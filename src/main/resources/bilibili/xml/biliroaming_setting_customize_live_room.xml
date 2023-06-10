@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.preference.PreferenceCategory>
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="forbid_switch_live_room"
+            android:title="@string/biliroaming_forbid_switch_live_room_title"
+            android:summary="@string/biliroaming_forbid_switch_live_room_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="disable_live_room_double_click"
+            android:title="@string/biliroaming_disable_live_room_double_click_title"
+            android:summary="@string/biliroaming_disable_live_room_double_click_summary" />
+        <androidx.preference.Preference
+            android:fragment="app.revanced.bilibili.settings.fragments.PurifyLivePopupsFragment"
+            android:key="purify_live_popups"
+            android:title="@string/biliroaming_purify_live_popups_title"
+            android:summary="@string/biliroaming_purify_live_popups_summary" />
+    </androidx.preference.PreferenceCategory>
+</androidx.preference.PreferenceScreen>

@@ -92,4 +92,7 @@
     <string name="biliroaming_save_success_and_refresh_dynamic">保存成功，刷新动态页生效</string>
     <string name="biliroaming_block_word_search_title">屏蔽评论关键词搜索功能</string>
     <string name="biliroaming_block_word_search_summary">屏蔽视频评论蓝色关键词点击触发跳转搜索功能</string>
+    <string name="biliroaming_customize_live_room_title">自定义直播间</string>
+    <string name="biliroaming_disable_live_room_double_click_title">禁用双击点赞</string>
+    <string name="biliroaming_disable_live_room_double_click_summary">将双击点赞行为更换为暂停/播放</string>
 </resources>
