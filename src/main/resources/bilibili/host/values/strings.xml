@@ -25,14 +25,14 @@
     <string name="biliroaming_purify_live_popups_summary">净化直播间各种浮窗</string>
     <string name="biliroaming_forbid_switch_live_room_title">禁止滑动切换直播间</string>
     <string name="biliroaming_forbid_switch_live_room_summary">禁止上下滑动切换直播间</string>
-    <string name="biliroaming_customize_mine_title">自定义我的页面</string>
+    <string name="biliroaming_customize_mine_title">我的页面</string>
     <string name="biliraoming_customize_drawer_title">需要展示的项目</string>
     <string name="biliroaming_drawer_style_title">页面样式</string>
     <string name="biliroaming_purify_drawer_reddot_title">净化红点</string>
     <string name="biliroaming_remove_video_cmd_dms_title">移除视频浮窗</string>
     <string name="biliroaming_remove_video_cmd_dms_summary">移除视频播放时出现的浮窗，包括三连关注、关联视频、投票弹幕、评分弹幕、投资当前UP主、跳转其他应用、免流引导等</string>
     <string name="biliroaming_remove_vip_section_title">移除我的大会员横幅</string>
-    <string name="biliroaming_customize_home_title">自定义首页</string>
+    <string name="biliroaming_customize_home_title">首页</string>
     <string name="biliroaming_customize_home_summary">需要重启才能生效</string>
     <string name="biliraoming_customize_bottom_title">需要展示的底栏</string>
     <string name="biliraoming_customize_home_tab_title">需要隐藏的顶部标签</string>
@@ -76,7 +76,7 @@
     <string name="biliroaming_save">保存</string>
     <string name="biliroaming_invalid_regex">保存失败，正则表达式有误</string>
     <string name="biliroaming_save_success_and_refresh_home">保存成功，刷新首页生效</string>
-    <string name="biliroaming_customize_dynamic_title">自定义动态页</string>
+    <string name="biliroaming_customize_dynamic_title">动态页</string>
     <string name="biliroaming_filter_dynamic_category_title">动态过滤</string>
     <string name="biliroaming_filter_dynamic_by_type_title">按类型过滤</string>
     <string name="biliroaming_filter_dynamic_by_type_hint">选择需要移除的类型</string>
@@ -92,7 +92,10 @@
     <string name="biliroaming_save_success_and_refresh_dynamic">保存成功，刷新动态页生效</string>
     <string name="biliroaming_block_word_search_title">屏蔽评论关键词搜索功能</string>
     <string name="biliroaming_block_word_search_summary">屏蔽视频评论蓝色关键词点击触发跳转搜索功能</string>
-    <string name="biliroaming_customize_live_room_title">自定义直播间</string>
+    <string name="biliroaming_customize_live_room_title">直播间</string>
     <string name="biliroaming_disable_live_room_double_click_title">禁用双击点赞</string>
     <string name="biliroaming_disable_live_room_double_click_summary">将双击点赞行为更换为暂停/播放</string>
+    <string name="biliroaming_customize_player_title">播放器</string>
+    <string name="biliroaming_remember_lossless_setting_title">记住无损设置开关状态</string>
+    <string name="biliroaming_customize_video_detail_title">视频详情页</string>
 </resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.preference.PreferenceCategory>
+        <tv.danmaku.bili.widget.preference.BLRadioGroupEntrancePreference
+            android:fragment="app.revanced.bilibili.settings.fragments.HalfScreenQualitySettingFragment"
+            android:key="half_screen_quality"
+            android:persistent="true"
+            android:title="@string/biliroaming_half_screen_quality_title"
+            app:migration_settings_type="none"
+            app:radioDefaultValue="0"
+            app:radioEntries="@array/biliroaming_half_screen_quality_entries"
+            app:radioEntryValues="@array/biliroaming_half_screen_quality_values" />
+        <tv.danmaku.bili.widget.preference.BLRadioGroupEntrancePreference
+            android:fragment="app.revanced.bilibili.settings.fragments.FullScreenQualitySettingFragment"
+            android:key="full_screen_quality"
+            android:persistent="true"
+            android:title="@string/biliroaming_full_screen_quality_title"
+            app:migration_settings_type="none"
+            app:radioDefaultValue="0"
+            app:radioEntries="@array/biliroaming_full_screen_quality_entries"
+            app:radioEntryValues="@array/biliroaming_full_screen_quality_values" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="force_old_player"
+            android:title="@string/biliroaming_force_old_player_title" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="remember_lossless_setting"
+            android:title="@string/biliroaming_remember_lossless_setting_title" />
+    </androidx.preference.PreferenceCategory>
+</androidx.preference.PreferenceScreen>

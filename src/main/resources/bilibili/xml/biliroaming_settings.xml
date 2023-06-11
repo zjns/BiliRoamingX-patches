@@ -2,30 +2,10 @@
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.preference.PreferenceCategory>
-        <tv.danmaku.bili.widget.preference.BLRadioGroupEntrancePreference
-            android:fragment="app.revanced.bilibili.settings.fragments.HalfScreenQualitySettingFragment"
-            android:key="half_screen_quality"
-            android:persistent="true"
-            android:title="@string/biliroaming_half_screen_quality_title"
-            app:migration_settings_type="none"
-            app:radioDefaultValue="0"
-            app:radioEntries="@array/biliroaming_half_screen_quality_entries"
-            app:radioEntryValues="@array/biliroaming_half_screen_quality_values" />
-        <tv.danmaku.bili.widget.preference.BLRadioGroupEntrancePreference
-            android:fragment="app.revanced.bilibili.settings.fragments.FullScreenQualitySettingFragment"
-            android:key="full_screen_quality"
-            android:persistent="true"
-            android:title="@string/biliroaming_full_screen_quality_title"
-            app:migration_settings_type="none"
-            app:radioDefaultValue="0"
-            app:radioEntries="@array/biliroaming_full_screen_quality_entries"
-            app:radioEntryValues="@array/biliroaming_full_screen_quality_values" />
-        <androidx.preference.SwitchPreferenceCompat
-            android:key="force_old_player"
-            android:title="@string/biliroaming_force_old_player_title" />
-    </androidx.preference.PreferenceCategory>
-
-    <androidx.preference.PreferenceCategory>
+        <androidx.preference.Preference
+            android:fragment="app.revanced.bilibili.settings.fragments.CustomizePlayerFragment"
+            android:key="customize_player"
+            android:title="@string/biliroaming_customize_player_title" />
         <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.CustomizeHomeFragment"
             android:key="customize_home"
@@ -43,18 +23,10 @@
             android:fragment="app.revanced.bilibili.settings.fragments.CustomizeLiveRoomFragment"
             android:key="customize_live_room"
             android:title="@string/biliroaming_customize_live_room_title" />
-        <androidx.preference.SwitchPreferenceCompat
-            android:key="disable_story_full"
-            android:title="@string/biliroaming_disable_story_full_title"
-            android:summary="@string/biliroaming_disable_story_full_summary" />
-        <androidx.preference.SwitchPreferenceCompat
-            android:key="remove_video_cmd_dms"
-            android:title="@string/biliroaming_remove_video_cmd_dms_title"
-            android:summary="@string/biliroaming_remove_video_cmd_dms_summary" />
-        <androidx.preference.SwitchPreferenceCompat
-            android:key="block_word_search"
-            android:title="@string/biliroaming_block_word_search_title"
-            android:summary="@string/biliroaming_block_word_search_summary" />
+        <androidx.preference.Preference
+            android:fragment="app.revanced.bilibili.settings.fragments.CustomizeVideoDetailFragment"
+            android:key="customize_video_detail"
+            android:title="@string/biliroaming_customize_video_detail_title" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory>
@@ -62,17 +34,9 @@
             android:key="teenagers_mode_dialog"
             android:title="@string/biliroaming_teenagers_mode_dialog_title"
             android:summary="@string/biliroaming_teenagers_mode_dialog_summary" />
-        <androidx.preference.SwitchPreferenceCompat
-            android:key="replace_story_video"
-            android:title="@string/biliroaming_replace_story_video_title"
-            android:summary="@string/biliroaming_replace_story_video_summary" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory>
-        <androidx.preference.SwitchPreferenceCompat
-            android:key="block_up_rcmd_ads"
-            android:title="@string/biliroaming_block_up_rcmd_ads_title"
-            android:summary="@string/biliroaming_block_up_rcmd_ads_summary" />
         <androidx.preference.SwitchPreferenceCompat
             android:key="purify_splash"
             android:title="@string/biliroaming_purify_splash_title"

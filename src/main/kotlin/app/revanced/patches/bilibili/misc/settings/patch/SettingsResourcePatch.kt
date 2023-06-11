@@ -40,6 +40,8 @@ class SettingsResourcePatch : AbstractSettingsResourcePatch(
         "biliroaming_setting_customize_dynamic",
         "biliroaming_setting_filter_dynamic_by_type",
         "biliroaming_setting_customize_live_room",
+        "biliroaming_setting_customize_player",
+        "biliroaming_setting_customize_video_detail",
     )
 
     override fun execute(context: ResourceContext): PatchResult {

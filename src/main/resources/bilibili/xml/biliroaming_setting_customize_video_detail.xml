@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.preference.PreferenceCategory>
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="disable_story_full"
+            android:title="@string/biliroaming_disable_story_full_title"
+            android:summary="@string/biliroaming_disable_story_full_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="replace_story_video"
+            android:title="@string/biliroaming_replace_story_video_title"
+            android:summary="@string/biliroaming_replace_story_video_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="remove_video_cmd_dms"
+            android:title="@string/biliroaming_remove_video_cmd_dms_title"
+            android:summary="@string/biliroaming_remove_video_cmd_dms_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="block_word_search"
+            android:title="@string/biliroaming_block_word_search_title"
+            android:summary="@string/biliroaming_block_word_search_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="block_up_rcmd_ads"
+            android:title="@string/biliroaming_block_up_rcmd_ads_title"
+            android:summary="@string/biliroaming_block_up_rcmd_ads_summary" />
+    </androidx.preference.PreferenceCategory>
+</androidx.preference.PreferenceScreen>
