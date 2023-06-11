@@ -100,4 +100,5 @@
     <string name="biliroaming_customize_video_detail_title">视频详情页</string>
     <string name="biliroaming_customize_space_category_title">用户空间页</string>
     <string name="biliroaming_customize_space_category_summary">选择要屏蔽的元素（全选会让你什么也看不到）</string>
+    <string name="biliroaming_auto_like_title">自动点赞</string>
 </resources>
