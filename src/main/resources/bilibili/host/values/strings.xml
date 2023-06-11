@@ -98,4 +98,6 @@
     <string name="biliroaming_customize_player_title">播放器</string>
     <string name="biliroaming_remember_lossless_setting_title">记住无损设置开关状态</string>
     <string name="biliroaming_customize_video_detail_title">视频详情页</string>
+    <string name="biliroaming_customize_space_category_title">用户空间页</string>
+    <string name="biliroaming_customize_space_category_summary">选择要屏蔽的元素（全选会让你什么也看不到）</string>
 </resources>
