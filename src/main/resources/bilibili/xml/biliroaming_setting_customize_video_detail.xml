@@ -6,6 +6,10 @@
             android:key="auto_like"
             android:title="@string/biliroaming_auto_like_title" />
         <androidx.preference.SwitchPreferenceCompat
+            android:key="save_comment_image"
+            android:title="@string/biliroaming_save_comment_image_title"
+            android:summary="@string/biliroaming_save_comment_image_summary" />
+        <androidx.preference.SwitchPreferenceCompat
             android:key="replace_story_video"
             android:title="@string/biliroaming_replace_story_video_title"
             android:summary="@string/biliroaming_replace_story_video_summary" />
