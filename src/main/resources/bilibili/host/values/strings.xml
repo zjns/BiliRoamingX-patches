@@ -106,4 +106,6 @@
     <string name="biliroaming_toast_comment_image_get_failed">图片获取失败</string>
     <string name="biliroaming_save_comment_image_title">笔记图片长按预览保存</string>
     <string name="biliroaming_save_comment_image_summary">笔记图片点开后长按保存到本地</string>
+    <string name="biliroaming_play_arc_conf_title">解除播放限制</string>
+    <string name="biliroaming_play_arc_conf_summary">解除部分版权视频禁止后台播放、小窗播放、投屏、听视频等限制</string>
 </resources>

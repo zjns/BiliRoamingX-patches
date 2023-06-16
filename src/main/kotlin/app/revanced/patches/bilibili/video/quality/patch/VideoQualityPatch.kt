@@ -14,6 +14,7 @@ import app.revanced.patches.bilibili.video.quality.annotations.VideoQualityCompa
 import app.revanced.patches.bilibili.video.quality.fingerprints.PlayerPreloadHolderFingerprint
 import app.revanced.patches.bilibili.video.quality.fingerprints.PlayerQualityServiceFingerprint
 import app.revanced.patches.bilibili.video.quality.fingerprints.PlayerSettingHelperFingerprint
+import org.jf.dexlib2.iface.Method
 
 @Patch
 @Name("video-default-quality")
@@ -28,11 +29,9 @@ class VideoQualityPatch : BytecodePatch(
     )
 ) {
     override fun execute(context: BytecodeContext): PatchResult {
-        var playerSettingHelperClassType = ""
-        var defaultQnMethodName = ""
+        var defaultQnMethod: Method? = null
         PlayerSettingHelperFingerprint.result?.also {
-            playerSettingHelperClassType = it.classDef.type
-            defaultQnMethodName = it.method.name
+            defaultQnMethod = it.method
         }?.mutableMethod?.addInstructions(
             0, """
                     invoke-static {}, Lapp/revanced/bilibili/patches/VideoQualityPatch;->fullScreenQuality()I
@@ -64,38 +63,10 @@ class VideoQualityPatch : BytecodePatch(
                     nop
         """.trimIndent()
         ) ?: return PlayerQualityServiceFingerprint.toErrorResult()
-        context.findClass("Lcom/bapis/bilibili/pgc/gateway/player/v1/PlayURLMoss;")?.let { clazz ->
-            clazz.mutableClass.methods.find { it.name == "playView" && it.parameters.size == 1 }?.addInstructions(
-                0, """
-                invoke-static {p1}, Lapp/revanced/bilibili/patches/VideoQualityPatch;->unlockLimit(Lcom/bapis/bilibili/pgc/gateway/player/v1/PlayViewReq;)V
-                """.trimIndent()
-            )
-        }
-        context.findClass("Lcom/bapis/bilibili/pgc/gateway/player/v2/PlayURLMoss;")?.let { clazz ->
-            clazz.mutableClass.methods.find { it.name == "playView" && it.parameters.size == 1 }?.addInstructions(
-                0, """
-                invoke-static {p1}, Lapp/revanced/bilibili/patches/VideoQualityPatch;->unlockLimit(Lcom/bapis/bilibili/pgc/gateway/player/v2/PlayViewReq;)V
-                """.trimIndent()
-            )
-        }
-        context.findClass("Lcom/bapis/bilibili/app/playurl/v1/PlayURLMoss;")?.let { clazz ->
-            clazz.mutableClass.methods.find { it.name == "playView" && it.parameters.size == 1 }?.addInstructions(
-                0, """
-                invoke-static {p1}, Lapp/revanced/bilibili/patches/VideoQualityPatch;->unlockLimit(Lcom/bapis/bilibili/app/playurl/v1/PlayViewReq;)V
-                """.trimIndent()
-            )
-        }
-        context.findClass("Lcom/bapis/bilibili/app/playerunite/v1/PlayerMoss;")?.let { clazz ->
-            clazz.mutableClass.methods.find { it.name == "playViewUnite" && it.parameters.size == 1 }?.addInstructions(
-                0, """
-                invoke-static {p1}, Lapp/revanced/bilibili/patches/VideoQualityPatch;->unlockLimit(Lcom/bapis/bilibili/app/playerunite/v1/PlayViewUniteReq;)V
-                """.trimIndent()
-            )
-        }
         context.findClass("Lapp/revanced/bilibili/patches/VideoQualityPatch;")?.let { clazz ->
             clazz.mutableClass.methods.find { it.name == "defaultQn" }?.addInstructions(
                 0, """
-                invoke-static {}, $playerSettingHelperClassType->$defaultQnMethodName()I
+                invoke-static {}, $defaultQnMethod
                 move-result v0
                 return v0
                 """.trimIndent()

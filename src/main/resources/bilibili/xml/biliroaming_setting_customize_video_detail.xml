@@ -10,6 +10,10 @@
             android:title="@string/biliroaming_save_comment_image_title"
             android:summary="@string/biliroaming_save_comment_image_summary" />
         <androidx.preference.SwitchPreferenceCompat
+            android:key="play_arc_conf"
+            android:title="@string/biliroaming_play_arc_conf_title"
+            android:summary="@string/biliroaming_play_arc_conf_summary" />
+        <androidx.preference.SwitchPreferenceCompat
             android:key="replace_story_video"
             android:title="@string/biliroaming_replace_story_video_title"
             android:summary="@string/biliroaming_replace_story_video_summary" />

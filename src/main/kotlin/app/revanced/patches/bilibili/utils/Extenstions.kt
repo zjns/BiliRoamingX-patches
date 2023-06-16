@@ -5,7 +5,10 @@ import org.jf.dexlib2.iface.Method
 import org.jf.dexlib2.immutable.ImmutableMethod
 import org.jf.dexlib2.immutable.ImmutableMethodImplementation
 
-internal fun Method.clone(registerCount: Int = 0, clearImplementation: Boolean = false): ImmutableMethod {
+internal fun Method.clone(
+    registerCount: Int = implementation?.registerCount ?: 0,
+    clearImplementation: Boolean = false
+): ImmutableMethod {
     val clonedImplementation = implementation?.let {
         ImmutableMethodImplementation(
             registerCount,
@@ -26,5 +29,7 @@ internal fun Method.clone(registerCount: Int = 0, clearImplementation: Boolean =
     )
 }
 
-internal fun Method.cloneMutable(registerCount: Int = 0, clearImplementation: Boolean = false) =
-    clone(registerCount, clearImplementation).toMutable()
+internal fun Method.cloneMutable(
+    registerCount: Int = implementation?.registerCount ?: 0,
+    clearImplementation: Boolean = false
+) = clone(registerCount, clearImplementation).toMutable()

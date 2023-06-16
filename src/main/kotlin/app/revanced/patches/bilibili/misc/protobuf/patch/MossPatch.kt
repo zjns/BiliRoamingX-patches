@@ -5,6 +5,7 @@ import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.addInstructions
+import app.revanced.patcher.extensions.removeInstructions
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.PatchResultSuccess
@@ -12,6 +13,7 @@ import app.revanced.patcher.patch.annotations.Patch
 import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
 import app.revanced.patches.bilibili.misc.protobuf.fingerprints.MossServiceFingerprint
 import org.jf.dexlib2.Opcode
+import org.jf.dexlib2.iface.instruction.formats.Instruction35c
 
 @Patch
 @BiliBiliCompatibility
@@ -21,6 +23,7 @@ class MossPatch : BytecodePatch(listOf(MossServiceFingerprint)) {
     override fun execute(context: BytecodeContext): PatchResult {
         MossServiceFingerprint.result?.mutableClass?.methods?.let { methods ->
             methods.find { it.name == "blockingUnaryCall" }?.run {
+                val implementation = implementation ?: return@run
                 addInstructions(
                     0, """
                     invoke-static {p2}, Lapp/revanced/bilibili/patches/protobuf/MossPatch;->hookBlockingBefore(Lcom/google/protobuf/GeneratedMessageLite;)Ljava/lang/Object;
@@ -39,15 +42,44 @@ class MossPatch : BytecodePatch(listOf(MossServiceFingerprint)) {
                     nop
                 """.trimIndent()
                 )
-                val afterInsertIndex = implementation?.instructions?.indexOfLast {
-                    it.opcode == Opcode.RETURN_OBJECT
-                }?.takeIf { it != -1 } ?: return@run
+                val invokeInst = implementation.instructions.findLast {
+                    it.opcode == Opcode.INVOKE_INTERFACE
+                } as Instruction35c
+                removeInstructions(implementation.instructions.size - 3, 3)
                 addInstructions(
-                    afterInsertIndex, """
-                    invoke-static {p2, p1}, Lapp/revanced/bilibili/patches/protobuf/MossPatch;->hookBlockingAfter(Lcom/google/protobuf/GeneratedMessageLite;Lcom/google/protobuf/GeneratedMessageLite;)Lcom/google/protobuf/GeneratedMessageLite;
+                    """
+                    const/4 v1, 0x0
+                    const/4 v2, 0x0
+                    #:try_start
+                    invoke-interface {v0, p1, p2, p3}, ${invokeInst.reference}
                     move-result-object p1
-                    # return-object p1
+                    #:try_end
+                    #.catch Lcom/bilibili/lib/moss/api/MossException; {:try_start .. :try_end} :catch
+                    move-object v1, p1
+                    goto :modify_result
+
+                    #:catch
+                    move-exception p1
+                    move-object v2, p1
+
+                    :modify_result
+                    invoke-static {p2, v1, v2}, Lapp/revanced/bilibili/patches/protobuf/MossPatch;->hookBlockingAfter(Lcom/google/protobuf/GeneratedMessageLite;Lcom/google/protobuf/GeneratedMessageLite;Lcom/bilibili/lib/moss/api/MossException;)Lcom/google/protobuf/GeneratedMessageLite;
+
+                    move-result-object p1
+                    return-object p1
                 """.trimIndent()
+                )
+                val invokeIndex = implementation.instructions.indexOfLast {
+                    it.opcode == Opcode.INVOKE_INTERFACE
+                }
+                val moveExceptionIndex = implementation.instructions.indexOfLast {
+                    it.opcode == Opcode.MOVE_EXCEPTION
+                }
+                implementation.addCatch(
+                    "Lcom/bilibili/lib/moss/api/MossException;",
+                    implementation.newLabelForIndex(invokeIndex),
+                    implementation.newLabelForIndex(invokeIndex + 2),
+                    implementation.newLabelForIndex(moveExceptionIndex)
                 )
             }
             methods.find { it.name == "asyncUnaryCall" }?.run {
