@@ -18,7 +18,7 @@
     <string name="biliroaming_teenagers_mode_dialog_title">关闭青少年模式弹窗</string>
     <string name="biliroaming_teenagers_mode_dialog_summary">仍可从侧滑菜单进入青少年模式</string>
     <string name="biliroaming_replace_story_video_title">替换竖版视频</string>
-    <string name="biliroaming_replace_story_video_summary">替换竖版视频为正常视频</string>
+    <string name="biliroaming_replace_story_video_summary">替换竖版视频为正常视频，同时需要到设置中关闭显示竖屏模式入口</string>
     <string name="biliroaming_purify_search_title">净化搜索页面</string>
     <string name="biliroaming_purify_search_summary">去除搜索页面的热搜和推荐</string>
     <string name="biliroaming_purify_live_popups_title">净化直播间浮窗</string>
@@ -91,7 +91,7 @@
     <string name="biliroaming_dynamic_rm_blocked_title">屏蔽无权查看动态(例如充电专属)</string>
     <string name="biliroaming_save_success_and_refresh_dynamic">保存成功，刷新动态页生效</string>
     <string name="biliroaming_block_word_search_title">屏蔽评论关键词搜索功能</string>
-    <string name="biliroaming_block_word_search_summary">屏蔽视频评论蓝色关键词点击触发跳转搜索功能</string>
+    <string name="biliroaming_block_word_search_summary">屏蔽评论蓝色关键词点击触发跳转搜索功能</string>
     <string name="biliroaming_customize_live_room_title">直播间</string>
     <string name="biliroaming_disable_live_room_double_click_title">禁用双击点赞</string>
     <string name="biliroaming_disable_live_room_double_click_summary">将双击点赞行为更换为暂停/播放</string>
@@ -115,4 +115,9 @@
     <string name="biliroaming_comment_copy_summary">禁用长按评论/动态/视频简介复制到剪切板（减少误触）</string>
     <string name="biliroaming_comment_copy_enhance_title">长按自由复制</string>
     <string name="biliroaming_comment_copy_enhance_summary">长按私信/评论/动态/视频简介时弹出自由选择对话框，需要开启“去除长按复制”</string>
+    <string name="biliroaming_block_comment_guide_title">屏蔽评论引导</string>
+    <string name="biliroaming_block_comment_guide_summary">屏蔽详情页及评论页的评论引导提示</string>
+    <string name="biliroaming_block_video_comment_title">屏蔽评论区</string>
+    <string name="biliroaming_video_detail_comment_category_title">评论</string>
+    <string name="biliroaming_video_detail_ad_category_title">广告</string>
 </resources>
