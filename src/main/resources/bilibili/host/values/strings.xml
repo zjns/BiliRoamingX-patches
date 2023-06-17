@@ -108,4 +108,11 @@
     <string name="biliroaming_save_comment_image_summary">笔记图片点开后长按保存到本地</string>
     <string name="biliroaming_play_arc_conf_title">解除播放限制</string>
     <string name="biliroaming_play_arc_conf_summary">解除部分版权视频禁止后台播放、小窗播放、投屏、听视频等限制</string>
+    <string name="biliroaming_dialog_title_copy_enhance">自由复制</string>
+    <string name="biliroaming_dialog_btn_share">分享</string>
+    <string name="biliroaming_dialog_btn_copy_all">复制全部</string>
+    <string name="biliroaming_comment_copy_title">去除长按复制</string>
+    <string name="biliroaming_comment_copy_summary">禁用长按评论/动态/视频简介复制到剪切板（减少误触）</string>
+    <string name="biliroaming_comment_copy_enhance_title">长按自由复制</string>
+    <string name="biliroaming_comment_copy_enhance_summary">长按私信/评论/动态/视频简介时弹出自由选择对话框，需要开启“去除长按复制”</string>
 </resources>

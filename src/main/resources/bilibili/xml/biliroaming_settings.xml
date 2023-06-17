@@ -38,6 +38,15 @@
             android:key="teenagers_mode_dialog"
             android:title="@string/biliroaming_teenagers_mode_dialog_title"
             android:summary="@string/biliroaming_teenagers_mode_dialog_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="comment_copy"
+            android:title="@string/biliroaming_comment_copy_title"
+            android:summary="@string/biliroaming_comment_copy_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:dependency="comment_copy"
+            android:key="comment_copy_enhance"
+            android:title="@string/biliroaming_comment_copy_enhance_title"
+            android:summary="@string/biliroaming_comment_copy_enhance_summary" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory>
