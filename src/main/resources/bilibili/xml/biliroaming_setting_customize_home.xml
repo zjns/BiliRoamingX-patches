@@ -38,5 +38,9 @@
             android:key="drawer"
             android:title="@string/biliraoming_drawer_title"
             android:summary="@string/biliraoming_drawer_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="disable_main_page_story"
+            android:title="@string/biliroaming_disable_main_page_story_title"
+            android:summary="@string/biliroaming_disable_main_page_story_summary" />
     </androidx.preference.PreferenceCategory>
 </androidx.preference.PreferenceScreen>
