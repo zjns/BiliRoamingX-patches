@@ -31,6 +31,10 @@
             android:fragment="app.revanced.bilibili.settings.fragments.CustomizeSpaceFragment"
             android:key="customize_space_category"
             android:title="@string/biliroaming_customize_space_category_title" />
+        <androidx.preference.Preference
+            android:fragment="app.revanced.bilibili.settings.fragments.CustomizeSubtitleFragment"
+            android:key="customize_subtitle_category"
+            android:title="@string/biliroaming_customize_subtitle_title" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory>

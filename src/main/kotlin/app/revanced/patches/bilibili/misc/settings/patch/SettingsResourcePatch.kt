@@ -27,30 +27,36 @@ class SettingsResourcePatch : AbstractSettingsResourcePatch(
     "biliroaming_settings", "bilibili"
 ) {
     private val extraPreferences = arrayOf(
-        "biliroaming_setting_half_screen_quality",
-        "biliroaming_setting_full_screen_quality",
-        "biliroaming_setting_live_popups",
-        "biliroaming_setting_customize_mine",
-        "biliroaming_setting_customize_drawer",
-        "biliroaming_setting_customize_bottom",
-        "biliroaming_setting_customize_home",
-        "biliroaming_setting_home_tab",
-        "biliroaming_setting_filter_home",
-        "biliroaming_setting_filter_home_by_type",
-        "biliroaming_setting_customize_dynamic",
-        "biliroaming_setting_filter_dynamic_by_type",
-        "biliroaming_setting_customize_live_room",
-        "biliroaming_setting_customize_player",
-        "biliroaming_setting_customize_video_detail",
-        "biliroaming_setting_customize_space",
+        "biliroaming_setting_half_screen_quality.xml",
+        "biliroaming_setting_full_screen_quality.xml",
+        "biliroaming_setting_live_popups.xml",
+        "biliroaming_setting_customize_mine.xml",
+        "biliroaming_setting_customize_drawer.xml",
+        "biliroaming_setting_customize_bottom.xml",
+        "biliroaming_setting_customize_home.xml",
+        "biliroaming_setting_home_tab.xml",
+        "biliroaming_setting_filter_home.xml",
+        "biliroaming_setting_filter_home_by_type.xml",
+        "biliroaming_setting_customize_dynamic.xml",
+        "biliroaming_setting_filter_dynamic_by_type.xml",
+        "biliroaming_setting_customize_live_room.xml",
+        "biliroaming_setting_customize_player.xml",
+        "biliroaming_setting_customize_video_detail.xml",
+        "biliroaming_setting_customize_space.xml",
+        "biliroaming_setting_customize_subtitle.xml",
+    )
+    private val layouts = arrayOf(
+        "biliroaming_dialog_argb_color_choose.xml",
     )
 
     override fun execute(context: ResourceContext): PatchResult {
         super.execute(context)
-        extraPreferences.forEach { prefs ->
-            ResourceUtils.ResourceGroup("xml", "$prefs.xml").let {
-                context.copyResources("bilibili", it)
-            }
+        arrayOf(
+            ResourceUtils.ResourceGroup("xml", *extraPreferences),
+            ResourceUtils.ResourceGroup("layout", *layouts),
+            ResourceUtils.ResourceGroup("drawable", "biliroaming_bg_transparent.webp")
+        ).forEach {
+            context.copyResources("bilibili", it)
         }
         context.mergeStrings("bilibili/host/values/strings.xml")
         context.mergeArrays("bilibili/host/values/arrays.xml")

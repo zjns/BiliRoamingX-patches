@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.preference.PreferenceCategory>
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="auto_generate_subtitle"
+            android:title="@string/biliroaming_generate_subtitle_title"
+            android:summary="@string/biliroaming_generate_subtitle_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="subtitle_add_close"
+            android:title="@string/biliroaming_add_close_subtitle_title"
+            android:summary="@string/biliroaming_add_close_subtitle_summary" />
+        <androidx.preference.Preference
+            android:fragment="app.revanced.bilibili.settings.fragments.CustomizeSubtitleStyleFragment"
+            android:key="customize_subtitle_style"
+            android:title="@string/biliroaming_subtitle_style_title" />
+    </androidx.preference.PreferenceCategory>
+</androidx.preference.PreferenceScreen>
