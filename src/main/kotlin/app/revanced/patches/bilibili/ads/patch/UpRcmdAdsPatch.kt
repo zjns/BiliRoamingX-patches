@@ -4,7 +4,7 @@ import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.extensions.addInstructions
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.PatchResultSuccess
@@ -19,7 +19,7 @@ import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
 class UpRcmdAdsPatch : BytecodePatch() {
     override fun execute(context: BytecodeContext): PatchResult {
         context.findClass("Lcom/bapis/bilibili/ad/v1/SourceContentDto;")?.let {
-            it.mutableClass.methods.find { it.name == "getAdContent" }?.addInstructions(
+            it.mutableClass.methods.find { it.name == "getAdContent" }?.addInstructionsWithLabels(
                 0, """
                 invoke-static {}, Lapp/revanced/bilibili/patches/UpRcmdAdsPatch;->blockUpRcmdAds()Z
                 move-result v0

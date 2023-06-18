@@ -4,8 +4,8 @@ import app.revanced.extensions.toErrorResult
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.extensions.addInstructions
-import app.revanced.patcher.extensions.removeInstructions
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
+import app.revanced.patcher.extensions.InstructionExtensions.removeInstructions
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.PatchResultSuccess
@@ -24,7 +24,7 @@ class MossPatch : BytecodePatch(listOf(MossServiceFingerprint)) {
         MossServiceFingerprint.result?.mutableClass?.methods?.let { methods ->
             methods.find { it.name == "blockingUnaryCall" }?.run {
                 val implementation = implementation ?: return@run
-                addInstructions(
+                addInstructionsWithLabels(
                     0, """
                     invoke-static {p2}, Lapp/revanced/bilibili/patches/protobuf/MossPatch;->hookBlockingBefore(Lcom/google/protobuf/GeneratedMessageLite;)Ljava/lang/Object;
                     move-result-object v0
@@ -46,7 +46,8 @@ class MossPatch : BytecodePatch(listOf(MossServiceFingerprint)) {
                     it.opcode == Opcode.INVOKE_INTERFACE
                 } as Instruction35c
                 removeInstructions(implementation.instructions.size - 3, 3)
-                addInstructions(
+                addInstructionsWithLabels(
+                    implementation.instructions.size,
                     """
                     const/4 v1, 0x0
                     const/4 v2, 0x0
@@ -83,7 +84,7 @@ class MossPatch : BytecodePatch(listOf(MossServiceFingerprint)) {
                 )
             }
             methods.find { it.name == "asyncUnaryCall" }?.run {
-                addInstructions(
+                addInstructionsWithLabels(
                     0, """
                     invoke-static {p2, p3}, Lapp/revanced/bilibili/patches/protobuf/MossPatch;->hookAsyncBefore(Lcom/google/protobuf/GeneratedMessageLite;Lcom/bilibili/lib/moss/api/MossResponseHandler;)Ljava/lang/Object;
                     move-result-object v0

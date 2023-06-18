@@ -5,7 +5,8 @@ import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.extensions.addInstructions
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.PatchResultSuccess
@@ -32,7 +33,7 @@ class VideoQualityPatch : BytecodePatch(
         var defaultQnMethod: Method? = null
         PlayerSettingHelperFingerprint.result?.also {
             defaultQnMethod = it.method
-        }?.mutableMethod?.addInstructions(
+        }?.mutableMethod?.addInstructionsWithLabels(
             0, """
                     invoke-static {}, Lapp/revanced/bilibili/patches/VideoQualityPatch;->fullScreenQuality()I
                     move-result v0
@@ -42,7 +43,7 @@ class VideoQualityPatch : BytecodePatch(
                     nop
                 """.trimIndent()
         ) ?: return PlayerSettingHelperFingerprint.toErrorResult()
-        PlayerPreloadHolderFingerprint.result?.mutableMethod?.addInstructions(
+        PlayerPreloadHolderFingerprint.result?.mutableMethod?.addInstructionsWithLabels(
             0, """
                     invoke-static {}, Lapp/revanced/bilibili/patches/VideoQualityPatch;->halfScreenQuality()I
                     move-result v0
@@ -53,7 +54,7 @@ class VideoQualityPatch : BytecodePatch(
                     nop
             """.trimIndent()
         ) ?: return PlayerPreloadHolderFingerprint.toErrorResult()
-        PlayerQualityServiceFingerprint.result?.mutableMethod?.addInstructions(
+        PlayerQualityServiceFingerprint.result?.mutableMethod?.addInstructionsWithLabels(
             0, """
                     invoke-static {}, Lapp/revanced/bilibili/patches/VideoQualityPatch;->getMatchedHalfScreenQuality()I
                     move-result v0

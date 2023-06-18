@@ -4,7 +4,7 @@ import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.extensions.addInstructions
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.PatchResultError
@@ -25,7 +25,7 @@ class ForbidSwitchLiveRoomPatch : BytecodePatch() {
                     if (c.immutableClass.superclass == "Landroidx/recyclerview/widget/RecyclerView;") c
                     else null
                 }
-            }?.mutableClass?.methods?.find { it.name == "onInterceptTouchEvent" }?.addInstructions(
+            }?.mutableClass?.methods?.find { it.name == "onInterceptTouchEvent" }?.addInstructionsWithLabels(
                 0, """
                     invoke-static {}, Lapp/revanced/bilibili/patches/ForbidLSwitchLiveRoomPatch;->forbid()Z
                     move-result v0

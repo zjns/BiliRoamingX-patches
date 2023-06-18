@@ -4,7 +4,7 @@ import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.extensions.addInstructions
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.PatchResultError
@@ -22,7 +22,7 @@ class LiveRoomPatch : BytecodePatch() {
     override fun execute(context: BytecodeContext): PatchResult {
         context.findClass("Lcom/bilibili/bililive/room/ui/roomv3/player/container/LiveRoomPlayerContainerView;")
             ?.mutableClass?.run {
-                methods.find { it.name == "onDoubleTap" }?.addInstructions(
+                methods.find { it.name == "onDoubleTap" }?.addInstructionsWithLabels(
                     0, """
                     invoke-static {p0}, Lapp/revanced/bilibili/patches/LiveRoomPatch;->onDoubleTap(${this.type})Z
                     move-result v0
@@ -42,7 +42,7 @@ class LiveRoomPatch : BytecodePatch() {
                 }
                 if (info != null) {
                     val (m, insertIndex) = info
-                    m.addInstructions(
+                    m.addInstructionsWithLabels(
                         insertIndex, """
                         invoke-static {}, Lapp/revanced/bilibili/patches/LiveRoomPatch;->disableLiveRoomDoubleClick()Z
                         move-result v3

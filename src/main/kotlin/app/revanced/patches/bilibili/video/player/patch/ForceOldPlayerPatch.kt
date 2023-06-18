@@ -4,7 +4,7 @@ import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.extensions.addInstructions
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.PatchResultSuccess
@@ -19,8 +19,9 @@ import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
 class ForceOldPlayerPatch : BytecodePatch() {
     override fun execute(context: BytecodeContext): PatchResult {
         context.findClass("Ltv/danmaku/biliplayerv2/GeminiPlayerFFKt;")?.let { clazz ->
-            clazz.mutableClass.methods.find { it.returnType == "Z" && it.parameters.isEmpty() }?.addInstructions(
-                0, """
+            clazz.mutableClass.methods.find { it.returnType == "Z" && it.parameters.isEmpty() }
+                ?.addInstructionsWithLabels(
+                    0, """
                     invoke-static {}, Lapp/revanced/bilibili/patches/ForceOldPlayerPatch;->forceOldPlayer()Z
                     move-result v0
                     if-eqz v0, :jump
@@ -29,7 +30,7 @@ class ForceOldPlayerPatch : BytecodePatch() {
                     :jump
                     nop
                 """.trimIndent()
-            )
+                )
         }
         return PatchResultSuccess()
     }

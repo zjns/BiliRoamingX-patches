@@ -5,7 +5,8 @@ import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.extensions.addInstructions
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.PatchResultError
@@ -76,7 +77,7 @@ class PegasusPatch : BytecodePatch(listOf(PegasusParserFingerprint, CardClickPro
                     )
                 }?.also { add(it) }
         }
-        CardClickProcessorFingerprint.result?.mutableMethod?.addInstructions(
+        CardClickProcessorFingerprint.result?.mutableMethod?.addInstructionsWithLabels(
             0, """
             invoke-static {p3}, Lapp/revanced/bilibili/patches/json/PegasusPatch;->onFeedClick(Lcom/bilibili/app/comm/list/common/data/DislikeReason;)Z
             move-result v0

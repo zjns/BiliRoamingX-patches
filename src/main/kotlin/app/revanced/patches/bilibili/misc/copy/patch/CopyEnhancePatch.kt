@@ -4,7 +4,8 @@ import app.revanced.extensions.toErrorResult
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.extensions.addInstructions
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.PatchResultSuccess
@@ -36,7 +37,7 @@ class CopyEnhancePatch : BytecodePatch(
             cloneMutable(name = name + "_Origin", accessFlags = AccessFlags.PUBLIC.value)
         }.also { descResult.mutableClass.methods.add(it) }
         descResult.mutableMethod.run {
-            addInstructions(
+            addInstructionsWithLabels(
                 0, """
                 invoke-static {p0, p1, p2}, Lapp/revanced/bilibili/patches/CopyEnhancePatch;->copyDescProxy(Ljava/lang/Object;ZLjava/lang/String;)Z
                 move-result v0
@@ -70,7 +71,7 @@ class CopyEnhancePatch : BytecodePatch(
             context.proxy(c).mutableClass.methods.run {
                 first { it.name == "onLongClick" }.also { m ->
                     m.cloneMutable(name = "onLongClick_Origin").also { add(it) }
-                }.addInstructions(
+                }.addInstructionsWithLabels(
                     0, """
                     invoke-static {p0, p1}, Lapp/revanced/bilibili/patches/CopyEnhancePatch;->onDynamicLongClick(${onLongClickOriginListenerType}Landroid/view/View;)Z
                     move-result v0
@@ -89,7 +90,7 @@ class CopyEnhancePatch : BytecodePatch(
                 result?.mutableClass?.methods?.run {
                     result.mutableMethod.also { m ->
                         m.cloneMutable(name = "onLongClick_Origin").also { add(it) }
-                    }.addInstructions(
+                    }.addInstructionsWithLabels(
                         0, """
                         const-string v0, "$idName"
                         invoke-static {p0, p1, v0}, Lapp/revanced/bilibili/patches/CopyEnhancePatch;->onCommentLongClick(${onLongClickOriginListenerType}Landroid/view/View;Ljava/lang/String;)Z
@@ -103,7 +104,7 @@ class CopyEnhancePatch : BytecodePatch(
                     )
                 }
             }
-        ConversationCopyFingerprint.result?.mutableMethod?.addInstructions(
+        ConversationCopyFingerprint.result?.mutableMethod?.addInstructionsWithLabels(
             0, """
             move-object/from16 v0, p8
             invoke-virtual {v0, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z

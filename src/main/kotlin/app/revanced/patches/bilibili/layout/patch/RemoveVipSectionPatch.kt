@@ -5,7 +5,7 @@ import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.extensions.addInstructions
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.PatchResultSuccess
@@ -29,7 +29,7 @@ class RemoveVipSectionPatch : BytecodePatch(listOf(HomeUserCenterFragmentFingerp
             val insertIndex = method.implementation?.instructions?.indexOfLast {
                 it.opcode == Opcode.RETURN_OBJECT
             }?.takeIf { it != -1 } ?: return@let null
-            method.addInstructions(
+            method.addInstructionsWithLabels(
                 insertIndex, """
                     invoke-static {}, Lapp/revanced/bilibili/patches/RemoveVipSectionPatch;->removeVipSection()Z
                     move-result v0
