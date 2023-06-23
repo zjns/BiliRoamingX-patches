@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.preference.PreferenceCategory>
         <androidx.preference.Preference
+            android:fragment="app.revanced.bilibili.settings.fragments.UnlockAreaLimitFragment"
+            android:key="main_func_category"
+            android:title="@string/biliroaming_unlock_area_limit_category_title" />
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory>
+        <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.CustomizePlayerFragment"
             android:key="customize_player"
             android:title="@string/biliroaming_customize_player_title" />

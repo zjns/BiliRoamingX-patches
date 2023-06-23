@@ -10,6 +10,7 @@ import app.revanced.patches.shared.settings.preference.BaseResource
 import app.revanced.patches.shared.settings.preference.addPreference
 import app.revanced.patches.shared.settings.preference.addResource
 import app.revanced.patches.shared.settings.preference.impl.ArrayResource
+import app.revanced.patches.shared.settings.preference.impl.PureArrayResource
 import app.revanced.patches.shared.settings.preference.impl.StringResource
 import app.revanced.util.resources.ResourceUtils
 import app.revanced.util.resources.ResourceUtils.copyResources
@@ -97,6 +98,10 @@ abstract class AbstractSettingsResourcePatch(
          */
         fun addArray(arrayResource: ArrayResource, pure: Boolean = false) =
             arraysNode!!.addResource(arrayResource) { if (!pure) it.include() }
+
+        fun addPureArray(arrayResource: PureArrayResource) {
+            arraysNode!!.addResource(arrayResource) {}
+        }
 
         /**
          * Add a preference to the settings.

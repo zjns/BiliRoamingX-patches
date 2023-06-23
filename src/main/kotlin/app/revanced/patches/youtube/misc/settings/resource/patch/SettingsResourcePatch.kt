@@ -142,6 +142,9 @@ class SettingsResourcePatch : AbstractSettingsResourcePatch(
         fun addArray(arrayResource: ArrayResource, pure: Boolean = false) =
             AbstractSettingsResourcePatch.addArray(arrayResource, pure)
 
+        fun addPureArray(arrayResource: PureArrayResource) =
+            AbstractSettingsResourcePatch.addPureArray(arrayResource)
+
         /**
          * Add a preference to the settings.
          *

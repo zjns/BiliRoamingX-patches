@@ -15,6 +15,7 @@ import app.revanced.patcher.patch.PatchResultSuccess
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patches.shared.settings.preference.impl.ArrayResource
 import app.revanced.patches.shared.settings.preference.impl.Preference
+import app.revanced.patches.shared.settings.preference.impl.PureArrayResource
 import app.revanced.patches.shared.settings.util.AbstractPreferenceScreen
 import app.revanced.patches.youtube.misc.integrations.patch.IntegrationsPatch
 import app.revanced.patches.youtube.misc.settings.bytecode.fingerprints.LicenseActivityFingerprint
@@ -106,6 +107,9 @@ class SettingsPatch : BytecodePatch(
 
         fun addArray(arrayResource: ArrayResource, pure: Boolean = false) =
             SettingsResourcePatch.addArray(arrayResource, pure)
+
+        fun addPureArray(arrayResource: PureArrayResource) =
+            SettingsResourcePatch.addPureArray(arrayResource)
 
         fun addPreferenceScreen(preferenceScreen: app.revanced.patches.shared.settings.preference.impl.PreferenceScreen) =
             SettingsResourcePatch.addPreferenceScreen(preferenceScreen)

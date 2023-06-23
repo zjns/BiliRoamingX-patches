@@ -259,4 +259,50 @@
         <item>contractResource</item>
         <item>nftShowModule</item>
     </string-array>
+    <string-array name="biliroaming_upos_entries">
+        <item>不替换</item>
+        <item>ali（阿里）</item>
+        <item>alib（阿里）</item>
+        <item>alio1（阿里）</item>
+        <item>bos（百度）</item>
+        <item>cos（腾讯）</item>
+        <item>cosb（腾讯）</item>
+        <item>coso1（腾讯）</item>
+        <item>hw（华为）</item>
+        <item>hwb（华为）</item>
+        <item>hwo1（华为）</item>
+        <item>08c（华为）</item>
+        <item>08h（华为）</item>
+        <item>08ct（华为）</item>
+        <item>tf_hw（华为）</item>
+        <item>tf_tx（腾讯）</item>
+        <item>akamai（Akamai海外）</item>
+        <item>aliov（阿里海外）</item>
+        <item>cosov（腾讯海外）</item>
+        <item>hwov（华为海外）</item>
+        <item>hk_bcache（Bilibili海外）</item>
+    </string-array>
+    <string-array name="biliroaming_upos_values">
+        <item>$1</item>
+        <item>@string/biliroaming_ali_host</item>
+        <item>@string/biliroaming_alib_host</item>
+        <item>@string/biliroaming_alio1_host</item>
+        <item>@string/biliroaming_bos_host</item>
+        <item>@string/biliroaming_cos_host</item>
+        <item>@string/biliroaming_cosb_host</item>
+        <item>@string/biliroaming_coso1_host</item>
+        <item>@string/biliroaming_hw_host</item>
+        <item>@string/biliroaming_hwb_host</item>
+        <item>@string/biliroaming_hwo1_host</item>
+        <item>@string/biliroaming_hw_08c_host</item>
+        <item>@string/biliroaming_hw_08h_host</item>
+        <item>@string/biliroaming_hw_08ct_host</item>
+        <item>@string/biliroaming_tf_hw_host</item>
+        <item>@string/biliroaming_tf_tx_host</item>
+        <item>@string/biliroaming_akamai_host</item>
+        <item>@string/biliroaming_aliov_host</item>
+        <item>@string/biliroaming_cosov_host</item>
+        <item>@string/biliroaming_hwov_host</item>
+        <item>@string/biliroaming_hk_bcache_host</item>
+    </string-array>
 </resources>

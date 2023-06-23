@@ -148,4 +148,21 @@
     <string name="biliroaming_dialog_color_picker_title">拾色器</string>
     <string name="biliroaming_choose_font_file_title">选择字体文件</string>
     <string name="biliroaming_pls_install_file_manager">请安装文件管理器</string>
+    <string name="biliroaming_unlock_area_limit_category_title">解锁番剧限制</string>
+    <string name="biliroaming_unlock_area_limit_title">总开关</string>
+    <string name="biliroaming_unlock_area_limit_summary">设置解析服务器即可观看区域外版权番剧</string>
+    <string name="biliroaming_custom_server_title">设置解析服务器</string>
+    <string name="biliroaming_custom_server_summary">使用设置的服务器解析区域限制番剧的播放地址；如不知如何设置，请查看帮助文档</string>
+    <string name="biliroaming_allow_download_title">允许下载版权番剧</string>
+    <string name="biliroaming_allow_download_summary">使版权番剧可以缓存</string>
+    <string name="biliroaming_allow_mini_play_title">允许解锁番剧小窗播放</string>
+    <string name="biliroaming_allow_mini_play_summary">CC字幕并不能在小窗显示</string>
+    <string name="biliroaming_copy_access_key">复制当前账号访问密钥</string>
+    <string name="biliroaming_area_cn">中国大陆</string>
+    <string name="biliroaming_area_hk">香港</string>
+    <string name="biliroaming_area_tw">台湾</string>
+    <string name="biliroaming_area_th">泰国/东南亚</string>
+    <string name="biliroaming_get_public_server">获取公共解析服务器</string>
+    <string name="biliroaming_custom_upos_title">UPOS 服务器</string>
+    <string name="biliroaming_custom_upos_summary">自定义解锁番剧的 UPOS 服务器，可解决黑屏与无限加载</string>
 </resources>

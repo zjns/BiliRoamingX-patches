@@ -44,9 +44,12 @@ class SettingsResourcePatch : AbstractSettingsResourcePatch(
         "biliroaming_setting_customize_video_detail.xml",
         "biliroaming_setting_customize_space.xml",
         "biliroaming_setting_customize_subtitle.xml",
+        "biliroaming_setting_unlock_area_limit.xml",
+        "biliroaming_setting_upos.xml"
     )
     private val layouts = arrayOf(
         "biliroaming_dialog_argb_color_choose.xml",
+        "biliroaming_dialog_customize_backup.xml",
     )
 
     override fun execute(context: ResourceContext): PatchResult {
@@ -59,6 +62,7 @@ class SettingsResourcePatch : AbstractSettingsResourcePatch(
             context.copyResources("bilibili", it)
         }
         context.mergeStrings("bilibili/host/values/strings.xml")
+        context.mergeStrings("bilibili/host/values/strings_raw.xml")
         context.mergeArrays("bilibili/host/values/arrays.xml")
         context.xmlEditor["res/xml/main_preferences.xml"].use {
             it.addBiliRoamingEntrance()

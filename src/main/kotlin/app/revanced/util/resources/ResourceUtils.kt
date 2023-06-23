@@ -2,7 +2,8 @@ package app.revanced.util.resources
 
 import app.revanced.patcher.data.DomFileEditor
 import app.revanced.patcher.data.ResourceContext
-import app.revanced.patches.shared.settings.preference.impl.ArrayResource
+import app.revanced.patches.shared.settings.preference.impl.ArrayItem
+import app.revanced.patches.shared.settings.preference.impl.PureArrayResource
 import app.revanced.patches.shared.settings.preference.impl.StringResource
 import app.revanced.patches.youtube.misc.settings.bytecode.patch.SettingsPatch
 import org.w3c.dom.Element
@@ -31,25 +32,22 @@ internal object ResourceUtils {
         }
     }
 
-    internal fun ResourceContext.mergeArrays(host: String, pure: Boolean = true) {
+    internal fun ResourceContext.mergeArrays(host: String) {
         this.iterateXmlNodeChildren(host, "resources") {
             if (!it.hasAttributes()) return@iterateXmlNodeChildren
 
             val attributes = it.attributes
             val name = attributes.getNamedItem("name")!!.nodeValue!!
             val childNodes = it.childNodes
-            val items = mutableListOf<StringResource>()
-            var raw = true
+            val items = mutableListOf<ArrayItem>()
             for (i in 0 until childNodes.length) {
                 val item = childNodes.item(i)
                 if (item !is Element) continue
                 val text = item.textContent.orEmpty()
-                if (text.startsWith("@"))
-                    raw = false
-                items.add(StringResource(text, ""))
+                items.add(ArrayItem(text))
             }
 
-            SettingsPatch.addArray(ArrayResource(name, items, raw), pure)
+            SettingsPatch.addPureArray(PureArrayResource(name, items))
         }
     }
 
