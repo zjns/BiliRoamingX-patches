@@ -19,8 +19,15 @@
     <string name="biliroaming_teenagers_mode_dialog_summary">仍可从侧滑菜单进入青少年模式</string>
     <string name="biliroaming_replace_story_video_title">替换竖版视频</string>
     <string name="biliroaming_replace_story_video_summary">替换竖版视频为正常视频，同时需要到设置中关闭显示竖屏模式入口</string>
+    <string name="biliroaming_search_category_title">搜索页</string>
     <string name="biliroaming_purify_search_title">净化搜索页面</string>
-    <string name="biliroaming_purify_search_summary">去除搜索页面的热搜和推荐</string>
+    <string name="biliroaming_purify_search_summary">去除热搜和推荐</string>
+    <string name="biliroaming_filter_search_type_title">净化搜索结果</string>
+    <string name="biliroaming_filter_search_type_summary">选择需要屏蔽的搜索结果类型</string>
+    <string name="biliroaming_search_area_title">开启其它地区番剧搜索</string>
+    <string name="biliroaming_search_area_summary">添加其它地区番剧搜索结果，需要解析服务器支持</string>
+    <string name="biliroaming_search_area_movie_title">开启其它地区影剧搜索</string>
+    <string name="biliroaming_search_area_movie_summary">添加其它地区影剧搜索结果，需要解析服务器支持</string>
     <string name="biliroaming_purify_live_popups_title">净化直播间浮窗</string>
     <string name="biliroaming_purify_live_popups_summary">净化直播间各种浮窗</string>
     <string name="biliroaming_forbid_switch_live_room_title">禁止滑动切换直播间</string>

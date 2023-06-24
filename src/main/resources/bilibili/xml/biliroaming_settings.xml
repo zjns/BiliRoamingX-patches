@@ -39,6 +39,10 @@
             android:key="space"
             android:title="@string/biliroaming_space_title" />
         <androidx.preference.Preference
+            android:fragment="app.revanced.bilibili.settings.fragments.CustomizeSearchFragment"
+            android:key="search"
+            android:title="@string/biliroaming_search_category_title" />
+        <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.CustomizeSubtitleFragment"
             android:key="customize_subtitle_category"
             android:title="@string/biliroaming_customize_subtitle_title" />
@@ -65,10 +69,6 @@
             android:key="purify_splash"
             android:title="@string/biliroaming_purify_splash_title"
             android:summary="@string/biliroaming_purify_splash_summary" />
-        <androidx.preference.SwitchPreferenceCompat
-            android:key="purify_search"
-            android:title="@string/biliroaming_purify_search_title"
-            android:summary="@string/biliroaming_purify_search_summary" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory>

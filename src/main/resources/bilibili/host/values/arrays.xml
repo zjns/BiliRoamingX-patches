@@ -305,4 +305,28 @@
         <item>@string/biliroaming_hwov_host</item>
         <item>@string/biliroaming_hk_bcache_host</item>
     </string-array>
+    <string-array name="biliroaming_search_type_entries">
+        <item>投稿视频</item>
+        <item>游戏</item>
+        <item>UP主</item>
+        <item>广告</item>
+        <item>漫画</item>
+        <item>频道</item>
+        <item>番剧</item>
+        <item>话题</item>
+        <item>合集</item>
+        <item>专栏</item>
+    </string-array>
+    <string-array name="biliroaming_search_type_values">
+        <item>video</item>
+        <item>game</item>
+        <item>user</item>
+        <item>ad</item>
+        <item>comic</item>
+        <item>channel</item>
+        <item>bangumi</item>
+        <item>subject</item>
+        <item>collection</item>
+        <item>article</item>
+    </string-array>
 </resources>
