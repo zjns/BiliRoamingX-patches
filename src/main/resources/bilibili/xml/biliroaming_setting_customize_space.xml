@@ -5,7 +5,7 @@
         android:key="customize_space"
         android:layout="@layout/bili_app_layout_preference_category_title"
         android:persistent="true"
-        android:title="@string/biliroaming_customize_space_category_summary"
+        android:title="@string/biliroaming_customize_space_summary"
         android:entries="@array/biliroaming_space_entries"
         android:entryValues="@array/biliroaming_space_values"
         app:migration_settings_type="none" />

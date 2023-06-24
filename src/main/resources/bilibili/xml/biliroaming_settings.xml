@@ -35,9 +35,9 @@
             android:key="customize_video_detail"
             android:title="@string/biliroaming_customize_video_detail_title" />
         <androidx.preference.Preference
-            android:fragment="app.revanced.bilibili.settings.fragments.CustomizeSpaceFragment"
-            android:key="customize_space_category"
-            android:title="@string/biliroaming_customize_space_category_title" />
+            android:fragment="app.revanced.bilibili.settings.fragments.SpaceFragment"
+            android:key="space"
+            android:title="@string/biliroaming_space_title" />
         <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.CustomizeSubtitleFragment"
             android:key="customize_subtitle_category"

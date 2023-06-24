@@ -98,8 +98,11 @@
     <string name="biliroaming_customize_player_title">播放器</string>
     <string name="biliroaming_remember_lossless_setting_title">记住无损设置开关状态</string>
     <string name="biliroaming_customize_video_detail_title">视频详情页</string>
-    <string name="biliroaming_customize_space_category_title">用户空间页</string>
-    <string name="biliroaming_customize_space_category_summary">选择要屏蔽的元素（全选会让你什么也看不到）</string>
+    <string name="biliroaming_space_title">用户空间页</string>
+    <string name="biliroaming_fix_space_title">修复UP主空间</string>
+    <string name="biliroaming_fix_space_summary">修复部分被屏蔽的UP主空间</string>
+    <string name="biliroaming_customize_space_title">需要屏蔽的元素</string>
+    <string name="biliroaming_customize_space_summary">选择要屏蔽的元素（全选会让你什么也看不到）</string>
     <string name="biliroaming_auto_like_title">自动点赞</string>
     <string name="biliroaming_toast_comment_image_save_success">图片已保存至\n%s</string>
     <string name="biliroaming_toast_comment_image_save_failed">图片保存失败，可能已经保存或未授予权限</string>

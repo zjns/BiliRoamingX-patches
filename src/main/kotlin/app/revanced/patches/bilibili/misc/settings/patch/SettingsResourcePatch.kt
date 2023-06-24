@@ -45,7 +45,8 @@ class SettingsResourcePatch : AbstractSettingsResourcePatch(
         "biliroaming_setting_customize_space.xml",
         "biliroaming_setting_customize_subtitle.xml",
         "biliroaming_setting_unlock_area_limit.xml",
-        "biliroaming_setting_upos.xml"
+        "biliroaming_setting_upos.xml",
+        "biliroaming_setting_space.xml",
     )
     private val layouts = arrayOf(
         "biliroaming_dialog_argb_color_choose.xml",
