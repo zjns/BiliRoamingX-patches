@@ -18,10 +18,6 @@ import org.jf.dexlib2.AccessFlags
 @Version("0.0.1")
 class ModifyModifierPatch : BytecodePatch() {
     override fun execute(context: BytecodeContext): PatchResult {
-        context.findClass("Lcom/google/protobuf/GeneratedMessageLite;")
-            ?.mutableClass?.fields?.let { fields ->
-                fields.find { it.name == "unknownFields" }?.accessFlags = AccessFlags.PUBLIC.value
-            }
         context.findClass("Ltv/danmaku/bili/ui/main2/resource/MainResourceManager\$TabResponse;")
             ?.mutableClass?.accessFlags = AccessFlags.PUBLIC.value
         context.findClass("Ltv/danmaku/bili/ui/main2/resource/MainResourceManager\$TabData;")
