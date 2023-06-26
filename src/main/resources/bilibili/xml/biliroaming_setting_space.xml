@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.preference.PreferenceCategory>
         <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="true"
             android:key="fix_space"
             android:title="@string/biliroaming_fix_space_title"
             android:summary="@string/biliroaming_fix_space_summary" />
