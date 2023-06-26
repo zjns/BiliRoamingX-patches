@@ -76,4 +76,11 @@
             android:key="debug"
             android:title="@string/biliroaming_debug_title" />
     </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory>
+        <androidx.preference.Preference
+            android:fragment="app.revanced.bilibili.settings.fragments.AboutFragment"
+            android:key="about"
+            android:title="@string/biliroaming_about_title" />
+    </androidx.preference.PreferenceCategory>
 </androidx.preference.PreferenceScreen>
