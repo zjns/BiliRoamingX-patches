@@ -27,7 +27,7 @@ class ForbidSwitchLiveRoomPatch : BytecodePatch() {
                 }
             }?.mutableClass?.methods?.find { it.name == "onInterceptTouchEvent" }?.addInstructionsWithLabels(
                 0, """
-                    invoke-static {}, Lapp/revanced/bilibili/patches/ForbidLSwitchLiveRoomPatch;->forbid()Z
+                    invoke-static {}, Lapp/revanced/bilibili/patches/ForbidSwitchLiveRoomPatch;->forbid()Z
                     move-result v0
                     if-eqz v0, :jump
                     const/4 v0, 0x0
