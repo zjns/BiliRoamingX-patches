@@ -180,4 +180,13 @@
     <string name="biliroaming_about_title">关于</string>
     <string name="biliroaming_project_title">项目地址</string>
     <string name="biliroaming_tg_title">TG更新频道</string>
+    <string name="biliroaming_rm_video_relate_promote_title">移除推广</string>
+    <string name="biliroaming_rm_video_relate_promote_summary">游戏、课程、会员购、创作推广等</string>
+    <string name="biliroaming_rm_video_relate_only_av_title">仅UP主投稿视频</string>
+    <string name="biliroaming_rm_video_relate_only_av_summary">上个选项的基础上，仅展示UP主投稿视频，移除番剧等内容</string>
+    <string name="biliroaming_rm_video_relate_nothing_title">移除所有内容</string>
+    <string name="biliroaming_rm_video_relate_nothing_summary">上个选项的基础上，将UP主投稿视频也移除</string>
+    <string name="biliroaming_video_relate_title">视频下方推荐过滤</string>
+    <string name="biliroaming_video_relate_filter_title">按关键词过滤</string>
+    <string name="biliroaming_video_relate_filter_summary">复用首页推荐关键词过滤</string>
 </resources>
