@@ -80,7 +80,7 @@ internal inline fun <reified E> filterMapInstruction35c(
         return null
     }
 
-    if (instruction.opcode != Opcode.INVOKE_VIRTUAL) {
+    if (instruction.opcode.let { it != Opcode.INVOKE_VIRTUAL && it != Opcode.INVOKE_SUPER }) {
         return null
     }
 
