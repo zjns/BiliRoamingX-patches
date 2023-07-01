@@ -200,4 +200,5 @@
     <string name="biliroaming_long_press_speed_title">长按播放速度</string>
     <string name="biliroaming_long_press_speed_summary">自定义播放器长按播放速度</string>
     <string name="biliroaming_speed_save_ok">保存成功，立即生效</string>
+    <string name="biliroaming_block_update_title">禁止 APP 检查更新</string>
 </resources>

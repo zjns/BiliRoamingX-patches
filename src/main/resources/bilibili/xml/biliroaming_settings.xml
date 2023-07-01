@@ -62,6 +62,9 @@
             android:key="comment_copy_enhance"
             android:title="@string/biliroaming_comment_copy_enhance_title"
             android:summary="@string/biliroaming_comment_copy_enhance_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="block_update"
+            android:title="@string/biliroaming_block_update_title" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory>
