@@ -201,4 +201,9 @@
     <string name="biliroaming_long_press_speed_summary">自定义播放器长按播放速度</string>
     <string name="biliroaming_speed_save_ok">保存成功，立即生效</string>
     <string name="biliroaming_block_update_title">禁止 APP 检查更新</string>
+    <string name="biliroaming_video_detail_other_category_title">其它</string>
+    <string name="biliroaming_disable_auto_select_title">禁止自动转到动态</string>
+    <string name="biliroaming_disable_auto_select_summary">禁止评论带图时自动勾选转到动态</string>
+    <string name="biliroaming_disable_auto_subscribe_title">禁止自动订阅合集</string>
+    <string name="biliroaming_disable_auto_subscribe_summary">禁止收藏有合集的视频时自动勾选订阅合集</string>
 </resources>
