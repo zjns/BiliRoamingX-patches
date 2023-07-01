@@ -306,6 +306,7 @@
         <item>@string/biliroaming_hk_bcache_host</item>
     </string-array>
     <string-array name="biliroaming_search_type_entries">
+        <item>热搜横幅</item>
         <item>投稿视频</item>
         <item>游戏</item>
         <item>UP主</item>
@@ -318,6 +319,7 @@
         <item>专栏</item>
     </string-array>
     <string-array name="biliroaming_search_type_values">
+        <item>hot_banner</item>
         <item>video</item>
         <item>game</item>
         <item>user</item>

@@ -51,6 +51,10 @@
             android:key="block_up_rcmd_ads"
             android:title="@string/biliroaming_block_up_rcmd_ads_title"
             android:summary="@string/biliroaming_block_up_rcmd_ads_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="block_bangumi_page_ads"
+            android:title="@string/biliroaming_block_bangumi_page_ads_title"
+            android:summary="@string/biliroaming_block_bangumi_page_ads_summary" />
     </androidx.preference.PreferenceCategory>
     <androidx.preference.PreferenceCategory
         android:title="@string/biliroaming_video_detail_other_category_title"

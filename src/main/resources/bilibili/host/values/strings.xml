@@ -206,4 +206,6 @@
     <string name="biliroaming_disable_auto_select_summary">禁止评论带图时自动勾选转到动态</string>
     <string name="biliroaming_disable_auto_subscribe_title">禁止自动订阅合集</string>
     <string name="biliroaming_disable_auto_subscribe_summary">禁止收藏有合集的视频时自动勾选订阅合集</string>
+    <string name="biliroaming_block_bangumi_page_ads_title">屏蔽番剧页面广告</string>
+    <string name="biliroaming_block_bangumi_page_ads_summary">屏蔽番剧页面弹窗广告及会员购</string>
 </resources>
