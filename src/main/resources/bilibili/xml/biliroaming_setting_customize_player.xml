@@ -20,6 +20,18 @@
             app:radioDefaultValue="0"
             app:radioEntries="@array/biliroaming_full_screen_quality_entries"
             app:radioEntryValues="@array/biliroaming_full_screen_quality_values" />
+        <androidx.preference.Preference
+            android:key="default_speed"
+            android:title="@string/biliroaming_default_speed_title"
+            android:summary="@string/biliroaming_default_speed_summary" />
+        <androidx.preference.Preference
+            android:key="long_press_speed"
+            android:title="@string/biliroaming_long_press_speed_title"
+            android:summary="@string/biliroaming_long_press_speed_summary" />
+        <androidx.preference.Preference
+            android:key="override_speed"
+            android:title="@string/biliroaming_speed_override_title"
+            android:summary="@string/biliroaming_speed_override_summary" />
         <androidx.preference.SwitchPreferenceCompat
             android:key="force_old_player"
             android:title="@string/biliroaming_force_old_player_title" />

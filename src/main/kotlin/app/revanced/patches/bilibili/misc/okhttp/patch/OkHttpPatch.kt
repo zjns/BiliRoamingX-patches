@@ -11,6 +11,7 @@ import app.revanced.patcher.patch.annotations.Patch
 import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
 import app.revanced.patches.bilibili.misc.okhttp.fingerprints.*
 import app.revanced.patches.bilibili.patcher.patch.MultiMethodBytecodePatch
+import app.revanced.patches.bilibili.utils.removeFinal
 import app.revanced.patches.bilibili.utils.toPublic
 import org.jf.dexlib2.AccessFlags
 import org.jf.dexlib2.Opcode
@@ -38,7 +39,7 @@ class OkHttpPatch : MultiMethodBytecodePatch(
         val urlField = requestClass.fields.first { it.type == httpUrlClass.type }
         val responseClass = ResponseFingerprint.result?.mutableClass
             ?: return ResponseFingerprint.toErrorResult()
-        responseClass.fields.forEach { it.accessFlags = it.accessFlags and AccessFlags.FINAL.value.inv() }
+        responseClass.fields.forEach { it.accessFlags = it.accessFlags.removeFinal() }
         val requestField = responseClass.fields.first { it.type == requestClass.type }
         val codeField = responseClass.fields.first { it.type == "I" }
         val responseBodyClass = ResponseBodyFingerprint.result?.classDef
