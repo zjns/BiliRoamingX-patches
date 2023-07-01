@@ -5,12 +5,12 @@ import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
-import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.PatchResultSuccess
 import app.revanced.patcher.patch.annotations.Patch
 import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
 import app.revanced.patches.bilibili.misc.okhttp.fingerprints.*
+import app.revanced.patches.bilibili.patcher.patch.MultiMethodBytecodePatch
 import app.revanced.patches.bilibili.utils.toPublic
 import org.jf.dexlib2.AccessFlags
 import org.jf.dexlib2.Opcode
@@ -19,18 +19,18 @@ import org.jf.dexlib2.Opcode
 @BiliBiliCompatibility
 @Name("okhttp")
 @Description("OkHttp网络请求响应Hook")
-class OkHttpPatch : BytecodePatch(
-    listOf(
+class OkHttpPatch : MultiMethodBytecodePatch(
+    fingerprints = listOf(
         HttpUrlFingerprint,
         MediaTypeGetFingerprint,
         RequestFingerprint,
         ResponseBodyFingerprint,
         ResponseFingerprint,
-        BiliCallBodyWrapperFingerprint,
-        RetrofitBodyWrapperFingerprint,
-    )
+    ),
+    multiFingerprints = listOf(BodyWrapperFingerprint)
 ) {
     override fun execute(context: BytecodeContext): PatchResult {
+        super.execute(context)
         val httpUrlClass = HttpUrlFingerprint.result?.classDef
             ?: return HttpUrlFingerprint.toErrorResult()
         val requestClass = RequestFingerprint.result?.classDef
@@ -55,12 +55,8 @@ class OkHttpPatch : BytecodePatch(
         val stringMethod = responseBodyClass.methods.first { m ->
             m.returnType == "Ljava/lang/String;" && m.parameterTypes.isEmpty()
         }
-        val biliCallBodyWrapperClass = BiliCallBodyWrapperFingerprint.result?.mutableClass
-            ?: return BiliCallBodyWrapperFingerprint.toErrorResult()
-        val retrofitBodyWrapperClass = RetrofitBodyWrapperFingerprint.result?.mutableClass
-            ?: return RetrofitBodyWrapperFingerprint.toErrorResult()
-        biliCallBodyWrapperClass.run { accessFlags = accessFlags.toPublic() }
-        retrofitBodyWrapperClass.run { accessFlags = accessFlags.toPublic() }
+        val bodyWrapperClasses = BodyWrapperFingerprint.result.map { it.mutableClass }
+            .onEach { it.accessFlags = it.accessFlags.toPublic() }
         responseClass.methods.first { it.name == "<init>" }.run {
             val insertIndex = implementation!!.instructions.indexOfLast {
                 it.opcode == Opcode.RETURN_VOID
@@ -69,10 +65,14 @@ class OkHttpPatch : BytecodePatch(
                 insertIndex, """
                 iget-object p1, p0, $responseBodyField
                 if-eqz p1, :jump
-                instance-of v0, p1, $biliCallBodyWrapperClass
-                if-nez v0, :jump
-                instance-of v0, p1, $retrofitBodyWrapperClass
-                if-nez v0, :jump
+                ${
+                    bodyWrapperClasses.joinToString(separator = "\n") {
+                        """
+                        instance-of v0, p1, $it
+                        if-nez v0, :jump
+                    """.trimIndent()
+                    }
+                }
                 iget-object v0, p0, $requestField
                 iget-object v1, v0, $urlField
                 invoke-virtual {v1}, Ljava/lang/Object;->toString()Ljava/lang/String;

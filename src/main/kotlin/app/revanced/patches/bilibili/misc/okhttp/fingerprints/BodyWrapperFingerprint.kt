@@ -1,17 +1,7 @@
 package app.revanced.patches.bilibili.misc.okhttp.fingerprints
 
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
+import app.revanced.patches.bilibili.patcher.fingerprint.MultiMethodFingerprint
 
-object BiliCallBodyWrapperFingerprint : MethodFingerprint(
+object BodyWrapperFingerprint : MultiMethodFingerprint(
     strings = listOf("Cannot read raw response body of a converted body."),
-    customFingerprint = { _, classDef ->
-        classDef.type.startsWith("Lcom/bilibili/okretro")
-    }
-)
-
-object RetrofitBodyWrapperFingerprint : MethodFingerprint(
-    strings = listOf("Cannot read raw response body of a converted body."),
-    customFingerprint = { _, classDef ->
-        classDef.type.startsWith("Lretrofit")
-    }
 )
