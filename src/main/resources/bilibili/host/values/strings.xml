@@ -208,4 +208,6 @@
     <string name="biliroaming_disable_auto_subscribe_summary">禁止收藏有合集的视频时自动勾选订阅合集</string>
     <string name="biliroaming_block_bangumi_page_ads_title">屏蔽番剧页面广告</string>
     <string name="biliroaming_block_bangumi_page_ads_summary">屏蔽番剧页面弹窗广告及会员购</string>
+    <string name="biliroaming_block_follow_button_title">隐藏关注按钮</string>
+    <string name="biliroaming_block_follow_button_summary">隐藏评论、动态等右上角的关注按钮</string>
 </resources>

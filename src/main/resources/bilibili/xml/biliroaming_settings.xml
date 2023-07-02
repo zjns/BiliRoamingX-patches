@@ -65,6 +65,11 @@
         <androidx.preference.SwitchPreferenceCompat
             android:key="block_update"
             android:title="@string/biliroaming_block_update_title" />
+        <androidx.preference.Preference
+            android:fragment="app.revanced.bilibili.settings.fragments.BlockFollowFragment"
+            android:key="follow_button"
+            android:title="@string/biliroaming_block_follow_button_title"
+            android:summary="@string/biliroaming_block_follow_button_summary" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory>

@@ -51,6 +51,7 @@ class SettingsResourcePatch : AbstractSettingsResourcePatch(
         "biliroaming_setting_filter_search_type.xml",
         "biliroaming_setting_about.xml",
         "biliroaming_setting_video_detail_filter.xml",
+        "biliroaming_setting_block_follow.xml",
     )
     private val layouts = arrayOf(
         "biliroaming_dialog_argb_color_choose.xml",
