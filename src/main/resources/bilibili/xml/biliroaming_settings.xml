@@ -87,6 +87,9 @@
 
     <androidx.preference.PreferenceCategory>
         <androidx.preference.Preference
+            android:key="reboot"
+            android:title="@string/biliroaming_reboot_title" />
+        <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.AboutFragment"
             android:key="about"
             android:title="@string/biliroaming_about_title" />
