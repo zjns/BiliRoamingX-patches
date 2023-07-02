@@ -70,6 +70,10 @@
             android:key="follow_button"
             android:title="@string/biliroaming_block_follow_button_title"
             android:summary="@string/biliroaming_block_follow_button_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="custom_theme"
+            android:title="@string/biliroaming_custom_theme_title"
+            android:summary="@string/biliroaming_custom_theme_summary" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory>

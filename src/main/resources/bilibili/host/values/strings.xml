@@ -212,4 +212,6 @@
     <string name="biliroaming_block_follow_button_summary">隐藏评论、动态等右上角的关注按钮</string>
     <string name="biliroaming_add_channel_title">底栏添加频道按钮</string>
     <string name="biliroaming_reboot_title">重启</string>
+    <string name="biliroaming_custom_theme_title">自定义主题色</string>
+    <string name="biliroaming_custom_theme_summary">添加自定义主题颜色的功能（需从我的右上角调色盘图标进入）</string>
 </resources>
