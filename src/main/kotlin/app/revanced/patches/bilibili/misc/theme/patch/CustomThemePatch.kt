@@ -40,7 +40,7 @@ class CustomThemePatch : BytecodePatch(
         }?.let { field ->
             field.accessFlags = field.accessFlags.toPublic().removeFinal()
             patchClass.methods.run {
-                first { it.name == "getThemeNamesMap" }.also { remove(it) }.cloneMutable(
+                first { it.name == "getThemeNames" }.also { remove(it) }.cloneMutable(
                     registerCount = 1, clearImplementation = true
                 ).apply {
                     addInstructions(
