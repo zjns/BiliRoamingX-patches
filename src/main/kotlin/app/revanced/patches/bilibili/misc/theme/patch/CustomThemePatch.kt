@@ -16,6 +16,9 @@ import app.revanced.patches.bilibili.utils.cloneMutable
 import app.revanced.patches.bilibili.utils.removeFinal
 import app.revanced.patches.bilibili.utils.toPublic
 import org.jf.dexlib2.AccessFlags
+import org.jf.dexlib2.Opcode
+import org.jf.dexlib2.iface.instruction.formats.Instruction35c
+import org.jf.dexlib2.iface.reference.MethodReference
 
 @Patch
 @BiliBiliCompatibility
@@ -29,7 +32,8 @@ class CustomThemePatch : BytecodePatch(
         ThemeColorsFingerprint,
         ThemeHelperFingerprint,
         ThemeNameFingerprint,
-        ThemeProcessorFingerprint
+        ThemeProcessorFingerprint,
+        WebActivityBuildUriFingerprint
     )
 ) {
     override fun execute(context: BytecodeContext): PatchResult {
@@ -159,6 +163,30 @@ class CustomThemePatch : BytecodePatch(
             """.trimIndent()
             )
         } ?: return ThemeProcessorFingerprint.toErrorResult()
+
+        WebActivityBuildUriFingerprint.result?.method?.implementation?.instructions?.firstNotNullOfOrNull { inst ->
+            if (inst.opcode == Opcode.INVOKE_STATIC && inst is Instruction35c) {
+                (inst.reference as MethodReference).let {
+                    if (it.parameterTypes.isEmpty() && it.returnType == "I") it.definingClass else null
+                }
+            } else null
+        }?.let { context.findClass(it)!! }?.mutableClass?.fields?.find {
+            it.type == "Landroid/util/SparseArray;"
+        }?.let { field ->
+            field.accessFlags = field.accessFlags.toPublic().removeFinal()
+            patchClass.methods.run {
+                first { it.name == "getColorIds" }.also { remove(it) }.cloneMutable(
+                    registerCount = 1, clearImplementation = true
+                ).apply {
+                    addInstructions(
+                        """
+                        sget-object v0, $field
+                        return-object v0
+                    """.trimIndent()
+                    )
+                }.also { add(it) }
+            }
+        } ?: return WebActivityBuildUriFingerprint.toErrorResult()
         return PatchResultSuccess()
     }
 }
