@@ -38,5 +38,15 @@
         <androidx.preference.SwitchPreferenceCompat
             android:key="remember_lossless_setting"
             android:title="@string/biliroaming_remember_lossless_setting_title" />
+
+        <androidx.preference.PreferenceCategory
+            android:title="@string/biliroaming_unstable_feature_title"
+            android:layout="@layout/bili_app_layout_preference_category_title">
+            <androidx.preference.SwitchPreferenceCompat
+                android:dependency="force_old_player"
+                android:key="trial_vip_quality"
+                android:title="@string/biliroaming_trial_vip_quality_title"
+                android:summary="@string/biliroaming_trial_vip_quality_summary" />
+        </androidx.preference.PreferenceCategory>
     </androidx.preference.PreferenceCategory>
 </androidx.preference.PreferenceScreen>
