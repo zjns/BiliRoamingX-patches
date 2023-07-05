@@ -20,7 +20,7 @@ class TeenagerModePatch : BytecodePatch() {
     override fun execute(context: BytecodeContext): PatchResult {
         context.findClass("Lcom/bilibili/teenagersmode/ui/TeenagersModeDialogActivity;")?.let { clazz ->
             clazz.mutableClass.methods.find { it.name == "onCreate" }?.addInstructionsWithLabels(
-                0, """
+                1, """
                     invoke-static {p0}, Lapp/revanced/bilibili/patches/TeenagerModePatch;->disableDialog(Landroid/app/Activity;)Z
                     move-result v0
                     if-eqz v0, :jump
