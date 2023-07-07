@@ -226,4 +226,5 @@
     <string name="biliroaming_skin_invalid">请填入有效的json格式主题</string>
     <string name="biliroaming_skin_success">导入成功，重启两次生效</string>
     <string name="biliroaming_skin_choose">选择文件</string>
+    <string name="biliroaming_misc_title">杂项</string>
 </resources>

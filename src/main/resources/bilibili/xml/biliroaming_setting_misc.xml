@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.preference.PreferenceCategory>
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="teenagers_mode_dialog"
+            android:title="@string/biliroaming_teenagers_mode_dialog_title"
+            android:summary="@string/biliroaming_teenagers_mode_dialog_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="comment_copy"
+            android:title="@string/biliroaming_comment_copy_title"
+            android:summary="@string/biliroaming_comment_copy_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:dependency="comment_copy"
+            android:key="comment_copy_enhance"
+            android:title="@string/biliroaming_comment_copy_enhance_title"
+            android:summary="@string/biliroaming_comment_copy_enhance_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="block_update"
+            android:title="@string/biliroaming_block_update_title" />
+        <androidx.preference.Preference
+            android:fragment="app.revanced.bilibili.settings.fragments.BlockFollowFragment"
+            android:key="follow_button"
+            android:title="@string/biliroaming_block_follow_button_title"
+            android:summary="@string/biliroaming_block_follow_button_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="custom_theme"
+            android:title="@string/biliroaming_custom_theme_title"
+            android:summary="@string/biliroaming_custom_theme_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="skin"
+            android:title="@string/biliroaming_skin_title"
+            android:summary="@string/biliroaming_skin_summary" />
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory>
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="purify_splash"
+            android:title="@string/biliroaming_purify_splash_title"
+            android:summary="@string/biliroaming_purify_splash_summary" />
+    </androidx.preference.PreferenceCategory>
+</androidx.preference.PreferenceScreen>
