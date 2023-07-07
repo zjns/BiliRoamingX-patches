@@ -339,4 +339,12 @@
         <item>comment</item>
         <item>dynamic</item>
     </string-array>
+    <string-array name="biliroaming_filter_story_entries">
+        <item>广告</item>
+        <item>直播</item>
+    </string-array>
+    <string-array name="biliroaming_filter_story_values">
+        <item>ad</item>
+        <item>live</item>
+    </string-array>
 </resources>

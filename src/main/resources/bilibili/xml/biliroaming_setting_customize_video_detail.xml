@@ -28,6 +28,10 @@
         <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.VideoDetailFilterFragment"
             android:title="@string/biliroaming_video_relate_title" />
+        <androidx.preference.Preference
+            android:fragment="app.revanced.bilibili.settings.fragments.FilterStoryFragment"
+            android:title="@string/biliroaming_filter_story_title"
+            android:summary="@string/biliroaming_filter_story_summary" />
     </androidx.preference.PreferenceCategory>
     <androidx.preference.PreferenceCategory
         android:title="@string/biliroaming_video_detail_comment_category_title"
