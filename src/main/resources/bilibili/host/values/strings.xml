@@ -230,4 +230,6 @@
     <string name="biliroaming_switch_dark_tips">将关闭深色跟随系统，确定切换？</string>
     <string name="biliroaming_switch_dark_dialog_title">切换深色模式时弹框确认</string>
     <string name="biliroaming_switch_dark_dialog_summary">当深色跟随系统启用时，点击右上角切换深色模式图标时弹框确认，防止误触</string>
+    <string name="biliroaming_block_dm_feedback_title">屏蔽弹幕氛围反馈</string>
+    <string name="biliroaming_block_dm_feedback_summary">屏蔽播放结束时的弹幕氛围反馈</string>
 </resources>
