@@ -238,4 +238,5 @@
     <string name="biliroaming_text_fold_dyn_max_lines_title">动态开始折叠行数</string>
     <string name="biliroaming_text_fold_dyn_lines_to_all_title">动态全文阅读触发行数</string>
     <string name="biliroaming_text_fold_line">%1$s行</string>
+    <string name="biliroaming_version">版本号</string>
 </resources>
