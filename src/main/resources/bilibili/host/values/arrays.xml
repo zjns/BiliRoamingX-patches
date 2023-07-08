@@ -347,4 +347,10 @@
         <item>ad</item>
         <item>live</item>
     </string-array>
+    <string-array name="block_modules_exception_entries">
+        <item>发布动态</item>
+    </string-array>
+    <string-array name="block_modules_exception_values">
+        <item>dynamic</item>
+    </string-array>
 </resources>

@@ -36,6 +36,9 @@
             android:key="text_fold"
             android:title="@string/biliroaming_text_fold_title"
             android:summary="@string/biliroaming_text_fold_summary" />
+        <androidx.preference.Preference
+            android:fragment="app.revanced.bilibili.settings.fragments.BlockModuleFragment"
+            android:title="@string/biliroaming_block_modules_title" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory>
