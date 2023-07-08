@@ -66,12 +66,12 @@ class OverridePlaybackSpeedPatch : MultiMethodBytecodePatch(
             )
         }
         StoryMenuFingerprint.result?.mutableClass?.methods?.first { it.name == "<init>" }?.run {
-            var i = 0
-            val (register, insertIndex) = implementation!!.instructions.firstNotNullOfOrNull { inst ->
-                if (inst.opcode == Opcode.IPUT_OBJECT && inst is BuilderInstruction22c
-                    && (inst.reference as FieldReference).type == "[F"
-                ) (inst.registerA to i++) else run { i++; null }
-            } ?: return StoryMenuFingerprint.toErrorResult()
+            val (register, insertIndex) = implementation!!.instructions.withIndex()
+                .firstNotNullOfOrNull { (index, inst) ->
+                    if (inst.opcode == Opcode.IPUT_OBJECT && inst is BuilderInstruction22c
+                        && (inst.reference as FieldReference).type == "[F"
+                    ) (inst.registerA to index) else null
+                } ?: return StoryMenuFingerprint.toErrorResult()
             addInstructions(
                 insertIndex, """
                 invoke-static {v$register}, Lapp/revanced/bilibili/patches/PlaybackSpeedPatch;->getOverrideSpeedArray([F)[F
@@ -176,12 +176,12 @@ class OverridePlaybackSpeedPatch : MultiMethodBytecodePatch(
                 )
             } ?: return PatchResultError("not found PodcastSpeedSeekBar")
         MusicPlayerPanelFingerprint.result?.mutableClass?.methods?.first { it.name == "<init>" }?.run {
-            var i = 0
-            val (register, insertIndex) = implementation!!.instructions.firstNotNullOfOrNull {
-                if (it.opcode == Opcode.IPUT_OBJECT && it is BuilderInstruction22c
-                    && (it.reference as FieldReference).type == "[F"
-                ) (it.registerA to i++) else run { i++; null }
-            } ?: return MusicPlayerPanelFingerprint.toErrorResult()
+            val (register, insertIndex) = implementation!!.instructions.withIndex()
+                .firstNotNullOfOrNull { (index, inst) ->
+                    if (inst.opcode == Opcode.IPUT_OBJECT && inst is BuilderInstruction22c
+                        && (inst.reference as FieldReference).type == "[F"
+                    ) (inst.registerA to index) else null
+                } ?: return MusicPlayerPanelFingerprint.toErrorResult()
             addInstructions(
                 insertIndex, """
                 invoke-static {v$register}, Lapp/revanced/bilibili/patches/PlaybackSpeedPatch;->getOverrideReverseSpeedArray([F)[F

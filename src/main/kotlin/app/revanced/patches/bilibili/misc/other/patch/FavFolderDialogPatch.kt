@@ -21,12 +21,12 @@ import org.jf.dexlib2.builder.instruction.BuilderInstruction35c
 class FavFolderDialogPatch : BytecodePatch(listOf(FavFolderOnDataSuccessFingerprint)) {
     override fun execute(context: BytecodeContext): PatchResult {
         FavFolderOnDataSuccessFingerprint.result?.mutableMethod?.run {
-            var i = 0
-            val (register, insertIndex) = implementation!!.instructions.firstNotNullOfOrNull {
-                if (it.opcode == Opcode.INVOKE_VIRTUAL && it is BuilderInstruction35c
-                    && it.reference.toString() == "Landroid/widget/CheckBox;->setChecked(Z)V"
-                ) (it.registerD to i++) else run { i++; null }
-            } ?: return FavFolderOnDataSuccessFingerprint.toErrorResult()
+            val (register, insertIndex) = implementation!!.instructions.withIndex()
+                .firstNotNullOfOrNull { (index, inst) ->
+                    if (inst.opcode == Opcode.INVOKE_VIRTUAL && inst is BuilderInstruction35c
+                        && inst.reference.toString() == "Landroid/widget/CheckBox;->setChecked(Z)V"
+                    ) (inst.registerD to index) else null
+                } ?: return FavFolderOnDataSuccessFingerprint.toErrorResult()
             addInstructions(
                 insertIndex, """
                 invoke-static {v$register}, Lapp/revanced/bilibili/patches/FavFolderDialogPatch;->shouldChecked(Z)Z
