@@ -31,6 +31,11 @@
             android:key="skin"
             android:title="@string/biliroaming_skin_title"
             android:summary="@string/biliroaming_skin_summary" />
+        <androidx.preference.Preference
+            android:fragment="app.revanced.bilibili.settings.fragments.TextFoldFragment"
+            android:key="text_fold"
+            android:title="@string/biliroaming_text_fold_title"
+            android:summary="@string/biliroaming_text_fold_summary" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory>

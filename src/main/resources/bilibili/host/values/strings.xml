@@ -232,4 +232,10 @@
     <string name="biliroaming_switch_dark_dialog_summary">当深色跟随系统启用时，点击右上角切换深色模式图标时弹框确认，防止误触</string>
     <string name="biliroaming_block_dm_feedback_title">屏蔽弹幕氛围反馈</string>
     <string name="biliroaming_block_dm_feedback_summary">屏蔽播放结束时的弹幕氛围反馈</string>
+    <string name="biliroaming_text_fold_title">文本折叠控制</string>
+    <string name="biliroaming_text_fold_summary">支持自定义评论及动态开始折叠的文本行数，0表示默认</string>
+    <string name="biliroaming_text_fold_comment_max_lines_title">评论开始折叠行数</string>
+    <string name="biliroaming_text_fold_dyn_max_lines_title">动态开始折叠行数</string>
+    <string name="biliroaming_text_fold_dyn_lines_to_all_title">动态全文阅读触发行数</string>
+    <string name="biliroaming_text_fold_line">%1$s行</string>
 </resources>
