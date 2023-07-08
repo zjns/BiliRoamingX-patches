@@ -23,4 +23,11 @@
             android:key="customize_drawer"
             android:title="@string/biliraoming_customize_drawer_title" />
     </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory>
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="switch_dark_dialog"
+            android:title="@string/biliroaming_switch_dark_dialog_title"
+            android:summary="@string/biliroaming_switch_dark_dialog_summary" />
+    </androidx.preference.PreferenceCategory>
 </androidx.preference.PreferenceScreen>

@@ -227,4 +227,7 @@
     <string name="biliroaming_skin_success">导入成功，重启两次生效</string>
     <string name="biliroaming_skin_choose">选择文件</string>
     <string name="biliroaming_misc_title">杂项</string>
+    <string name="biliroaming_switch_dark_tips">将关闭深色跟随系统，确定切换？</string>
+    <string name="biliroaming_switch_dark_dialog_title">切换深色模式时弹框确认</string>
+    <string name="biliroaming_switch_dark_dialog_summary">当深色跟随系统启用时，点击右上角切换深色模式图标时弹框确认，防止误触</string>
 </resources>
