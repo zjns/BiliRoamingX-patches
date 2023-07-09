@@ -28,11 +28,12 @@ import org.jf.dexlib2.iface.value.StringEncodedValue
 class PegasusPatch : BytecodePatch(listOf(PegasusParserFingerprint, CardClickProcessorFingerprint)) {
     override fun execute(context: BytecodeContext): PatchResult {
         PegasusParserFingerprint.result?.run {
-            mutableMethod.cloneMutable(registerCount = 2, clearImplementation = true).apply {
-                mutableMethod.name = mutableMethod.name + "_Origin"
+            val method = mutableClass.methods.first { it.returnType == "Lcom/bilibili/okretro/GeneralResponse;" }
+            method.cloneMutable(registerCount = 2, clearImplementation = true).apply {
+                method.name = method.name + "_Origin"
                 addInstructions(
                     """
-                    invoke-virtual {p0, p1}, $mutableMethod
+                    invoke-virtual {p0, p1}, $method
                     move-result-object p1
                     invoke-static {p1}, Lapp/revanced/bilibili/patches/json/PegasusPatch;->pegasusHook(Lcom/bilibili/okretro/GeneralResponse;)V
                     return-object p1
