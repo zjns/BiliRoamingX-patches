@@ -13,6 +13,7 @@ import app.revanced.patcher.patch.annotations.Patch
 import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
 import app.revanced.patches.bilibili.misc.darkswitch.fingerprints.SwitchDarkModeFingerprint
 import app.revanced.patches.bilibili.utils.cloneMutable
+import app.revanced.patches.bilibili.utils.toPublic
 import org.jf.dexlib2.Opcode
 import org.jf.dexlib2.iface.Method
 import org.jf.dexlib2.iface.instruction.formats.Instruction35c
@@ -43,12 +44,13 @@ class DarkSwitchPatch : BytecodePatch(listOf(SwitchDarkModeFingerprint)) {
             mutableMethod.cloneMutable(registerCount = 2, clearImplementation = true).apply {
                 addInstructions(
                     """
-                    invoke-static {p0, p1}, Lapp/revanced/bilibili/patches/DarkSwitchPatch;->switchDarkMode(Ltv/danmaku/bili/ui/main2/mine/HomeUserCenterFragment;Z)V
+                    invoke-static {p0, p1}, Lapp/revanced/bilibili/patches/DarkSwitchPatch;->switchDarkMode(${mutableClass.type}Z)V
                     return-void
                 """.trimIndent()
                 )
             }.also {
                 mutableMethod.name = "switchDarkMode_Origin"
+                mutableMethod.accessFlags = mutableMethod.accessFlags.toPublic()
                 mutableClass.methods.add(it)
             }
         } ?: return SwitchDarkModeFingerprint.toErrorResult()

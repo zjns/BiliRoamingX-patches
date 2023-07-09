@@ -7,6 +7,6 @@ object SwitchDarkModeFingerprint : MethodFingerprint(
     returnType = "V",
     parameters = listOf("Z"),
     customFingerprint = { _, classDef ->
-        classDef.type == "Ltv/danmaku/bili/ui/main2/mine/HomeUserCenterFragment;"
+        classDef.type.endsWith("HomeUserCenterFragment;")
     }
 )

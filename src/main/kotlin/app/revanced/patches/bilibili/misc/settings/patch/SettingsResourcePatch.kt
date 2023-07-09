@@ -9,7 +9,7 @@ import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.PatchResultSuccess
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.misc.settings.annotations.SettingsCompatibility
+import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
 import app.revanced.patches.shared.mapping.misc.patch.ResourceMappingPatch
 import app.revanced.patches.shared.settings.resource.patch.AbstractSettingsResourcePatch
 import app.revanced.util.resources.ResourceUtils
@@ -19,7 +19,7 @@ import app.revanced.util.resources.ResourceUtils.mergeStrings
 
 @Patch
 @Name("settings-resource-patch")
-@SettingsCompatibility
+@BiliBiliCompatibility
 @DependsOn([ResourceMappingPatch::class])
 @Version("0.0.1")
 @Description("哔哩漫游设置入口")

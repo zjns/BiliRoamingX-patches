@@ -11,7 +11,7 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.PatchResultSuccess
 import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.video.quality.annotations.VideoQualityCompatibility
+import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
 import app.revanced.patches.bilibili.video.quality.fingerprints.PlayerPreloadHolderFingerprint
 import app.revanced.patches.bilibili.video.quality.fingerprints.PlayerQualityServiceFingerprint
 import app.revanced.patches.bilibili.video.quality.fingerprints.PlayerSettingHelperFingerprint
@@ -19,7 +19,7 @@ import org.jf.dexlib2.iface.Method
 
 @Patch
 @Name("video-default-quality")
-@VideoQualityCompatibility
+@BiliBiliCompatibility
 @Description("视频默认画质设置")
 @Version("0.0.1")
 class VideoQualityPatch : BytecodePatch(

@@ -7,13 +7,13 @@ import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.PatchResultSuccess
 import app.revanced.patcher.patch.annotations.Patch
 import app.revanced.patcher.patch.annotations.RequiresIntegrations
-import app.revanced.patches.bilibili.misc.integrations.annotations.IntegrationsCompatibility
+import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
 import app.revanced.patches.bilibili.misc.integrations.fingerprints.InitFingerprint
 import app.revanced.patches.shared.integrations.patch.AbstractIntegrationsPatch
 
 @Patch
 @Name("integrations")
-@IntegrationsCompatibility
+@BiliBiliCompatibility
 @RequiresIntegrations
 class IntegrationsPatch : AbstractIntegrationsPatch(
     "Lapp/revanced/bilibili/utils/Utils;",

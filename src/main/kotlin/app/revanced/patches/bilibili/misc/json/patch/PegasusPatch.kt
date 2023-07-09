@@ -16,7 +16,6 @@ import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
 import app.revanced.patches.bilibili.misc.json.fingerprints.CardClickProcessorFingerprint
 import app.revanced.patches.bilibili.misc.json.fingerprints.PegasusParserFingerprint
 import app.revanced.patches.bilibili.utils.cloneMutable
-import org.jf.dexlib2.Opcode
 import org.jf.dexlib2.iface.ClassDef
 import org.jf.dexlib2.iface.Field
 import org.jf.dexlib2.iface.value.StringEncodedValue
@@ -28,15 +27,20 @@ import org.jf.dexlib2.iface.value.StringEncodedValue
 @Version("0.0.1")
 class PegasusPatch : BytecodePatch(listOf(PegasusParserFingerprint, CardClickProcessorFingerprint)) {
     override fun execute(context: BytecodeContext): PatchResult {
-        PegasusParserFingerprint.result?.mutableMethod?.run {
-            val insetIndex = implementation?.instructions?.indexOfLast {
-                it.opcode == Opcode.MOVE_RESULT_OBJECT
-            }?.takeIf { it != -1 } ?: return@run
-            addInstructions(
-                insetIndex + 1, """
-                invoke-static {v0}, Lapp/revanced/bilibili/patches/json/PegasusPatch;->pegasusHook(Lcom/bilibili/okretro/GeneralResponse;)V
-            """.trimIndent()
-            )
+        PegasusParserFingerprint.result?.run {
+            mutableMethod.cloneMutable(registerCount = 2, clearImplementation = true).apply {
+                mutableMethod.name = mutableMethod.name + "_Origin"
+                addInstructions(
+                    """
+                    invoke-virtual {p0, p1}, $mutableMethod
+                    move-result-object p1
+                    invoke-static {p1}, Lapp/revanced/bilibili/patches/json/PegasusPatch;->pegasusHook(Lcom/bilibili/okretro/GeneralResponse;)V
+                    return-object p1
+                """.trimIndent()
+                )
+            }.also {
+                mutableClass.methods.add(it)
+            }
         } ?: return PegasusParserFingerprint.toErrorResult()
         var bannerItemFiled: Field? = null
         var stockBannersItemClass: ClassDef? = null
