@@ -35,6 +35,9 @@
             android:key="purify_game"
             android:title="@string/biliroaming_purify_game_title" />
         <androidx.preference.SwitchPreferenceCompat
+            android:key="block_top_activity"
+            android:title="@string/biliroaming_block_top_activity_title" />
+        <androidx.preference.SwitchPreferenceCompat
             android:key="drawer"
             android:title="@string/biliraoming_drawer_title"
             android:summary="@string/biliraoming_drawer_summary" />

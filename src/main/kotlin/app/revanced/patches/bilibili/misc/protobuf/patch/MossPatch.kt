@@ -83,8 +83,8 @@ class MossPatch : BytecodePatch(listOf(MossServiceFingerprint)) {
                     implementation.newLabelForIndex(moveExceptionIndex)
                 )
             }
-            methods.find { it.name == "asyncUnaryCall" }?.run {
-                addInstructionsWithLabels(
+            methods.filter { it.name == "asyncUnaryCall" || it.name == "asyncServerStreamingCall" }.forEach {
+                it.addInstructionsWithLabels(
                     0, """
                     invoke-static {p2, p3}, Lapp/revanced/bilibili/patches/protobuf/MossPatch;->hookAsyncBefore(Lcom/google/protobuf/GeneratedMessageLite;Lcom/bilibili/lib/moss/api/MossResponseHandler;)Ljava/lang/Object;
                     move-result-object v0
