@@ -243,13 +243,18 @@
     <string name="biliroaming_block_modules_summary">在清理存储空间中清理 APP 基础组件库后不再下载，能节省存储空间，但会影响部分功能</string>
     <string name="biliroaming_block_modules_exception_title">例外允许下载的组件</string>
     <string name="biliroaming_block_top_activity_title">隐藏右上角热门活动图标</string>
-    <string name="biliroaming_backup_category_title">备份与还原</string>
+    <string name="biliroaming_backup_category_title">备份与恢复</string>
     <string name="biliroaming_backup_title">备份配置</string>
-    <string name="biliroaming_restore_title">还原配置</string>
+    <string name="biliroaming_restore_title">恢复配置</string>
     <string name="biliroaming_toast_pls_choose_save_path">请选择备份文件保存路径</string>
     <string name="biliroaming_toast_pls_choose_restore_path">请选择备份文件</string>
     <string name="biliroaming_toast_backup_failed">备份失败！</string>
-    <string name="biliroaming_toast_restore_failed">还原失败！</string>
+    <string name="biliroaming_toast_restore_failed">恢复失败！</string>
     <string name="biliroaming_toast_backup_success">备份成功</string>
-    <string name="biliroaming_dialog_msg_restore_success">还原成功，需要重启才能生效</string>
+    <string name="biliroaming_dialog_msg_restore_success">恢复成功，需要重启才能生效</string>
+    <string name="biliroaming_usage_hint_title">使用说明</string>
+    <string name="biliroaming_usage_hint_message">欢迎使用基于Revanced方案的修改版哔哩哔哩。以下几点说明请仔细阅读：\n\n1. 本修改方案完全开源免费，谨防被骗。\n2. 本修改版不使用Xposed框架，追求极致性能。\n3. 请勿在B站任何地方暗示/提及/宣传本修改版。\n4. 设置入口：我的 -> 设置 -> 哔哩漫游X。</string>
+    <string name="biliroaming_get_it">我知道了</string>
+    <string name="biliroaming_jump_settings">查看设置</string>
+    <string name="biliroaming_hint_open_from_mine">请最好在登录状态下通过我的页面设置入口进入本页面以获取所有项目</string>
 </resources>
