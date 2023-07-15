@@ -8,7 +8,7 @@
     <string name="biliroaming_half_screen_quality_title">视频半屏清晰度</string>
     <string name="biliroaming_half_screen_quality_summary">设置视频半屏播放时的清晰度，设置后会大幅降低视频的首次播放加载速度，旧版播放器（半屏时进度条在框内）仅支持跟随全屏清晰度</string>
     <string name="biliroaming_force_old_player_title">强制使用旧版播放器</string>
-    <string name="biliroaming_need_reboot_dialog_title">需要重启才能生效</string>
+    <string name="biliroaming_need_reboot_dialog_message">需要重启才能生效</string>
     <string name="biliroaming_need_reboot_dialog_confirm">立即重启</string>
     <string name="biliroaming_need_reboot_dialog_later">稍后</string>
     <string name="biliroaming_disable_story_full_title">关闭看一看按钮</string>
@@ -243,4 +243,13 @@
     <string name="biliroaming_block_modules_summary">在清理存储空间中清理 APP 基础组件库后不再下载，能节省存储空间，但会影响部分功能</string>
     <string name="biliroaming_block_modules_exception_title">例外允许下载的组件</string>
     <string name="biliroaming_block_top_activity_title">隐藏右上角热门活动图标</string>
+    <string name="biliroaming_backup_category_title">备份与还原</string>
+    <string name="biliroaming_backup_title">备份配置</string>
+    <string name="biliroaming_restore_title">还原配置</string>
+    <string name="biliroaming_toast_pls_choose_save_path">请选择备份文件保存路径</string>
+    <string name="biliroaming_toast_pls_choose_restore_path">请选择备份文件</string>
+    <string name="biliroaming_toast_backup_failed">备份失败！</string>
+    <string name="biliroaming_toast_restore_failed">还原失败！</string>
+    <string name="biliroaming_toast_backup_success">备份成功</string>
+    <string name="biliroaming_dialog_msg_restore_success">还原成功，需要重启才能生效</string>
 </resources>

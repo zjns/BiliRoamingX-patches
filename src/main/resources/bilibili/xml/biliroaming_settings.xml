@@ -56,6 +56,13 @@
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory>
+        <androidx.preference.Preference
+            android:fragment="app.revanced.bilibili.settings.fragments.BackupFragment"
+            android:key="backup_category"
+            android:title="@string/biliroaming_backup_category_title" />
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory>
         <androidx.preference.SwitchPreferenceCompat
             android:key="debug"
             android:title="@string/biliroaming_debug_title" />
