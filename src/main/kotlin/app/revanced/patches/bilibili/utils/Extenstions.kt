@@ -14,7 +14,7 @@ import org.jf.dexlib2.immutable.value.ImmutableArrayEncodedValue
 import org.jf.dexlib2.immutable.value.ImmutableEncodedValue
 import org.jf.dexlib2.immutable.value.ImmutableStringEncodedValue
 
-internal fun Method.clone(
+fun Method.clone(
     registerCount: Int = implementation?.registerCount ?: 0,
     clearImplementation: Boolean = false,
     name: String = this.name,
@@ -40,7 +40,7 @@ internal fun Method.clone(
     )
 }
 
-internal fun Method.cloneMutable(
+fun Method.cloneMutable(
     registerCount: Int = implementation?.registerCount ?: 0,
     clearImplementation: Boolean = false,
     name: String = this.name,
@@ -104,3 +104,10 @@ fun methodImplementation(
 ) = ImmutableMethodImplementation(registerCount, instructions, tryBlocks, debugItems)
 
 fun MultiMethodFingerprint.toErrorResult() = PatchResultError("Failed to resolve ${javaClass.simpleName}")
+
+val String.className: String
+    get() {
+        return if (startsWith("L") && endsWith(";"))
+            substring(1, length - 1).replace('/', '.')
+        else replace('/', '.')
+    }

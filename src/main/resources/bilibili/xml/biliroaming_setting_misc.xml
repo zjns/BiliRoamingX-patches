@@ -39,6 +39,10 @@
         <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.BlockModuleFragment"
             android:title="@string/biliroaming_block_modules_title" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="music_notification"
+            android:title="@string/biliroaming_music_notification_title"
+            android:summary="@string/biliroaming_music_notification_summary" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory>

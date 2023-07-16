@@ -257,4 +257,6 @@
     <string name="biliroaming_get_it">我知道了</string>
     <string name="biliroaming_jump_settings">查看设置</string>
     <string name="biliroaming_hint_open_from_mine">请最好在登录状态下通过我的页面设置入口进入本页面以获取所有项目</string>
+    <string name="biliroaming_music_notification_title">原生音乐通知样式</string>
+    <string name="biliroaming_music_notification_summary">强制音乐通知为原生样式</string>
 </resources>
