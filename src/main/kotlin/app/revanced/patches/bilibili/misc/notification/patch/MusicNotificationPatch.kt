@@ -41,6 +41,7 @@ class MusicNotificationPatch : BytecodePatch(
         PlayerServiceFingerprint,
         MusicBackgroundPlayerFingerprint,
         MusicWrapperPlayerFingerprint,
+        NotificationStyleAbFingerprint,
     )
 ) {
     override fun execute(context: BytecodeContext): PatchResult {
@@ -163,7 +164,19 @@ class MusicNotificationPatch : BytecodePatch(
             :jump
             nop
         """.trimIndent()
-        )
+        ) ?: return MusicNotificationHelperFingerprint.toErrorResult()
+
+        NotificationStyleAbFingerprint.result?.mutableMethod?.addInstructionsWithLabels(
+            0, """
+            invoke-static {}, $patchClass->enabled()Z
+            move-result v0
+            if-eqz v0, :jump
+            const/4 v0, 0x0
+            return v0
+            :jump
+            nop
+        """.trimIndent()
+        ) ?: return NotificationStyleAbFingerprint.toErrorResult()
 
         val onCreateNotificationMethod = patchClass.methods.first { it.name == "onCreateNotification" }
         arrayOf(
