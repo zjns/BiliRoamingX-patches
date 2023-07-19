@@ -12,7 +12,6 @@ import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.PatchResultSuccess
 import app.revanced.patcher.patch.annotations.Patch
 import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
-import app.revanced.patches.bilibili.video.quality.fingerprints.PlayerPreloadHolderFingerprint
 import app.revanced.patches.bilibili.video.quality.fingerprints.PlayerQualityServiceFingerprint
 import app.revanced.patches.bilibili.video.quality.fingerprints.PlayerSettingHelperFingerprint
 import org.jf.dexlib2.iface.Method
@@ -25,7 +24,6 @@ import org.jf.dexlib2.iface.Method
 class VideoQualityPatch : BytecodePatch(
     listOf(
         PlayerSettingHelperFingerprint,
-        PlayerPreloadHolderFingerprint,
         PlayerQualityServiceFingerprint,
     )
 ) {
@@ -43,17 +41,6 @@ class VideoQualityPatch : BytecodePatch(
                     nop
                 """.trimIndent()
         ) ?: return PlayerSettingHelperFingerprint.toErrorResult()
-        PlayerPreloadHolderFingerprint.result?.mutableMethod?.addInstructionsWithLabels(
-            0, """
-                    invoke-static {}, Lapp/revanced/bilibili/patches/VideoQualityPatch;->halfScreenQuality()I
-                    move-result v0
-                    if-eqz v0, :jump
-                    const/4 v0, 0x0
-                    return-object v0
-                    :jump
-                    nop
-            """.trimIndent()
-        ) ?: return PlayerPreloadHolderFingerprint.toErrorResult()
         PlayerQualityServiceFingerprint.result?.mutableMethod?.addInstructionsWithLabels(
             0, """
                     invoke-static {}, Lapp/revanced/bilibili/patches/VideoQualityPatch;->getMatchedHalfScreenQuality()I
