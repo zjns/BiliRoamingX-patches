@@ -11,8 +11,8 @@
     <string name="biliroaming_need_reboot_dialog_message">需要重启才能生效</string>
     <string name="biliroaming_need_reboot_dialog_confirm">立即重启</string>
     <string name="biliroaming_need_reboot_dialog_later">稍后</string>
-    <string name="biliroaming_disable_story_full_title">关闭看一看按钮</string>
-    <string name="biliroaming_disable_story_full_summary">横屏稿件半屏时不显示看一看按钮</string>
+    <string name="biliroaming_disable_story_full_title">隐藏竖屏按钮</string>
+    <string name="biliroaming_disable_story_full_summary">横屏稿件半屏时不显示竖屏按钮</string>
     <string name="biliroaming_purify_splash_title">净化开屏页面</string>
     <string name="biliroaming_purify_splash_summary">去除启动客户端时的推广</string>
     <string name="biliroaming_teenagers_mode_dialog_title">关闭青少年模式弹窗</string>
@@ -259,4 +259,9 @@
     <string name="biliroaming_hint_open_from_mine">请最好在登录状态下通过我的页面设置入口进入本页面以获取所有项目</string>
     <string name="biliroaming_music_notification_title">原生音乐通知样式</string>
     <string name="biliroaming_music_notification_summary">强制音乐通知为原生样式</string>
+    <string name="biliroaming_always_enabled_title">始终启用功能</string>
+    <string name="biliroaming_clear_app_icon_title">干净的APP图标</string>
+    <string name="biliroaming_clear_app_icon_summary">始终替换APP图标为不带推广内容的干净图标</string>
+    <string name="biliroaming_splash_follow_dark_title">开屏页背景色跟随深色模式</string>
+    <string name="biliroaming_splash_follow_dark_summary">同时适配 Android 12 开始的 SplashScreen 特性，需要在设置中开启“深色跟随系统”。</string>
 </resources>

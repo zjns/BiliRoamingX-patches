@@ -51,4 +51,15 @@
             android:title="@string/biliroaming_purify_splash_title"
             android:summary="@string/biliroaming_purify_splash_summary" />
     </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory
+        android:title="@string/biliroaming_always_enabled_title"
+        android:layout="@layout/bili_app_layout_preference_category_title">
+        <androidx.preference.Preference
+            android:title="@string/biliroaming_clear_app_icon_title"
+            android:summary="@string/biliroaming_clear_app_icon_summary" />
+        <androidx.preference.Preference
+            android:title="@string/biliroaming_splash_follow_dark_title"
+            android:summary="@string/biliroaming_splash_follow_dark_summary" />
+    </androidx.preference.PreferenceCategory>
 </androidx.preference.PreferenceScreen>

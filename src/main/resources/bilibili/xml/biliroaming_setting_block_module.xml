@@ -2,10 +2,10 @@
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.preference.PreferenceCategory>
-    <androidx.preference.SwitchPreferenceCompat
-        android:key="block_modules"
-        android:title="@string/biliroaming_block_modules_title"
-        android:summary="@string/biliroaming_block_modules_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="block_modules"
+            android:title="@string/biliroaming_block_modules_title"
+            android:summary="@string/biliroaming_block_modules_summary" />
     </androidx.preference.PreferenceCategory>
     <app.revanced.bilibili.widget.CheckBoxGroupPreference
         android:key="block_modules_exception"
