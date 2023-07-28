@@ -212,12 +212,17 @@ class MusicNotificationPatch : BytecodePatch(
             if (method.parameterTypes == listOf("I")) {
                 classDef to method
             } else {
-                classDef.methods.find { m ->
+                (classDef.methods.find { m ->
                     m.parameterTypes == listOf("I") && m.returnType == "V"
                             && m.implementation?.instructions?.any { inst ->
                         inst.opcode == Opcode.INVOKE_VIRTUAL && inst is Instruction35c && inst.reference == method
                     } == true
-                }?.let { classDef to it }
+                } ?: classDef.methods.find { m ->
+                    m.parameterTypes == listOf("I", "Z") && m.returnType == "V"
+                            && m.implementation?.instructions?.any { inst ->
+                        inst.opcode == Opcode.INVOKE_VIRTUAL && inst is Instruction35c && inst.reference == method
+                    } == true
+                })?.let { classDef to it }
             }
         } ?: return SeekToFingerprint.toErrorResult()
         val defaultSpeedMethod = DefaultSpeedFingerprint.result?.method
