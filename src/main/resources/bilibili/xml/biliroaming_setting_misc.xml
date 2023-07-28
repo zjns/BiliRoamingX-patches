@@ -7,15 +7,6 @@
             android:title="@string/biliroaming_teenagers_mode_dialog_title"
             android:summary="@string/biliroaming_teenagers_mode_dialog_summary" />
         <androidx.preference.SwitchPreferenceCompat
-            android:key="comment_copy"
-            android:title="@string/biliroaming_comment_copy_title"
-            android:summary="@string/biliroaming_comment_copy_summary" />
-        <androidx.preference.SwitchPreferenceCompat
-            android:dependency="comment_copy"
-            android:key="comment_copy_enhance"
-            android:title="@string/biliroaming_comment_copy_enhance_title"
-            android:summary="@string/biliroaming_comment_copy_enhance_summary" />
-        <androidx.preference.SwitchPreferenceCompat
             android:key="block_update"
             android:title="@string/biliroaming_block_update_title" />
         <androidx.preference.Preference
@@ -23,14 +14,6 @@
             android:key="follow_button"
             android:title="@string/biliroaming_block_follow_button_title"
             android:summary="@string/biliroaming_block_follow_button_summary" />
-        <androidx.preference.SwitchPreferenceCompat
-            android:key="custom_theme"
-            android:title="@string/biliroaming_custom_theme_title"
-            android:summary="@string/biliroaming_custom_theme_summary" />
-        <androidx.preference.SwitchPreferenceCompat
-            android:key="skin"
-            android:title="@string/biliroaming_skin_title"
-            android:summary="@string/biliroaming_skin_summary" />
         <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.TextFoldFragment"
             android:key="text_fold"
@@ -43,6 +26,46 @@
             android:key="music_notification"
             android:title="@string/biliroaming_music_notification_title"
             android:summary="@string/biliroaming_music_notification_summary" />
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory
+        android:title="@string/biliroaming_theme_title"
+        android:layout="@layout/bili_app_layout_preference_category_title">
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="custom_theme"
+            android:title="@string/biliroaming_custom_theme_title"
+            android:summary="@string/biliroaming_custom_theme_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="skin"
+            android:title="@string/biliroaming_skin_title"
+            android:summary="@string/biliroaming_skin_summary" />
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory
+        android:title="@string/biliroaming_copy_title"
+        android:layout="@layout/bili_app_layout_preference_category_title">
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="comment_copy"
+            android:title="@string/biliroaming_comment_copy_title"
+            android:summary="@string/biliroaming_comment_copy_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:dependency="comment_copy"
+            android:key="comment_copy_enhance"
+            android:title="@string/biliroaming_comment_copy_enhance_title"
+            android:summary="@string/biliroaming_comment_copy_enhance_summary" />
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory
+        android:title="@string/biliroaming_share_title"
+        android:layout="@layout/bili_app_layout_preference_category_title">
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="purify_share"
+            android:title="@string/biliroaming_purify_share_title"
+            android:summary="@string/biliroaming_purify_share_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="mini_program"
+            android:title="@string/biliroaming_mini_program_title"
+            android:summary="@string/biliroaming_mini_program_summary" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory>

@@ -1,7 +1,7 @@
 package app.revanced.extensions
 
-import app.revanced.patcher.extensions.MethodFingerprintExtensions.name
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
+import app.revanced.patcher.extensions.MethodFingerprintExtensions.name
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
 import app.revanced.patcher.patch.PatchResultError
 import app.revanced.patcher.util.proxy.mutableTypes.MutableClass
@@ -10,6 +10,7 @@ import app.revanced.patches.shared.mapping.misc.patch.ResourceMappingPatch
 import org.jf.dexlib2.Opcode
 import org.jf.dexlib2.iface.Method
 import org.jf.dexlib2.iface.instruction.WideLiteralInstruction
+import org.jf.dexlib2.iface.reference.MethodReference
 import org.jf.dexlib2.util.MethodUtil
 import org.w3c.dom.Node
 
@@ -27,7 +28,7 @@ internal fun MethodFingerprint.toErrorResult() = PatchResultError("Failed to res
  * @param method The [Method] to find.
  * @return The [MutableMethod].
  */
-internal fun MutableClass.findMutableMethodOf(method: Method) = this.methods.first {
+internal fun MutableClass.findMutableMethodOf(method: MethodReference) = this.methods.first {
     MethodUtil.methodSignaturesMatch(it, method)
 }
 
