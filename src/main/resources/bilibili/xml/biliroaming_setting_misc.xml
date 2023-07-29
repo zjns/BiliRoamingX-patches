@@ -82,6 +82,9 @@
             android:title="@string/biliroaming_clear_app_icon_title"
             android:summary="@string/biliroaming_clear_app_icon_summary" />
         <androidx.preference.Preference
+            android:title="@string/biliroaming_themed_icon_title"
+            android:summary="@string/biliroaming_themed_icon_summary" />
+        <androidx.preference.Preference
             android:title="@string/biliroaming_splash_follow_dark_title"
             android:summary="@string/biliroaming_splash_follow_dark_summary" />
     </androidx.preference.PreferenceCategory>

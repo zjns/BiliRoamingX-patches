@@ -262,6 +262,8 @@
     <string name="biliroaming_always_enabled_title">始终启用功能</string>
     <string name="biliroaming_clear_app_icon_title">干净的APP图标</string>
     <string name="biliroaming_clear_app_icon_summary">始终替换APP图标为不带推广内容的干净图标</string>
+    <string name="biliroaming_themed_icon_title">带主题的应用图标</string>
+    <string name="biliroaming_themed_icon_summary">适配 Android 13 开始的带主题的应用图标特性，需要启动器支持。</string>
     <string name="biliroaming_splash_follow_dark_title">开屏页背景色跟随深色模式</string>
     <string name="biliroaming_splash_follow_dark_summary">同时适配 Android 12 开始的 SplashScreen 特性，需要在设置中开启“深色跟随系统”。</string>
     <string name="biliroaming_theme_title">主题</string>

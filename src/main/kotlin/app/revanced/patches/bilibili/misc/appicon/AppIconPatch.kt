@@ -22,7 +22,8 @@ class AppIconPatch : ResourcePatch {
             "ic_launcher_background.png",
             "ic_launcher_foreground.png",
             "ic_launcher_foreground_round.png",
-            "ic_launcher_round.png"
+            "ic_launcher_round.png",
+            "ic_launcher_monochrome.png"
         )
         val iconPaths = arrayOf(
             "mipmap-mdpi",
@@ -35,6 +36,11 @@ class AppIconPatch : ResourcePatch {
             ResourceUtils.ResourceGroup(it, *iconFiles).run {
                 context.copyResources("bilibili/appicon", this)
             }
+        }
+        ResourceUtils.ResourceGroup(
+            "mipmap-anydpi-v26", "ic_launcher.xml", "ic_launcher_round.xml"
+        ).run {
+            context.copyResources("bilibili/appicon", this)
         }
         return PatchResultSuccess()
     }

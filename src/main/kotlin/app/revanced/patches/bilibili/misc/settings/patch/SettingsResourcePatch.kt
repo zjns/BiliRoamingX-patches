@@ -24,7 +24,7 @@ import app.revanced.util.resources.ResourceUtils.mergeStrings
 @Version("0.0.1")
 @Description("哔哩漫游设置入口")
 class SettingsResourcePatch : AbstractSettingsResourcePatch(
-    "biliroaming_settings", "bilibili"
+    "biliroaming_settings", "bilibili", false
 ) {
     private val extraPreferences = arrayOf(
         "biliroaming_setting_half_screen_quality.xml",
