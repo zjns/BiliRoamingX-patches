@@ -4,7 +4,11 @@
     <androidx.preference.PreferenceCategory>
         <androidx.preference.Preference
             android:key="version"
-            android:title="@string/biliroaming_version" />
+            android:title="@string/biliroaming_version_title" />
+        <androidx.preference.Preference
+            android:key="feedback"
+            android:title="@string/biliroaming_feedback_title"
+            android:summary="@string/biliroaming_feedback_summary" />
         <androidx.preference.Preference
             android:key="project_url"
             android:title="@string/biliroaming_project_title"

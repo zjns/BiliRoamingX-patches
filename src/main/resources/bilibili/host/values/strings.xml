@@ -238,7 +238,7 @@
     <string name="biliroaming_text_fold_dyn_max_lines_title">动态开始折叠行数</string>
     <string name="biliroaming_text_fold_dyn_lines_to_all_title">动态全文阅读触发行数</string>
     <string name="biliroaming_text_fold_line">%1$s行</string>
-    <string name="biliroaming_version">版本</string>
+    <string name="biliroaming_version_title">版本</string>
     <string name="biliroaming_block_modules_title">禁止下载 APP 基础组件库</string>
     <string name="biliroaming_block_modules_summary">在清理存储空间中清理 APP 基础组件库后不再下载，能节省存储空间，但会影响部分功能</string>
     <string name="biliroaming_block_modules_exception_title">例外允许下载的组件</string>
@@ -273,4 +273,6 @@
     <string name="biliroaming_purify_share_summary">移除分享链接中的跟踪信息，同时替换 b23.tv 短链为原始链接（短链也包含部分跟踪信息）</string>
     <string name="biliroaming_mini_program_title">去你大爷的小程序</string>
     <string name="biliroaming_mini_program_summary">以普通网页，而不是小程序的形式分享到QQ或微信</string>
+    <string name="biliroaming_feedback_title">反馈</string>
+    <string name="biliroaming_feedback_summary">反馈遇到的问题或请求某个功能</string>
 </resources>
