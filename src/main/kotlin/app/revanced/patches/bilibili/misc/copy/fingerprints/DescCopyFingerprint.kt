@@ -1,9 +1,9 @@
 package app.revanced.patches.bilibili.misc.copy.fingerprints
 
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
+import app.revanced.patches.bilibili.patcher.fingerprint.MultiMethodFingerprint
 
-object DescCopyFingerprint : MethodFingerprint(
+object DescCopyFingerprint : MultiMethodFingerprint(
     returnType = "V",
     parameters = listOf("Z", "Ljava/lang/String;"),
-    strings = listOf("clipboard", "text", "1", "2")
+    strings = listOf("clipboard", "text")
 )
