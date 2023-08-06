@@ -14,6 +14,7 @@ import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMu
 import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
 import app.revanced.patches.bilibili.misc.other.fingerprints.BangumiSearchResultFingerprint
 import app.revanced.patches.bilibili.misc.other.fingerprints.OgvSearchResultFingerprint
+import app.revanced.patches.bilibili.misc.other.fingerprints.OgvSearchResultV2Fingerprint
 import app.revanced.patches.bilibili.utils.*
 import org.jf.dexlib2.AccessFlags
 import org.jf.dexlib2.Opcode
@@ -24,7 +25,13 @@ import org.jf.dexlib2.iface.reference.FieldReference
 @BiliBiliCompatibility
 @Name("append-extra-search-type")
 @Description("附加更多搜索类型补丁")
-class AppendExtraSearchTypePatch : BytecodePatch(listOf(OgvSearchResultFingerprint, BangumiSearchResultFingerprint)) {
+class AppendExtraSearchTypePatch : BytecodePatch(
+    listOf(
+        OgvSearchResultFingerprint,
+        OgvSearchResultV2Fingerprint,
+        BangumiSearchResultFingerprint
+    )
+) {
     override fun execute(context: BytecodeContext): PatchResult {
         val pagerTypesClass =
             context.findClass("Lcom/bilibili/search/result/pages/BiliMainSearchResultPage\$PageTypes;")
@@ -37,8 +44,22 @@ class AppendExtraSearchTypePatch : BytecodePatch(listOf(OgvSearchResultFingerpri
                 accessFlags = accessFlags.toPublic().removeFinal()
             }
         }
-        arrayOf(OgvSearchResultFingerprint.result, BangumiSearchResultFingerprint.result)
-            .filterNotNull().ifEmpty { return PatchResultError("not found search result fragment") }
+        // start from 7.39.0?
+        val pagerTypesV2Class =
+            context.findClass("Lcom/bilibili/search2/result/pages/BiliMainSearchResultPage\$PageTypes;")
+        pagerTypesV2Class?.mutableClass?.run {
+            methods.first { it.name == "<init>" && it.parameterTypes.size == 5 }.run {
+                accessFlags = accessFlags.toPublic()
+            }
+            fields.first { it.name == "\$VALUES" }.run {
+                accessFlags = accessFlags.toPublic().removeFinal()
+            }
+        }
+        arrayOf(
+            OgvSearchResultFingerprint.result,
+            OgvSearchResultV2Fingerprint.result,
+            BangumiSearchResultFingerprint.result
+        ).filterNotNull().ifEmpty { return PatchResultError("not found search result fragment") }
             .forEach { r ->
                 val typeFiled = r.mutableMethod.run {
                     implementation!!.instructions.firstNotNullOf {

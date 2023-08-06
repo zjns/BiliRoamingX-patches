@@ -13,6 +13,16 @@ object OgvSearchResultFingerprint : MethodFingerprint(
 )
 
 /**
+ * from pink, search2
+ */
+object OgvSearchResultV2Fingerprint : MethodFingerprint(
+    strings = listOf("pgc.bangumi-search.0.0.pv"),
+    customFingerprint = { _, classDef ->
+        classDef.type == "Lcom/bilibili/search2/ogv/OgvSearchResultFragment;"
+    }
+)
+
+/**
  * from hd
  */
 object BangumiSearchResultFingerprint : MethodFingerprint(
