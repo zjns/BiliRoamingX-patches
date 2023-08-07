@@ -25,7 +25,7 @@ class AutoLikePatch : BytecodePatch(listOf(SectionFingerprint)) {
     override fun execute(context: BytecodeContext): PatchResult {
         val clazz = SectionFingerprint.result?.mutableClass
             ?: return SectionFingerprint.toErrorResult()
-        val likeMethod = context.findClass(clazz.superclass!!)!!.immutableClass.virtualMethods.find { m ->
+        val likeMethod = context.classes.first { it.type == clazz.superclass }.virtualMethods.find { m ->
             m.parameterTypes.size == 1 && m.returnType == "V" && !AccessFlags.FINAL.isSet(m.accessFlags)
         } ?: return PatchResultError("can not found like method")
         val realLikeMethod = clazz.methods.first { m ->
