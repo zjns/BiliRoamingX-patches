@@ -21,7 +21,7 @@
         <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.CustomizeDrawerFragment"
             android:key="customize_drawer"
-            android:title="@string/biliraoming_customize_drawer_title" />
+            android:title="@string/biliroaming_customize_drawer_title" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory>

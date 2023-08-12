@@ -5,12 +5,12 @@
         <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.CustomizeBottomFragment"
             android:key="customize_bottom"
-            android:title="@string/biliraoming_customize_bottom_title" />
+            android:title="@string/biliroaming_customize_bottom_title" />
         <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.CustomizeHomeTabFragment"
             android:key="home_tab"
-            android:title="@string/biliraoming_customize_home_tab_title"
-            android:summary="@string/biliraoming_customize_home_tab_summary" />
+            android:title="@string/biliroaming_customize_home_tab_title"
+            android:summary="@string/biliroaming_customize_home_tab_summary" />
         <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.FilterHomeRcmdFragment"
             android:key="filter_home_recommend"
@@ -21,16 +21,16 @@
             android:summary="@string/biliroaming_disable_auto_refresh_summary" />
         <androidx.preference.SwitchPreferenceCompat
             android:key="add_bangumi"
-            android:title="@string/biliraoming_add_bangumi_title"
-            android:summary="@string/biliraoming_add_bangumi_summary" />
+            android:title="@string/biliroaming_add_bangumi_title"
+            android:summary="@string/biliroaming_add_bangumi_summary" />
         <androidx.preference.SwitchPreferenceCompat
             android:key="add_movie"
-            android:title="@string/biliraoming_add_movie_title"
-            android:summary="@string/biliraoming_add_movie_summary" />
+            android:title="@string/biliroaming_add_movie_title"
+            android:summary="@string/biliroaming_add_movie_summary" />
         <androidx.preference.SwitchPreferenceCompat
             android:key="add_korea"
-            android:title="@string/biliraoming_add_korea_title"
-            android:summary="@string/biliraoming_add_korea_summary" />
+            android:title="@string/biliroaming_add_korea_title"
+            android:summary="@string/biliroaming_add_korea_summary" />
         <androidx.preference.SwitchPreferenceCompat
             android:key="purify_game"
             android:title="@string/biliroaming_purify_game_title" />
@@ -39,8 +39,8 @@
             android:title="@string/biliroaming_block_top_activity_title" />
         <androidx.preference.SwitchPreferenceCompat
             android:key="drawer"
-            android:title="@string/biliraoming_drawer_title"
-            android:summary="@string/biliraoming_drawer_summary" />
+            android:title="@string/biliroaming_drawer_title"
+            android:summary="@string/biliroaming_drawer_summary" />
         <androidx.preference.SwitchPreferenceCompat
             android:key="disable_main_page_story"
             android:title="@string/biliroaming_disable_main_page_story_title"
