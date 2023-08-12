@@ -32,9 +32,15 @@
             android:key="override_speed"
             android:title="@string/biliroaming_speed_override_title"
             android:summary="@string/biliroaming_speed_override_summary" />
-        <androidx.preference.SwitchPreferenceCompat
-            android:key="force_old_player"
-            android:title="@string/biliroaming_force_old_player_title" />
+        <tv.danmaku.bili.widget.preference.BLRadioGroupEntrancePreference
+            android:fragment="app.revanced.bilibili.settings.fragments.PlayerVersionFragment"
+            android:key="player_version"
+            android:persistent="true"
+            android:title="@string/biliroaming_player_version_title"
+            app:migration_settings_type="none"
+            app:radioDefaultValue="0"
+            app:radioEntries="@array/biliroaming_player_version_entries"
+            app:radioEntryValues="@array/biliroaming_player_version_values" />
         <androidx.preference.SwitchPreferenceCompat
             android:key="remember_lossless_setting"
             android:title="@string/biliroaming_remember_lossless_setting_title" />
@@ -43,7 +49,6 @@
             android:title="@string/biliroaming_unstable_feature_title"
             android:layout="@layout/bili_app_layout_preference_category_title">
             <androidx.preference.SwitchPreferenceCompat
-                android:dependency="force_old_player"
                 android:key="trial_vip_quality"
                 android:title="@string/biliroaming_trial_vip_quality_title"
                 android:summary="@string/biliroaming_trial_vip_quality_summary" />

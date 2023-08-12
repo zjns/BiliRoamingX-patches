@@ -7,7 +7,6 @@
     <string name="biliroaming_block_up_rcmd_ads_summary">屏蔽视频下方推荐栏及视频播放过程中，浮窗出现的UP主推荐广告，开启后会同时屏蔽评论区顶部推广横幅</string>
     <string name="biliroaming_half_screen_quality_title">视频半屏清晰度</string>
     <string name="biliroaming_half_screen_quality_summary">设置视频半屏播放时的清晰度，设置后会大幅降低视频的首次播放加载速度，旧版播放器（半屏时进度条在框内）仅支持跟随全屏清晰度</string>
-    <string name="biliroaming_force_old_player_title">强制使用旧版播放器</string>
     <string name="biliroaming_need_reboot_dialog_message">需要重启才能生效</string>
     <string name="biliroaming_need_reboot_dialog_confirm">立即重启</string>
     <string name="biliroaming_need_reboot_dialog_later">稍后</string>
@@ -215,7 +214,7 @@
     <string name="biliroaming_custom_theme_title">自定义主题色</string>
     <string name="biliroaming_custom_theme_summary">添加自定义主题颜色的功能（需从我的右上角调色盘图标进入）</string>
     <string name="biliroaming_trial_vip_quality_title">无限试用会员画质</string>
-    <string name="biliroaming_trial_vip_quality_summary">通过将视频流信息设置为限免达到无限试用会员画质目的，目前只对大部分UP主投稿视频有效，需启用“强制使用旧版播放器”。</string>
+    <string name="biliroaming_trial_vip_quality_summary">通过将视频流信息设置为限免达到无限试用会员画质目的，目前只对大部分UP主投稿视频有效，“播放器版本”需选择旧版。</string>
     <string name="biliroaming_unstable_feature_title">实验性</string>
     <string name="biliroaming_filter_story_title">过滤故事模式视频</string>
     <string name="biliroaming_filter_story_summary">过滤故事模式（竖屏）下的视频</string>
@@ -275,4 +274,5 @@
     <string name="biliroaming_mini_program_summary">以普通网页，而不是小程序的形式分享到QQ或微信</string>
     <string name="biliroaming_feedback_title">反馈</string>
     <string name="biliroaming_feedback_summary">反馈遇到的问题或请求某个功能</string>
+    <string name="biliroaming_player_version_title">播放器版本</string>
 </resources>

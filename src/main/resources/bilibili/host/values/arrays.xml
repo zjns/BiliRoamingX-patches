@@ -361,4 +361,14 @@
     <string-array name="block_modules_exception_values">
         <item>dynamic</item>
     </string-array>
+    <string-array name="biliroaming_player_version_entries">
+        <item>默认</item>
+        <item>旧版</item>
+        <item>新版</item>
+    </string-array>
+    <string-array name="biliroaming_player_version_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>
