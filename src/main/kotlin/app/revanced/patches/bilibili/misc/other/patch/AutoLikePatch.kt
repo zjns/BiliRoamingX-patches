@@ -3,7 +3,6 @@ package app.revanced.patches.bilibili.misc.other.patch
 import app.revanced.extensions.toErrorResult
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
-import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.patch.BytecodePatch
@@ -20,7 +19,6 @@ import org.jf.dexlib2.Opcode
 @BiliBiliCompatibility
 @Name("auto-like")
 @Description("视频自动点赞补丁")
-@Version("0.0.1")
 class AutoLikePatch : BytecodePatch(listOf(SectionFingerprint)) {
     override fun execute(context: BytecodeContext): PatchResult {
         val clazz = SectionFingerprint.result?.mutableClass

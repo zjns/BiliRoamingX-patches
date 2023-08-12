@@ -3,7 +3,6 @@ package app.revanced.patches.bilibili.video.quality.patch
 import app.revanced.extensions.toErrorResult
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
-import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
@@ -21,7 +20,6 @@ import org.jf.dexlib2.iface.Method
 @Name("video-default-quality")
 @BiliBiliCompatibility
 @Description("视频默认画质设置")
-@Version("0.0.1")
 class VideoQualityPatch : MultiMethodBytecodePatch(
     fingerprints = listOf(PlayerSettingHelperFingerprint),
     multiFingerprints = listOf(PlayerQualityServiceFingerprint)

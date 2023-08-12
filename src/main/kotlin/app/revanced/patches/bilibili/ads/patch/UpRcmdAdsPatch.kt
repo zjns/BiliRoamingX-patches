@@ -2,7 +2,6 @@ package app.revanced.patches.bilibili.ads.patch
 
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
-import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
@@ -14,7 +13,6 @@ import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
 @Patch
 @Name("up-rcmd-ads")
 @BiliBiliCompatibility
-@Version("0.0.1")
 @Description("移除UP主推荐广告")
 class UpRcmdAdsPatch : BytecodePatch() {
     override fun execute(context: BytecodeContext): PatchResult {

@@ -2,7 +2,6 @@ package app.revanced.patches.bilibili.misc.drawer.patch
 
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
-import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
@@ -24,7 +23,6 @@ import org.jf.dexlib2.AccessFlags
 @BiliBiliCompatibility
 @Name("drawer-patch")
 @Description("我的页面移至侧滑栏辅助补丁")
-@Version("0.0.1")
 class DrawerPatch(
     private val openDrawer: MethodFingerprint = DrawerControlFingerprint(true),
     private val closeDrawer: MethodFingerprint = DrawerControlFingerprint(false)

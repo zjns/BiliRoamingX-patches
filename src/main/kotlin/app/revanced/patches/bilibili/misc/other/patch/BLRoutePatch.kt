@@ -3,7 +3,6 @@ package app.revanced.patches.bilibili.misc.other.patch
 import app.revanced.extensions.toErrorResult
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
-import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
@@ -18,7 +17,6 @@ import app.revanced.patches.bilibili.misc.other.fingerprints.RouteRequestFingerp
 @BiliBiliCompatibility
 @Name("bl-route-intercept")
 @Description("哔哩哔哩页面路由修改")
-@Version("0.0.1")
 class BLRoutePatch : BytecodePatch(listOf(BLRouteBuilderFingerprint, RouteRequestFingerprint)) {
     override fun execute(context: BytecodeContext): PatchResult {
         BLRouteBuilderFingerprint.result?.mutableClass?.methods?.find { m ->

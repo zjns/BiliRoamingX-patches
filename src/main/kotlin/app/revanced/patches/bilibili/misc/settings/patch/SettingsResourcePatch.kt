@@ -2,7 +2,6 @@ package app.revanced.patches.bilibili.misc.settings.patch
 
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
-import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.DomFileEditor
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.PatchResult
@@ -21,7 +20,6 @@ import app.revanced.util.resources.ResourceUtils.mergeStrings
 @Name("settings-resource-patch")
 @BiliBiliCompatibility
 @DependsOn([ResourceMappingPatch::class])
-@Version("0.0.1")
 @Description("哔哩漫游设置入口")
 class SettingsResourcePatch : AbstractSettingsResourcePatch(
     "biliroaming_settings", "bilibili", false

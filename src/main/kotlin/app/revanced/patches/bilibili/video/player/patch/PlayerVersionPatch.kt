@@ -2,7 +2,6 @@ package app.revanced.patches.bilibili.video.player.patch
 
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
-import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
@@ -17,7 +16,6 @@ import app.revanced.patches.bilibili.video.player.fingerprints.FFUniteDetailAbFi
 @BiliBiliCompatibility
 @Name("player-version")
 @Description("播放器版本")
-@Version("0.0.1")
 class PlayerVersionPatch : BytecodePatch(listOf(FFUniteDetailAbFingerprint)) {
     override fun execute(context: BytecodeContext): PatchResult {
         fun MutableMethod.patch() = addInstructionsWithLabels(

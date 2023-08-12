@@ -2,7 +2,6 @@ package app.revanced.patches.bilibili.misc.other.patch
 
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
-import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
@@ -18,7 +17,6 @@ import app.revanced.patches.bilibili.misc.other.fingerprints.TeenagerModeOnShowF
 @BiliBiliCompatibility
 @Name("disable-teenager-mode-dialog")
 @Description("禁用青少年模式弹窗")
-@Version("0.0.1")
 class TeenagerModePatch : BytecodePatch(
     listOf(TeenagerModeCheckFingerprint, TeenagerModeOnShowFingerprint)
 ) {

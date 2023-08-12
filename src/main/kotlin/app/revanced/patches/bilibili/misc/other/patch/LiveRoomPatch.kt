@@ -2,7 +2,6 @@ package app.revanced.patches.bilibili.misc.other.patch
 
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
-import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
@@ -17,7 +16,6 @@ import org.jf.dexlib2.iface.instruction.formats.Instruction35c
 @BiliBiliCompatibility
 @Name("disable-live-room-double-click")
 @Description("禁用直播间双击点赞")
-@Version("0.0.1")
 class LiveRoomPatch : BytecodePatch() {
     override fun execute(context: BytecodeContext): PatchResult {
         context.findClass("Lcom/bilibili/bililive/room/ui/roomv3/player/container/LiveRoomPlayerContainerView;")

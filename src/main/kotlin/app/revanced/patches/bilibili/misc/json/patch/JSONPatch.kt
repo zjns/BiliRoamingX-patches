@@ -3,7 +3,6 @@ package app.revanced.patches.bilibili.misc.json.patch
 import app.revanced.extensions.toErrorResult
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
-import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
@@ -18,7 +17,6 @@ import org.jf.dexlib2.Opcode
 @BiliBiliCompatibility
 @Name("json-patch")
 @Description("通用阿里Fastjson反序列化数据修改")
-@Version("0.0.1")
 class JSONPatch : BytecodePatch(listOf(JSONFingerprint)) {
     override fun execute(context: BytecodeContext): PatchResult {
         val clazz = JSONFingerprint.result?.mutableClass

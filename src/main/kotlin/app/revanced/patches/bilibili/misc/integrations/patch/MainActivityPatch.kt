@@ -2,7 +2,6 @@ package app.revanced.patches.bilibili.misc.integrations.patch
 
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
-import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
@@ -18,7 +17,6 @@ import org.jf.dexlib2.Opcode
 @BiliBiliCompatibility
 @Name("main-activity-patch")
 @Description("代理部分MainActivity方法补丁")
-@Version("0.0.1")
 class MainActivityPatch : BytecodePatch() {
     override fun execute(context: BytecodeContext): PatchResult {
         context.findClass("Ltv/danmaku/bili/MainActivityV2;")?.mutableClass?.run {

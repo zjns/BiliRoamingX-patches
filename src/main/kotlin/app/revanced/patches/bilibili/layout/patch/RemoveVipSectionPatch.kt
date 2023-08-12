@@ -2,7 +2,6 @@ package app.revanced.patches.bilibili.layout.patch
 
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
-import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
@@ -17,7 +16,6 @@ import org.jf.dexlib2.Opcode
 @BiliBiliCompatibility
 @Name("remove-vip-section")
 @Description("移除我的页面大会员横幅")
-@Version("0.0.1")
 class RemoveVipSectionPatch : BytecodePatch() {
     override fun execute(context: BytecodeContext): PatchResult {
         val homeUserCenterFragmentClass = context.findClass("Ltv/danmaku/bili/ui/main2/mine/HomeUserCenterFragment;")

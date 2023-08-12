@@ -3,7 +3,6 @@ package app.revanced.patches.bilibili.misc.toast.patch
 import app.revanced.extensions.toErrorResult
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
-import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
@@ -22,7 +21,6 @@ import org.jf.dexlib2.iface.reference.MethodReference
 @BiliBiliCompatibility
 @Name("toast-call-patch")
 @Description("调用APP自带Toast补丁")
-@Version("0.0.1")
 class ToastPatch : BytecodePatch(listOf(LessonsModeToastFingerprint)) {
     override fun execute(context: BytecodeContext): PatchResult {
         val showToastRef = LessonsModeToastFingerprint.result?.mutableMethod

@@ -3,7 +3,6 @@ package app.revanced.patches.bilibili.misc.json.patch
 import app.revanced.extensions.toErrorResult
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
-import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
@@ -24,7 +23,6 @@ import org.jf.dexlib2.iface.value.StringEncodedValue
 @BiliBiliCompatibility
 @Name("pegasus-hook")
 @Description("首页推荐流hook")
-@Version("0.0.1")
 class PegasusPatch : BytecodePatch(listOf(PegasusParserFingerprint, CardClickProcessorFingerprint)) {
     override fun execute(context: BytecodeContext): PatchResult {
         PegasusParserFingerprint.result?.run {

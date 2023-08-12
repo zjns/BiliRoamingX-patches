@@ -2,7 +2,6 @@ package app.revanced.patches.bilibili.layout.patch
 
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
-import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
@@ -19,7 +18,6 @@ import org.jf.dexlib2.iface.reference.MethodReference
 @BiliBiliCompatibility
 @Name("disable-full-story")
 @Description("禁用看一看按钮")
-@Version("0.0.1")
 class FullStoryWidgetPatch(
     private val fingerprints: List<FullStoryWidgetFingerprint> = listOf(
         FullStoryWidgetFingerprint("PlayerFullStoryWidget"),
