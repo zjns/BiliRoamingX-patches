@@ -275,4 +275,5 @@
     <string name="biliroaming_feedback_title">反馈</string>
     <string name="biliroaming_feedback_summary">反馈遇到的问题或请求某个功能</string>
     <string name="biliroaming_player_version_title">播放器版本</string>
+    <string name="biliroaming_copy_success">复制成功</string>
 </resources>
