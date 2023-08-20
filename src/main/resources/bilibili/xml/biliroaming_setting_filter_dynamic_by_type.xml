@@ -8,5 +8,6 @@
         android:title="@string/biliroaming_filter_dynamic_by_type_hint"
         android:entries="@array/biliroaming_dynamic_type_entries"
         android:entryValues="@array/biliroaming_dynamic_type_values"
+        app:radioEntrySummaries="@array/biliroaming_dynamic_type_summaries"
         app:migration_settings_type="none" />
 </androidx.preference.PreferenceScreen>
