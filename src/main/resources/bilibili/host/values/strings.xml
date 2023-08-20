@@ -276,4 +276,8 @@
     <string name="biliroaming_feedback_summary">反馈遇到的问题或请求某个功能</string>
     <string name="biliroaming_player_version_title">播放器版本</string>
     <string name="biliroaming_copy_success">复制成功</string>
+    <string name="biliroaming_app_not_support">当前客户端版本不支持此功能</string>
+    <string name="biliroaming_os_not_support">当前系统版本不支持此功能</string>
+    <string name="biliroaming_only_support_new_player">仅新版播放器支持此功能</string>
+    <string name="biliroaming_block_fan_guide_title">屏蔽成为UP主老粉引导</string>
 </resources>

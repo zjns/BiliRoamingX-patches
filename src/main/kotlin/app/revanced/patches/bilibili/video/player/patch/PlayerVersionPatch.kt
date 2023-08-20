@@ -3,6 +3,7 @@ package app.revanced.patches.bilibili.video.player.patch
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
@@ -10,6 +11,7 @@ import app.revanced.patcher.patch.PatchResultSuccess
 import app.revanced.patcher.patch.annotations.Patch
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
+import app.revanced.patches.bilibili.utils.cloneMutable
 import app.revanced.patches.bilibili.video.player.fingerprints.FFUniteDetailAbFingerprint
 
 @Patch
@@ -39,8 +41,23 @@ class PlayerVersionPatch : BytecodePatch(listOf(FFUniteDetailAbFingerprint)) {
         context.findClass("Ltv/danmaku/biliplayerv2/GeminiPlayerFFKt;")?.let { clazz ->
             clazz.mutableClass.methods.find { it.returnType == "Z" && it.parameters.isEmpty() }?.patch()
         }
+        val utilsClass = context.findClass("Lapp/revanced/bilibili/utils/Utils;")!!.mutableClass
+        val newPlayerEnabledField = utilsClass.fields.first { it.name == "newPlayerEnabled" }
         // >= 7.39.0
-        FFUniteDetailAbFingerprint.result?.mutableMethod?.patch()
+        FFUniteDetailAbFingerprint.result?.run {
+            mutableMethod.patch()
+            mutableMethod.cloneMutable(registerCount = 2, clearImplementation = true).apply {
+                mutableMethod.name += "_Origin"
+                addInstructions(
+                    """
+                    invoke-direct {p0}, $mutableMethod
+                    move-result v0
+                    sput-boolean v0, $newPlayerEnabledField
+                    return v0
+                """.trimIndent()
+                )
+            }.also { mutableClass.methods.add(it) }
+        }
         return PatchResultSuccess()
     }
 }

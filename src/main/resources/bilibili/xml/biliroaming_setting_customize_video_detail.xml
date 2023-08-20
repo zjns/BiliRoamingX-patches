@@ -29,6 +29,9 @@
             android:key="block_dm_feedback"
             android:title="@string/biliroaming_block_dm_feedback_title"
             android:summary="@string/biliroaming_block_dm_feedback_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="block_fan_guide"
+            android:title="@string/biliroaming_block_fan_guide_title" />
         <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.VideoDetailFilterFragment"
             android:title="@string/biliroaming_video_relate_title" />
