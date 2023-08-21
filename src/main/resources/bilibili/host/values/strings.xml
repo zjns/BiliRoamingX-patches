@@ -6,7 +6,7 @@
     <string name="biliroaming_block_up_rcmd_ads_title">屏蔽UP主推荐广告</string>
     <string name="biliroaming_block_up_rcmd_ads_summary">屏蔽视频下方推荐栏及视频播放过程中，浮窗出现的UP主推荐广告，开启后会同时屏蔽评论区顶部推广横幅</string>
     <string name="biliroaming_half_screen_quality_title">视频半屏清晰度</string>
-    <string name="biliroaming_half_screen_quality_summary">设置视频半屏播放时的清晰度，设置后会大幅降低视频的首次播放加载速度，旧版播放器（半屏时进度条在框内）仅支持跟随全屏清晰度</string>
+    <string name="biliroaming_half_screen_quality_summary">设置视频半屏播放时的清晰度，设置后会大幅降低视频的首次播放加载速度，旧版播放器仅支持跟随全屏清晰度</string>
     <string name="biliroaming_need_reboot_dialog_message">需要重启才能生效</string>
     <string name="biliroaming_need_reboot_dialog_confirm">立即重启</string>
     <string name="biliroaming_need_reboot_dialog_later">稍后</string>
