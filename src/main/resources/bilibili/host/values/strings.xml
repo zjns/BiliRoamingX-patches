@@ -283,4 +283,6 @@
     <string name="biliroaming_need_old_player_message">需要强制启用旧版播放器才能生效，是否立即启用？</string>
     <string name="biliroaming_y">是</string>
     <string name="biliroaming_n">否</string>
+    <string name="biliroaming_number_format_title">数量精确展示</string>
+    <string name="biliroaming_number_format_summary">我的页面及个人空间页动态、关注、粉丝、获赞数等展示精确数量</string>
 </resources>

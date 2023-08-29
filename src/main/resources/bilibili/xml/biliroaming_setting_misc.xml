@@ -26,6 +26,10 @@
             android:key="music_notification"
             android:title="@string/biliroaming_music_notification_title"
             android:summary="@string/biliroaming_music_notification_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="number_format"
+            android:title="@string/biliroaming_number_format_title"
+            android:summary="@string/biliroaming_number_format_summary" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory
