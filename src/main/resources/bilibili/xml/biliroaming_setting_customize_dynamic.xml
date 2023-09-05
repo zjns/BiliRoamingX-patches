@@ -30,6 +30,9 @@
         <androidx.preference.SwitchPreferenceCompat
             android:key="customize_dynamic_rm_blocked"
             android:title="@string/biliroaming_dynamic_rm_blocked_title" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="customize_dynamic_rm_ad_link"
+            android:title="@string/biliroaming_dynamic_rm_ad_link_title" />
         <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.FilterDynamicByTypeFragment"
             android:key="filter_dynamic_by_type"
