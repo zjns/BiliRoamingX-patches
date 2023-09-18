@@ -32,6 +32,9 @@
         <androidx.preference.SwitchPreferenceCompat
             android:key="block_fan_guide"
             android:title="@string/biliroaming_block_fan_guide_title" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="remove_elec_button"
+            android:title="@string/biliroaming_remove_elec_button_title" />
         <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.VideoDetailFilterFragment"
             android:title="@string/biliroaming_video_relate_title" />
