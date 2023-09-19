@@ -2,6 +2,7 @@ package app.revanced.patches.bilibili.misc.integrations.patch
 
 import app.revanced.extensions.toErrorResult
 import app.revanced.patcher.annotation.Description
+import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
@@ -12,7 +13,6 @@ import app.revanced.patcher.patch.annotations.Patch
 import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
 import app.revanced.patches.bilibili.misc.other.fingerprints.MineBindAccountStateFingerprint
 import app.revanced.patches.bilibili.utils.cloneMutable
-import jdk.jfr.Name
 import org.jf.dexlib2.Opcode
 import org.jf.dexlib2.iface.instruction.formats.Instruction35c
 import org.jf.dexlib2.iface.reference.MethodReference
