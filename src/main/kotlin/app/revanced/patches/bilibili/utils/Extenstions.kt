@@ -7,6 +7,7 @@ import app.revanced.patches.bilibili.patcher.fingerprint.MultiMethodFingerprint
 import org.jf.dexlib2.AccessFlags
 import org.jf.dexlib2.HiddenApiRestriction
 import org.jf.dexlib2.iface.Method
+import org.jf.dexlib2.iface.MethodParameter
 import org.jf.dexlib2.immutable.*
 import org.jf.dexlib2.immutable.debug.ImmutableDebugItem
 import org.jf.dexlib2.immutable.instruction.ImmutableInstruction
@@ -19,6 +20,7 @@ fun Method.clone(
     clearImplementation: Boolean = false,
     name: String = this.name,
     accessFlags: Int = this.accessFlags,
+    parameters: List<MethodParameter> = this.parameters,
 ): ImmutableMethod {
     val clonedImplementation = implementation?.let {
         ImmutableMethodImplementation(
@@ -45,7 +47,8 @@ fun Method.cloneMutable(
     clearImplementation: Boolean = false,
     name: String = this.name,
     accessFlags: Int = this.accessFlags,
-) = clone(registerCount, clearImplementation, name, accessFlags).toMutable()
+    parameters: List<MethodParameter> = this.parameters,
+) = clone(registerCount, clearImplementation, name, accessFlags, parameters).toMutable()
 
 fun Int.toPublic() = or(AccessFlags.PUBLIC).and(AccessFlags.PRIVATE.value.inv())
 fun Int.removeFinal() = and(AccessFlags.FINAL.value.inv())
