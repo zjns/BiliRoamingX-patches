@@ -40,7 +40,7 @@ class FixPreferenceManagerPatch : BytecodePatch(listOf(PreferenceManagerFingerpr
                 replaceInstruction(
                     1, """
                     invoke-super {p0, p1}, Landroidx/preference/PreferenceCategory;->onAttachedToHierarchy($preferenceManagerDef)V
-            """.trimIndent()
+                """.trimIndent()
                 )
             }.run {
                 remove(this)
@@ -77,22 +77,22 @@ class FixPreferenceManagerPatch : BytecodePatch(listOf(PreferenceManagerFingerpr
             implementation!!.instructions.indexOfFirst { it.opcode == Opcode.CONST_CLASS }.run {
                 replaceInstruction(
                     this, """
-                const-class v1, $preferenceManagerDef
-            """.trimIndent()
+                    const-class v1, $preferenceManagerDef
+                """.trimIndent()
                 )
             }
             implementation!!.instructions.indexOfFirst { it.opcode == Opcode.NEW_INSTANCE }.run {
                 replaceInstruction(
                     this, """
-                new-instance v1, $preferenceManagerDef
-            """.trimIndent()
+                    new-instance v1, $preferenceManagerDef
+                """.trimIndent()
                 )
             }
             implementation!!.instructions.indexOfFirst { it.opcode == Opcode.INVOKE_DIRECT }.run {
                 replaceInstruction(
                     this, """
-                invoke-direct {v1, v4}, $preferenceManagerDef-><init>(Landroid/content/Context;)V
-            """.trimIndent()
+                    invoke-direct {v1, v4}, $preferenceManagerDef-><init>(Landroid/content/Context;)V
+                """.trimIndent()
                 )
             }
         }
@@ -128,23 +128,23 @@ class FixPreferenceManagerPatch : BytecodePatch(listOf(PreferenceManagerFingerpr
             )
             replaceInstruction(
                 2, """
-                    invoke-virtual {v0}, $getSharedPreferencesMethod
-                """.trimIndent()
+                invoke-virtual {v0}, $getSharedPreferencesMethod
+            """.trimIndent()
             )
         }
         settingsFragmentClass.methods.first { it.name == "onStart" }.run {
             implementation!!.instructions.indexOfFirst { it.opcode == Opcode.INVOKE_VIRTUAL }.run {
                 replaceInstruction(
                     this, """
-                invoke-virtual {p0}, Lcom/bilibili/lib/ui/BasePreferenceFragment;->getPreferenceManager()$preferenceManagerDef
-            """.trimIndent()
+                    invoke-virtual {p0}, Lcom/bilibili/lib/ui/BasePreferenceFragment;->getPreferenceManager()$preferenceManagerDef
+                """.trimIndent()
                 )
             }
             implementation!!.instructions.indexOfLast { it.opcode == Opcode.INVOKE_STATIC }.run {
                 replaceInstruction(
                     this, """
-                invoke-static {v0, p0}, $onPreferenceTreeClickMethod
-            """.trimIndent()
+                    invoke-static {v0, p0}, $onPreferenceTreeClickMethod
+                """.trimIndent()
                 )
             }
         }
@@ -152,15 +152,15 @@ class FixPreferenceManagerPatch : BytecodePatch(listOf(PreferenceManagerFingerpr
             implementation!!.instructions.indexOfFirst { it.opcode == Opcode.INVOKE_VIRTUAL }.run {
                 replaceInstruction(
                     this, """
-                invoke-virtual {p0}, Lcom/bilibili/lib/ui/BasePreferenceFragment;->getPreferenceManager()$preferenceManagerDef
-            """.trimIndent()
+                    invoke-virtual {p0}, Lcom/bilibili/lib/ui/BasePreferenceFragment;->getPreferenceManager()$preferenceManagerDef
+                """.trimIndent()
                 )
             }
             implementation!!.instructions.indexOfLast { it.opcode == Opcode.INVOKE_STATIC }.run {
                 replaceInstruction(
                     this, """
-                invoke-static {v0, p0}, $onPreferenceTreeClickMethod
-            """.trimIndent()
+                    invoke-static {v0, p0}, $onPreferenceTreeClickMethod
+                """.trimIndent()
                 )
             }
         }
