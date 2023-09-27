@@ -48,6 +48,18 @@ class FixPreferenceManagerPatch : BytecodePatch(listOf(PreferenceManagerFingerpr
                     it[0] = methodParameter(preferenceManagerDef.type).toMutable()
                 }).let { add(it) }
             }
+            first { it.name == "notifyChanged" }.run {
+                replaceInstruction(
+                    0, """
+                    invoke-virtual {p0}, Landroidx/preference/PreferenceCategory;->getPreferenceManager()$preferenceManagerDef
+                """.trimIndent()
+                )
+                replaceInstruction(
+                    2, """
+                    invoke-virtual {p0, v0}, Lapp/revanced/bilibili/widget/CheckBoxGroupPreference;->onAttachedToHierarchy($preferenceManagerDef)V
+                """.trimIndent()
+                )
+            }
         }
 
         val ktUtilsClass = context.findClass("Lapp/revanced/bilibili/utils/KtUtils;")!!.mutableClass
