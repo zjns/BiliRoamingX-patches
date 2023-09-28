@@ -63,12 +63,6 @@
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory>
-        <androidx.preference.SwitchPreferenceCompat
-            android:key="debug"
-            android:title="@string/biliroaming_debug_title" />
-    </androidx.preference.PreferenceCategory>
-
-    <androidx.preference.PreferenceCategory>
         <androidx.preference.Preference
             android:key="reboot"
             android:title="@string/biliroaming_reboot_title" />

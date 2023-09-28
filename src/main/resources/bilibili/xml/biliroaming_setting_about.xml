@@ -18,4 +18,10 @@
             android:title="@string/biliroaming_tg_title"
             android:summary="@string/biliroaming_tg_url" />
     </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory>
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="debug"
+            android:title="@string/biliroaming_debug_title" />
+    </androidx.preference.PreferenceCategory>
 </androidx.preference.PreferenceScreen>
