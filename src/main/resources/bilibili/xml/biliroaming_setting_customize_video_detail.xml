@@ -35,6 +35,9 @@
         <androidx.preference.SwitchPreferenceCompat
             android:key="remove_elec_button"
             android:title="@string/biliroaming_remove_elec_button_title" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="block_live_order"
+            android:title="@string/biliroaming_block_live_order_title" />
         <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.VideoDetailFilterFragment"
             android:title="@string/biliroaming_video_relate_title" />

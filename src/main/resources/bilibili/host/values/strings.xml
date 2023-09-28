@@ -288,4 +288,5 @@
     <string name="biliroaming_number_format_title">数量精确展示</string>
     <string name="biliroaming_number_format_summary">我的页面及个人空间页动态、关注、粉丝、获赞数等展示精确数量</string>
     <string name="biliroaming_remove_elec_button_title">移除充电按钮</string>
+    <string name="biliroaming_block_live_order_title">屏蔽直播预约横幅</string>
 </resources>
