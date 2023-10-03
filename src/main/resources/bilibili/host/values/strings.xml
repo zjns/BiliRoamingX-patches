@@ -289,4 +289,5 @@
     <string name="biliroaming_number_format_summary">我的页面及个人空间页动态、关注、粉丝、获赞数等展示精确数量</string>
     <string name="biliroaming_remove_elec_button_title">移除充电按钮</string>
     <string name="biliroaming_block_live_order_title">屏蔽直播预约横幅</string>
+    <string name="biliroaming_can_not_share_to_wx">修改版由于签名问题不能分享至微信，如有需要，请使用官方版本！</string>
 </resources>

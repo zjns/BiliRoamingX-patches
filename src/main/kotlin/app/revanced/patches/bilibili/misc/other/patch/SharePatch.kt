@@ -5,7 +5,6 @@ import app.revanced.extensions.toErrorResult
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
@@ -36,12 +35,15 @@ class SharePatch : BytecodePatch(listOf(ShareToFingerprint, AppendTrackingInfoFi
             } ?: return ShareToFingerprint.toErrorResult()
         result.mutableClass.run {
             findMutableMethodOf(shareToMethodRef).let { method ->
-                method.cloneMutable(registerCount = 3, clearImplementation = true).apply {
+                method.cloneMutable(registerCount = 4, clearImplementation = true).apply {
                     method.name += "_Origin"
-                    addInstructions(
-                        """
-                        invoke-static {p1, p2}, Lapp/revanced/bilibili/patches/SharePatch;->onShareTo(Ljava/lang/String;Landroid/os/Bundle;)V
+                    addInstructionsWithLabels(
+                        0, """
+                        invoke-static {p1, p2}, Lapp/revanced/bilibili/patches/SharePatch;->onShareTo(Ljava/lang/String;Landroid/os/Bundle;)Z
+                        move-result v0
+                        if-nez v0, :return
                         invoke-virtual {p0, p1, p2}, $method
+                        :return
                         return-void
                     """.trimIndent()
                     )
