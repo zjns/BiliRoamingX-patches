@@ -9,17 +9,16 @@ import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.PatchResultError
 import app.revanced.patcher.patch.PatchResultSuccess
 import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
+import app.revanced.patches.bilibili.annotations.BiliPinkCompatibility
 import org.jf.dexlib2.Opcode
 
 @Patch
-@BiliBiliCompatibility
+@BiliPinkCompatibility
 @Name("remove-vip-section")
 @Description("移除我的页面大会员横幅")
 class RemoveVipSectionPatch : BytecodePatch() {
     override fun execute(context: BytecodeContext): PatchResult {
         val homeUserCenterFragmentClass = context.findClass("Ltv/danmaku/bili/ui/main2/mine/HomeUserCenterFragment;")
-            ?: context.findClass("Ltv/danmaku/bilibilihd/ui/main/mine/HdHomeUserCenterFragment;")
             ?: return PatchResultError("not found HomeUserCenterFragment")
         homeUserCenterFragmentClass.mutableClass.let { clazz ->
             val viewField = clazz.fields.find {

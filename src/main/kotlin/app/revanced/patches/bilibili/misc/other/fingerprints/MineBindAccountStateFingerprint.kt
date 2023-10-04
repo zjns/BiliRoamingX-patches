@@ -7,6 +7,6 @@ object MineBindAccountStateFingerprint : MethodFingerprint(
     parameters = listOf("Ltv/danmaku/bili/ui/main2/api/AccountMine;", "Z"),
     returnType = "V",
     customFingerprint = { _, classDef ->
-        classDef.type == "Ltv/danmaku/bili/ui/main2/mine/HomeUserCenterFragment;"
+        classDef.type == "Ltv/danmaku/bili/ui/main2/mine/HomeUserCenterFragment;" || classDef.type == "Ltv/danmaku/bilibilihd/ui/main/mine/HdHomeUserCenterFragment;"
     }
 )
