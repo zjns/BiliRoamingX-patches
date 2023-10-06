@@ -1,27 +1,24 @@
 package app.revanced.patches.bilibili.misc.integrations.patch
 
-import app.revanced.extensions.toErrorResult
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
+import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.misc.integrations.fingerprints.BLKVFingerprint
 import app.revanced.patches.bilibili.utils.cloneMutable
-import org.jf.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.AccessFlags
 
-@Patch
-@BiliBiliCompatibility
-@Name("blkv")
-@Description("集成BLKV")
-class BLKVPatch : BytecodePatch(listOf(BLKVFingerprint)) {
-    override fun execute(context: BytecodeContext): PatchResult {
+@Patch(
+    name = "Blkv",
+    description = "集成BLKV",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object BLKVPatch : BytecodePatch(setOf(BLKVFingerprint)) {
+    override fun execute(context: BytecodeContext) {
         val utilsClass = context.findClass("Lapp/revanced/bilibili/utils/Utils;")!!
-        val result = BLKVFingerprint.result ?: return BLKVFingerprint.toErrorResult()
+        val result = BLKVFingerprint.result ?: throw BLKVFingerprint.exception
         val stockByNameMethod = result.method
         val stockByFileMethod = result.classDef.methods.first { m ->
             !AccessFlags.SYNTHETIC.isSet(m.accessFlags) && AccessFlags.STATIC.isSet(m.accessFlags)
@@ -58,6 +55,5 @@ class BLKVPatch : BytecodePatch(listOf(BLKVFingerprint)) {
                 )
             }.also { add(it) }
         }
-        return PatchResultSuccess()
     }
 }

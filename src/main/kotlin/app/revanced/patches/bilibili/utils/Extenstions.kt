@@ -1,19 +1,18 @@
 package app.revanced.patches.bilibili.utils
 
-import app.revanced.patcher.extensions.or
-import app.revanced.patcher.patch.PatchResultError
+import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
 import app.revanced.patches.bilibili.patcher.fingerprint.MultiMethodFingerprint
-import org.jf.dexlib2.AccessFlags
-import org.jf.dexlib2.HiddenApiRestriction
-import org.jf.dexlib2.iface.Method
-import org.jf.dexlib2.iface.MethodParameter
-import org.jf.dexlib2.immutable.*
-import org.jf.dexlib2.immutable.debug.ImmutableDebugItem
-import org.jf.dexlib2.immutable.instruction.ImmutableInstruction
-import org.jf.dexlib2.immutable.value.ImmutableArrayEncodedValue
-import org.jf.dexlib2.immutable.value.ImmutableEncodedValue
-import org.jf.dexlib2.immutable.value.ImmutableStringEncodedValue
+import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.HiddenApiRestriction
+import com.android.tools.smali.dexlib2.iface.Method
+import com.android.tools.smali.dexlib2.iface.MethodParameter
+import com.android.tools.smali.dexlib2.immutable.*
+import com.android.tools.smali.dexlib2.immutable.debug.ImmutableDebugItem
+import com.android.tools.smali.dexlib2.immutable.instruction.ImmutableInstruction
+import com.android.tools.smali.dexlib2.immutable.value.ImmutableArrayEncodedValue
+import com.android.tools.smali.dexlib2.immutable.value.ImmutableEncodedValue
+import com.android.tools.smali.dexlib2.immutable.value.ImmutableStringEncodedValue
 
 fun Method.clone(
     registerCount: Int = implementation?.registerCount ?: 0,
@@ -50,7 +49,7 @@ fun Method.cloneMutable(
     parameters: List<MethodParameter> = this.parameters,
 ) = clone(registerCount, clearImplementation, name, accessFlags, parameters).toMutable()
 
-fun Int.toPublic() = or(AccessFlags.PUBLIC).and(AccessFlags.PRIVATE.value.inv())
+fun Int.toPublic() = or(AccessFlags.PUBLIC.value).and(AccessFlags.PRIVATE.value.inv())
 fun Int.removeFinal() = and(AccessFlags.FINAL.value.inv())
 
 fun method(
@@ -106,7 +105,8 @@ fun methodImplementation(
     debugItems: List<ImmutableDebugItem>? = null
 ) = ImmutableMethodImplementation(registerCount, instructions, tryBlocks, debugItems)
 
-fun MultiMethodFingerprint.toErrorResult() = PatchResultError("Failed to resolve ${javaClass.simpleName}")
+val MultiMethodFingerprint.exception
+    get() = PatchException("Failed to resolve ${this.javaClass.simpleName}")
 
 val String.className: String
     get() {

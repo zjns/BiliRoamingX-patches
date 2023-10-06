@@ -1,27 +1,24 @@
 package app.revanced.patches.bilibili.misc.other.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.utils.cloneMutable
 import app.revanced.patches.bilibili.utils.toPublic
-import org.jf.dexlib2.AccessFlags
-import org.jf.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.Opcode
 
-@Patch
-@BiliBiliCompatibility
-@Name("subtitle")
-@Description("字幕相关补丁")
-class SubtitlePatch : BytecodePatch() {
-    override fun execute(context: BytecodeContext): PatchResult {
+@Patch(
+    name = "Subtitle",
+    description = "字幕相关补丁",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object SubtitlePatch : BytecodePatch() {
+    override fun execute(context: BytecodeContext) {
         context.findClass("Lcom/bilibili/cron/Canvas;")?.mutableClass?.run {
             accessFlags = accessFlags.toPublic()
             fields.filterNot { AccessFlags.STATIC.isSet(it.accessFlags) }.forEach {
@@ -90,6 +87,5 @@ class SubtitlePatch : BytecodePatch() {
             """.trimIndent()
             )
         }
-        return PatchResultSuccess()
     }
 }

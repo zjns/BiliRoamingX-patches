@@ -1,26 +1,23 @@
 package app.revanced.patches.bilibili.misc.other.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultError
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
-import org.jf.dexlib2.Opcode
-import org.jf.dexlib2.builder.instruction.BuilderInstruction11n
-import org.jf.dexlib2.builder.instruction.BuilderInstruction22c
-import org.jf.dexlib2.iface.reference.FieldReference
+import app.revanced.patcher.patch.PatchException
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
+import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction11n
+import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction22c
+import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 
-@Patch
-@BiliBiliCompatibility
-@Name("text-fold")
-@Description("文本折叠控制")
-class TextFoldPatch : BytecodePatch() {
-    override fun execute(context: BytecodeContext): PatchResult {
+@Patch(
+    name = "Text fold",
+    description = "文本折叠控制",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object TextFoldPatch : BytecodePatch() {
+    override fun execute(context: BytecodeContext) {
         context.findClass("Lcom/bapis/bilibili/main/community/reply/v1/ReplyControl;")
             ?.mutableClass?.methods?.find { it.name == "getMaxLine" }?.run {
                 addInstructions(
@@ -45,7 +42,7 @@ class TextFoldPatch : BytecodePatch() {
                     if (index > const4Index && value.opcode == Opcode.IPUT && value is BuilderInstruction22c) {
                         value.reference as FieldReference
                     } else null
-                } ?: return PatchResultError("not found EllipsizingTextView#maxLines field")
+                } ?: throw PatchException("not found EllipsizingTextView#maxLines field")
                 addInstructions(
                     implementation!!.instructions.size - 1, """
                     const/4 p1, 0x4
@@ -70,7 +67,7 @@ class TextFoldPatch : BytecodePatch() {
                         it as BuilderInstruction22c; it.reference as FieldReference
                     }
                 } else null
-            } ?: return PatchResultError("not found EllipsizingTextView#linesToAll field")
+            } ?: throw PatchException("not found EllipsizingTextView#linesToAll field")
             val setLineToAllCountMethod = methods.first { m ->
                 m.parameterTypes == listOf("I") && m.implementation?.instructions?.let { inst ->
                     inst.size == 2 && inst[0].let { it.opcode == Opcode.IPUT && (it as BuilderInstruction22c).reference == linesToAllField }
@@ -83,7 +80,6 @@ class TextFoldPatch : BytecodePatch() {
                 move-result p1
             """.trimIndent()
             )
-        } ?: return PatchResultError("not found EllipsizingTextView class")
-        return PatchResultSuccess()
+        } ?: throw PatchException("not found EllipsizingTextView class")
     }
 }

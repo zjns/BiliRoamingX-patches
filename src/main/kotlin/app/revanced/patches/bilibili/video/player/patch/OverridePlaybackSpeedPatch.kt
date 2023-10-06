@@ -1,47 +1,44 @@
 package app.revanced.patches.bilibili.video.player.patch
 
-import app.revanced.extensions.toErrorResult
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
+import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
 import app.revanced.patcher.util.smali.ExternalLabel
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
 import app.revanced.patches.bilibili.patcher.patch.MultiMethodBytecodePatch
 import app.revanced.patches.bilibili.utils.*
 import app.revanced.patches.bilibili.video.player.fingerprints.*
-import org.jf.dexlib2.AccessFlags
-import org.jf.dexlib2.AnnotationVisibility
-import org.jf.dexlib2.Opcode
-import org.jf.dexlib2.builder.instruction.BuilderInstruction21ih
-import org.jf.dexlib2.builder.instruction.BuilderInstruction22c
-import org.jf.dexlib2.builder.instruction.BuilderInstruction31i
-import org.jf.dexlib2.iface.reference.FieldReference
+import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.AnnotationVisibility
+import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction21ih
+import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction22c
+import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction31i
+import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 
-@Patch
-@BiliBiliCompatibility
-@Name("override-playback-speed")
-@Description("自定义播放器播放速度列表")
-class OverridePlaybackSpeedPatch : MultiMethodBytecodePatch(
-    fingerprints = listOf(
+@Patch(
+    name = "Override playback speed",
+    description = "自定义播放器播放速度列表",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object OverridePlaybackSpeedPatch : MultiMethodBytecodePatch(
+    fingerprints = setOf(
         StoryMenuFingerprint,
         MenuFuncSegmentFingerprint,
         NewShareServiceFingerprint,
         MusicPlayerPanelFingerprint
     ),
-    multiFingerprints = listOf(
+    multiFingerprints = setOf(
         SpeedFunctionWidgetFingerprint,
         PlaybackSpeedSettingFingerprint,
         PlayerSpeedWidgetFingerprint
     )
 ) {
-    override fun execute(context: BytecodeContext): PatchResult {
+    override fun execute(context: BytecodeContext) {
         super.execute(context)
         SpeedFunctionWidgetFingerprint.result.mapNotNull { r ->
             r.classDef.fields.firstNotNullOfOrNull { f ->
@@ -52,7 +49,7 @@ class OverridePlaybackSpeedPatch : MultiMethodBytecodePatch(
                 }
             }
         }.ifEmpty {
-            return SpeedFunctionWidgetFingerprint.toErrorResult()
+            throw SpeedFunctionWidgetFingerprint.exception
         }.forEach { m ->
             val result = m.implementation!!.instructions.withIndex().firstNotNullOfOrNull { (index, inst) ->
                 if (inst.opcode == Opcode.IPUT_OBJECT && inst is BuilderInstruction22c && (inst.reference as FieldReference).type == "[F") {
@@ -75,14 +72,14 @@ class OverridePlaybackSpeedPatch : MultiMethodBytecodePatch(
                     if (inst.opcode == Opcode.IPUT_OBJECT && inst is BuilderInstruction22c
                         && (inst.reference as FieldReference).type == "[F"
                     ) (inst.registerA to index) else null
-                } ?: return StoryMenuFingerprint.toErrorResult()
+                } ?: throw StoryMenuFingerprint.exception
             addInstructions(
                 insertIndex, """
                 invoke-static {v$register}, Lapp/revanced/bilibili/patches/PlaybackSpeedPatch;->getOverrideSpeedArray([F)[F
                 move-result-object v$register
             """.trimIndent()
             )
-        } ?: return StoryMenuFingerprint.toErrorResult()
+        } ?: throw StoryMenuFingerprint.exception
         MenuFuncSegmentFingerprint.result?.mutableClass?.fields
             ?.find { it.type == "[F" && AccessFlags.STATIC.isSet(it.accessFlags) }?.let { f ->
                 f.accessFlags = f.accessFlags.toPublic().removeFinal()
@@ -98,14 +95,14 @@ class OverridePlaybackSpeedPatch : MultiMethodBytecodePatch(
                     if (inst.opcode == Opcode.IPUT_OBJECT && inst is BuilderInstruction22c
                         && (inst.reference as FieldReference).type == "[F"
                     ) (inst.registerA to index) else null
-                } ?: return MenuFuncSegmentFingerprint.toErrorResult()
+                } ?: throw MenuFuncSegmentFingerprint.exception
             addInstructions(
                 insertIndex, """
                 invoke-static {v$register}, Lapp/revanced/bilibili/patches/PlaybackSpeedPatch;->getOverrideSpeedArray([F)[F
                 move-result-object v$register
             """.trimIndent()
             )
-        } ?: return MenuFuncSegmentFingerprint.toErrorResult()
+        } ?: throw MenuFuncSegmentFingerprint.exception
         NewShareServiceFingerprint.result?.mutableClass?.fields?.find { it.type == "[F" }?.let { f ->
             f.accessFlags = f.accessFlags.toPublic().removeFinal()
             context.findClass("Lapp/revanced/bilibili/patches/PlaybackSpeedPatch;")!!.mutableClass.methods
@@ -114,11 +111,11 @@ class OverridePlaybackSpeedPatch : MultiMethodBytecodePatch(
                     sput-object p0, $f
                 """.trimIndent()
                 )
-        } ?: return NewShareServiceFingerprint.toErrorResult()
+        } ?: throw NewShareServiceFingerprint.exception
         PlaybackSpeedSettingFingerprint.result.map { r ->
             r.mutableClass.methods.first { it.name == "<init>" }
         }.ifEmpty {
-            return PlaybackSpeedSettingFingerprint.toErrorResult()
+            throw PlaybackSpeedSettingFingerprint.exception
         }.forEach { m ->
             val insertIndex = m.implementation!!.instructions.indexOfLast {
                 it.opcode == Opcode.IPUT_OBJECT && it is BuilderInstruction22c
@@ -191,21 +188,21 @@ class OverridePlaybackSpeedPatch : MultiMethodBytecodePatch(
                 return-void
             """.trimIndent()
             )
-        } /*?: return PatchResultError("not found PodcastSpeedSeekBar")*/ // not exist on hd
+        } /*?: throw PatchException("not found PodcastSpeedSeekBar")*/ // not exist on hd
         MusicPlayerPanelFingerprint.result?.mutableClass?.methods?.first { it.name == "<init>" }?.run {
             val (register, insertIndex) = implementation!!.instructions.withIndex()
                 .firstNotNullOfOrNull { (index, inst) ->
                     if (inst.opcode == Opcode.IPUT_OBJECT && inst is BuilderInstruction22c
                         && (inst.reference as FieldReference).type == "[F"
                     ) (inst.registerA to index) else null
-                } ?: return MusicPlayerPanelFingerprint.toErrorResult()
+                } ?: throw MusicPlayerPanelFingerprint.exception
             addInstructions(
                 insertIndex, """
                 invoke-static {v$register}, Lapp/revanced/bilibili/patches/PlaybackSpeedPatch;->getOverrideReverseSpeedArray([F)[F
                 move-result-object v$register
             """.trimIndent()
             )
-        } /*?: return MusicPlayerPanelFingerprint.toErrorResult()*/ // not exist on hd
+        } /*?: throw MusicPlayerPanelFingerprint.exception*/ // not exist on hd
         PlayerSpeedWidgetFingerprint.result.mapNotNull { r ->
             r.mutableClass.methods.firstNotNullOfOrNull { m ->
                 m.implementation?.instructions?.indexOfFirst {
@@ -218,7 +215,7 @@ class OverridePlaybackSpeedPatch : MultiMethodBytecodePatch(
                 }
             }
         }.ifEmpty {
-            return PlayerSpeedWidgetFingerprint.toErrorResult()
+            throw PlayerSpeedWidgetFingerprint.exception
         }.forEach { (m, insertIndex, oneIndex) ->
             m.addInstructionsWithLabels(
                 insertIndex,
@@ -228,6 +225,5 @@ class OverridePlaybackSpeedPatch : MultiMethodBytecodePatch(
                 ExternalLabel("cmp_one", m.getInstruction(oneIndex))
             )
         }
-        return PatchResultSuccess()
     }
 }

@@ -1,30 +1,26 @@
 package app.revanced.patches.bilibili.misc.other.patch
 
-import app.revanced.extensions.toErrorResult
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
+import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.misc.integrations.patch.BiliAccountsPatch
 import app.revanced.patches.bilibili.misc.other.fingerprints.MineBindAccountStateFingerprint
 import app.revanced.patches.bilibili.misc.other.fingerprints.SpaceBindAccountStateFingerprint
 import app.revanced.patches.bilibili.utils.cloneMutable
 
-@Patch
-@BiliBiliCompatibility
-@DependsOn([BiliAccountsPatch::class])
-@Name("number-format")
-@Description("数字格式化补丁")
-class NumberFormatPatch : BytecodePatch(
-    listOf(MineBindAccountStateFingerprint, SpaceBindAccountStateFingerprint)
+@Patch(
+    name = "Number format",
+    description = "数字格式化补丁",
+    dependencies = [BiliAccountsPatch::class],
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object NumberFormatPatch : BytecodePatch(
+    setOf(MineBindAccountStateFingerprint, SpaceBindAccountStateFingerprint)
 ) {
-    override fun execute(context: BytecodeContext): PatchResult {
+    override fun execute(context: BytecodeContext) {
         val numerFormatPatchClass = context.classes.first {
             it.type == "Lapp/revanced/bilibili/patches/NumberFormatPatch;"
         }
@@ -41,7 +37,7 @@ class NumberFormatPatch : BytecodePatch(
                 """.trimIndent()
                 )
             }.also { mutableClass.methods.add(it) }
-        } ?: return MineBindAccountStateFingerprint.toErrorResult()
+        } ?: throw MineBindAccountStateFingerprint.exception
         SpaceBindAccountStateFingerprint.result?.run {
             mutableMethod.cloneMutable(registerCount = 2, clearImplementation = true).apply {
                 mutableMethod.name += "_Origin"
@@ -53,7 +49,6 @@ class NumberFormatPatch : BytecodePatch(
                 """.trimIndent()
                 )
             }.also { mutableClass.methods.add(it) }
-        } ?: return SpaceBindAccountStateFingerprint.toErrorResult()
-        return PatchResultSuccess()
+        } ?: throw SpaceBindAccountStateFingerprint.exception
     }
 }

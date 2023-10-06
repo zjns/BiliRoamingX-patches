@@ -1,28 +1,25 @@
 package app.revanced.patches.bilibili.misc.integrations.patch
 
-import app.revanced.extensions.toErrorResult
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
+import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.misc.integrations.fingerprints.DownloadingActivityFingerprint
 import app.revanced.patches.bilibili.utils.cloneMutable
-import org.jf.dexlib2.AccessFlags
-import org.jf.dexlib2.Opcode
-import org.jf.dexlib2.iface.instruction.formats.Instruction35c
-import org.jf.dexlib2.iface.reference.MethodReference
+import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
+import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
-@Patch
-@BiliBiliCompatibility
-@Name("account-info")
-@Description("获取账号信息辅助补丁")
-class AccountInfoPatch : BytecodePatch(listOf(DownloadingActivityFingerprint)) {
-    override fun execute(context: BytecodeContext): PatchResult {
+@Patch(
+    name = "Account info",
+    description = "获取账号信息辅助补丁",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object AccountInfoPatch : BytecodePatch(setOf(DownloadingActivityFingerprint)) {
+    override fun execute(context: BytecodeContext) {
         DownloadingActivityFingerprint.result?.method?.implementation?.instructions?.firstNotNullOfOrNull { inst ->
             if (inst.opcode == Opcode.INVOKE_VIRTUAL && inst is Instruction35c) {
                 (inst.reference as MethodReference).takeIf {
@@ -50,7 +47,6 @@ class AccountInfoPatch : BytecodePatch(listOf(DownloadingActivityFingerprint)) {
                     )
                 }.also { add(it) }
             }
-        } ?: return DownloadingActivityFingerprint.toErrorResult()
-        return PatchResultSuccess()
+        } ?: throw DownloadingActivityFingerprint.exception
     }
 }

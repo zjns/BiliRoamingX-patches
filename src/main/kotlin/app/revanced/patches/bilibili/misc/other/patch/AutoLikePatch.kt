@@ -1,31 +1,28 @@
 package app.revanced.patches.bilibili.misc.other.patch
 
-import app.revanced.extensions.toErrorResult
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
+import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultError
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
+import app.revanced.patcher.patch.PatchException
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.misc.other.fingerprints.SectionFingerprint
-import org.jf.dexlib2.AccessFlags
-import org.jf.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.Opcode
 
-@Patch
-@BiliBiliCompatibility
-@Name("auto-like")
-@Description("视频自动点赞补丁")
-class AutoLikePatch : BytecodePatch(listOf(SectionFingerprint)) {
-    override fun execute(context: BytecodeContext): PatchResult {
+@Patch(
+    name = "Auto like",
+    description = "视频自动点赞补丁",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object AutoLikePatch : BytecodePatch(setOf(SectionFingerprint)) {
+    override fun execute(context: BytecodeContext) {
         val clazz = SectionFingerprint.result?.mutableClass
-            ?: return SectionFingerprint.toErrorResult()
+            ?: throw SectionFingerprint.exception
         val likeMethod = context.classes.first { it.type == clazz.superclass }.virtualMethods.find { m ->
             m.parameterTypes.size == 1 && m.returnType == "V" && !AccessFlags.FINAL.isSet(m.accessFlags)
-        } ?: return PatchResultError("can not found like method")
+        } ?: throw PatchException("can not found like method")
         val realLikeMethod = clazz.methods.first { m ->
             m.name == likeMethod.name && m.parameterTypes == likeMethod.parameterTypes
         }
@@ -36,6 +33,5 @@ class AutoLikePatch : BytecodePatch(listOf(SectionFingerprint)) {
             invoke-static {p0}, Lapp/revanced/bilibili/patches/AutoLikePatch;->autoLike(Ljava/lang/Object;)V
         """.trimIndent()
         )
-        return PatchResultSuccess()
     }
 }

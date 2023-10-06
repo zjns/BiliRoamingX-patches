@@ -1,26 +1,23 @@
 package app.revanced.patches.bilibili.misc.other.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.misc.other.fingerprints.QualityViewHolderFingerprint
 import app.revanced.patches.bilibili.patcher.patch.MultiMethodBytecodePatch
 import app.revanced.patches.bilibili.utils.cloneMutable
-import app.revanced.patches.bilibili.utils.toErrorResult
+import app.revanced.patches.bilibili.utils.exception
 
-@Patch
-@BiliBiliCompatibility
-@Name("trial-quality")
-@Description("试用画质辅助补丁")
-class TrialQualityPatch : MultiMethodBytecodePatch(
-    multiFingerprints = listOf(QualityViewHolderFingerprint)
+@Patch(
+    name = "Trial quality",
+    description = "试用画质辅助补丁",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object TrialQualityPatch : MultiMethodBytecodePatch(
+    multiFingerprints = setOf(QualityViewHolderFingerprint)
 ) {
-    override fun execute(context: BytecodeContext): PatchResult {
+    override fun execute(context: BytecodeContext) {
         super.execute(context)
         val patchMethod = context.findClass("Lapp/revanced/bilibili/patches/TrialQualityPatch;")!!
             .mutableClass.methods.first { it.name == "onBindOnline" }
@@ -29,7 +26,7 @@ class TrialQualityPatch : MultiMethodBytecodePatch(
                 m.parameterTypes.let { it.size == 5 && it[1] == "Z" && it[3] == "Landroid/widget/TextView;" && it[4] == "Landroid/widget/TextView;" }
             }
         }.ifEmpty {
-            return QualityViewHolderFingerprint.toErrorResult()
+            throw QualityViewHolderFingerprint.exception
         }.forEach { (methods, method) ->
             val originMethod = method.cloneMutable(name = method.name + "_Origin")
                 .also { methods.add(it) }
@@ -43,6 +40,5 @@ class TrialQualityPatch : MultiMethodBytecodePatch(
                 )
             }.also { methods.add(it) }
         }
-        return PatchResultSuccess()
     }
 }

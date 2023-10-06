@@ -1,8 +1,8 @@
 package app.revanced.patches.bilibili.misc.theme.fingerprints
 
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
-import org.jf.dexlib2.Opcode
-import org.jf.dexlib2.iface.instruction.formats.Instruction35c
+import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 
 object BuiltInThemesFingerprint : MethodFingerprint(
     customFingerprint = { methodDef, _ ->

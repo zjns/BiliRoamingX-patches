@@ -1,31 +1,26 @@
 package app.revanced.patches.bilibili.layout.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
-import app.revanced.patches.bilibili.layout.fingerprints.FullStoryWidgetFingerprint
-import org.jf.dexlib2.Opcode
-import org.jf.dexlib2.iface.instruction.formats.Instruction35c
-import org.jf.dexlib2.iface.reference.MethodReference
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
+import app.revanced.patches.bilibili.layout.fingerprints.GeminiPlayerFullStoryWidgetFingerprint
+import app.revanced.patches.bilibili.layout.fingerprints.PlayerFullStoryWidgetFingerprint
+import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
+import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
-@Patch
-@BiliBiliCompatibility
-@Name("disable-full-story")
-@Description("禁用看一看按钮")
-class FullStoryWidgetPatch(
-    private val fingerprints: List<FullStoryWidgetFingerprint> = listOf(
-        FullStoryWidgetFingerprint("PlayerFullStoryWidget"),
-        FullStoryWidgetFingerprint("GeminiPlayerFullStoryWidget")
-    )
-) : BytecodePatch(fingerprints) {
-    override fun execute(context: BytecodeContext): PatchResult {
-        fingerprints.mapNotNull { item ->
+@Patch(
+    name = "Disable full story",
+    description = "禁用看一看按钮",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object FullStoryWidgetPatch : BytecodePatch(
+    setOf(PlayerFullStoryWidgetFingerprint, GeminiPlayerFullStoryWidgetFingerprint)
+) {
+    override fun execute(context: BytecodeContext) {
+        arrayOf(PlayerFullStoryWidgetFingerprint, GeminiPlayerFullStoryWidgetFingerprint).mapNotNull { item ->
             item.result?.mutableClass?.let { clazz ->
                 clazz.methods.find {
                     it.returnType == "Z" && it.parameters.size == 1 && it.parameters[0].type == clazz.type
@@ -52,6 +47,5 @@ class FullStoryWidgetPatch(
                  """.trimIndent()
             )
         }
-        return PatchResultSuccess()
     }
 }

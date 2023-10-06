@@ -1,23 +1,20 @@
 package app.revanced.patches.bilibili.misc.splash
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.ResourceContext
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultSuccess
 import app.revanced.patcher.patch.ResourcePatch
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
-import app.revanced.patches.youtube.layout.theme.bytecode.patch.ThemeBytecodePatch.Companion.darkThemeBackgroundColor
-import app.revanced.patches.youtube.layout.theme.bytecode.patch.ThemeBytecodePatch.Companion.lightThemeBackgroundColor
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
+import app.revanced.patches.youtube.layout.theme.ThemeBytecodePatch.darkThemeBackgroundColor
+import app.revanced.patches.youtube.layout.theme.ThemeBytecodePatch.lightThemeBackgroundColor
 import org.w3c.dom.Element
 
-@Patch
-@BiliBiliCompatibility
-@Name("splash")
-@Description("闪屏页背景色跟随深色模式")
-class SplashPatch : ResourcePatch {
-    override fun execute(context: ResourceContext): PatchResult {
+@Patch(
+    name = "Splash",
+    description = "闪屏页背景色跟随深色模式",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object SplashPatch : ResourcePatch() {
+    override fun execute(context: ResourceContext) {
         addResourceStyleItem(
             context, "res/values/styles.xml",
             STYLE_NAME_APP_THEME, STYLE_ITEM_NAME_SPLASH_BG, lightThemeBackgroundColor!!
@@ -55,7 +52,6 @@ class SplashPatch : ResourcePatch {
             ).item(0) as Element
             rootNode.setAttribute("android:background", "@color/$COLOR_NAME_BILIROAMING_BG_SPLASH")
         }
-        return PatchResultSuccess()
     }
 
     private fun addResourceStyleItem(
@@ -93,9 +89,7 @@ class SplashPatch : ResourcePatch {
             })
     }
 
-    companion object {
-        const val STYLE_NAME_APP_THEME = "AppTheme"
-        const val STYLE_ITEM_NAME_SPLASH_BG = "android:windowSplashScreenBackground"
-        const val COLOR_NAME_BILIROAMING_BG_SPLASH = "biliroaming_bg_splash"
-    }
+    private const val STYLE_NAME_APP_THEME = "AppTheme"
+    private const val STYLE_ITEM_NAME_SPLASH_BG = "android:windowSplashScreenBackground"
+    private const val COLOR_NAME_BILIROAMING_BG_SPLASH = "biliroaming_bg_splash"
 }

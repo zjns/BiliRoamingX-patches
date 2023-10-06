@@ -1,32 +1,29 @@
 package app.revanced.patches.bilibili.misc.settings.patch
 
-import app.revanced.extensions.toErrorResult
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
+import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethodParameter.Companion.toMutable
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
 import app.revanced.patches.bilibili.misc.settings.fingerprints.PreferenceManagerFingerprint
 import app.revanced.patches.bilibili.utils.cloneMutable
 import app.revanced.patches.bilibili.utils.methodParameter
-import org.jf.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.Opcode
 
 /**
  * TODO: better way to solve it?
  */
-@Patch
-@BiliBiliCompatibility
-@Name("fix-preference-manager")
-@Description("修复PreferenceManager被混淆后引起的问题")
-class FixPreferenceManagerPatch : BytecodePatch(listOf(PreferenceManagerFingerprint)) {
-    override fun execute(context: BytecodeContext): PatchResult {
+@Patch(
+    name = "Fix preference manager",
+    description = "修复PreferenceManager被混淆后引起的问题",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object FixPreferenceManagerPatch : BytecodePatch(setOf(PreferenceManagerFingerprint)) {
+    override fun execute(context: BytecodeContext) {
         val preferenceManagerDef = PreferenceManagerFingerprint.result?.classDef
-            ?: return PreferenceManagerFingerprint.toErrorResult()
+            ?: throw PreferenceManagerFingerprint.exception
 
         val checkBoxGroupPreferenceClass =
             context.findClass("Lapp/revanced/bilibili/widget/CheckBoxGroupPreference;")!!.mutableClass
@@ -176,6 +173,5 @@ class FixPreferenceManagerPatch : BytecodePatch(listOf(PreferenceManagerFingerpr
                 )
             }
         }
-        return PatchResultSuccess()
     }
 }

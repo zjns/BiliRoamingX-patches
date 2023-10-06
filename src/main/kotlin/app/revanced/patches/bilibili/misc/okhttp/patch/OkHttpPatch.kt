@@ -1,52 +1,49 @@
 package app.revanced.patches.bilibili.misc.okhttp.patch
 
-import app.revanced.extensions.toErrorResult
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
+import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.misc.okhttp.fingerprints.*
 import app.revanced.patches.bilibili.patcher.patch.MultiMethodBytecodePatch
 import app.revanced.patches.bilibili.utils.removeFinal
 import app.revanced.patches.bilibili.utils.toPublic
-import org.jf.dexlib2.AccessFlags
-import org.jf.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.Opcode
 
-@Patch
-@BiliBiliCompatibility
-@Name("okhttp")
-@Description("OkHttp网络请求响应Hook")
-class OkHttpPatch : MultiMethodBytecodePatch(
-    fingerprints = listOf(
+@Patch(
+    name = "OkHttp",
+    description = "OkHttp网络请求响应Hook",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object OkHttpPatch : MultiMethodBytecodePatch(
+    fingerprints = setOf(
         HttpUrlFingerprint,
         MediaTypeGetFingerprint,
         RequestFingerprint,
         ResponseBodyFingerprint,
         ResponseFingerprint,
     ),
-    multiFingerprints = listOf(BodyWrapperFingerprint)
+    multiFingerprints = setOf(BodyWrapperFingerprint)
 ) {
-    override fun execute(context: BytecodeContext): PatchResult {
+    override fun execute(context: BytecodeContext) {
         super.execute(context)
         val httpUrlClass = HttpUrlFingerprint.result?.classDef
-            ?: return HttpUrlFingerprint.toErrorResult()
+            ?: throw HttpUrlFingerprint.exception
         val requestClass = RequestFingerprint.result?.classDef
-            ?: return RequestFingerprint.toErrorResult()
+            ?: throw RequestFingerprint.exception
         val urlField = requestClass.fields.first { it.type == httpUrlClass.type }
         val responseClass = ResponseFingerprint.result?.mutableClass
-            ?: return ResponseFingerprint.toErrorResult()
+            ?: throw ResponseFingerprint.exception
         responseClass.fields.forEach { it.accessFlags = it.accessFlags.removeFinal() }
         val requestField = responseClass.fields.first { it.type == requestClass.type }
         val codeField = responseClass.fields.first { it.type == "I" }
         val responseBodyClass = ResponseBodyFingerprint.result?.classDef
-            ?: return ResponseBodyFingerprint.toErrorResult()
+            ?: throw ResponseBodyFingerprint.exception
         val responseBodyField = responseClass.fields.first { it.type == responseBodyClass.type }
         val mediaTypeGetMethod = MediaTypeGetFingerprint.result?.method
-            ?: return MediaTypeGetFingerprint.toErrorResult()
+            ?: throw MediaTypeGetFingerprint.exception
         val mediaTypeType = mediaTypeGetMethod.definingClass
         val createMethod = responseBodyClass.methods.first { m ->
             AccessFlags.STATIC.isSet(m.accessFlags) && m.parameterTypes.let { ts ->
@@ -100,6 +97,5 @@ class OkHttpPatch : MultiMethodBytecodePatch(
             """.trimIndent()
             )
         }
-        return PatchResultSuccess()
     }
 }

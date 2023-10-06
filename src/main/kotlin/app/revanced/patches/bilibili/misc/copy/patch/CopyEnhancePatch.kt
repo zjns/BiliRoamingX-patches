@@ -1,36 +1,33 @@
 package app.revanced.patches.bilibili.misc.copy.patch
 
-import app.revanced.extensions.toErrorResult
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
+import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.misc.copy.fingerprints.*
 import app.revanced.patches.bilibili.patcher.patch.MultiMethodBytecodePatch
 import app.revanced.patches.bilibili.utils.cloneMutable
-import app.revanced.patches.bilibili.utils.toErrorResult
+import app.revanced.patches.bilibili.utils.exception
 
-@Patch
-@BiliBiliCompatibility
-@Name("copy-enhance")
-@Description("自由复制补丁")
-class CopyEnhancePatch : MultiMethodBytecodePatch(
-    fingerprints = listOf(
+@Patch(
+    name = "Copy enhance",
+    description = "自由复制补丁",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object CopyEnhancePatch : MultiMethodBytecodePatch(
+    fingerprints = setOf(
         CommentCopyOldFingerprint,
         CommentCopyNewFingerprint,
         Comment3CopyFingerprint,
         ConversationCopyFingerprint
     ),
-    multiFingerprints = listOf(DescCopyFingerprint)
+    multiFingerprints = setOf(DescCopyFingerprint)
 ) {
-    override fun execute(context: BytecodeContext): PatchResult {
+    override fun execute(context: BytecodeContext) {
         super.execute(context)
         DescCopyFingerprint.result.ifEmpty {
-            return DescCopyFingerprint.toErrorResult()
+            throw DescCopyFingerprint.exception
         }.forEach {
             it.mutableMethod.addInstructionsWithLabels(
                 0, """
@@ -102,7 +99,6 @@ class CopyEnhancePatch : MultiMethodBytecodePatch(
             :jump
             nop
         """.trimIndent()
-        ) ?: return ConversationCopyFingerprint.toErrorResult()
-        return PatchResultSuccess()
+        ) ?: throw ConversationCopyFingerprint.exception
     }
 }

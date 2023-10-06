@@ -1,30 +1,27 @@
 package app.revanced.patches.bilibili.video.quality.patch
 
-import app.revanced.extensions.toErrorResult
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
+import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.patcher.patch.MultiMethodBytecodePatch
-import app.revanced.patches.bilibili.utils.toErrorResult
+import app.revanced.patches.bilibili.utils.exception
 import app.revanced.patches.bilibili.video.quality.fingerprints.PlayerQualityServiceFingerprint
 import app.revanced.patches.bilibili.video.quality.fingerprints.PlayerSettingHelperFingerprint
-import org.jf.dexlib2.iface.Method
+import com.android.tools.smali.dexlib2.iface.Method
 
-@Patch
-@Name("video-default-quality")
-@BiliBiliCompatibility
-@Description("视频默认画质设置")
-class VideoQualityPatch : MultiMethodBytecodePatch(
-    fingerprints = listOf(PlayerSettingHelperFingerprint),
-    multiFingerprints = listOf(PlayerQualityServiceFingerprint)
+@Patch(
+    name = "Video default quality",
+    description = "视频默认画质设置",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object VideoQualityPatch : MultiMethodBytecodePatch(
+    fingerprints = setOf(PlayerSettingHelperFingerprint),
+    multiFingerprints = setOf(PlayerQualityServiceFingerprint)
 ) {
-    override fun execute(context: BytecodeContext): PatchResult {
+    override fun execute(context: BytecodeContext) {
         super.execute(context)
         var defaultQnMethod: Method? = null
         PlayerSettingHelperFingerprint.result?.also {
@@ -38,9 +35,9 @@ class VideoQualityPatch : MultiMethodBytecodePatch(
             :jump
             nop
         """.trimIndent()
-        ) ?: return PlayerSettingHelperFingerprint.toErrorResult()
+        ) ?: throw PlayerSettingHelperFingerprint.exception
         PlayerQualityServiceFingerprint.result.ifEmpty {
-            return PlayerQualityServiceFingerprint.toErrorResult()
+            throw PlayerQualityServiceFingerprint.exception
         }.forEach {
             it.mutableMethod.addInstructionsWithLabels(
                 0, """
@@ -62,6 +59,5 @@ class VideoQualityPatch : MultiMethodBytecodePatch(
             """.trimIndent()
             )
         }
-        return PatchResultSuccess()
     }
 }

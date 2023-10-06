@@ -1,40 +1,41 @@
 package app.revanced.patches.bilibili.misc.drawer.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.replaceInstruction
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultError
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
-import app.revanced.patches.bilibili.misc.drawer.fingerprints.DrawerControlFingerprint
+import app.revanced.patcher.patch.PatchException
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
+import app.revanced.patches.bilibili.misc.drawer.fingerprints.CloseDrawerControlFingerprint
 import app.revanced.patches.bilibili.misc.drawer.fingerprints.DrawerIsOpenFingerprint
 import app.revanced.patches.bilibili.misc.drawer.fingerprints.DrawerLayoutParamsFingerprint
+import app.revanced.patches.bilibili.misc.drawer.fingerprints.OpenDrawerControlFingerprint
 import app.revanced.patches.bilibili.utils.cloneMutable
-import org.jf.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.AccessFlags
 
-@Patch
-@BiliBiliCompatibility
-@Name("drawer-patch")
-@Description("我的页面移至侧滑栏辅助补丁")
-class DrawerPatch(
-    private val openDrawer: MethodFingerprint = DrawerControlFingerprint(true),
-    private val closeDrawer: MethodFingerprint = DrawerControlFingerprint(false)
-) : BytecodePatch(listOf(openDrawer, closeDrawer, DrawerIsOpenFingerprint, DrawerLayoutParamsFingerprint)) {
-    override fun execute(context: BytecodeContext): PatchResult {
+@Patch(
+    name = "Drawer",
+    description = "我的页面移至侧滑栏辅助补丁",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object DrawerPatch : BytecodePatch(
+    setOf(
+        OpenDrawerControlFingerprint,
+        CloseDrawerControlFingerprint,
+        DrawerIsOpenFingerprint,
+        DrawerLayoutParamsFingerprint
+    )
+) {
+    override fun execute(context: BytecodeContext) {
         val drawerExClass = context.findClass("Lapp/revanced/bilibili/patches/drawer/DrawerLayoutEx;")
-        val openMethod = openDrawer.result?.method
-            ?: return PatchResultError("not found openDrawer method")
-        val closeMethod = closeDrawer.result?.method
-            ?: return PatchResultError("not found closeDrawer method")
+        val openMethod = OpenDrawerControlFingerprint.result?.method
+            ?: throw PatchException("not found openDrawer method")
+        val closeMethod = CloseDrawerControlFingerprint.result?.method
+            ?: throw PatchException("not found closeDrawer method")
         val isOpenMethod = DrawerIsOpenFingerprint.result?.method
-            ?: return PatchResultError("not found isDrawerOpen method")
+            ?: throw PatchException("not found isDrawerOpen method")
         drawerExClass!!.mutableClass.methods.run {
             first { it.name == "openDrawerEx" }.addInstruction(
                 0, "invoke-virtual {p0, p1, p2}, $openMethod"
@@ -57,7 +58,7 @@ class DrawerPatch(
             context.findClass("Lapp/revanced/bilibili/patches/drawer/DrawerLayoutEx\$LayoutParamsEx;")!!
         val gravityField = DrawerLayoutParamsFingerprint.result?.classDef?.fields?.first {
             it.type == "I" && it.accessFlags == AccessFlags.PUBLIC.value
-        } ?: return PatchResultError("not found gravity field")
+        } ?: throw PatchException("not found gravity field")
         layoutParamsExClass.mutableClass.setSuperClass(gravityField.definingClass)
         layoutParamsExClass.mutableClass.methods.run {
             first { it.name == "<init>" }.replaceInstruction(
@@ -81,7 +82,6 @@ class DrawerPatch(
                 invoke-static {p1}, Lapp/revanced/bilibili/patches/drawer/DrawerPatch;->onMainFrameFragmentViewCreated(Landroid/view/View;)V
                 """.trimIndent()
                 )
-            } ?: return PatchResultError("can not found BaseMainFrameFragment")
-        return PatchResultSuccess()
+            } ?: throw PatchException("can not found BaseMainFrameFragment")
     }
 }

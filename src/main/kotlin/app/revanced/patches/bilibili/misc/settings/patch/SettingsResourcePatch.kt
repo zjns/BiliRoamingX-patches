@@ -1,27 +1,23 @@
 package app.revanced.patches.bilibili.misc.settings.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
-import app.revanced.patcher.data.DomFileEditor
 import app.revanced.patcher.data.ResourceContext
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.DependsOn
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
-import app.revanced.patches.shared.mapping.misc.patch.ResourceMappingPatch
-import app.revanced.patches.shared.settings.resource.patch.AbstractSettingsResourcePatch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
+import app.revanced.patcher.util.DomFileEditor
+import app.revanced.patches.shared.mapping.misc.ResourceMappingPatch
+import app.revanced.patches.shared.settings.AbstractSettingsResourcePatch
 import app.revanced.util.resources.ResourceUtils
 import app.revanced.util.resources.ResourceUtils.copyResources
 import app.revanced.util.resources.ResourceUtils.mergeArrays
 import app.revanced.util.resources.ResourceUtils.mergeStrings
 
-@Patch
-@Name("settings-resource-patch")
-@BiliBiliCompatibility
-@DependsOn([ResourceMappingPatch::class])
-@Description("哔哩漫游设置入口")
-class SettingsResourcePatch : AbstractSettingsResourcePatch(
+@Patch(
+    name = "Settings resource patch",
+    description = "哔哩漫游设置入口",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")],
+    dependencies = [ResourceMappingPatch::class]
+)
+object SettingsResourcePatch : AbstractSettingsResourcePatch(
     "biliroaming_settings", "bilibili", false
 ) {
     private val extraPreferences = arrayOf(
@@ -62,7 +58,7 @@ class SettingsResourcePatch : AbstractSettingsResourcePatch(
         "biliroaming_dialog_color_choose.xml",
     )
 
-    override fun execute(context: ResourceContext): PatchResult {
+    override fun execute(context: ResourceContext) {
         super.execute(context)
         arrayOf(
             ResourceUtils.ResourceGroup("xml", *extraPreferences),
@@ -77,7 +73,6 @@ class SettingsResourcePatch : AbstractSettingsResourcePatch(
         context.xmlEditor["res/xml/main_preferences.xml"].use {
             it.addBiliRoamingEntrance()
         }
-        return PatchResultSuccess()
     }
 
     private fun DomFileEditor.addBiliRoamingEntrance() {

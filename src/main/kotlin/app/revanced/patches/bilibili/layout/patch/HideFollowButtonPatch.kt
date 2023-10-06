@@ -1,21 +1,18 @@
 package app.revanced.patches.bilibili.layout.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
 
-@Patch
-@BiliBiliCompatibility
-@Name("block-follow-button")
-@Description("不显示关注按钮")
-class BlockFollowButtonPatch : BytecodePatch() {
-    override fun execute(context: BytecodeContext): PatchResult {
+@Patch(
+    name = "Hide follow button",
+    description = "不显示关注按钮",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object HideFollowButtonPatch : BytecodePatch() {
+    override fun execute(context: BytecodeContext) {
         context.findClass("Lcom/bapis/bilibili/main/community/reply/v1/ReplyControl;")
             ?.mutableClass?.methods?.find { it.name == "getShowFollowBtn" }?.run {
                 addInstructions(
@@ -38,6 +35,5 @@ class BlockFollowButtonPatch : BytecodePatch() {
                 )
             }
         }
-        return PatchResultSuccess()
     }
 }

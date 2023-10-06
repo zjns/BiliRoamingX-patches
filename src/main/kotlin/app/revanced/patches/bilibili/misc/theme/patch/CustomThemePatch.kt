@@ -1,31 +1,28 @@
 package app.revanced.patches.bilibili.misc.theme.patch
 
-import app.revanced.extensions.toErrorResult
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
+import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.misc.theme.fingerprints.*
 import app.revanced.patches.bilibili.utils.cloneMutable
 import app.revanced.patches.bilibili.utils.removeFinal
 import app.revanced.patches.bilibili.utils.toPublic
-import org.jf.dexlib2.AccessFlags
-import org.jf.dexlib2.Opcode
-import org.jf.dexlib2.iface.instruction.formats.Instruction35c
-import org.jf.dexlib2.iface.reference.MethodReference
+import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
+import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
-@Patch
-@BiliBiliCompatibility
-@Name("custom-theme")
-@Description("自定义主题色")
-class CustomThemePatch : BytecodePatch(
-    listOf(
+@Patch(
+    name = "Custom theme color",
+    description = "自定义主题色",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object CustomThemePatch : BytecodePatch(
+    setOf(
         BuiltInThemesFingerprint,
         SkinListFingerprint,
         ThemeClickFingerprint,
@@ -36,7 +33,7 @@ class CustomThemePatch : BytecodePatch(
         WebActivityBuildUriFingerprint
     )
 ) {
-    override fun execute(context: BytecodeContext): PatchResult {
+    override fun execute(context: BytecodeContext) {
         val patchClass = context.findClass("Lapp/revanced/bilibili/patches/CustomThemePatch;")!!.mutableClass
 
         ThemeNameFingerprint.result?.mutableClass?.fields?.first {
@@ -55,7 +52,7 @@ class CustomThemePatch : BytecodePatch(
                     )
                 }.also { add(it) }
             }
-        } ?: return ThemeNameFingerprint.toErrorResult()
+        } ?: throw ThemeNameFingerprint.exception
 
         ThemeHelperFingerprint.result?.let { r ->
             r.mutableClass.fields.first { it.name == r.method.name }
@@ -73,7 +70,7 @@ class CustomThemePatch : BytecodePatch(
                     )
                 }.also { add(it) }
             }
-        } ?: return ThemeHelperFingerprint.toErrorResult()
+        } ?: throw ThemeHelperFingerprint.exception
 
         BuiltInThemesFingerprint.result?.mutableClass?.fields?.first {
             it.type == "Ljava/util/Map;"
@@ -91,7 +88,7 @@ class CustomThemePatch : BytecodePatch(
                     )
                 }.also { add(it) }
             }
-        } ?: return BuiltInThemesFingerprint.toErrorResult()
+        } ?: throw BuiltInThemesFingerprint.exception
 
         ThemeColorsFingerprint.result?.mutableClass?.methods?.first {
             it.name == "<init>" && AccessFlags.PRIVATE.isSet(it.accessFlags)
@@ -121,14 +118,14 @@ class CustomThemePatch : BytecodePatch(
                     )
                 }.also { add(it) }
             }
-        } ?: return ThemeColorsFingerprint.toErrorResult()
+        } ?: throw ThemeColorsFingerprint.exception
 
         val onSetSkinListMethod = patchClass.methods.first { it.name == "onSetSkinList" }
         SkinListFingerprint.result?.mutableMethod?.addInstructions(
             0, """
             invoke-static {p1}, $onSetSkinListMethod
         """.trimIndent()
-        ) ?: return SkinListFingerprint.toErrorResult()
+        ) ?: throw SkinListFingerprint.exception
 
         val onClickOriginListenerType = "Lapp/revanced/bilibili/widget/OnClickOriginListener;"
         val onThemeClickMethod = patchClass.methods.first { it.name == "onThemeClick" }
@@ -146,7 +143,7 @@ class CustomThemePatch : BytecodePatch(
                 nop
             """.trimIndent()
             )
-        } ?: return ThemeClickFingerprint.toErrorResult()
+        } ?: throw ThemeClickFingerprint.exception
 
         val onThemeResetMethod = patchClass.methods.first { it.name == "onThemeReset" }
         ThemeProcessorFingerprint.result?.mutableClass?.methods?.filter { m ->
@@ -162,7 +159,7 @@ class CustomThemePatch : BytecodePatch(
                 nop
             """.trimIndent()
             )
-        } ?: return ThemeProcessorFingerprint.toErrorResult()
+        } ?: throw ThemeProcessorFingerprint.exception
 
         WebActivityBuildUriFingerprint.result?.method?.implementation?.instructions?.firstNotNullOfOrNull { inst ->
             if (inst.opcode == Opcode.INVOKE_STATIC && inst is Instruction35c) {
@@ -186,7 +183,6 @@ class CustomThemePatch : BytecodePatch(
                     )
                 }.also { add(it) }
             }
-        } ?: return WebActivityBuildUriFingerprint.toErrorResult()
-        return PatchResultSuccess()
+        } ?: throw WebActivityBuildUriFingerprint.exception
     }
 }

@@ -1,9 +1,9 @@
 package app.revanced.patches.bilibili.misc.drawer.fingerprints
 
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
-import org.jf.dexlib2.iface.instruction.formats.Instruction11n
+import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction11n
 
-class DrawerControlFingerprint(open: Boolean) : MethodFingerprint(
+open class DrawerControlFingerprint(open: Boolean) : MethodFingerprint(
     returnType = "V",
     strings = listOf("is not a sliding drawer"),
     parameters = listOf("Landroid/view/View;", "Z"),
@@ -15,3 +15,6 @@ class DrawerControlFingerprint(open: Boolean) : MethodFingerprint(
         } ?: false
     }
 )
+
+object OpenDrawerControlFingerprint : DrawerControlFingerprint(true)
+object CloseDrawerControlFingerprint : DrawerControlFingerprint(false)

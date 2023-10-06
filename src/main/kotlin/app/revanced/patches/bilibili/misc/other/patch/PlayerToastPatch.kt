@@ -1,23 +1,20 @@
 package app.revanced.patches.bilibili.misc.other.patch
 
-import app.revanced.extensions.toErrorResult
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
+import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.misc.other.fingerprints.ShowPlayerToastFingerprint
 
-@Patch
-@BiliBiliCompatibility
-@Name("player-toast")
-@Description("播放器特定样式toast显示拦截")
-class PlayerToastPatch : BytecodePatch(listOf(ShowPlayerToastFingerprint)) {
-    override fun execute(context: BytecodeContext): PatchResult {
+@Patch(
+    name = "Player toast",
+    description = "播放器特定样式toast显示拦截",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object PlayerToastPatch : BytecodePatch(setOf(ShowPlayerToastFingerprint)) {
+    override fun execute(context: BytecodeContext) {
         ShowPlayerToastFingerprint.result?.mutableMethod?.addInstructionsWithLabels(
             0, """
                 invoke-static {p1}, Lapp/revanced/bilibili/patches/PlayerToastPatch;->onShow(Ltv/danmaku/biliplayerv2/widget/toast/PlayerToast;)Z
@@ -27,7 +24,6 @@ class PlayerToastPatch : BytecodePatch(listOf(ShowPlayerToastFingerprint)) {
                 :jump
                 nop
             """.trimIndent()
-        ) ?: return ShowPlayerToastFingerprint.toErrorResult()
-        return PatchResultSuccess()
+        ) ?: throw ShowPlayerToastFingerprint.exception
     }
 }

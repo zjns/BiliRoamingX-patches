@@ -1,41 +1,38 @@
 package app.revanced.patches.bilibili.misc.other.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultError
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.PatchException
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
 import app.revanced.patches.bilibili.misc.other.fingerprints.BangumiSearchResultFingerprint
 import app.revanced.patches.bilibili.misc.other.fingerprints.OgvSearchResultFingerprint
 import app.revanced.patches.bilibili.misc.other.fingerprints.OgvSearchResultV2Fingerprint
 import app.revanced.patches.bilibili.utils.*
-import org.jf.dexlib2.AccessFlags
-import org.jf.dexlib2.Opcode
-import org.jf.dexlib2.builder.instruction.BuilderInstruction22c
-import org.jf.dexlib2.iface.reference.FieldReference
+import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction22c
+import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 
-@Patch
-@BiliBiliCompatibility
-@Name("append-extra-search-type")
-@Description("附加更多搜索类型补丁")
-class AppendExtraSearchTypePatch : BytecodePatch(
-    listOf(
+@Patch(
+    name = "Search type",
+    description = "附加更多搜索类型补丁",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object AppendExtraSearchTypePatch : BytecodePatch(
+    setOf(
         OgvSearchResultFingerprint,
         OgvSearchResultV2Fingerprint,
         BangumiSearchResultFingerprint
     )
 ) {
-    override fun execute(context: BytecodeContext): PatchResult {
+    override fun execute(context: BytecodeContext) {
         val pagerTypesClass =
             context.findClass("Lcom/bilibili/search/result/pages/BiliMainSearchResultPage\$PageTypes;")
-                ?: return PatchResultError("not found pager type class")
+                ?: throw PatchException("not found pager type class")
         pagerTypesClass.mutableClass.run {
             methods.first { it.name == "<init>" && it.parameterTypes.size == 5 }.run {
                 accessFlags = accessFlags.toPublic()
@@ -59,7 +56,7 @@ class AppendExtraSearchTypePatch : BytecodePatch(
             OgvSearchResultFingerprint.result,
             OgvSearchResultV2Fingerprint.result,
             BangumiSearchResultFingerprint.result
-        ).filterNotNull().ifEmpty { return PatchResultError("not found search result fragment") }
+        ).filterNotNull().ifEmpty { throw PatchException("not found search result fragment") }
             .forEach { r ->
                 val typeFiled = r.mutableMethod.run {
                     implementation!!.instructions.firstNotNullOf {
@@ -103,6 +100,5 @@ class AppendExtraSearchTypePatch : BytecodePatch(
                 """.trimIndent()
                 )
             }
-        return PatchResultSuccess()
     }
 }

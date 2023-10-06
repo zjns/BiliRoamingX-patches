@@ -1,30 +1,27 @@
 package app.revanced.patches.bilibili.misc.darkswitch.patch
 
-import app.revanced.extensions.toErrorResult
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
+import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultError
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
+import app.revanced.patcher.patch.PatchException
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.misc.darkswitch.fingerprints.SwitchDarkModeFingerprint
 import app.revanced.patches.bilibili.utils.cloneMutable
 import app.revanced.patches.bilibili.utils.toPublic
-import org.jf.dexlib2.Opcode
-import org.jf.dexlib2.iface.Method
-import org.jf.dexlib2.iface.instruction.formats.Instruction35c
-import org.jf.dexlib2.iface.reference.MethodReference
+import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.iface.Method
+import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
+import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
-@Patch
-@BiliBiliCompatibility
-@Name("dark-switch")
-@Description("我的页面深色模式切换弹框确认")
-class DarkSwitchPatch : BytecodePatch(listOf(SwitchDarkModeFingerprint)) {
-    override fun execute(context: BytecodeContext): PatchResult {
+@Patch(
+    name = "Dark switch",
+    description = "我的页面深色模式切换弹框确认",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object DarkSwitchPatch : BytecodePatch(setOf(SwitchDarkModeFingerprint)) {
+    override fun execute(context: BytecodeContext) {
         fun Method.findIsNightFollowSystemMethod(): MethodReference? {
             return implementation!!.instructions.firstNotNullOfOrNull { inst ->
                 if (inst.opcode == Opcode.INVOKE_STATIC && inst is Instruction35c) {
@@ -39,7 +36,7 @@ class DarkSwitchPatch : BytecodePatch(listOf(SwitchDarkModeFingerprint)) {
         val utilsIsNightFollowSystemMethod = utilsClass.methods.first { it.name == "isNightFollowSystem" }
         val utilsGetContextMethod = utilsClass.methods.first { it.name == "getContext" }
         val isNightFollowSystemMethod = SwitchDarkModeFingerprint.result?.method?.findIsNightFollowSystemMethod()
-            ?: return PatchResultError("not found isNightFollowSystem method")
+            ?: throw PatchException("not found isNightFollowSystem method")
         SwitchDarkModeFingerprint.result?.run {
             mutableMethod.cloneMutable(registerCount = 2, clearImplementation = true).apply {
                 addInstructions(
@@ -53,7 +50,7 @@ class DarkSwitchPatch : BytecodePatch(listOf(SwitchDarkModeFingerprint)) {
                 mutableMethod.accessFlags = mutableMethod.accessFlags.toPublic()
                 mutableClass.methods.add(it)
             }
-        } ?: return SwitchDarkModeFingerprint.toErrorResult()
+        } ?: throw SwitchDarkModeFingerprint.exception
         utilsIsNightFollowSystemMethod.also { utilsClass.methods.remove(it) }.cloneMutable(
             registerCount = 1, clearImplementation = true
         ).apply {
@@ -67,6 +64,5 @@ class DarkSwitchPatch : BytecodePatch(listOf(SwitchDarkModeFingerprint)) {
             """.trimIndent()
             )
         }.also { utilsClass.methods.add(it) }
-        return PatchResultSuccess()
     }
 }

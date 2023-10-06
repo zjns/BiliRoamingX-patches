@@ -1,28 +1,25 @@
 package app.revanced.patches.bilibili.video.player.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.patcher.patch.MultiMethodBytecodePatch
-import app.revanced.patches.bilibili.utils.toErrorResult
+import app.revanced.patches.bilibili.utils.exception
 import app.revanced.patches.bilibili.video.player.fingerprints.TripleSpeedServiceFingerprint
-import org.jf.dexlib2.Opcode
-import org.jf.dexlib2.iface.instruction.formats.Instruction35c
-import org.jf.dexlib2.iface.reference.MethodReference
+import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
+import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
-@Patch
-@BiliBiliCompatibility
-@Name("long-press-playback-speed")
-@Description("自定义播放器长按播放速度")
-class LongPressPlaybackSpeedPatch : MultiMethodBytecodePatch(
-    multiFingerprints = listOf(TripleSpeedServiceFingerprint)
+@Patch(
+    name = "Long press playback speed",
+    description = "自定义播放器长按播放速度",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object LongPressPlaybackSpeedPatch : MultiMethodBytecodePatch(
+    multiFingerprints = setOf(TripleSpeedServiceFingerprint)
 ) {
-    override fun execute(context: BytecodeContext): PatchResult {
+    override fun execute(context: BytecodeContext) {
         super.execute(context)
         TripleSpeedServiceFingerprint.result.mapNotNull { r ->
             r.method.implementation!!.instructions.firstNotNullOfOrNull { inst ->
@@ -33,7 +30,7 @@ class LongPressPlaybackSpeedPatch : MultiMethodBytecodePatch(
                 } else null
             }?.let { r.mutableClass.methods.first { m -> m == it } }
         }.ifEmpty {
-            return TripleSpeedServiceFingerprint.toErrorResult()
+            throw TripleSpeedServiceFingerprint.exception
         }.forEach {
             it.addInstructions(
                 0, """
@@ -42,6 +39,5 @@ class LongPressPlaybackSpeedPatch : MultiMethodBytecodePatch(
             """.trimIndent()
             )
         }
-        return PatchResultSuccess()
     }
 }

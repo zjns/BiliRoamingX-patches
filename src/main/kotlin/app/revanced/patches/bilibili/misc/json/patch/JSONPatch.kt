@@ -1,26 +1,23 @@
 package app.revanced.patches.bilibili.misc.json.patch
 
-import app.revanced.extensions.toErrorResult
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
+import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.misc.json.fingerprints.JSONFingerprint
-import org.jf.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.Opcode
 
-@Patch
-@BiliBiliCompatibility
-@Name("json-patch")
-@Description("通用阿里Fastjson反序列化数据修改")
-class JSONPatch : BytecodePatch(listOf(JSONFingerprint)) {
-    override fun execute(context: BytecodeContext): PatchResult {
+@Patch(
+    name = "Json",
+    description = "通用阿里Fastjson反序列化数据修改",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object JSONPatch : BytecodePatch(setOf(JSONFingerprint)) {
+    override fun execute(context: BytecodeContext) {
         val clazz = JSONFingerprint.result?.mutableClass
-            ?: return JSONFingerprint.toErrorResult()
+            ?: throw JSONFingerprint.exception
         val parseObject = if (clazz.type.endsWith("/JSON;")) "parseObject" else "a"
         clazz.methods.find { m ->
             m.name == parseObject && m.parameterTypes.let {
@@ -70,6 +67,5 @@ class JSONPatch : BytecodePatch(listOf(JSONFingerprint)) {
             """.trimIndent()
             )
         }
-        return PatchResultSuccess()
     }
 }

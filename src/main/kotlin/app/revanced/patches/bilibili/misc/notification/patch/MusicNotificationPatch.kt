@@ -1,47 +1,44 @@
 package app.revanced.patches.bilibili.misc.notification.patch
 
+import app.revanced.extensions.exception
 import app.revanced.extensions.findMutableMethodOf
-import app.revanced.extensions.toErrorResult
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultError
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.PatchException
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.util.proxy.mutableTypes.MutableClass
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
 import app.revanced.patches.bilibili.misc.notification.fingerprints.HeadsetMediaSessionCallbackFingerprint
 import app.revanced.patches.bilibili.misc.notification.fingerprints.LiveNotificationHelperFingerprint
 import app.revanced.patches.bilibili.misc.notification.fingerprints.MediaSessionCallbackApi21Fingerprint
 import app.revanced.patches.bilibili.misc.notification.fingerprints.NotificationStyleAbFingerprint
 import app.revanced.patches.bilibili.utils.*
-import org.jf.dexlib2.AccessFlags
-import org.jf.dexlib2.AnnotationVisibility
-import org.jf.dexlib2.Opcode
-import org.jf.dexlib2.iface.instruction.formats.Instruction22c
-import org.jf.dexlib2.iface.instruction.formats.Instruction35c
-import org.jf.dexlib2.iface.reference.FieldReference
-import org.jf.dexlib2.iface.reference.MethodReference
+import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.AnnotationVisibility
+import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction22c
+import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
+import com.android.tools.smali.dexlib2.iface.reference.FieldReference
+import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
-@Patch
-@BiliBiliCompatibility
-@Name("music-notification")
-@Description("原生音乐通知样式")
-class MusicNotificationPatch : BytecodePatch(
-    fingerprints = listOf(
+@Patch(
+    name = "Music notification",
+    description = "原生音乐通知样式",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object MusicNotificationPatch : BytecodePatch(
+    fingerprints = setOf(
         LiveNotificationHelperFingerprint,
         NotificationStyleAbFingerprint,
         MediaSessionCallbackApi21Fingerprint,
         HeadsetMediaSessionCallbackFingerprint,
     )
 ) {
-    override fun execute(context: BytecodeContext): PatchResult {
+    override fun execute(context: BytecodeContext) {
         val patchClass = context.findClass("Lapp/revanced/bilibili/patches/MusicNotificationPatch;")!!.mutableClass
 
         NotificationStyleAbFingerprint.result?.mutableMethod?.addInstructionsWithLabels(
@@ -54,12 +51,12 @@ class MusicNotificationPatch : BytecodePatch(
             :jump
             nop
         """.trimIndent()
-        ) ?: return NotificationStyleAbFingerprint.toErrorResult()
+        ) ?: throw NotificationStyleAbFingerprint.exception
 
         val onCreateNotificationMethod = patchClass.methods.first { it.name == "onCreateNotification" }
         arrayOf(
             LiveNotificationHelperFingerprint.result?.mutableClass
-                ?: return LiveNotificationHelperFingerprint.toErrorResult(),
+                ?: throw LiveNotificationHelperFingerprint.exception,
         ).forEach { clazz ->
             clazz.methods.filter {
                 !AccessFlags.STATIC.isSet(it.accessFlags) && it.returnType == "Landroid/app/Notification;"
@@ -84,10 +81,10 @@ class MusicNotificationPatch : BytecodePatch(
         }
 
         val playbackStateClass = context.findClass("Landroid/support/v4/media/session/PlaybackStateCompat;")
-            ?.mutableClass ?: return PatchResultError("not found PlaybackStateCompat class")
+            ?.mutableClass ?: throw PatchException("not found PlaybackStateCompat class")
         val customActionClass =
             context.findClass("Landroid/support/v4/media/session/PlaybackStateCompat\$CustomAction;")
-                ?.mutableClass ?: return PatchResultError("not found CustomAction class")
+                ?.mutableClass ?: throw PatchException("not found CustomAction class")
         customActionClass.methods.first {
             it.name == "<init>" && it.parameterTypes.size == 4
         }.run { accessFlags = accessFlags.toPublic() }
@@ -151,7 +148,7 @@ class MusicNotificationPatch : BytecodePatch(
         }
 
         val (builderClass, buildMethod) = context.findBuildPlaybackStateMethod()
-            ?: return PatchResultError("not found buildPlaybackState method")
+            ?: throw PatchException("not found buildPlaybackState method")
         val onBuildPlaybackStateMethod = patchClass.methods.first { it.name == "onBuildPlaybackState" }
         buildMethod.cloneMutable(registerCount = 2, clearImplementation = true).apply {
             buildMethod.name += "_Origin"
@@ -169,9 +166,9 @@ class MusicNotificationPatch : BytecodePatch(
         }
 
         val headsetMediaSessionCallbackClass = HeadsetMediaSessionCallbackFingerprint.result?.mutableClass
-            ?: return HeadsetMediaSessionCallbackFingerprint.toErrorResult()
+            ?: throw HeadsetMediaSessionCallbackFingerprint.exception
         val result = MediaSessionCallbackApi21Fingerprint.result
-            ?: return MediaSessionCallbackApi21Fingerprint.toErrorResult()
+            ?: throw MediaSessionCallbackApi21Fingerprint.exception
         val mediaSessionCallbackApi21Class = result.classDef
         val onCustomActionMethodRef = result.method.implementation!!.instructions
             .last { it.opcode == Opcode.INVOKE_VIRTUAL }
@@ -212,7 +209,6 @@ class MusicNotificationPatch : BytecodePatch(
         }.also {
             headsetMediaSessionCallbackClass.methods.add(it)
         }
-        return PatchResultSuccess()
     }
 
     private fun BytecodeContext.findBuildPlaybackStateMethod(): Pair<MutableClass, MutableMethod>? {

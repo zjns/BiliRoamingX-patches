@@ -1,24 +1,21 @@
 package app.revanced.patches.bilibili.misc.integrations.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultError
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
-import org.jf.dexlib2.Opcode
+import app.revanced.patcher.patch.PatchException
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
+import com.android.tools.smali.dexlib2.Opcode
 
-@Patch
-@BiliBiliCompatibility
-@Name("main-activity-patch")
-@Description("代理部分MainActivity方法补丁")
-class MainActivityPatch : BytecodePatch() {
-    override fun execute(context: BytecodeContext): PatchResult {
+@Patch(
+    name = "Main activity patch",
+    description = "代理部分MainActivity方法补丁",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object MainActivityPatch : BytecodePatch() {
+    override fun execute(context: BytecodeContext) {
         context.findClass("Ltv/danmaku/bili/MainActivityV2;")?.mutableClass?.run {
             methods.find { it.name == "onCreate" }?.run {
                 addInstruction(
@@ -65,7 +62,6 @@ class MainActivityPatch : BytecodePatch() {
                 nop
                 """.trimIndent()
             )
-        } ?: return PatchResultError("main activity patch failed")
-        return PatchResultSuccess()
+        } ?: throw PatchException("main activity patch failed")
     }
 }

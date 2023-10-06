@@ -1,7 +1,7 @@
 package app.revanced.patches.bilibili.misc.drawer.fingerprints
 
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
-import org.jf.dexlib2.iface.instruction.formats.Instruction11n
+import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction11n
 
 object DrawerIsOpenFingerprint : MethodFingerprint(
     returnType = "Z",

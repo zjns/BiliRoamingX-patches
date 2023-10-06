@@ -1,26 +1,23 @@
 package app.revanced.patches.bilibili.misc.protobuf.patch
 
-import app.revanced.extensions.toErrorResult
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
+import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.extensions.InstructionExtensions.removeInstructions
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.misc.protobuf.fingerprints.MossServiceFingerprint
-import org.jf.dexlib2.Opcode
-import org.jf.dexlib2.iface.instruction.formats.Instruction35c
+import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 
-@Patch
-@BiliBiliCompatibility
-@Name("moss-patch")
-@Description("gRPC 通信引擎服务 hook")
-class MossPatch : BytecodePatch(listOf(MossServiceFingerprint)) {
-    override fun execute(context: BytecodeContext): PatchResult {
+@Patch(
+    name = "Moss",
+    description = "gRPC 通信引擎服务 hook",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object MossPatch : BytecodePatch(setOf(MossServiceFingerprint)) {
+    override fun execute(context: BytecodeContext) {
         MossServiceFingerprint.result?.mutableClass?.methods?.let { methods ->
             methods.find { it.name == "blockingUnaryCall" }?.run {
                 val implementation = implementation ?: return@run
@@ -102,7 +99,6 @@ class MossPatch : BytecodePatch(listOf(MossServiceFingerprint)) {
                 """.trimIndent()
                 )
             }
-        } ?: return MossServiceFingerprint.toErrorResult()
-        return PatchResultSuccess()
+        } ?: throw MossServiceFingerprint.exception
     }
 }

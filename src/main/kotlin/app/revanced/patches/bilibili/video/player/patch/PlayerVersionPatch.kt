@@ -1,25 +1,22 @@
 package app.revanced.patches.bilibili.video.player.patch
 
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.BytecodePatch
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultSuccess
-import app.revanced.patcher.patch.annotations.Patch
+import app.revanced.patcher.patch.annotation.CompatiblePackage
+import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
-import app.revanced.patches.bilibili.annotations.BiliBiliCompatibility
 import app.revanced.patches.bilibili.utils.cloneMutable
 import app.revanced.patches.bilibili.video.player.fingerprints.FFUniteDetailAbFingerprint
 
-@Patch
-@BiliBiliCompatibility
-@Name("player-version")
-@Description("播放器版本")
-class PlayerVersionPatch : BytecodePatch(listOf(FFUniteDetailAbFingerprint)) {
-    override fun execute(context: BytecodeContext): PatchResult {
+@Patch(
+    name = "Player version",
+    description = "播放器版本",
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+)
+object PlayerVersionPatch : BytecodePatch(setOf(FFUniteDetailAbFingerprint)) {
+    override fun execute(context: BytecodeContext) {
         fun MutableMethod.patch() = addInstructionsWithLabels(
             0, """
             invoke-static {}, Lapp/revanced/bilibili/patches/PlayerVersionPatch;->playerVersion()I
@@ -58,6 +55,5 @@ class PlayerVersionPatch : BytecodePatch(listOf(FFUniteDetailAbFingerprint)) {
                 )
             }.also { mutableClass.methods.add(it) }
         }
-        return PatchResultSuccess()
     }
 }
