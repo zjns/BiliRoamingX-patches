@@ -1,23 +1,25 @@
 package app.revanced.util.resources
 
-import app.revanced.patcher.data.DomFileEditor
 import app.revanced.patcher.data.ResourceContext
+import app.revanced.patcher.util.DomFileEditor
 import app.revanced.patches.shared.settings.preference.impl.ArrayItem
 import app.revanced.patches.shared.settings.preference.impl.PureArrayResource
 import app.revanced.patches.shared.settings.preference.impl.StringResource
-import app.revanced.patches.youtube.misc.settings.bytecode.patch.SettingsPatch
+import app.revanced.patches.youtube.misc.settings.SettingsPatch
 import org.w3c.dom.Element
 import org.w3c.dom.Node
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
 
-internal object ResourceUtils {
+@Suppress("MemberVisibilityCanBePrivate")
+object ResourceUtils {
 
     /**
      * Merge strings. This manages [StringResource]s automatically.
+     *
      * @param host The hosting xml resource. Needs to be a valid strings.xml resource.
      */
-    internal fun ResourceContext.mergeStrings(host: String) {
+    fun ResourceContext.mergeStrings(host: String) {
         this.iterateXmlNodeChildren(host, "resources") {
             // TODO: figure out why this is needed
             if (!it.hasAttributes()) return@iterateXmlNodeChildren
@@ -32,7 +34,7 @@ internal object ResourceUtils {
         }
     }
 
-    internal fun ResourceContext.mergeArrays(host: String) {
+    fun ResourceContext.mergeArrays(host: String) {
         this.iterateXmlNodeChildren(host, "resources") {
             if (!it.hasAttributes()) return@iterateXmlNodeChildren
 
@@ -53,10 +55,11 @@ internal object ResourceUtils {
 
     /**
      * Copy resources from the current class loader to the resource directory.
+     *
      * @param sourceResourceDirectory The source resource directory name.
      * @param resources The resources to copy.
      */
-    internal fun ResourceContext.copyResources(sourceResourceDirectory: String, vararg resources: ResourceGroup) {
+    fun ResourceContext.copyResources(sourceResourceDirectory: String, vararg resources: ResourceGroup) {
         val classLoader = ResourceUtils.javaClass.classLoader
         val targetResourceDirectory = this["res"]
 
@@ -76,7 +79,7 @@ internal object ResourceUtils {
      * @param resourceDirectoryName The name of the directory of the resource.
      * @param resources A list of resource names.
      */
-    internal class ResourceGroup(val resourceDirectoryName: String, vararg val resources: String)
+    class ResourceGroup(val resourceDirectoryName: String, vararg val resources: String)
 
     /**
      * Iterate through the children of a node by its tag.
@@ -84,7 +87,7 @@ internal object ResourceUtils {
      * @param targetTag The target xml node.
      * @param callback The callback to call when iterating over the nodes.
      */
-    internal fun ResourceContext.iterateXmlNodeChildren(
+    fun ResourceContext.iterateXmlNodeChildren(
         resource: String,
         targetTag: String,
         callback: (node: Node) -> Unit

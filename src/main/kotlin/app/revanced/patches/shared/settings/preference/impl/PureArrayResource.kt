@@ -11,7 +11,7 @@ class ArrayItem(val value: String)
  *  @param name The name of the array resource.
  *  @param items The items of the array resource.
  */
-internal class PureArrayResource(
+class PureArrayResource(
     name: String,
     val items: List<ArrayItem>,
 ) : BaseResource(name, "string-array") {

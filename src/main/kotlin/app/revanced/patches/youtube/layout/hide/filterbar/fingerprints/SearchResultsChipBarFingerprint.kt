@@ -1,10 +1,10 @@
 package app.revanced.patches.youtube.layout.hide.filterbar.fingerprints
 
 import app.revanced.patcher.extensions.or
-import app.revanced.patches.youtube.layout.hide.filterbar.patch.HideFilterBarResourcePatch
+import app.revanced.patches.youtube.layout.hide.filterbar.HideFilterBarResourcePatch
 import app.revanced.util.patch.LiteralValueFingerprint
-import org.jf.dexlib2.AccessFlags
-import org.jf.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.Opcode
 
 object SearchResultsChipBarFingerprint : LiteralValueFingerprint(
     returnType = "V",
@@ -16,5 +16,5 @@ object SearchResultsChipBarFingerprint : LiteralValueFingerprint(
         Opcode.INVOKE_VIRTUAL,
         Opcode.MOVE_RESULT_OBJECT
     ),
-    literal = HideFilterBarResourcePatch.barContainerHeightId
+    literalSupplier = { HideFilterBarResourcePatch.barContainerHeightId }
 )

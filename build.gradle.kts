@@ -1,20 +1,19 @@
 plugins {
     kotlin("jvm") version "1.8.20"
+    alias(libs.plugins.ksp)
 }
 
 group = "app.revanced"
 
-val githubUsername: String = project.findProperty("gpr.user") as? String ?: System.getenv("GITHUB_ACTOR")
-val githubPassword: String = project.findProperty("gpr.key") as? String ?: System.getenv("GITHUB_TOKEN")
-
 repositories {
     mavenCentral()
     mavenLocal()
+    google()
     maven {
         url = uri("https://maven.pkg.github.com/revanced/revanced-patcher")
         credentials {
-            username = githubUsername
-            password = githubPassword
+            username = project.findProperty("gpr.user") as? String ?: System.getenv("GITHUB_ACTOR")
+            password = project.findProperty("gpr.key") as? String ?: System.getenv("GITHUB_TOKEN")
         }
     }
     // Required for FlexVer-Java
@@ -27,16 +26,17 @@ repositories {
 }
 
 dependencies {
-    implementation("app.revanced:revanced-patcher:11.0.3")
-    implementation("app.revanced:multidexlib2:2.5.3-a3836654")
-    // Required for meta
-    implementation("com.google.code.gson:gson:2.10.1")
-    // Required for FlexVer-Java
-    implementation("com.unascribed:flexver-java:1.0.2")
-
-    // A dependency to the Android library unfortunately fails the build,
-    // which is why this is required for the patch change-oauth-client-id
+    implementation(libs.revanced.patcher)
+    implementation(libs.smali)
+    implementation(libs.revanced.patch.annotation.processor)
+    // TODO: Required because build fails without it. Find a way to remove this dependency.
+    implementation(libs.guava)
+    // Used in JsonGenerator.
+    implementation(libs.gson)
+    // A dependency to the Android library unfortunately fails the build, which is why this is required.
     compileOnly(project("dummy"))
+
+    ksp(libs.revanced.patch.annotation.processor)
 }
 
 kotlin {
@@ -52,7 +52,7 @@ tasks {
             val androidHome = System.getenv("ANDROID_HOME") ?: throw GradleException("ANDROID_HOME not found")
             val d8 = "${androidHome}/build-tools/33.0.1/d8"
             val input = configurations.archives.get().allArtifacts.files.files.first().absolutePath
-            val work = File("${buildDir}/libs")
+            val work = layout.buildDirectory.dir("libs").get().asFile
 
             exec {
                 workingDir = work
@@ -65,6 +65,7 @@ tasks {
             }
         }
     }
+
     register<JavaExec>("generateMeta") {
         description = "Generate metadata for this bundle"
         dependsOn(build)
@@ -72,6 +73,7 @@ tasks {
         classpath = sourceSets["main"].runtimeClasspath
         mainClass.set("app.revanced.meta.PatchesFileGenerator")
     }
+
     // Dummy task to fix the Gradle semantic-release plugin.
     // Remove this if you forked it to support building only.
     // Tracking issue: https://github.com/KengoTODA/gradle-semantic-release-plugin/issues/435

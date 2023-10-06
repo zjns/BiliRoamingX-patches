@@ -1,26 +1,26 @@
 package app.revanced.extensions
 
+import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
-import app.revanced.patcher.extensions.MethodFingerprintExtensions.name
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
-import app.revanced.patcher.patch.PatchResultError
+import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.util.proxy.mutableTypes.MutableClass
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
-import app.revanced.patches.shared.mapping.misc.patch.ResourceMappingPatch
-import org.jf.dexlib2.Opcode
-import org.jf.dexlib2.iface.Method
-import org.jf.dexlib2.iface.instruction.WideLiteralInstruction
-import org.jf.dexlib2.iface.reference.MethodReference
-import org.jf.dexlib2.util.MethodUtil
+import app.revanced.patches.shared.mapping.misc.ResourceMappingPatch
+import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.iface.Method
+import com.android.tools.smali.dexlib2.iface.instruction.WideLiteralInstruction
+import com.android.tools.smali.dexlib2.iface.reference.MethodReference
+import com.android.tools.smali.dexlib2.util.MethodUtil
 import org.w3c.dom.Node
 
-// TODO: populate this to all patches
 /**
- * Convert a [MethodFingerprint] to a [PatchResultError].
+ * The [PatchException] of failing to resolve a [MethodFingerprint].
  *
- * @return A [PatchResultError] for the [MethodFingerprint].
+ * @return The [PatchException].
  */
-internal fun MethodFingerprint.toErrorResult() = PatchResultError("Failed to resolve $name")
+val MethodFingerprint.exception
+    get() = PatchException("Failed to resolve ${this.javaClass.simpleName}")
 
 /**
  * Find the [MutableMethod] from a given [Method] in a [MutableClass].
@@ -28,27 +28,27 @@ internal fun MethodFingerprint.toErrorResult() = PatchResultError("Failed to res
  * @param method The [Method] to find.
  * @return The [MutableMethod].
  */
-internal fun MutableClass.findMutableMethodOf(method: MethodReference) = this.methods.first {
+fun MutableClass.findMutableMethodOf(method: MethodReference) = this.methods.first {
     MethodUtil.methodSignaturesMatch(it, method)
 }
 
 /**
- * apply a transform to all methods of the class
+ * apply a transform to all methods of the class.
  *
- * @param transform the transformation function. original method goes in, transformed method goes out
+ * @param transform the transformation function. original method goes in, transformed method goes out.
  */
-internal fun MutableClass.transformMethods(transform: MutableMethod.() -> MutableMethod) {
+fun MutableClass.transformMethods(transform: MutableMethod.() -> MutableMethod) {
     val transformedMethods = methods.map { it.transform() }
     methods.clear()
     methods.addAll(transformedMethods)
 }
 
-internal fun Node.doRecursively(action: (Node) -> Unit) {
+fun Node.doRecursively(action: (Node) -> Unit) {
     action(this)
     for (i in 0 until this.childNodes.length) this.childNodes.item(i).doRecursively(action)
 }
 
-internal fun MutableMethod.injectHideViewCall(
+fun MutableMethod.injectHideViewCall(
     insertIndex: Int,
     viewRegister: Int,
     classDescriptor: String,
@@ -58,7 +58,13 @@ internal fun MutableMethod.injectHideViewCall(
     "invoke-static { v$viewRegister }, $classDescriptor->$targetMethod(Landroid/view/View;)V"
 )
 
-internal fun Method.findIndexForIdResource(resourceName: String): Int {
+/**
+ * Find the index of the first constant instruction with the id of the given resource name.
+ *
+ * @param resourceName the name of the resource to find the id for.
+ * @return the index of the first constant instruction with the id of the given resource name, or -1 if not found.
+ */
+fun Method.findIndexForIdResource(resourceName: String): Int {
     fun getIdResourceId(resourceName: String) = ResourceMappingPatch.resourceMappings.single {
         it.type == "id" && it.name == resourceName
     }.id
@@ -67,19 +73,35 @@ internal fun Method.findIndexForIdResource(resourceName: String): Int {
 }
 
 /**
+ * Find the index of the first constant instruction with the given value.
+ *
  * @return the first constant instruction with the value, or -1 if not found.
  */
-fun Method.indexOfFirstConstantInstructionValue(constantValue: Long): Int {
-    return implementation?.let {
-        it.instructions.indexOfFirst { instruction ->
-            instruction.opcode == Opcode.CONST && (instruction as WideLiteralInstruction).wideLiteral == constantValue
-        }
-    } ?: -1
-}
+fun Method.indexOfFirstConstantInstructionValue(constantValue: Long) = implementation?.let {
+    it.instructions.indexOfFirst { instruction ->
+        instruction.opcode == Opcode.CONST && (instruction as WideLiteralInstruction).wideLiteral == constantValue
+    }
+} ?: -1
+
 
 /**
+ * Check if the method contains a constant with the given value.
+ *
  * @return if the method contains a constant with the given value.
  */
-fun Method.containsConstantInstructionValue(constantValue: Long): Boolean {
-    return indexOfFirstConstantInstructionValue(constantValue) >= 0
+fun Method.containsConstantInstructionValue(constantValue: Long) =
+    indexOfFirstConstantInstructionValue(constantValue) >= 0
+
+
+/**
+ * Traverse the class hierarchy starting from the given root class.
+ *
+ * @param targetClass the class to start traversing the class hierarchy from.
+ * @param callback function that is called for every class in the hierarchy.
+ */
+fun BytecodeContext.traverseClassHierarchy(targetClass: MutableClass, callback: MutableClass.() -> Unit) {
+    callback(targetClass)
+    this.findClass(targetClass.superclass ?: return)?.mutableClass?.let {
+        traverseClassHierarchy(it, callback)
+    }
 }

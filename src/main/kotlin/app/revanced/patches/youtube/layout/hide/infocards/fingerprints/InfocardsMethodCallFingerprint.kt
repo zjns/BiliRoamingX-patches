@@ -1,8 +1,8 @@
 package app.revanced.patches.youtube.layout.hide.infocards.fingerprints
 
+import app.revanced.patches.youtube.layout.hide.infocards.HideInfocardsResourcePatch
 import app.revanced.util.patch.LiteralValueFingerprint
-import app.revanced.patches.youtube.layout.hide.infocards.resource.patch.HideInfocardsResourcePatch
-import org.jf.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.Opcode
 
 object InfocardsMethodCallFingerprint : LiteralValueFingerprint(
     opcodes = listOf(
@@ -11,5 +11,5 @@ object InfocardsMethodCallFingerprint : LiteralValueFingerprint(
         Opcode.INVOKE_INTERFACE,
     ),
     strings = listOf("Missing ControlsOverlayPresenter for InfoCards to work."),
-    literal = HideInfocardsResourcePatch.drawerResourceId
+    literalSupplier = { HideInfocardsResourcePatch.drawerResourceId }
 )
