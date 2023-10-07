@@ -30,6 +30,10 @@
             android:key="number_format"
             android:title="@string/biliroaming_number_format_title"
             android:summary="@string/biliroaming_number_format_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="auto_receive_coupon"
+            android:title="@string/biliroaming_auto_receive_coupon_title"
+            android:summary="@string/biliroaming_auto_receive_coupon_summary" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory
