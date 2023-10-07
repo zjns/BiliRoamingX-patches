@@ -2,8 +2,6 @@ package app.revanced.meta
 
 import app.revanced.patcher.PatchSet
 import app.revanced.patcher.patch.Patch
-import com.google.gson.GsonBuilder
-import java.io.File
 
 internal class JsonGenerator : PatchesFileGenerator {
     override fun generate(patches: PatchSet) = patches.map {
@@ -18,7 +16,7 @@ internal class JsonGenerator : PatchesFileGenerator {
             }
         )
     }.let {
-        File("patches.json").writeText(GsonBuilder().serializeNulls().create().toJson(it))
+        // File("patches.json").writeText(GsonBuilder().serializeNulls().create().toJson(it))
     }
 
     @Suppress("unused")
