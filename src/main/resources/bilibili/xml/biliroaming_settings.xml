@@ -16,8 +16,7 @@
         <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.CustomizeHomeFragment"
             android:key="customize_home"
-            android:title="@string/biliroaming_customize_home_title"
-            android:summary="@string/biliroaming_customize_home_summary" />
+            android:title="@string/biliroaming_customize_home_title" />
         <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.CustomizeDynamicFragment"
             android:key="customize_dynamic"
