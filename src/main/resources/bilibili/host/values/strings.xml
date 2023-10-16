@@ -293,4 +293,6 @@
     <string name="biliroaming_coupon_receive_success">%1$d张卡券自动领取成功！</string>
     <string name="biliroaming_auto_receive_coupon_title">自动领取卡券</string>
     <string name="biliroaming_auto_receive_coupon_summary">大会员自动领取每月B币券、装扮体验卡等卡券</string>
+    <string name="biliroaming_block_activity_tab_title">隐藏活动标签</string>
+    <string name="biliroaming_block_activity_tab_summary">隐藏“一起聊”等活动标签</string>
 </resources>

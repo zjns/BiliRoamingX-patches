@@ -38,6 +38,10 @@
         <androidx.preference.SwitchPreferenceCompat
             android:key="block_live_order"
             android:title="@string/biliroaming_block_live_order_title" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="block_activity_tab"
+            android:title="@string/biliroaming_block_activity_tab_title"
+            android:summary="@string/biliroaming_block_activity_tab_summary" />
         <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.VideoDetailFilterFragment"
             android:title="@string/biliroaming_video_relate_title" />
