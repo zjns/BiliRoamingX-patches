@@ -34,6 +34,9 @@
             android:key="auto_receive_coupon"
             android:title="@string/biliroaming_auto_receive_coupon_title"
             android:summary="@string/biliroaming_auto_receive_coupon_summary" />
+        <androidx.preference.Preference
+            android:key="custom_dpi"
+            android:title="@string/biliroaming_custom_dpi_title" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory

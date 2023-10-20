@@ -297,4 +297,7 @@
     <string name="biliroaming_block_activity_tab_summary">隐藏“一起聊”等活动标签</string>
     <string name="biliroaming_block_recommend_guidance_title">屏蔽个性化推荐指引</string>
     <string name="biliroaming_block_recommend_guidance_summary">当关闭个性化推荐时，屏蔽开启指引弹窗</string>
+    <string name="biliroaming_custom_dpi_title">自定义显示dpi</string>
+    <string name="biliroaming_custom_dpi_summary">自定义显示dpi，以缩放APP内显示内容。最好能被160整除或除尽，数字越大，则同屏显示效果越大，显示内容越少。\n当前系统默认dpi：%d。</string>
+    <string name="biliroaming_custom_dpi_hint">留空表示系统默认</string>
 </resources>
