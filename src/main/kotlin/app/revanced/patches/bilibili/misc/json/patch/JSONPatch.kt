@@ -6,8 +6,10 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
+import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patches.bilibili.misc.json.fingerprints.JSONFingerprint
 import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction11x
 
 @Patch(
     name = "Json",
@@ -19,48 +21,38 @@ object JSONPatch : BytecodePatch(setOf(JSONFingerprint)) {
         val clazz = JSONFingerprint.result?.mutableClass
             ?: throw JSONFingerprint.exception
         val parseObject = if (clazz.type.endsWith("/JSON;")) "parseObject" else "a"
-        clazz.methods.find { m ->
-            m.name == parseObject && m.parameterTypes.let {
-                it.size == 4 && it[0] == "Ljava/lang/String;"
-                        && it[1] == "Ljava/lang/reflect/Type;"
-                        && it[2] == "I" && it[3] == "[Lcom/alibaba/fastjson/parser/Feature;"
+        fun MutableMethod.hookParseObject() {
+            val (index, inst) = implementation!!.instructions.withIndex().last { (_, inst) ->
+                inst.opcode == Opcode.RETURN_OBJECT
             }
-        }?.run {
-            val insetIndex = implementation?.instructions?.indexOfLast {
-                it.opcode == Opcode.RETURN_OBJECT
-            }.takeUnless { it == -1 } ?: 0
+            val register = (inst as BuilderInstruction11x).registerA
             addInstructions(
-                insetIndex, """
-                invoke-static {p0}, Lapp/revanced/bilibili/patches/json/JSONPatch;->parseObjectHook(Ljava/lang/Object;)Ljava/lang/Object;
-                move-result-object p0
+                index, """
+                invoke-static {v$register}, Lapp/revanced/bilibili/patches/json/JSONPatch;->parseObjectHook(Ljava/lang/Object;)Ljava/lang/Object;
+                move-result-object v$register
             """.trimIndent()
             )
         }
         clazz.methods.find { m ->
-            m.name == parseObject && m.parameterTypes.let {
-                it.size == 3 && it[0] == "Ljava/lang/String;"
-                        && it[1] == "Ljava/lang/reflect/Type;"
-                        && it[2] == "[Lcom/alibaba/fastjson/parser/Feature;"
-            }
-        }?.run {
-            val insetIndex = implementation?.instructions?.indexOfLast {
-                it.opcode == Opcode.RETURN_OBJECT
-            }.takeUnless { it == -1 } ?: 0
-            addInstructions(
-                insetIndex, """
-                invoke-static {p0}, Lapp/revanced/bilibili/patches/json/JSONPatch;->parseObjectHook(Ljava/lang/Object;)Ljava/lang/Object;
-                move-result-object p0
-            """.trimIndent()
+            m.name == parseObject && m.parameterTypes == listOf(
+                "Ljava/lang/String;", "Ljava/lang/reflect/Type;", "I", "[Lcom/alibaba/fastjson/parser/Feature;"
             )
-        }
+        }?.hookParseObject()
         clazz.methods.find { m ->
-            m.name == "parseArray" && m.parameterTypes.let {
-                it.size == 2 && it[0] == "Ljava/lang/String;" && it[1] == "Ljava/lang/Class;"
-            }
+            m.name == parseObject && m.parameterTypes == listOf(
+                "Ljava/lang/String;", "Ljava/lang/reflect/Type;", "[Lcom/alibaba/fastjson/parser/Feature;"
+            )
+        }?.hookParseObject()
+        clazz.methods.find { m ->
+            m.name == parseObject && m.parameterTypes == listOf("Ljava/lang/String;", "Ljava/lang/Class;")
+        }?.hookParseObject()
+
+        clazz.methods.find { m ->
+            m.name == "parseArray" && m.parameterTypes == listOf("Ljava/lang/String;", "Ljava/lang/Class;")
         }?.run {
-            val insetIndex = implementation?.instructions?.indexOfLast {
+            val insetIndex = implementation!!.instructions.indexOfLast {
                 it.opcode == Opcode.RETURN_OBJECT
-            }.takeUnless { it == -1 } ?: 0
+            }
             addInstructions(
                 insetIndex, """
                 invoke-static {p1, v0}, Lapp/revanced/bilibili/patches/json/JSONPatch;->parseArrayHook(Ljava/lang/Class;Ljava/util/ArrayList;)V

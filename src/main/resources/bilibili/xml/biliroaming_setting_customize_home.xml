@@ -22,6 +22,10 @@
             android:title="@string/biliroaming_disable_auto_refresh_title"
             android:summary="@string/biliroaming_disable_auto_refresh_summary" />
         <androidx.preference.SwitchPreferenceCompat
+            android:key="block_recommend_guidance"
+            android:title="@string/biliroaming_block_recommend_guidance_title"
+            android:summary="@string/biliroaming_block_recommend_guidance_summary" />
+        <androidx.preference.SwitchPreferenceCompat
             android:key="add_bangumi"
             android:title="@string/biliroaming_add_bangumi_title"
             android:summary="@string/biliroaming_add_bangumi_summary" />

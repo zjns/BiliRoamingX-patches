@@ -295,4 +295,6 @@
     <string name="biliroaming_auto_receive_coupon_summary">大会员自动领取每月B币券、装扮体验卡等卡券</string>
     <string name="biliroaming_block_activity_tab_title">隐藏活动标签</string>
     <string name="biliroaming_block_activity_tab_summary">隐藏“一起聊”等活动标签</string>
+    <string name="biliroaming_block_recommend_guidance_title">屏蔽个性化推荐指引</string>
+    <string name="biliroaming_block_recommend_guidance_summary">当关闭个性化推荐时，屏蔽开启指引弹窗</string>
 </resources>
