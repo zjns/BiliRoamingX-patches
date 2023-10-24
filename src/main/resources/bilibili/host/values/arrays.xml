@@ -399,4 +399,22 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+    <string-array name="biliroaming_display_size_entries">
+        <item>更小</item>
+        <item>较小</item>
+        <item>小</item>
+        <item>默认</item>
+        <item>大</item>
+        <item>较大</item>
+        <item>更大</item>
+    </string-array>
+    <string-array name="biliroaming_display_size_values">
+        <item>-0.75</item>
+        <item>-0.5</item>
+        <item>-0.25</item>
+        <item>0</item>
+        <item>0.25</item>
+        <item>0.5</item>
+        <item>0.75</item>
+    </string-array>
 </resources>
