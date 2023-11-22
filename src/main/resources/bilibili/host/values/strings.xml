@@ -65,6 +65,7 @@
     <string name="biliroaming_regex_mode">正则模式</string>
     <string name="biliroaming_filter_home_recommend_by_keyword_title">按关键词过滤</string>
     <string name="biliroaming_apply_to_relate_title">同时应用于视频下方推荐</string>
+    <string name="biliroaming_apply_to_popular_title">同时应用于首页热门</string>
     <string name="biliroaming_low_play_count_summary">隐藏首页推送低于指定播放量的视频</string>
     <string name="biliroaming_low_play_count_title">隐藏首页低播放量视频</string>
     <string name="biliroaming_hide_duration_summary">隐藏首页推送指定时长的视频（秒）</string>
@@ -299,4 +300,11 @@
     <string name="biliroaming_block_recommend_guidance_summary">当关闭个性化推荐时，屏蔽开启指引弹窗</string>
     <string name="biliroaming_display_size_title">调整显示大小</string>
     <string name="biliroaming_display_size_summary">调整显示大小，以整体缩放APP内显示内容</string>
+    <string name="biliroaming_filter_popular_title">过滤热门内容</string>
+    <string name="biliroaming_block_popular_top_entrance_title">移除顶部分类列表</string>
+    <string name="biliroaming_block_popular_topic_list_title">移除热门话题列表</string>
+    <string name="biliroaming_block_popular_rcmd_up_title">过滤UP主推荐</string>
+    <string name="biliroaming_filter_popular_by_keyword_title">按关键词过滤</string>
+    <string name="biliroaming_filter_popular_by_keyword_summary">复用首页推荐关键词过滤</string>
+    <string name="biliroaming_save_success_and_refresh_popular">保存成功，刷新热门生效</string>
 </resources>

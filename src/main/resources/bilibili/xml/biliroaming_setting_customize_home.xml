@@ -17,6 +17,10 @@
             android:fragment="app.revanced.bilibili.settings.fragments.FilterHomeRcmdFragment"
             android:key="filter_home_recommend"
             android:title="@string/biliroaming_filter_home_recommend_title" />
+        <androidx.preference.Preference
+            android:fragment="app.revanced.bilibili.settings.fragments.FilterPopularFragment"
+            android:key="filter_popular"
+            android:title="@string/biliroaming_filter_popular_title" />
         <androidx.preference.SwitchPreferenceCompat
             android:key="disable_auto_refresh"
             android:title="@string/biliroaming_disable_auto_refresh_title"
