@@ -52,6 +52,10 @@
                 android:key="trial_vip_quality"
                 android:title="@string/biliroaming_trial_vip_quality_title"
                 android:summary="@string/biliroaming_trial_vip_quality_summary" />
+            <androidx.preference.SwitchPreferenceCompat
+                android:key="force_hw_codec"
+                android:title="@string/biliroaming_force_hw_codec_title"
+                android:summary="@string/biliroaming_force_hw_codec_summary" />
         </androidx.preference.PreferenceCategory>
     </androidx.preference.PreferenceCategory>
 </androidx.preference.PreferenceScreen>
