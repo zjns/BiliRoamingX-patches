@@ -319,4 +319,6 @@
     <string name="biliroaming_choose_image">选择一张图片</string>
     <string name="biliroaming_force_hw_codec_title">强制硬解</string>
     <string name="biliroaming_force_hw_codec_summary">B站一般会优先硬解，视情况启用</string>
+    <string name="biliroaming_old_fav_title">强制旧版收藏逻辑</string>
+    <string name="biliroaming_old_fav_summary">将新版的点按收藏至默认文件夹，长按选择文件夹收藏逻辑恢复为旧版点按选择文件夹收藏</string>
 </resources>
