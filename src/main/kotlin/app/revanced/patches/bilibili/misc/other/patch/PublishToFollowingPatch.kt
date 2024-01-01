@@ -1,6 +1,5 @@
 package app.revanced.patches.bilibili.misc.other.patch
 
-import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
@@ -22,6 +21,6 @@ object PublishToFollowingPatch : BytecodePatch(setOf(PublishToFollowingConfigFin
             invoke-static {p3}, Lapp/revanced/bilibili/patches/PublishToFollowingPatch;->shouldAutoSelectOnce(Z)Z
             move-result p3
         """.trimIndent()
-        ) ?: throw PublishToFollowingConfigFingerprint.exception
+        )
     }
 }
