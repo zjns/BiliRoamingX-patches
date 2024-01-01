@@ -9,6 +9,7 @@ import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.misc.json.fingerprints.CardClickProcessorFingerprint
+import app.revanced.patches.bilibili.misc.json.fingerprints.CardClickProcessorNewFingerprint
 import app.revanced.patches.bilibili.misc.json.fingerprints.PegasusParserFingerprint
 import app.revanced.patches.bilibili.utils.cloneMutable
 import com.android.tools.smali.dexlib2.iface.ClassDef
@@ -20,7 +21,13 @@ import com.android.tools.smali.dexlib2.iface.value.StringEncodedValue
     description = "首页推荐流hook",
     compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
 )
-object PegasusPatch : BytecodePatch(setOf(PegasusParserFingerprint, CardClickProcessorFingerprint)) {
+object PegasusPatch : BytecodePatch(
+    setOf(
+        PegasusParserFingerprint,
+        CardClickProcessorFingerprint,
+        CardClickProcessorNewFingerprint
+    )
+) {
     override fun execute(context: BytecodeContext) {
         PegasusParserFingerprint.result?.run {
             val method = mutableClass.methods.first { it.returnType == "Lcom/bilibili/okretro/GeneralResponse;" }
@@ -87,5 +94,15 @@ object PegasusPatch : BytecodePatch(setOf(PegasusParserFingerprint, CardClickPro
             nop
         """.trimIndent()
         ) ?: throw CardClickProcessorFingerprint.exception
+        CardClickProcessorNewFingerprint.result?.mutableMethod?.addInstructionsWithLabels(
+            0, """
+            invoke-static {p3}, Lapp/revanced/bilibili/patches/json/PegasusPatch;->onFeedClick(Lcom/bilibili/app/comm/list/common/data/DislikeReason;)Z
+            move-result v0
+            if-eqz v0, :jump
+            return-void
+            :jump
+            nop
+            """.trimIndent()
+        ) ?: throw CardClickProcessorNewFingerprint.exception
     }
 }
