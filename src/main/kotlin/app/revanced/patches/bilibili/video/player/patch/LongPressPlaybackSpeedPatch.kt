@@ -1,5 +1,6 @@
 package app.revanced.patches.bilibili.video.player.patch
 
+import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.annotation.CompatiblePackage
@@ -7,6 +8,7 @@ import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.patcher.patch.MultiMethodBytecodePatch
 import app.revanced.patches.bilibili.utils.exception
 import app.revanced.patches.bilibili.video.player.fingerprints.TripleSpeedServiceFingerprint
+import app.revanced.patches.bilibili.video.player.fingerprints.TripleSpeedServiceUniteFingerprint
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
@@ -17,7 +19,8 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
     compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
 )
 object LongPressPlaybackSpeedPatch : MultiMethodBytecodePatch(
-    multiFingerprints = setOf(TripleSpeedServiceFingerprint)
+    fingerprints = setOf(TripleSpeedServiceUniteFingerprint),
+    multiFingerprints = setOf(TripleSpeedServiceFingerprint),
 ) {
     override fun execute(context: BytecodeContext) {
         super.execute(context)
@@ -35,9 +38,17 @@ object LongPressPlaybackSpeedPatch : MultiMethodBytecodePatch(
             it.addInstructions(
                 0, """
                 invoke-static {p1}, Lapp/revanced/bilibili/patches/PlaybackSpeedPatch;->longPressSpeed(F)F
-                move-result p1 
+                move-result p1
             """.trimIndent()
             )
         }
+        TripleSpeedServiceUniteFingerprint.result?.mutableClass?.methods?.first { m ->
+            m.name == "<init>" && m.parameterTypes.let { it.size == 4 && it[1] == "F" }
+        }?.addInstructions(
+            0, """
+            invoke-static {p2}, Lapp/revanced/bilibili/patches/PlaybackSpeedPatch;->longPressSpeed(F)F
+            move-result p2
+        """.trimIndent()
+        ) ?: throw TripleSpeedServiceUniteFingerprint.exception
     }
 }
