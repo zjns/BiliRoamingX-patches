@@ -68,6 +68,9 @@
         <androidx.preference.SwitchPreferenceCompat
             android:key="block_video_comment"
             android:title="@string/biliroaming_block_video_comment_title" />
+        <androidx.preference.Preference
+            android:fragment="app.revanced.bilibili.settings.fragments.FilterCommentFragment"
+            android:title="@string/biliroaming_filter_comment_title" />
     </androidx.preference.PreferenceCategory>
     <androidx.preference.PreferenceCategory
         android:title="@string/biliroaming_video_detail_ad_category_title"

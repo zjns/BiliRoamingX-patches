@@ -53,6 +53,7 @@ object SettingsResourcePatch : AbstractSettingsResourcePatch(
         "biliroaming_setting_player_version.xml",
         "biliroaming_setting_display_size.xml",
         "biliroaming_setting_filter_popular.xml",
+        "biliroaming_setting_filter_comment.xml",
     )
     private val layouts = arrayOf(
         "biliroaming_dialog_argb_color_choose.xml",

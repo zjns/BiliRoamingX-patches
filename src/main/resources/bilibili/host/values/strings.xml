@@ -321,4 +321,8 @@
     <string name="biliroaming_force_hw_codec_summary">B站一般会优先硬解，视情况启用</string>
     <string name="biliroaming_old_fav_title">强制旧版收藏逻辑</string>
     <string name="biliroaming_old_fav_summary">将新版的点按收藏至默认文件夹，长按选择文件夹收藏逻辑恢复为旧版点按选择文件夹收藏</string>
+    <string name="biliroaming_filter_comment_title">评论过滤</string>
+    <string name="biliroaming_block_comment_only_at_title">屏蔽仅“@xxx”评论</string>
+    <string name="biliroaming_block_comment_goods_title">屏蔽UP主带货评论</string>
+    <string name="biliroaming_filter_comment_by_keyword_title">按关键词过滤</string>
 </resources>
