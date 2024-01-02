@@ -8,6 +8,7 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
+import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patches.bilibili.misc.json.fingerprints.CardClickProcessorFingerprint
 import app.revanced.patches.bilibili.misc.json.fingerprints.CardClickProcessorNewFingerprint
 import app.revanced.patches.bilibili.misc.json.fingerprints.PegasusParserFingerprint
@@ -84,7 +85,7 @@ object PegasusPatch : BytecodePatch(
                     )
                 }?.also { add(it) }
         }
-        CardClickProcessorFingerprint.result?.mutableMethod?.addInstructionsWithLabels(
+        fun MutableMethod.hookOnFeedClick() = addInstructionsWithLabels(
             0, """
             invoke-static {p3}, Lapp/revanced/bilibili/patches/json/PegasusPatch;->onFeedClick(Lcom/bilibili/app/comm/list/common/data/DislikeReason;)Z
             move-result v0
@@ -93,16 +94,11 @@ object PegasusPatch : BytecodePatch(
             :jump
             nop
         """.trimIndent()
-        ) ?: throw CardClickProcessorFingerprint.exception
-        CardClickProcessorNewFingerprint.result?.mutableMethod?.addInstructionsWithLabels(
-            0, """
-            invoke-static {p3}, Lapp/revanced/bilibili/patches/json/PegasusPatch;->onFeedClick(Lcom/bilibili/app/comm/list/common/data/DislikeReason;)Z
-            move-result v0
-            if-eqz v0, :jump
-            return-void
-            :jump
-            nop
-            """.trimIndent()
-        ) ?: throw CardClickProcessorNewFingerprint.exception
+        )
+        CardClickProcessorFingerprint.result?.mutableMethod?.hookOnFeedClick()
+            ?: throw CardClickProcessorFingerprint.exception
+        // 7.63.0+
+        CardClickProcessorNewFingerprint.result?.mutableMethod?.hookOnFeedClick()
+            ?: throw CardClickProcessorNewFingerprint.exception
     }
 }
