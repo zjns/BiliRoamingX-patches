@@ -325,4 +325,7 @@
     <string name="biliroaming_block_comment_only_at_title">屏蔽仅“@xxx”评论</string>
     <string name="biliroaming_block_comment_goods_title">屏蔽UP主带货评论</string>
     <string name="biliroaming_filter_comment_by_keyword_title">按关键词过滤</string>
+    <string name="biliroaming_block_comment_up_level_title">屏蔽用户等级过低的评论</string>
+    <string name="biliroaming_up_level">%1$s级</string>
+    <string name="biliroaming_disabled">禁用</string>
 </resources>
