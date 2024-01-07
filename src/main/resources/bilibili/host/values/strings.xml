@@ -328,4 +328,6 @@
     <string name="biliroaming_block_comment_up_level_title">屏蔽用户等级过低的评论</string>
     <string name="biliroaming_up_level">%1$s级</string>
     <string name="biliroaming_disabled">禁用</string>
+    <string name="biliroaming_global_segmented_section_title">记住章节进度条开关状态</string>
+    <string name="biliroaming_global_segmented_section_summary">章节进度条开关设置状态全局生效，而不是单个视频各自保存状态</string>
 </resources>

@@ -44,18 +44,22 @@
         <androidx.preference.SwitchPreferenceCompat
             android:key="remember_lossless_setting"
             android:title="@string/biliroaming_remember_lossless_setting_title" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="global_segmented_section"
+            android:title="@string/biliroaming_global_segmented_section_title"
+            android:summary="@string/biliroaming_global_segmented_section_summary" />
+    </androidx.preference.PreferenceCategory>
 
-        <androidx.preference.PreferenceCategory
-            android:title="@string/biliroaming_unstable_feature_title"
-            android:layout="@layout/bili_app_layout_preference_category_title">
-            <androidx.preference.SwitchPreferenceCompat
-                android:key="trial_vip_quality"
-                android:title="@string/biliroaming_trial_vip_quality_title"
-                android:summary="@string/biliroaming_trial_vip_quality_summary" />
-            <androidx.preference.SwitchPreferenceCompat
-                android:key="force_hw_codec"
-                android:title="@string/biliroaming_force_hw_codec_title"
-                android:summary="@string/biliroaming_force_hw_codec_summary" />
-        </androidx.preference.PreferenceCategory>
+    <androidx.preference.PreferenceCategory
+        android:title="@string/biliroaming_unstable_feature_title"
+        android:layout="@layout/bili_app_layout_preference_category_title">
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="trial_vip_quality"
+            android:title="@string/biliroaming_trial_vip_quality_title"
+            android:summary="@string/biliroaming_trial_vip_quality_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="force_hw_codec"
+            android:title="@string/biliroaming_force_hw_codec_title"
+            android:summary="@string/biliroaming_force_hw_codec_summary" />
     </androidx.preference.PreferenceCategory>
 </androidx.preference.PreferenceScreen>
