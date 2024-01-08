@@ -45,9 +45,8 @@
             android:key="remember_lossless_setting"
             android:title="@string/biliroaming_remember_lossless_setting_title" />
         <androidx.preference.SwitchPreferenceCompat
-            android:key="global_segmented_section"
-            android:title="@string/biliroaming_global_segmented_section_title"
-            android:summary="@string/biliroaming_global_segmented_section_summary" />
+            android:key="disable_segmented_section"
+            android:title="@string/biliroaming_disable_segmented_section_title" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory
