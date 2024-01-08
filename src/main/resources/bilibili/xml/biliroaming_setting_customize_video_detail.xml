@@ -42,10 +42,6 @@
             android:key="block_activity_tab"
             android:title="@string/biliroaming_block_activity_tab_title"
             android:summary="@string/biliroaming_block_activity_tab_summary" />
-        <androidx.preference.SwitchPreferenceCompat
-            android:key="old_fav"
-            android:title="@string/biliroaming_old_fav_title"
-            android:summary="@string/biliroaming_old_fav_summary" />
         <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.VideoDetailFilterFragment"
             android:title="@string/biliroaming_video_relate_title" />
@@ -95,5 +91,9 @@
             android:key="disable_auto_subscribe"
             android:title="@string/biliroaming_disable_auto_subscribe_title"
             android:summary="@string/biliroaming_disable_auto_subscribe_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+          android:key="old_fav"
+          android:title="@string/biliroaming_old_fav_title"
+          android:summary="@string/biliroaming_old_fav_summary" />
     </androidx.preference.PreferenceCategory>
 </androidx.preference.PreferenceScreen>
