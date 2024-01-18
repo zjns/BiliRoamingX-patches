@@ -32,8 +32,8 @@ object AppendExtraSearchTypePatch : BytecodePatch(
     override fun execute(context: BytecodeContext) {
         val pagerTypesClass =
             context.findClass("Lcom/bilibili/search/result/pages/BiliMainSearchResultPage\$PageTypes;")
-                ?: throw PatchException("not found pager type class")
-        pagerTypesClass.mutableClass.run {
+        /*?: throw PatchException("not found pager type class")*/ // removed from 7.64.0
+        pagerTypesClass?.mutableClass?.run {
             methods.first { it.name == "<init>" && it.parameterTypes.size == 5 }.run {
                 accessFlags = accessFlags.toPublic()
             }
