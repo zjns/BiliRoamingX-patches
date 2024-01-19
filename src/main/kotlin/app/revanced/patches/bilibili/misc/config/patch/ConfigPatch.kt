@@ -17,8 +17,11 @@ import app.revanced.patches.bilibili.utils.cloneMutable
 )
 object ConfigPatch : BytecodePatch(fingerprints = setOf(ABSourceFingerprint, ConfigSourceFingerprint)) {
     override fun execute(context: BytecodeContext) {
-        ABSourceFingerprint.result?.run {
-            val method = mutableMethod
+        ABSourceFingerprint.result?.mutableClass?.run {
+            val method = methods.first { m ->
+                m.parameterTypes == listOf("Ljava/lang/String;", "Ljava/lang/Boolean;")
+                        && m.returnType == "Ljava/lang/Boolean;"
+            }
             method.cloneMutable(registerCount = 4, clearImplementation = true).apply {
                 method.name += "_Origin"
                 addInstructions(
@@ -30,7 +33,7 @@ object ConfigPatch : BytecodePatch(fingerprints = setOf(ABSourceFingerprint, Con
                     return-object v0
                 """.trimIndent()
                 )
-            }.also { mutableClass.methods.add(it) }
+            }.also { methods.add(it) }
         } ?: throw ABSourceFingerprint.exception
         ConfigSourceFingerprint.result?.mutableClass?.run {
             val method = methods.first { m ->

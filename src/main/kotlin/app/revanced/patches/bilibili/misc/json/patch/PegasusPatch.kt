@@ -97,8 +97,7 @@ object PegasusPatch : BytecodePatch(
         )
         CardClickProcessorFingerprint.result?.mutableMethod?.hookOnFeedClick()
             ?: throw CardClickProcessorFingerprint.exception
-        // 7.63.0+
+        // only exist on 7.63.0 alpha version now
         CardClickProcessorNewFingerprint.result?.mutableMethod?.hookOnFeedClick()
-            ?: throw CardClickProcessorNewFingerprint.exception
     }
 }

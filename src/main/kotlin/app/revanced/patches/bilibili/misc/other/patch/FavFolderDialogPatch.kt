@@ -37,7 +37,7 @@ object FavFolderDialogPatch : BytecodePatch(
                     move-result v$register
                 """.trimIndent()
                 )
-            } ?: throw it.exception
+            }
         }
     }
 }

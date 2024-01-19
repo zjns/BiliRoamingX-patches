@@ -1,6 +1,5 @@
 package app.revanced.patches.bilibili.video.player.patch
 
-import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.annotation.CompatiblePackage
@@ -49,6 +48,6 @@ object LongPressPlaybackSpeedPatch : MultiMethodBytecodePatch(
             invoke-static {p2}, Lapp/revanced/bilibili/patches/PlaybackSpeedPatch;->longPressSpeed(F)F
             move-result p2
         """.trimIndent()
-        ) ?: throw TripleSpeedServiceUniteFingerprint.exception
+        )
     }
 }

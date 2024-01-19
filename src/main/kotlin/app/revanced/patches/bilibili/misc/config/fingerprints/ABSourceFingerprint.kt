@@ -3,7 +3,8 @@ package app.revanced.patches.bilibili.misc.config.fingerprints
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
 
 object ABSourceFingerprint : MethodFingerprint(
-    strings = listOf("key: ", ", invoke"),
-    parameters = listOf("Ljava/lang/String;", "Ljava/lang/Boolean;"),
-    returnType = "Ljava/lang/Boolean;",
+    strings = listOf("getMBean()Lcom/bilibili/lib/blconfig/internal/ABBean;"),
+    customFingerprint = { methodDef, _ ->
+        methodDef.name == "<clinit>"
+    }
 )
