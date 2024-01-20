@@ -330,4 +330,5 @@
     <string name="biliroaming_disabled">禁用</string>
     <string name="biliroaming_disable_segmented_section_title">全局关闭章节进度条</string>
     <string name="biliroaming_hide_more_category_warning">更多服务隐藏后会导致设置入口消失！！！</string>
+    <string name="biliroaming_disable_auto_next_play_title">小窗播放时禁止自动连播相关视频</string>
 </resources>
