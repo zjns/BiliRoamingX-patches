@@ -7,6 +7,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.removeInstructions
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
+import app.revanced.patches.bilibili.misc.protobuf.fingerprints.MossMiddlewareGaiaFingerprint
 import app.revanced.patches.bilibili.misc.protobuf.fingerprints.MossServiceFingerprint
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
@@ -16,7 +17,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
     description = "gRPC 通信引擎服务 hook",
     compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
 )
-object MossPatch : BytecodePatch(setOf(MossServiceFingerprint)) {
+object MossPatch : BytecodePatch(setOf(MossServiceFingerprint, MossMiddlewareGaiaFingerprint)) {
     override fun execute(context: BytecodeContext) {
         MossServiceFingerprint.result?.mutableClass?.methods?.let { methods ->
             methods.find { it.name == "blockingUnaryCall" }?.run {
@@ -80,9 +81,18 @@ object MossPatch : BytecodePatch(setOf(MossServiceFingerprint)) {
                     implementation.newLabelForIndex(moveExceptionIndex)
                 )
             }
+            val gainType = MossMiddlewareGaiaFingerprint.result?.classDef?.type
             methods.filter { it.name == "asyncUnaryCall" || it.name == "asyncServerStreamingCall" }.forEach {
                 it.addInstructionsWithLabels(
                     0, """
+                    ${
+                        if (gainType != null) {
+                            """
+                                instance-of v0, p3, $gainType
+                                if-nez v0, :jump
+                            """.trimIndent()
+                        } else ""
+                    }
                     invoke-static {p2, p3}, Lapp/revanced/bilibili/patches/protobuf/MossPatch;->hookAsyncBefore(Lcom/google/protobuf/GeneratedMessageLite;Lcom/bilibili/lib/moss/api/MossResponseHandler;)Ljava/lang/Object;
                     move-result-object v0
                     if-eqz v0, :jump
