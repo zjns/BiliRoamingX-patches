@@ -75,6 +75,9 @@ object OkHttpPatch : MultiMethodBytecodePatch(
                 ts.size == 2 && ts[0] == mediaTypeType && ts[1] == "Ljava/lang/String;"
             }
         }
+        val requestBodyTypeMethod = requestBodyClass.methods.first {
+            it.returnType == mediaTypeType && it.parameterTypes.isEmpty()
+        }
         val bodyWrapperClasses = BodyWrapperFingerprint.result.map { it.mutableClass }
             .onEach { it.accessFlags = it.accessFlags.toPublic() }
         val headersClass = HeadersFingerprint.result?.mutableClass
@@ -99,129 +102,202 @@ object OkHttpPatch : MultiMethodBytecodePatch(
             name = "hook",
             returnType = "V",
             parameters = listOf(methodParameter(responseClass.type)),
-            accessFlags = AccessFlags.PRIVATE.value,
-            implementation = methodImplementation(registerCount = 20)
+            accessFlags = AccessFlags.PRIVATE.value or AccessFlags.STATIC.value,
+            implementation = methodImplementation(registerCount = 21)
         ).toMutable().apply {
             addInstructionsWithLabels(
                 0, """
-                move-object/from16 v0, p1
-                
+                move-object/from16 v0, p0
+            
                 iget-object v1, v0, $responseBodyField
-                
-                if-eqz v1, :exit
+            
+                if-eqz v1, :cond_ab
                 
                 ${
                     bodyWrapperClasses.joinToString(separator = "\n") {
                         """
                         instance-of v2, v1, $it
-                        if-nez v2, :exit
+                        if-nez v2, :cond_ab
                     """.trimIndent()
                     }
                 }
-                
-                iget-object v2, v0, $requestField
-                
-                iget v9, v0, $codeField
-                
-                iget-object v3, v2, $urlField
-                
-                invoke-virtual {v3}, Ljava/lang/Object;->toString()Ljava/lang/String;
-                
-                move-result-object v10
-                
-                invoke-static {v10, v9}, Lapp/revanced/bilibili/patches/okhttp/OkHttpPatch;->shouldHook(Ljava/lang/String;I)Z
-                
-                move-result v3
-                
-                if-eqz v3, :exit
-                
-                const-string v11, "Content-Encoding"
-
-                invoke-virtual {v2, v11}, $requestHeaderMethod
             
-                move-result-object v12
+                iget-object v2, v0, $requestField
+            
+                iget v9, v0, $codeField
+            
+                iget-object v3, v2, $urlField
+            
+                invoke-virtual {v3}, Ljava/lang/Object;->toString()Ljava/lang/String;
+            
+                move-result-object v10
+            
+                invoke-static {v10, v9}, Lapp/revanced/bilibili/patches/okhttp/OkHttpPatch;->shouldHook(Ljava/lang/String;I)Z
+            
+                move-result v3
+            
+                if-eqz v3, :cond_ab
+            
+                const-string v3, "Content-Type"
+            
+                invoke-virtual {v0, v3}, $responseHeaderMethod
+            
+                move-result-object v11
+            
+                if-eqz v11, :cond_ab
+            
+                const-string v4, "application/json"
+            
+                invoke-virtual {v11, v4}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+            
+                move-result v5
+            
+                const-string v6, "text"
+            
+                if-nez v5, :cond_2f
+            
+                invoke-virtual {v11, v6}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+            
+                move-result v5
+            
+                if-eqz v5, :cond_ab
+            
+                :cond_2f
+                iget-object v12, v2, $requestBodyField
+            
+                invoke-virtual {v2, v3}, $requestHeaderMethod
+            
+                move-result-object v3
+            
+                if-nez v3, :cond_48
+            
+                if-eqz v12, :cond_48
+            
+                invoke-virtual {v12}, $requestBodyTypeMethod
+            
+                move-result-object v5
+            
+                if-eqz v5, :cond_44
+            
+                invoke-virtual {v5}, Ljava/lang/Object;->toString()Ljava/lang/String;
+            
+                move-result-object v7
+            
+                goto :goto_45
+            
+                :cond_44
+                const/4 v7, 0x0
+            
+                :goto_45
+                move-object v3, v7
+            
+                move-object v13, v3
+            
+                goto :goto_49
+            
+                :cond_48
+                move-object v13, v3
+            
+                :goto_49
+                const-string v14, "Content-Encoding"
+            
+                invoke-virtual {v2, v14}, $requestHeaderMethod
+            
+                move-result-object v15
             
                 new-instance v3, $bufferClass
             
                 invoke-direct {v3}, $bufferClass-><init>()V
             
-                move-object v13, v3
+                move-object v8, v3
             
-                iget-object v14, v2, $requestBodyField
+                if-eqz v12, :cond_73
             
-                if-eqz v14, :not_write
+                if-eqz v13, :cond_73
             
-                invoke-virtual {v14, v13}, $writeToMethod
+                const-string v3, "application/x-www-form-urlencoded"
             
-                :not_write
-                invoke-virtual {v13}, $bufferInStreamMethod
+                invoke-virtual {v13, v3}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
             
-                move-result-object v15
+                move-result v3
             
-                invoke-virtual {v0, v11}, $responseHeaderMethod
+                if-nez v3, :cond_70
+            
+                invoke-virtual {v13, v4}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+            
+                move-result v3
+            
+                if-nez v3, :cond_70
+            
+                invoke-virtual {v13, v6}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+            
+                move-result v3
+            
+                if-eqz v3, :cond_73
+            
+                :cond_70
+                invoke-virtual {v12, v8}, $writeToMethod
+            
+                :cond_73
+                invoke-virtual {v8}, $bufferInStreamMethod
             
                 move-result-object v16
             
-                invoke-virtual {v1}, $bodyStreamMethod
+                invoke-virtual {v0, v14}, $responseHeaderMethod
             
                 move-result-object v17
+            
+                invoke-virtual {v1}, $bodyStreamMethod
+            
+                move-result-object v18
             
                 move-object v3, v10
             
                 move v4, v9
             
-                move-object v5, v12
+                move-object v5, v15
             
-                move-object v6, v15
+                move-object/from16 v6, v16
             
-                move-object/from16 v7, v16
+                move-object/from16 v7, v17
             
-                move-object/from16 v8, v17
+                move-object/from16 v19, v8
+            
+                move-object/from16 v8, v18
             
                 invoke-static/range {v3 .. v8}, Lapp/revanced/bilibili/patches/okhttp/OkHttpPatch;->hook(Ljava/lang/String;ILjava/lang/String;Ljava/io/InputStream;Ljava/lang/String;Ljava/io/InputStream;)Ljava/lang/String;
             
                 move-result-object v3
             
-                const-string v4, "Content-Type"
-            
-                invoke-virtual {v0, v4}, $responseHeaderMethod
+                invoke-static {v11}, $mediaTypeGetMethod
             
                 move-result-object v4
             
-                if-nez v4, :type_exist
+                invoke-static {v4, v3}, $createMethod
             
-                const-string v4, "application/json; charset=utf-8"
+                move-result-object v4
             
-                :type_exist
-                invoke-static {v4}, $mediaTypeGetMethod
+                const/16 v5, 0xc8
             
-                move-result-object v5
+                iput v5, v0, $codeField
             
-                invoke-static {v5, v3}, $createMethod
+                iput-object v4, v0, $responseBodyField
             
-                move-result-object v5
+                new-instance v5, $headersClass
             
-                const/16 v6, 0xc8
+                iget-object v6, v0, $responseHeadersField
             
-                iput v6, v0, $codeField
+                iget-object v6, v6, $headersValueField
             
-                iput-object v5, v0, $responseBodyField
+                invoke-static {v6, v14}, $removeHeaderMethod
             
-                new-instance v6, $headersClass
+                move-result-object v6
             
-                iget-object v7, v0, $responseHeadersField
+                invoke-direct {v5, v6}, $headersConstructor
             
-                iget-object v7, v7, $headersValueField
+                iput-object v5, v0, $responseHeadersField
             
-                invoke-static {v7, v11}, $removeHeaderMethod
-            
-                move-result-object v7
-            
-                invoke-direct {v6, v7}, $headersConstructor
-            
-                iput-object v6, v0, $responseHeadersField
-            
-                :exit
+                :cond_ab
                 return-void
             """.trimIndent()
             )
@@ -232,7 +308,7 @@ object OkHttpPatch : MultiMethodBytecodePatch(
                 """
                 invoke-virtual {p0}, $realCallGetMethod
                 move-result-object v0
-                invoke-direct {p0, v0}, $hookMethod
+                invoke-static {v0}, $hookMethod
                 return-object v0
             """.trimIndent()
             )
