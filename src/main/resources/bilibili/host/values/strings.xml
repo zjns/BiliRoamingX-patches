@@ -331,4 +331,6 @@
     <string name="biliroaming_disable_segmented_section_title">全局关闭章节进度条</string>
     <string name="biliroaming_hide_more_category_warning">更多服务隐藏后会导致设置入口消失！！！</string>
     <string name="biliroaming_disable_auto_next_play_title">小窗播放时禁止自动连播相关视频</string>
+    <string name="biliroaming_save_th_history_title">本地保存泰区视频播放进度</string>
+    <string name="biliroaming_save_th_history_summary">泰区视频播放进度由于无法云端同步至账号，故折中提供此选项</string>
 </resources>
