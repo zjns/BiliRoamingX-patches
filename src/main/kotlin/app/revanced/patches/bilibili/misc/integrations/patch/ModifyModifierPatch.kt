@@ -4,6 +4,7 @@ import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
+import app.revanced.patches.bilibili.utils.toPublic
 import com.android.tools.smali.dexlib2.AccessFlags
 
 @Patch(
@@ -17,7 +18,11 @@ object ModifyModifierPatch : BytecodePatch() {
             ?.mutableClass?.accessFlags = AccessFlags.PUBLIC.value
         context.findClass("Ltv/danmaku/bili/ui/main2/resource/MainResourceManager\$TabData;")
             ?.mutableClass?.accessFlags = AccessFlags.PUBLIC.value
-        context.findClass("Ltv/danmaku/bili/ui/main2/resource/MainResourceManager\$Tab;")
-            ?.mutableClass?.accessFlags = AccessFlags.PUBLIC.value
+        context.findClass("Ltv/danmaku/bili/ui/main2/resource/MainResourceManager\$Tab;")?.mutableClass?.run {
+            accessFlags = AccessFlags.PUBLIC.value
+            methods.first { it.name == "<init>" }.run {
+                accessFlags = accessFlags.toPublic()
+            }
+        }
     }
 }
