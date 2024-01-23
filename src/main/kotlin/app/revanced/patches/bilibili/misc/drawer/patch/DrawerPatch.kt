@@ -18,7 +18,7 @@ import com.android.tools.smali.dexlib2.AccessFlags
 @Patch(
     name = "Drawer",
     description = "我的页面移至侧滑栏辅助补丁",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object DrawerPatch : BytecodePatch(
     setOf(

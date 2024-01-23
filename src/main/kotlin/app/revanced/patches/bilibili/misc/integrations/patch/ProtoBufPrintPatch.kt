@@ -10,7 +10,7 @@ import app.revanced.patches.bilibili.utils.cloneMutable
 @Patch(
     name = "ProtoBuf print",
     description = "使 ProtoBuf toString 打印更具可读性",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object ProtoBufPrintPatch : BytecodePatch() {
     override fun execute(context: BytecodeContext) {

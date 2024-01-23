@@ -12,7 +12,7 @@ import com.android.tools.smali.dexlib2.Opcode
 @Patch(
     name = "Custom splash",
     description = "自定义启动图",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object CustomSplashPatch : BytecodePatch() {
     override fun execute(context: BytecodeContext) {

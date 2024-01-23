@@ -10,7 +10,7 @@ import app.revanced.util.resources.ResourceUtils.copyResources
 @Patch(
     name = "App icon",
     description = "恢复APP图标",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object AppIconPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {

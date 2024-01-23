@@ -12,7 +12,7 @@ import com.android.tools.smali.dexlib2.AccessFlags
 @Patch(
     name = "Lib bili",
     description = "查找网络请求签名及获取appKey方法",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object LibBiliPatch : BytecodePatch() {
     override fun execute(context: BytecodeContext) {

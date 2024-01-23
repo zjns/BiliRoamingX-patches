@@ -11,7 +11,7 @@ import app.revanced.patches.bilibili.misc.other.fingerprints.ShowPlayerToastFing
 @Patch(
     name = "Player toast",
     description = "播放器特定样式toast显示拦截",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object PlayerToastPatch : BytecodePatch(setOf(ShowPlayerToastFingerprint)) {
     override fun execute(context: BytecodeContext) {

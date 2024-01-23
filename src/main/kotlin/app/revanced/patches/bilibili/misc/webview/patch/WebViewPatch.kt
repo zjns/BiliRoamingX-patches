@@ -14,7 +14,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.Instruction
 @Patch(
     name = "Webview",
     description = "WebView 补丁",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object WebViewPatch : AbstractTransformInstructionsPatch<Instruction35cInfo>() {
     enum class MethodCall(

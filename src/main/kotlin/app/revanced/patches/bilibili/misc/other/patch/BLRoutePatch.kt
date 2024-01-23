@@ -12,7 +12,7 @@ import app.revanced.patches.bilibili.misc.other.fingerprints.RouteRequestFingerp
 @Patch(
     name = "BL route intercept",
     description = "哔哩哔哩页面路由修改",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object BLRoutePatch : BytecodePatch(setOf(BLRouteBuilderFingerprint, RouteRequestFingerprint)) {
     override fun execute(context: BytecodeContext) {

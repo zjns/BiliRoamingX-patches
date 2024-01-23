@@ -11,7 +11,7 @@ import org.w3c.dom.Element
 @Patch(
     name = "Splash",
     description = "闪屏页背景色跟随深色模式",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object SplashPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {

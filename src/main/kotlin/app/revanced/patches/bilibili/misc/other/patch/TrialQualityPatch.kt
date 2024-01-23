@@ -12,7 +12,7 @@ import app.revanced.patches.bilibili.utils.exception
 @Patch(
     name = "Trial quality",
     description = "试用画质辅助补丁",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object TrialQualityPatch : MultiMethodBytecodePatch(
     multiFingerprints = setOf(QualityViewHolderFingerprint)

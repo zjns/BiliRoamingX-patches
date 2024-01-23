@@ -20,7 +20,7 @@ import com.android.tools.smali.dexlib2.iface.value.StringEncodedValue
 @Patch(
     name = "Pegasus hook",
     description = "首页推荐流hook",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object PegasusPatch : BytecodePatch(
     setOf(

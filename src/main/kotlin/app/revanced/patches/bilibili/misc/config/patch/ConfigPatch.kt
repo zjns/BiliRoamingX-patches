@@ -13,7 +13,7 @@ import app.revanced.patches.bilibili.utils.cloneMutable
 @Patch(
     name = "Config",
     description = "Config hook",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object ConfigPatch : BytecodePatch(fingerprints = setOf(ABSourceFingerprint, ConfigSourceFingerprint)) {
     override fun execute(context: BytecodeContext) {

@@ -16,7 +16,7 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 @Patch(
     name = "Config",
     description = "集成获取Config方法",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object ConfigPatch : BytecodePatch(setOf(DanmakuFontSwitchPreferenceFingerprint, BaseMainFrameFragmentFingerprint)) {
     override fun execute(context: BytecodeContext) {

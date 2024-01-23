@@ -18,7 +18,7 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 @Patch(
     name = "Dark switch",
     description = "我的页面深色模式切换弹框确认",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object DarkSwitchPatch : BytecodePatch(setOf(SwitchDarkModeFingerprint)) {
     override fun execute(context: BytecodeContext) {

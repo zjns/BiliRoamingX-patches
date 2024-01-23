@@ -13,7 +13,7 @@ import com.android.tools.smali.dexlib2.AccessFlags
 @Patch(
     name = "Blkv",
     description = "集成BLKV",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object BLKVPatch : BytecodePatch(setOf(BLKVFingerprint)) {
     override fun execute(context: BytecodeContext) {

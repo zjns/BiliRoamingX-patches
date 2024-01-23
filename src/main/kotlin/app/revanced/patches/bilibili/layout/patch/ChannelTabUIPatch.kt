@@ -9,7 +9,7 @@ import app.revanced.patcher.patch.annotation.Patch
 @Patch(
     name = "Channel tab",
     description = "底栏添加频道辅助补丁",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object ChannelTabUIPatch : BytecodePatch() {
     override fun execute(context: BytecodeContext) {

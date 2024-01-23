@@ -9,7 +9,7 @@ import app.revanced.patches.shared.integrations.AbstractIntegrationsPatch
 
 @Patch(
     name = "Integrations",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")],
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")],
     requiresIntegrations = true
 )
 object IntegrationsPatch : AbstractIntegrationsPatch(

@@ -17,7 +17,7 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 @Patch(
     name = "Share",
     description = "分享处理相关补丁",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object SharePatch : BytecodePatch(setOf(ShareToFingerprint, AppendTrackingInfoFingerprint)) {
     override fun execute(context: BytecodeContext) {

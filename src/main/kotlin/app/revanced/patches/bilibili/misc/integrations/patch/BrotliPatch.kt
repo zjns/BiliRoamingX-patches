@@ -11,7 +11,7 @@ import app.revanced.patches.bilibili.misc.integrations.fingerprints.BrotliFinger
 @Patch(
     name = "Brotli",
     description = "集成Brotli",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object BrotliPatch : BytecodePatch(setOf(BrotliFingerprint)) {
     override fun execute(context: BytecodeContext) {

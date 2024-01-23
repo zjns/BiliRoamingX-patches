@@ -10,7 +10,7 @@ import app.revanced.patches.bilibili.misc.other.fingerprints.PublishToFollowingC
 @Patch(
     name = "Disable auto select",
     description = "禁止自动转到动态",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object PublishToFollowingPatch : BytecodePatch(setOf(PublishToFollowingConfigFingerprint)) {
     override fun execute(context: BytecodeContext) {

@@ -14,7 +14,7 @@ import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction11x
 @Patch(
     name = "Json",
     description = "通用阿里Fastjson反序列化数据修改",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object JSONPatch : BytecodePatch(setOf(JSONFingerprint)) {
     override fun execute(context: BytecodeContext) {

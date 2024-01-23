@@ -18,7 +18,7 @@ import com.android.tools.smali.dexlib2.Opcode
 @Patch(
     name = "Fix preference manager",
     description = "修复PreferenceManager被混淆后引起的问题",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")]
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object FixPreferenceManagerPatch : BytecodePatch(setOf(PreferenceManagerFingerprint)) {
     override fun execute(context: BytecodeContext) {

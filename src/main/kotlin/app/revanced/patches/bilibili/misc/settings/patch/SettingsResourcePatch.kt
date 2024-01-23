@@ -14,7 +14,7 @@ import app.revanced.util.resources.ResourceUtils.mergeStrings
 @Patch(
     name = "Settings resource patch",
     description = "哔哩漫游设置入口",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd")],
+    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")],
     dependencies = [ResourceMappingPatch::class]
 )
 object SettingsResourcePatch : AbstractSettingsResourcePatch(
