@@ -11,6 +11,8 @@ import app.revanced.patches.bilibili.misc.settings.fingerprints.PreferenceManage
 import app.revanced.patches.bilibili.utils.cloneMutable
 import app.revanced.patches.bilibili.utils.methodParameter
 import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction21c
+import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction35c
 
 /**
  * TODO: better way to solve it?
@@ -78,27 +80,28 @@ object FixPreferenceManagerPatch : BytecodePatch(setOf(PreferenceManagerFingerpr
             it.parameterTypes == listOf("Ljava/lang/String;") && it.returnType == "V"
         }
         settingsFragmentClass.methods.first { it.name == "fixPreferenceManager" }.run {
-            implementation!!.instructions.indexOfFirst { it.opcode == Opcode.CONST_CLASS }.run {
-                replaceInstruction(
-                    this, """
-                    const-class v1, $preferenceManagerDef
-                """.trimIndent()
-                )
+            val (i1, r1) = implementation!!.instructions.withIndex().firstNotNullOf { (index, inst) ->
+                if (inst.opcode == Opcode.CONST_CLASS) {
+                    index to (inst as BuilderInstruction21c).registerA
+                } else null
             }
-            implementation!!.instructions.indexOfFirst { it.opcode == Opcode.NEW_INSTANCE }.run {
-                replaceInstruction(
-                    this, """
-                    new-instance v1, $preferenceManagerDef
-                """.trimIndent()
-                )
+            replaceInstruction(i1, "const-class v$r1, $preferenceManagerDef")
+            val (i2, r2) = implementation!!.instructions.withIndex().firstNotNullOf { (index, inst) ->
+                if (inst.opcode == Opcode.NEW_INSTANCE) {
+                    index to (inst as BuilderInstruction21c).registerA
+                } else null
             }
-            implementation!!.instructions.indexOfFirst { it.opcode == Opcode.INVOKE_DIRECT }.run {
-                replaceInstruction(
-                    this, """
-                    invoke-direct {v1, v4}, $preferenceManagerDef-><init>(Landroid/content/Context;)V
-                """.trimIndent()
-                )
+            replaceInstruction(i2, "new-instance v$r2, $preferenceManagerDef")
+            val (index, registers) = implementation!!.instructions.withIndex().firstNotNullOf { (index, inst) ->
+                if (inst.opcode == Opcode.INVOKE_DIRECT && inst is BuilderInstruction35c && inst.registerCount == 2) {
+                    index to inst.let { arrayOf(it.registerC, it.registerD) }
+                } else null
             }
+            replaceInstruction(
+                index, """
+                invoke-direct {${registers.joinToString(separator = ",") { "v$it" }}}, $preferenceManagerDef-><init>(Landroid/content/Context;)V
+            """.trimIndent()
+            )
         }
         settingsFragmentClass.methods.first { it.name == "onCreate" }.run {
             replaceInstruction(
