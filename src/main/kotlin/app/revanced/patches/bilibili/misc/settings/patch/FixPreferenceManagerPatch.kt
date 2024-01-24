@@ -27,11 +27,6 @@ object FixPreferenceManagerPatch : BytecodePatch(setOf(PreferenceManagerFingerpr
 
         val checkBoxGroupPreferenceClass =
             context.findClass("Lapp/revanced/bilibili/widget/CheckBoxGroupPreference;")!!.mutableClass
-        checkBoxGroupPreferenceClass.methods.first { it.name == "notifyChanged" }.replaceInstruction(
-            0, """
-            invoke-virtual {p0}, Landroidx/preference/PreferenceCategory;->getPreferenceManager()$preferenceManagerDef
-        """.trimIndent()
-        )
         checkBoxGroupPreferenceClass.methods.run {
             first { it.name == "onAttachedToHierarchy" }.apply {
                 replaceInstruction(
