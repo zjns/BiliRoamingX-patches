@@ -43,6 +43,10 @@
           app:radioDefaultValue="0"
           app:radioEntries="@array/biliroaming_display_size_entries"
           app:radioEntryValues="@array/biliroaming_display_size_values" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="enable_av"
+            android:title="@string/biliroaming_enable_av_title"
+            android:summary="@string/biliroaming_enable_av_summary" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory
