@@ -333,4 +333,6 @@
     <string name="biliroaming_disable_auto_next_play_title">小窗播放时禁止自动连播相关视频</string>
     <string name="biliroaming_save_th_history_title">本地保存泰区视频播放进度</string>
     <string name="biliroaming_save_th_history_summary">泰区视频播放进度由于无法云端同步至账号，故提供此功能</string>
+    <string name="biliroaming_dynamic_force_old_tab_title">强制标签栏样式为旧版</string>
+    <string name="biliroaming_dynamic_force_old_tab_summary">恢复标签栏样式为视频和关注作为一级标签，取消二级标签，允许侧滑切换</string>
 </resources>
