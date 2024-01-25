@@ -15,7 +15,11 @@ import com.android.tools.smali.dexlib2.AccessFlags
 @Patch(
     name = "OkHttp",
     description = "OkHttp网络请求响应Hook",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
+    compatiblePackages = [
+        CompatiblePackage(name = "tv.danmaku.bili"),
+        CompatiblePackage(name = "tv.danmaku.bilibilihd"),
+        CompatiblePackage(name = "com.bilibili.app.in")
+    ]
 )
 object OkHttpPatch : MultiMethodBytecodePatch(
     fingerprints = setOf(

@@ -9,7 +9,11 @@ import app.revanced.patcher.patch.annotation.Patch
 @Patch(
     name = "Hide follow button",
     description = "不显示关注按钮",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
+    compatiblePackages = [
+        CompatiblePackage(name = "tv.danmaku.bili"),
+        CompatiblePackage(name = "tv.danmaku.bilibilihd"),
+        CompatiblePackage(name = "com.bilibili.app.in")
+    ]
 )
 object HideFollowButtonPatch : BytecodePatch() {
     override fun execute(context: BytecodeContext) {

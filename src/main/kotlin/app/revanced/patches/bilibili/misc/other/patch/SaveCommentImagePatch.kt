@@ -11,7 +11,11 @@ import com.android.tools.smali.dexlib2.Opcode
 @Patch(
     name = "Save comment images",
     description = "保存评论图片补丁",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
+    compatiblePackages = [
+        CompatiblePackage(name = "tv.danmaku.bili"),
+        CompatiblePackage(name = "tv.danmaku.bilibilihd"),
+        CompatiblePackage(name = "com.bilibili.app.in")
+    ]
 )
 object SaveCommentImagePatch : BytecodePatch() {
     override fun execute(context: BytecodeContext) {

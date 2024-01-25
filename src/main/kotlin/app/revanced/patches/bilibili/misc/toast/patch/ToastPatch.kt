@@ -16,7 +16,11 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 @Patch(
     name = "Toast",
     description = "调用APP自带Toast补丁",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
+    compatiblePackages = [
+        CompatiblePackage(name = "tv.danmaku.bili"),
+        CompatiblePackage(name = "tv.danmaku.bilibilihd"),
+        CompatiblePackage(name = "com.bilibili.app.in")
+    ]
 )
 object ToastPatch : BytecodePatch(setOf(LessonsModeToastFingerprint)) {
     override fun execute(context: BytecodeContext) {

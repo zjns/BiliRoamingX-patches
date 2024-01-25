@@ -11,7 +11,11 @@ import app.revanced.patches.bilibili.misc.other.fingerprints.TeenagersModeFinger
 @Patch(
     name = "Teenager mode",
     description = "禁用青少年模式弹窗",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
+    compatiblePackages = [
+        CompatiblePackage(name = "tv.danmaku.bili"),
+        CompatiblePackage(name = "tv.danmaku.bilibilihd"),
+        CompatiblePackage(name = "com.bilibili.app.in")
+    ]
 )
 object TeenagerModePatch : BytecodePatch(setOf(TeenagersModeFingerprint)) {
     override fun execute(context: BytecodeContext) {

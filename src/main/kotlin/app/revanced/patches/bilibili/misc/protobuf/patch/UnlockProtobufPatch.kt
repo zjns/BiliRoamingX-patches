@@ -13,7 +13,11 @@ import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction35c
 @Patch(
     name = "Unlock ProtoBuf",
     description = "公开ProtoBuf实体构建方法",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
+    compatiblePackages = [
+        CompatiblePackage(name = "tv.danmaku.bili"),
+        CompatiblePackage(name = "tv.danmaku.bilibilihd"),
+        CompatiblePackage(name = "com.bilibili.app.in")
+    ]
 )
 object UnlockProtobufPatch : BytecodePatch() {
     override fun execute(context: BytecodeContext) {

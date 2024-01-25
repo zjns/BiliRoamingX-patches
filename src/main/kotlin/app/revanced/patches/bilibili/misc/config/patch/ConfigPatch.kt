@@ -17,7 +17,11 @@ import app.revanced.patches.bilibili.misc.integrations.patch.ConfigPatch as Inte
     name = "Config",
     description = "Config hook",
     dependencies = [IntegrationConfigPatch::class],
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
+    compatiblePackages = [
+        CompatiblePackage(name = "tv.danmaku.bili"),
+        CompatiblePackage(name = "tv.danmaku.bilibilihd"),
+        CompatiblePackage(name = "com.bilibili.app.in")
+    ]
 )
 object ConfigPatch : BytecodePatch(fingerprints = setOf(ABSourceFingerprint, ConfigSourceFingerprint)) {
     override fun execute(context: BytecodeContext) {

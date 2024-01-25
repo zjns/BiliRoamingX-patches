@@ -15,7 +15,11 @@ import com.android.tools.smali.dexlib2.iface.Method
 @Patch(
     name = "Video default quality",
     description = "视频默认画质设置",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
+    compatiblePackages = [
+        CompatiblePackage(name = "tv.danmaku.bili"),
+        CompatiblePackage(name = "tv.danmaku.bilibilihd"),
+        CompatiblePackage(name = "com.bilibili.app.in")
+    ]
 )
 object VideoQualityPatch : MultiMethodBytecodePatch(
     fingerprints = setOf(PlayerSettingHelperFingerprint),

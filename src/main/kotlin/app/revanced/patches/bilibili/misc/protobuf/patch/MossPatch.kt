@@ -15,7 +15,11 @@ import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 @Patch(
     name = "Moss",
     description = "gRPC 通信引擎服务 hook",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
+    compatiblePackages = [
+        CompatiblePackage(name = "tv.danmaku.bili"),
+        CompatiblePackage(name = "tv.danmaku.bilibilihd"),
+        CompatiblePackage(name = "com.bilibili.app.in")
+    ]
 )
 object MossPatch : BytecodePatch(setOf(MossServiceFingerprint, MossMiddlewareGaiaFingerprint)) {
     override fun execute(context: BytecodeContext) {

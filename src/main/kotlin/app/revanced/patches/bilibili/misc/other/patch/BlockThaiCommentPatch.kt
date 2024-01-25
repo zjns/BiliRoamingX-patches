@@ -10,7 +10,11 @@ import com.android.tools.smali.dexlib2.AccessFlags
 @Patch(
     name = "Block thai comment",
     description = "禁止泰区评论",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
+    compatiblePackages = [
+        CompatiblePackage(name = "tv.danmaku.bili"),
+        CompatiblePackage(name = "tv.danmaku.bilibilihd"),
+        CompatiblePackage(name = "com.bilibili.app.in")
+    ]
 )
 object BlockThaiCommentPatch : BytecodePatch() {
     override fun execute(context: BytecodeContext) {

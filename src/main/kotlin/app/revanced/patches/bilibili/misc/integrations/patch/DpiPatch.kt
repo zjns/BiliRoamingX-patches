@@ -12,7 +12,11 @@ import app.revanced.patches.bilibili.misc.integrations.fingerprints.AppCompatAct
 @Patch(
     name = "Dpi",
     description = "自定义dpi辅助补丁",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
+    compatiblePackages = [
+        CompatiblePackage(name = "tv.danmaku.bili"),
+        CompatiblePackage(name = "tv.danmaku.bilibilihd"),
+        CompatiblePackage(name = "com.bilibili.app.in")
+    ]
 )
 object DpiPatch : BytecodePatch(setOf(AppCompatActivityFingerprint)) {
     override fun execute(context: BytecodeContext) {

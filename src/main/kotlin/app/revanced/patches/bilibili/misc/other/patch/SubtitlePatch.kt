@@ -15,7 +15,11 @@ import com.android.tools.smali.dexlib2.Opcode
 @Patch(
     name = "Subtitle",
     description = "字幕相关补丁",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
+    compatiblePackages = [
+        CompatiblePackage(name = "tv.danmaku.bili"),
+        CompatiblePackage(name = "tv.danmaku.bilibilihd"),
+        CompatiblePackage(name = "com.bilibili.app.in")
+    ]
 )
 object SubtitlePatch : BytecodePatch() {
     override fun execute(context: BytecodeContext) {

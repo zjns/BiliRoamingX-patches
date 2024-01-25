@@ -9,7 +9,11 @@ import app.revanced.patcher.patch.annotation.Patch
 @Patch(
     name = "Block up recommend ads",
     description = "屏蔽UP主推荐广告",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
+    compatiblePackages = [
+        CompatiblePackage(name = "tv.danmaku.bili"),
+        CompatiblePackage(name = "tv.danmaku.bilibilihd"),
+        CompatiblePackage(name = "com.bilibili.app.in")
+    ]
 )
 object UpRcmdAdsPatch : BytecodePatch() {
     override fun execute(context: BytecodeContext) {
@@ -23,7 +27,7 @@ object UpRcmdAdsPatch : BytecodePatch() {
                 return-object v0
                 :jump
                 nop
-                """.trimIndent()
+            """.trimIndent()
             )
         }
     }

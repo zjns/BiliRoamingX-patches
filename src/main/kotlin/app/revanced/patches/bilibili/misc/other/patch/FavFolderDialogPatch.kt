@@ -14,7 +14,11 @@ import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction35c
 @Patch(
     name = "Forbid auto subscribe",
     description = "禁止自动勾选订阅合集",
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
+    compatiblePackages = [
+        CompatiblePackage(name = "tv.danmaku.bili"),
+        CompatiblePackage(name = "tv.danmaku.bilibilihd"),
+        CompatiblePackage(name = "com.bilibili.app.in")
+    ]
 )
 object FavFolderDialogPatch : BytecodePatch(
     setOf(

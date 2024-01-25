@@ -15,7 +15,11 @@ import app.revanced.patches.bilibili.utils.cloneMutable
     name = "Number format",
     description = "数字格式化补丁",
     dependencies = [BiliAccountsPatch::class],
-    compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
+    compatiblePackages = [
+        CompatiblePackage(name = "tv.danmaku.bili"),
+        CompatiblePackage(name = "tv.danmaku.bilibilihd"),
+        CompatiblePackage(name = "com.bilibili.app.in")
+    ]
 )
 object NumberFormatPatch : BytecodePatch(
     setOf(MineBindAccountStateFingerprint, SpaceBindAccountStateFingerprint)
