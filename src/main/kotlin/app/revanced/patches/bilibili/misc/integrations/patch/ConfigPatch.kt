@@ -19,6 +19,9 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
     compatiblePackages = [CompatiblePackage(name = "tv.danmaku.bili"), CompatiblePackage(name = "tv.danmaku.bilibilihd"), CompatiblePackage(name = "com.bilibili.app.in")]
 )
 object ConfigPatch : BytecodePatch(setOf(DanmakuFontSwitchPreferenceFingerprint, BaseMainFrameFragmentFingerprint)) {
+    var configManagerType: String = ""
+        private set
+
     override fun execute(context: BytecodeContext) {
         val method = DanmakuFontSwitchPreferenceFingerprint.result?.method
             ?: throw DanmakuFontSwitchPreferenceFingerprint.exception
@@ -27,6 +30,7 @@ object ConfigPatch : BytecodePatch(setOf(DanmakuFontSwitchPreferenceFingerprint,
                 it.reference as MethodReference
             } else null
         }
+        configManagerType = abMethodRef.definingClass
         val getMethodRef = method.implementation!!.instructions.firstNotNullOf {
             if (it.opcode == Opcode.INVOKE_INTERFACE && (it as Instruction35c).registerCount == 3) {
                 it.reference as MethodReference
