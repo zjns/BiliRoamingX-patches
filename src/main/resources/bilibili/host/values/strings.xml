@@ -337,4 +337,13 @@
     <string name="biliroaming_dynamic_force_old_tab_summary">恢复标签栏样式为视频和关注作为一级标签，取消二级标签，允许侧滑切换</string>
     <string name="biliroaming_enable_av_title">显示AV号</string>
     <string name="biliroaming_enable_av_summary">视频详情页显示为AV号，同时净化分享启用时，分享链接中的BV号也将被替换为AV号</string>
+    <string name="biliroaming_speed_formatter">%sKB/s</string>
+    <string name="biliroaming_speed">速度</string>
+    <string name="biliroaming_test_upos_title">UPOS 服务器测速</string>
+    <string name="biliroaming_test_upos_summary">选择最快的 UPOS 服务器以获得最好体验</string>
+    <string name="biliroaming_close">关闭</string>
+    <string name="biliroaming_speed_testing">正在测速……</string>
+    <string name="biliroaming_speed_test_failed">测速失败</string>
+    <string name="biliroaming_speed_test_ok">测速完成</string>
+    <string name="biliroaming_upos_enabled">已启用 UPOS 服务器：%s</string>
 </resources>

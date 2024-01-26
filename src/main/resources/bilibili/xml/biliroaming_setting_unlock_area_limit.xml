@@ -30,6 +30,10 @@
             app:radioDefaultValue="@string/biliroaming_hw_host"
             app:radioEntries="@array/biliroaming_upos_entries"
             app:radioEntryValues="@array/biliroaming_upos_values" />
+        <androidx.preference.Preference
+            android:key="test_upos"
+            android:title="@string/biliroaming_test_upos_title"
+            android:summary="@string/biliroaming_test_upos_summary" />
         <androidx.preference.SwitchPreferenceCompat
             android:key="save_th_history"
             android:defaultValue="true"
