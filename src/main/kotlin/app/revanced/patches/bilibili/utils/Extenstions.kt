@@ -13,6 +13,10 @@ import com.android.tools.smali.dexlib2.immutable.instruction.ImmutableInstructio
 import com.android.tools.smali.dexlib2.immutable.value.ImmutableArrayEncodedValue
 import com.android.tools.smali.dexlib2.immutable.value.ImmutableEncodedValue
 import com.android.tools.smali.dexlib2.immutable.value.ImmutableStringEncodedValue
+import org.w3c.dom.Document
+import org.w3c.dom.Element
+import org.w3c.dom.Node
+import org.w3c.dom.NodeList
 
 fun Method.clone(
     registerCount: Int = implementation?.registerCount ?: 0,
@@ -116,3 +120,19 @@ val String.className: String
             substring(1, length - 1).replace('/', '.')
         else replace('/', '.')
     }
+
+operator fun Document.get(tagName: String): Element =
+    getElementsByTagName(tagName).item(0) as Element
+
+fun Node.children(): Sequence<Element> = object : Sequence<Element> {
+    override fun iterator(): Iterator<Element> = childNodes.iterator()
+}
+
+operator fun NodeList.iterator(): Iterator<Element> = object : Iterator<Element> {
+    private var index = 0
+    override fun hasNext(): Boolean = 2 * index + 1 < length
+    override fun next(): Element = item((2 * (index++) + 1)) as Element // jump meaningless text node
+}
+
+operator fun Element.get(attrName: String): String = getAttribute(attrName)
+operator fun Element.set(attrName: String, attrValue: String): Unit = setAttribute(attrName, attrValue)

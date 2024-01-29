@@ -4,9 +4,11 @@ import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
+import app.revanced.patches.bilibili.utils.children
+import app.revanced.patches.bilibili.utils.get
+import app.revanced.patches.bilibili.utils.set
 import app.revanced.patches.youtube.layout.theme.ThemeBytecodePatch.darkThemeBackgroundColor
 import app.revanced.patches.youtube.layout.theme.ThemeBytecodePatch.lightThemeBackgroundColor
-import org.w3c.dom.Element
 
 @Patch(
     name = "Splash",
@@ -36,25 +38,16 @@ object SplashPatch : ResourcePatch() {
             COLOR_NAME_BILIROAMING_BG_SPLASH, darkThemeBackgroundColor!!
         )
         context.xmlEditor["res/drawable/layerlist_splash.xml"].use { editor ->
-            val layerListNode = editor.file.getElementsByTagName("layer-list").item(0) as Element
-            val children = layerListNode.childNodes
-            out@ for (i in 0 until children.length) {
-                val item = children.item(i) as? Element ?: continue
-                val itemChildren = item.childNodes
-                for (j in 0 until itemChildren.length) {
-                    val itemChild = itemChildren.item(j) as? Element ?: continue
-                    if (itemChild.tagName == "color") {
-                        itemChild.setAttribute("android:color", "@color/$COLOR_NAME_BILIROAMING_BG_SPLASH")
-                        break@out
-                    }
-                }
-            }
+            editor.file["layer-list"].children().flatMap { it.children() }
+                .first { it.tagName == "color" }["android:color"] = "@color/$COLOR_NAME_BILIROAMING_BG_SPLASH"
+        }
+        context.xmlEditor["res/drawable/safe_mode_layerlist_splash.xml"].use { editor ->
+            editor.file["layer-list"].children().flatMap { it.children() }
+                .first { it.tagName == "color" }["android:color"] = "@color/$COLOR_NAME_BILIROAMING_BG_SPLASH"
         }
         context.xmlEditor["res/layout/bili_app_layout_brand_splash_fragment.xml"].use { editor ->
-            val rootNode = editor.file.getElementsByTagName(
-                "androidx.constraintlayout.widget.ConstraintLayout"
-            ).item(0) as Element
-            rootNode.setAttribute("android:background", "@color/$COLOR_NAME_BILIROAMING_BG_SPLASH")
+            editor.file["androidx.constraintlayout.widget.ConstraintLayout"]["android:background"] =
+                "@color/$COLOR_NAME_BILIROAMING_BG_SPLASH"
         }
     }
 
@@ -65,17 +58,13 @@ object SplashPatch : ResourcePatch() {
         name: String,
         value: String,
     ) = context.xmlEditor[resourceFile].use { editor ->
-        val resourcesNode = editor.file.getElementsByTagName("resources").item(0) as Element
-        val children = resourcesNode.childNodes
-        for (i in 0 until children.length) {
-            val style = children.item(i) as? Element ?: continue
-            if (style.tagName == "style" && style.getAttribute("name") == styleName) {
-                editor.file.createElement("item").apply {
-                    setAttribute("name", name)
-                    textContent = value
-                }.also { style.appendChild(it) }
-                break
-            }
+        editor.file["resources"].children().find {
+            it.tagName == "style" && it["name"] == styleName
+        }?.let { style ->
+            editor.file.createElement("item").apply {
+                this["name"] = name
+                textContent = value
+            }.also { style.appendChild(it) }
         }
     }
 
@@ -85,10 +74,9 @@ object SplashPatch : ResourcePatch() {
         name: String,
         value: String
     ) = context.xmlEditor[resourceFile].use {
-        val resourcesNode = it.file.getElementsByTagName("resources").item(0) as Element
-        resourcesNode.appendChild(
+        it.file["resources"].appendChild(
             it.file.createElement("color").apply {
-                setAttribute("name", name)
+                this["name"] = name
                 textContent = value
             })
     }
