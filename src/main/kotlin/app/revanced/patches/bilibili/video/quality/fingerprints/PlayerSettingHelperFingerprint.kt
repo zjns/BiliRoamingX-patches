@@ -1,6 +1,6 @@
 package app.revanced.patches.bilibili.video.quality.fingerprints
 
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
+import app.revanced.patcher.fingerprint.MethodFingerprint
 
 object PlayerSettingHelperFingerprint : MethodFingerprint(
     returnType = "I",

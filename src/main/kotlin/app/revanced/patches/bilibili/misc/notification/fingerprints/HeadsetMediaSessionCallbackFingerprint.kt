@@ -1,6 +1,6 @@
 package app.revanced.patches.bilibili.misc.notification.fingerprints
 
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
+import app.revanced.patcher.fingerprint.MethodFingerprint
 
 object HeadsetMediaSessionCallbackFingerprint : MethodFingerprint(
     strings = listOf("onMediaButtonEvent has a exception keyEventMessage:"),

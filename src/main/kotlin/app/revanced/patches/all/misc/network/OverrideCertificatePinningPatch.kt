@@ -4,7 +4,7 @@ import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.all.misc.debugging.EnableAndroidDebuggingPatch
-import org.w3c.dom.Element
+import app.revanced.util.get
 import java.io.File
 
 @Patch(
@@ -21,7 +21,7 @@ object OverrideCertificatePinningPatch : ResourcePatch() {
         // Add android:networkSecurityConfig="@xml/network_security_config" and the "networkSecurityConfig" attribute if it does not exist.
         context.xmlEditor["AndroidManifest.xml"].use { editor ->
             val document = editor.file
-            val applicationNode = document.getElementsByTagName("application").item(0) as Element
+            val applicationNode = document["application"]
 
             if (!applicationNode.hasAttribute("networkSecurityConfig")) {
                 document.createAttribute("android:networkSecurityConfig")

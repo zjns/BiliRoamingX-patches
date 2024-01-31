@@ -1,6 +1,6 @@
 package app.revanced.patches.bilibili.misc.darkswitch.fingerprints
 
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
+import app.revanced.patcher.fingerprint.MethodFingerprint
 
 object SwitchDarkModeFingerprint : MethodFingerprint(
     strings = listOf("default"),

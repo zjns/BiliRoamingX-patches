@@ -15,7 +15,7 @@ import app.revanced.patcher.patch.annotation.Patch
         CompatiblePackage(name = "com.bilibili.app.in")
     ]
 )
-object UpRcmdAdsPatch : BytecodePatch() {
+object UpRcmdAdsPatch : BytecodePatch(emptySet()) {
     override fun execute(context: BytecodeContext) {
         context.findClass("Lcom/bapis/bilibili/ad/v1/SourceContentDto;")?.let { c ->
             c.mutableClass.methods.find { it.name == "getAdContent" }?.addInstructionsWithLabels(

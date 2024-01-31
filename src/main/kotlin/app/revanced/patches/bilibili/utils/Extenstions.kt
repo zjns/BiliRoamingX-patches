@@ -13,10 +13,6 @@ import com.android.tools.smali.dexlib2.immutable.instruction.ImmutableInstructio
 import com.android.tools.smali.dexlib2.immutable.value.ImmutableArrayEncodedValue
 import com.android.tools.smali.dexlib2.immutable.value.ImmutableEncodedValue
 import com.android.tools.smali.dexlib2.immutable.value.ImmutableStringEncodedValue
-import org.w3c.dom.Document
-import org.w3c.dom.Element
-import org.w3c.dom.Node
-import org.w3c.dom.NodeList
 
 fun Method.clone(
     registerCount: Int = implementation?.registerCount ?: 0,
@@ -120,30 +116,3 @@ val String.className: String
             substring(1, length - 1).replace('/', '.')
         else replace('/', '.')
     }
-
-operator fun Document.get(tagName: String): Element =
-    getElementsByTagName(tagName).item(0) as Element
-
-fun Node.children(): Sequence<Element> =
-    childNodes.iterator().asSequence().filterIsInstance<Element>()
-
-operator fun NodeList.iterator(): Iterator<Node> = object : Iterator<Node> {
-    private var index = 0
-    override fun hasNext(): Boolean = index < length
-    override fun next(): Node = item(index++)
-}
-
-operator fun Element.get(attrName: String): String = getAttribute(attrName)
-operator fun Element.set(attrName: String, attrValue: String): Unit = setAttribute(attrName, attrValue)
-
-fun Element.appendChild(tagName: String, build: Element.() -> Unit) {
-    appendChild(ownerDocument.createElement(tagName).apply(build))
-}
-
-fun Element.insertBefore(refChild: Node, tagName: String, build: Element.() -> Unit) {
-    insertBefore(ownerDocument.createElement(tagName).apply(build), refChild)
-}
-
-fun Element.insertChild(index: Int, tagName: String, build: Element.() -> Unit) {
-    insertBefore(ownerDocument.createElement(tagName).apply(build), children().elementAt(index))
-}

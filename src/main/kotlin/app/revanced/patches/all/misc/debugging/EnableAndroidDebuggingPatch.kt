@@ -3,7 +3,8 @@ package app.revanced.patches.all.misc.debugging
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotation.Patch
-import org.w3c.dom.Element
+import app.revanced.util.get
+import app.revanced.util.set
 
 @Patch(
     name = "Enable Android debugging",
@@ -14,13 +15,7 @@ import org.w3c.dom.Element
 object EnableAndroidDebuggingPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
         context.xmlEditor["AndroidManifest.xml"].use { dom ->
-            val applicationNode = dom
-                .file
-                .getElementsByTagName("application")
-                .item(0) as Element
-
-            // set application as debuggable
-            applicationNode.setAttribute("android:debuggable", "true")
+            dom.file["application"]["android:debuggable"] = "true"
         }
     }
 }

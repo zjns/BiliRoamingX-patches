@@ -1,6 +1,5 @@
 package app.revanced.patches.bilibili.misc.config.patch
 
-import app.revanced.extensions.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
@@ -10,6 +9,7 @@ import app.revanced.patcher.util.proxy.mutableTypes.MutableClass
 import app.revanced.patches.bilibili.misc.config.fingerprints.ABSourceFingerprint
 import app.revanced.patches.bilibili.misc.config.fingerprints.ConfigSourceFingerprint
 import app.revanced.patches.bilibili.utils.cloneMutable
+import app.revanced.util.exception
 import com.android.tools.smali.dexlib2.iface.Method
 import app.revanced.patches.bilibili.misc.integrations.patch.ConfigPatch as IntegrationConfigPatch
 

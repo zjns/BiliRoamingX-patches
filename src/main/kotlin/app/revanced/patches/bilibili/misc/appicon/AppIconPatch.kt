@@ -4,8 +4,8 @@ import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
-import app.revanced.util.resources.ResourceUtils
-import app.revanced.util.resources.ResourceUtils.copyResources
+import app.revanced.util.ResourceGroup
+import app.revanced.util.copyResources
 
 @Patch(
     name = "App icon",
@@ -34,11 +34,11 @@ object AppIconPatch : ResourcePatch() {
             "mipmap-xxxhdpi"
         )
         iconPaths.forEach {
-            ResourceUtils.ResourceGroup(it, *iconFiles).run {
+            ResourceGroup(it, *iconFiles).run {
                 context.copyResources("bilibili/appicon", this)
             }
         }
-        ResourceUtils.ResourceGroup(
+        ResourceGroup(
             "mipmap-anydpi-v26", "ic_launcher.xml", "ic_launcher_round.xml"
         ).run {
             context.copyResources("bilibili/appicon", this)

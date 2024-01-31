@@ -4,9 +4,9 @@ import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
-import app.revanced.patches.bilibili.utils.appendChild
-import app.revanced.patches.bilibili.utils.get
-import app.revanced.patches.bilibili.utils.set
+import app.revanced.util.appendChild
+import app.revanced.util.get
+import app.revanced.util.set
 
 @Patch(
     name = "Inject DocumentsProvider",

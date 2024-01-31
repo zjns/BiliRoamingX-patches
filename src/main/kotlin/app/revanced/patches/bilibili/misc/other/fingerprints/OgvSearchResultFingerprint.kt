@@ -1,6 +1,6 @@
 package app.revanced.patches.bilibili.misc.other.fingerprints
 
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
+import app.revanced.patcher.fingerprint.MethodFingerprint
 
 /**
  * from pink

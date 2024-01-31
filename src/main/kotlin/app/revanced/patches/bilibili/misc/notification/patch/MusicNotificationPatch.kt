@@ -1,7 +1,6 @@
 package app.revanced.patches.bilibili.misc.notification.patch
 
-import app.revanced.extensions.exception
-import app.revanced.extensions.findMutableMethodOf
+import app.revanced.util.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
@@ -17,6 +16,7 @@ import app.revanced.patches.bilibili.misc.notification.fingerprints.LiveNotifica
 import app.revanced.patches.bilibili.misc.notification.fingerprints.MediaSessionCallbackApi21Fingerprint
 import app.revanced.patches.bilibili.misc.notification.fingerprints.NotificationStyleAbFingerprint
 import app.revanced.patches.bilibili.utils.*
+import app.revanced.util.findMutableMethodOf
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.AnnotationVisibility
 import com.android.tools.smali.dexlib2.Opcode

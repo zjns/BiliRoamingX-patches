@@ -1,8 +1,8 @@
 package app.revanced.patches.bilibili.misc.integrations.fingerprints
 
-import app.revanced.patches.shared.integrations.AbstractIntegrationsPatch.IntegrationsFingerprint
+import app.revanced.patches.shared.misc.integrations.BaseIntegrationsPatch
 
-object InitFingerprint : IntegrationsFingerprint(
+object InitFingerprint : BaseIntegrationsPatch.IntegrationsFingerprint(
     customFingerprint = { methodDef, _ ->
         methodDef.definingClass == "Lcom/bilibili/gripper/BiliApp;" && methodDef.name == "onCreate"
     }

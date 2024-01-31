@@ -1,7 +1,7 @@
 package app.revanced.patches.bilibili.patcher.patch
 
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
+import app.revanced.patcher.fingerprint.MethodFingerprint
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patches.bilibili.patcher.fingerprint.MultiMethodFingerprint
 import app.revanced.patches.bilibili.patcher.fingerprint.MultiMethodFingerprint.Companion.resolve

@@ -1,6 +1,6 @@
 package app.revanced.patches.bilibili.misc.theme.fingerprints
 
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
+import app.revanced.patcher.fingerprint.MethodFingerprint
 
 object SkinListFingerprint : MethodFingerprint(
     returnType = "V",

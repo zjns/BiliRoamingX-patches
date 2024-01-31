@@ -4,12 +4,11 @@ import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
-import app.revanced.patches.bilibili.utils.appendChild
-import app.revanced.patches.bilibili.utils.children
-import app.revanced.patches.bilibili.utils.get
-import app.revanced.patches.bilibili.utils.set
-import app.revanced.patches.youtube.layout.theme.ThemeBytecodePatch.darkThemeBackgroundColor
-import app.revanced.patches.youtube.layout.theme.ThemeBytecodePatch.lightThemeBackgroundColor
+import app.revanced.patcher.patch.options.PatchOption.PatchExtensions.stringPatchOption
+import app.revanced.util.appendChild
+import app.revanced.util.children
+import app.revanced.util.get
+import app.revanced.util.set
 
 @Patch(
     name = "Splash",
@@ -21,6 +20,47 @@ import app.revanced.patches.youtube.layout.theme.ThemeBytecodePatch.lightThemeBa
     ]
 )
 object SplashPatch : ResourcePatch() {
+
+    private const val BLACK_COLOR = "@android:color/black"
+    private const val WHITE_COLOR = "@android:color/white"
+
+    private val darkThemeBackgroundColor by stringPatchOption(
+        key = "darkThemeBackgroundColor",
+        default = BLACK_COLOR,
+        values = mapOf(
+            "Amoled black" to BLACK_COLOR,
+            "Material You" to "@android:color/system_neutral1_900",
+            "Classic (old YouTube)" to "#FF212121",
+            "Catppuccin (Mocha)" to "#FF181825",
+            "Dark pink" to "#FF290025",
+            "Dark blue" to "#FF001029",
+            "Dark green" to "#FF002905",
+            "Dark yellow" to "#FF282900",
+            "Dark orange" to "#FF291800",
+            "Dark red" to "#FF290000"
+        ),
+        title = "Dark theme background color",
+        description = "Can be a hex color (#AARRGGBB) or a color resource reference.",
+    )
+
+    private val lightThemeBackgroundColor by stringPatchOption(
+        key = "lightThemeBackgroundColor",
+        default = WHITE_COLOR,
+        values = mapOf(
+            "White" to WHITE_COLOR,
+            "Material You" to "@android:color/system_neutral1_50",
+            "Catppuccin (Latte)" to "#FFE6E9EF",
+            "Light pink" to "#FFFCCFF3",
+            "Light blue" to "#FFD1E0FF",
+            "Light green" to "#FFCCFFCC",
+            "Light yellow" to "#FFFDFFCC",
+            "Light orange" to "#FFFFE6CC",
+            "Light red" to "#FFFFD6D6"
+        ),
+        title = "Light theme background color",
+        description = "Can be a hex color (#AARRGGBB) or a color resource reference.",
+    )
+
     override fun execute(context: ResourceContext) {
         addResourceStyleItem(
             context, "res/values/styles.xml",

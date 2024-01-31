@@ -1,19 +1,12 @@
 package app.revanced.patches.bilibili.misc.settings.patch
 
 import app.revanced.patcher.data.ResourceContext
+import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.util.DomFileEditor
-import app.revanced.patches.bilibili.utils.appendChild
-import app.revanced.patches.bilibili.utils.get
-import app.revanced.patches.bilibili.utils.insertBefore
-import app.revanced.patches.bilibili.utils.set
-import app.revanced.patches.shared.mapping.misc.ResourceMappingPatch
-import app.revanced.patches.shared.settings.AbstractSettingsResourcePatch
-import app.revanced.util.resources.ResourceUtils
-import app.revanced.util.resources.ResourceUtils.copyResources
-import app.revanced.util.resources.ResourceUtils.mergeArrays
-import app.revanced.util.resources.ResourceUtils.mergeStrings
+import app.revanced.patches.shared.misc.mapping.ResourceMappingPatch
+import app.revanced.util.*
 
 @Patch(
     name = "Settings resource patch",
@@ -25,9 +18,7 @@ import app.revanced.util.resources.ResourceUtils.mergeStrings
     ],
     dependencies = [ResourceMappingPatch::class]
 )
-object SettingsResourcePatch : AbstractSettingsResourcePatch(
-    "biliroaming_settings", "bilibili", false
-) {
+object SettingsResourcePatch : ResourcePatch() {
     private val extraPreferences = arrayOf(
         "biliroaming_setting_half_screen_quality.xml",
         "biliroaming_setting_full_screen_quality.xml",
@@ -70,17 +61,22 @@ object SettingsResourcePatch : AbstractSettingsResourcePatch(
     )
 
     override fun execute(context: ResourceContext) {
-        super.execute(context)
         arrayOf(
-            ResourceUtils.ResourceGroup("xml", *extraPreferences),
-            ResourceUtils.ResourceGroup("layout", *layouts),
-            ResourceUtils.ResourceGroup("drawable", "biliroaming_bg_transparent.webp")
+            ResourceGroup("xml", *extraPreferences),
+            ResourceGroup("layout", *layouts),
+            ResourceGroup("drawable", "biliroaming_bg_transparent.webp")
         ).forEach {
             context.copyResources("bilibili", it)
         }
-        context.mergeStrings("bilibili/host/values/strings.xml")
-        context.mergeStrings("bilibili/host/values/strings_raw.xml")
-        context.mergeArrays("bilibili/host/values/arrays.xml")
+        context.mergeResources(
+            "res/values/strings.xml",
+            "bilibili/host/values/strings.xml",
+            "bilibili/host/values/strings_raw.xml"
+        )
+        context.mergeResources(
+            "res/values/arrays.xml",
+            "bilibili/host/values/arrays.xml"
+        )
         context.xmlEditor["res/xml/main_preferences.xml"].use {
             it.addBiliRoamingEntrance()
         }

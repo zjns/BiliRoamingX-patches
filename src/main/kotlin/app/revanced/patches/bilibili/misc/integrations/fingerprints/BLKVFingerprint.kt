@@ -1,6 +1,6 @@
 package app.revanced.patches.bilibili.misc.integrations.fingerprints
 
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
+import app.revanced.patcher.fingerprint.MethodFingerprint
 
 object BLKVFingerprint : MethodFingerprint(
     strings = listOf(".blkv"),

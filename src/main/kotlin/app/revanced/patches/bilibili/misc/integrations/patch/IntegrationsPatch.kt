@@ -5,7 +5,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.misc.integrations.fingerprints.InitFingerprint
-import app.revanced.patches.shared.integrations.AbstractIntegrationsPatch
+import app.revanced.patches.shared.misc.integrations.BaseIntegrationsPatch
 
 @Patch(
     name = "Integrations",
@@ -16,7 +16,7 @@ import app.revanced.patches.shared.integrations.AbstractIntegrationsPatch
     ],
     requiresIntegrations = true
 )
-object IntegrationsPatch : AbstractIntegrationsPatch(
+object IntegrationsPatch : BaseIntegrationsPatch(
     "Lapp/revanced/bilibili/utils/Utils;",
     setOf(InitFingerprint)
 ) {

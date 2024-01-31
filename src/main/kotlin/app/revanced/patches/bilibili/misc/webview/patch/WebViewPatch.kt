@@ -3,10 +3,10 @@ package app.revanced.patches.bilibili.misc.webview.patch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
-import app.revanced.util.patch.AbstractTransformInstructionsPatch
-import app.revanced.util.patch.IMethodCall
-import app.revanced.util.patch.Instruction35cInfo
-import app.revanced.util.patch.filterMapInstruction35c
+import app.revanced.patches.all.misc.transformation.BaseTransformInstructionsPatch
+import app.revanced.patches.all.misc.transformation.IMethodCall
+import app.revanced.patches.all.misc.transformation.Instruction35cInfo
+import app.revanced.patches.all.misc.transformation.filterMapInstruction35c
 import com.android.tools.smali.dexlib2.iface.ClassDef
 import com.android.tools.smali.dexlib2.iface.Method
 import com.android.tools.smali.dexlib2.iface.instruction.Instruction
@@ -20,7 +20,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.Instruction
         CompatiblePackage(name = "com.bilibili.app.in")
     ]
 )
-object WebViewPatch : AbstractTransformInstructionsPatch<Instruction35cInfo>() {
+object WebViewPatch : BaseTransformInstructionsPatch<Instruction35cInfo>() {
     enum class MethodCall(
         override val definedClassName: String,
         override val methodName: String,

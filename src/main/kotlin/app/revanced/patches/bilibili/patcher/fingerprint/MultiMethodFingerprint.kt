@@ -1,9 +1,8 @@
 package app.revanced.patches.bilibili.patcher.fingerprint
 
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.fingerprint.Fingerprint
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
-import app.revanced.patcher.fingerprint.method.impl.MethodFingerprintResult
+import app.revanced.patcher.fingerprint.MethodFingerprint
+import app.revanced.patcher.fingerprint.MethodFingerprintResult
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.ClassDef
 import com.android.tools.smali.dexlib2.iface.Method
@@ -30,7 +29,7 @@ abstract class MultiMethodFingerprint(
     val opcodes: Iterable<Opcode?>? = null,
     val strings: Iterable<String>? = null,
     val customFingerprint: ((methodDef: Method, classDef: ClassDef) -> Boolean)? = null
-) : Fingerprint {
+) {
     /**
      * The result of the [MethodFingerprint].
      */

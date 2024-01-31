@@ -1,6 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.8.20"
-    alias(libs.plugins.ksp)
+    kotlin("jvm") version "1.9.22"
 }
 
 group = "app.revanced"
@@ -28,15 +27,12 @@ repositories {
 dependencies {
     implementation(libs.revanced.patcher)
     implementation(libs.smali)
-    implementation(libs.revanced.patch.annotation.processor)
     // TODO: Required because build fails without it. Find a way to remove this dependency.
     implementation(libs.guava)
     // Used in JsonGenerator.
     implementation(libs.gson)
     // A dependency to the Android library unfortunately fails the build, which is why this is required.
     compileOnly(project("dummy"))
-
-    ksp(libs.revanced.patch.annotation.processor)
 }
 
 kotlin {
@@ -71,7 +67,7 @@ tasks {
         dependsOn(build)
 
         classpath = sourceSets["main"].runtimeClasspath
-        mainClass.set("app.revanced.meta.PatchesFileGenerator")
+        mainClass.set("app.revanced.meta.IPatchesFileGenerator")
     }
 
     // Dummy task to fix the Gradle semantic-release plugin.
