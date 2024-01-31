@@ -4,6 +4,7 @@ import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
+import app.revanced.patches.bilibili.utils.appendChild
 import app.revanced.patches.bilibili.utils.children
 import app.revanced.patches.bilibili.utils.get
 import app.revanced.patches.bilibili.utils.set
@@ -60,11 +61,9 @@ object SplashPatch : ResourcePatch() {
     ) = context.xmlEditor[resourceFile].use { editor ->
         editor.file["resources"].children().find {
             it.tagName == "style" && it["name"] == styleName
-        }?.let { style ->
-            editor.file.createElement("item").apply {
-                this["name"] = name
-                textContent = value
-            }.also { style.appendChild(it) }
+        }?.appendChild("item") {
+            this["name"] = name
+            textContent = value
         }
     }
 
@@ -74,11 +73,10 @@ object SplashPatch : ResourcePatch() {
         name: String,
         value: String
     ) = context.xmlEditor[resourceFile].use {
-        it.file["resources"].appendChild(
-            it.file.createElement("color").apply {
-                this["name"] = name
-                textContent = value
-            })
+        it.file["resources"].appendChild("color") {
+            this["name"] = name
+            textContent = value
+        }
     }
 
     private const val STYLE_NAME_APP_THEME = "AppTheme"

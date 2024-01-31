@@ -47,6 +47,10 @@
             android:key="enable_av"
             android:title="@string/biliroaming_enable_av_title"
             android:summary="@string/biliroaming_enable_av_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="enable_doc_provider"
+            android:title="@string/biliroaming_enable_doc_provider_title"
+            android:summary="@string/biliroaming_enable_doc_provider_summary" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory

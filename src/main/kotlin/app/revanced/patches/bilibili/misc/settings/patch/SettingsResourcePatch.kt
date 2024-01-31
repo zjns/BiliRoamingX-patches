@@ -4,7 +4,9 @@ import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.util.DomFileEditor
+import app.revanced.patches.bilibili.utils.appendChild
 import app.revanced.patches.bilibili.utils.get
+import app.revanced.patches.bilibili.utils.insertBefore
 import app.revanced.patches.bilibili.utils.set
 import app.revanced.patches.shared.mapping.misc.ResourceMappingPatch
 import app.revanced.patches.shared.settings.AbstractSettingsResourcePatch
@@ -86,12 +88,12 @@ object SettingsResourcePatch : AbstractSettingsResourcePatch(
 
     private fun DomFileEditor.addBiliRoamingEntrance() {
         file["androidx.preference.PreferenceScreen"].run {
-            file.createElement("androidx.preference.PreferenceCategory").apply {
-                file.createElement("androidx.preference.PreferenceScreen").apply {
+            insertBefore(firstChild, "androidx.preference.PreferenceCategory") {
+                appendChild("androidx.preference.PreferenceScreen") {
                     this["android:title"] = "@string/biliroaming_settings_title"
                     this["android:fragment"] = "app.revanced.bilibili.settings.fragments.BiliRoamingSettingsFragment"
-                }.also { appendChild(it) }
-            }.also { insertBefore(it, firstChild) }
+                }
+            }
         }
     }
 }

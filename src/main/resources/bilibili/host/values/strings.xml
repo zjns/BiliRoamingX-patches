@@ -346,4 +346,6 @@
     <string name="biliroaming_speed_test_failed">测速失败</string>
     <string name="biliroaming_speed_test_ok">测速完成</string>
     <string name="biliroaming_upos_enabled">已启用 UPOS 服务器：%s</string>
+    <string name="biliroaming_enable_doc_provider_title">允许三方APP访问私有存储</string>
+    <string name="biliroaming_enable_doc_provider_summary">允许三方APP（例如MT管理器）通过访问外部存储的方式访问私有存储下的文件</string>
 </resources>

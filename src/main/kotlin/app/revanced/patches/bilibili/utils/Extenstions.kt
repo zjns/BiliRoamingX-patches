@@ -124,15 +124,26 @@ val String.className: String
 operator fun Document.get(tagName: String): Element =
     getElementsByTagName(tagName).item(0) as Element
 
-fun Node.children(): Sequence<Element> = object : Sequence<Element> {
-    override fun iterator(): Iterator<Element> = childNodes.iterator()
-}
+fun Node.children(): Sequence<Element> =
+    childNodes.iterator().asSequence().filterIsInstance<Element>()
 
-operator fun NodeList.iterator(): Iterator<Element> = object : Iterator<Element> {
+operator fun NodeList.iterator(): Iterator<Node> = object : Iterator<Node> {
     private var index = 0
-    override fun hasNext(): Boolean = 2 * index + 1 < length
-    override fun next(): Element = item((2 * (index++) + 1)) as Element // jump meaningless text node
+    override fun hasNext(): Boolean = index < length
+    override fun next(): Node = item(index++)
 }
 
 operator fun Element.get(attrName: String): String = getAttribute(attrName)
 operator fun Element.set(attrName: String, attrValue: String): Unit = setAttribute(attrName, attrValue)
+
+fun Element.appendChild(tagName: String, build: Element.() -> Unit) {
+    appendChild(ownerDocument.createElement(tagName).apply(build))
+}
+
+fun Element.insertBefore(refChild: Node, tagName: String, build: Element.() -> Unit) {
+    insertBefore(ownerDocument.createElement(tagName).apply(build), refChild)
+}
+
+fun Element.insertChild(index: Int, tagName: String, build: Element.() -> Unit) {
+    insertBefore(ownerDocument.createElement(tagName).apply(build), children().elementAt(index))
+}
