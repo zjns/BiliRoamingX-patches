@@ -20,6 +20,7 @@ import app.revanced.util.*
 )
 object SettingsResourcePatch : ResourcePatch() {
     private val extraPreferences = arrayOf(
+        "biliroaming_settings.xml",
         "biliroaming_setting_half_screen_quality.xml",
         "biliroaming_setting_full_screen_quality.xml",
         "biliroaming_setting_live_popups.xml",
