@@ -50,9 +50,9 @@ object ChangePackageNamePatch : ResourcePatch(), Closeable {
             packageName
     }
 
-    override fun close() = context.xmlEditor["AndroidManifest.xml"].use { editor ->
+    override fun close() = context.xmlEditor["AndroidManifest.xml"].use { dom ->
         val packageName = packageNameOption.value
-        editor.file["manifest"].run {
+        dom["manifest"].run {
             this["package"] = (if (!packageName.isNullOrEmpty()
                 && packageName != packageNameOption.default
             ) packageName else "${this["package"]}.revanced")

@@ -19,9 +19,9 @@ import app.revanced.util.set
 )
 object InjectDataProviderPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
-        context.xmlEditor["AndroidManifest.xml"].use { editor ->
-            val packageName = editor.file["manifest"]["package"]
-            editor.file["application"].appendChild("provider") {
+        context.xmlEditor["AndroidManifest.xml"].use { dom ->
+            val packageName = dom["manifest"]["package"]
+            dom["application"].appendChild("provider") {
                 this["android:name"] = "app.revanced.bilibili.content.BiliDocumentsProvider"
                 this["android:authorities"] = "$packageName.MTDataFilesProvider"
                 this["android:enabled"] = "false"

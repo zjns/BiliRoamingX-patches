@@ -3,7 +3,6 @@ package app.revanced.util
 import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.util.DomFileEditor
 import app.revanced.util.resource.BaseResource
-import org.w3c.dom.Document
 import org.w3c.dom.Element
 import org.w3c.dom.Node
 import org.w3c.dom.NodeList
@@ -125,8 +124,8 @@ internal fun Node.addResource(resource: BaseResource, resourceCallback: (BaseRes
 
 internal fun DomFileEditor?.getNode(tagName: String) = this!!.file.getElementsByTagName(tagName).item(0)
 
-operator fun Document.get(tagName: String): Element =
-    getElementsByTagName(tagName).item(0) as Element
+operator fun DomFileEditor.get(tagName: String): Element =
+    file.getElementsByTagName(tagName).item(0) as Element
 
 fun Node.children(): Sequence<Element> =
     childNodes.iterator().asSequence().filterIsInstance<Element>()
@@ -154,26 +153,18 @@ fun Element.insertChild(index: Int, tagName: String, build: Element.() -> Unit) 
 
 fun bundledResource(path: String) = classLoader.getResourceAsStream(path)!!
 
-fun ResourceContext.mergeResources(hostPath: String, vararg resPaths: String) = xmlEditor[hostPath].use { host ->
-    val hostResources = host.file["resources"]
-    resPaths.map { xmlEditor[bundledResource(it)] }.forEach { editor ->
+fun ResourceContext.mergeXmlNodes(
+    nodeName: String,
+    hostPath: String,
+    vararg paths: String
+) = xmlEditor[hostPath].use { host ->
+    val hostNode = host[nodeName]
+    paths.map { xmlEditor[bundledResource(it)] }.forEach { editor ->
         editor.use {
-            it.file["resources"].children().forEach { resource ->
-                when (val tagName = resource.tagName) {
-                    "string" -> hostResources.appendChild(tagName) {
-                        this["name"] = resource["name"]
-                        textContent = resource.textContent
-                    }
-
-                    "string-array" -> hostResources.appendChild(tagName) {
-                        this["name"] = resource["name"]
-                        resource.children().forEach { item ->
-                            appendChild(item.tagName) {
-                                textContent = item.textContent
-                            }
-                        }
-                    }
-                }
+            for (node in it[nodeName].childNodes) {
+                val clonedNode = node.cloneNode(true)
+                host.file.adoptNode(clonedNode)
+                hostNode.appendChild(clonedNode)
             }
         }
     }

@@ -21,7 +21,7 @@ object OverrideCertificatePinningPatch : ResourcePatch() {
         // Add android:networkSecurityConfig="@xml/network_security_config" and the "networkSecurityConfig" attribute if it does not exist.
         context.xmlEditor["AndroidManifest.xml"].use { editor ->
             val document = editor.file
-            val applicationNode = document["application"]
+            val applicationNode = editor["application"]
 
             if (!applicationNode.hasAttribute("networkSecurityConfig")) {
                 document.createAttribute("android:networkSecurityConfig")

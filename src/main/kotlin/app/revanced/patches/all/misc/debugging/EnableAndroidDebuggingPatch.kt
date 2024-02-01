@@ -15,7 +15,7 @@ import app.revanced.util.set
 object EnableAndroidDebuggingPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
         context.xmlEditor["AndroidManifest.xml"].use { dom ->
-            dom.file["application"]["android:debuggable"] = "true"
+            dom["application"]["android:debuggable"] = "true"
         }
     }
 }

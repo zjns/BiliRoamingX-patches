@@ -11,7 +11,7 @@ internal object RemoveCaptureRestrictionResourcePatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
         // create an xml editor instance
         context.xmlEditor["AndroidManifest.xml"].use { dom ->
-            dom.file["application"]["android:allowAudioPlaybackCapture"] = "true"
+            dom["application"]["android:allowAudioPlaybackCapture"] = "true"
         }
     }
 }

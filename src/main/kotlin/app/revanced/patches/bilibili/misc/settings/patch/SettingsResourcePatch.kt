@@ -68,12 +68,14 @@ object SettingsResourcePatch : ResourcePatch() {
         ).forEach {
             context.copyResources("bilibili", it)
         }
-        context.mergeResources(
+        context.mergeXmlNodes(
+            "resources",
             "res/values/strings.xml",
             "bilibili/host/values/strings.xml",
             "bilibili/host/values/strings_raw.xml"
         )
-        context.mergeResources(
+        context.mergeXmlNodes(
+            "resources",
             "res/values/arrays.xml",
             "bilibili/host/values/arrays.xml"
         )
@@ -83,7 +85,7 @@ object SettingsResourcePatch : ResourcePatch() {
     }
 
     private fun DomFileEditor.addBiliRoamingEntrance() {
-        file["androidx.preference.PreferenceScreen"].run {
+        this["androidx.preference.PreferenceScreen"].run {
             insertBefore(firstChild, "androidx.preference.PreferenceCategory") {
                 appendChild("androidx.preference.PreferenceScreen") {
                     this["android:title"] = "@string/biliroaming_settings_title"

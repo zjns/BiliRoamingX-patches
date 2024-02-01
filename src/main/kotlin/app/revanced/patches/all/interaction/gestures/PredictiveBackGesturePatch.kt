@@ -14,8 +14,8 @@ import app.revanced.util.set
 @Suppress("unused")
 object PredictiveBackGesturePatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
-        context.xmlEditor["AndroidManifest.xml"].use { editor ->
-            editor.file["application"]["android:enableOnBackInvokedCallback"] = "true"
+        context.xmlEditor["AndroidManifest.xml"].use { dom ->
+            dom["application"]["android:enableOnBackInvokedCallback"] = "true"
         }
     }
 }
