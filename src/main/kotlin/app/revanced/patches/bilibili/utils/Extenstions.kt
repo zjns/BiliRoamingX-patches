@@ -53,6 +53,7 @@ fun Int.toPublic() = or(AccessFlags.PUBLIC.value).and(AccessFlags.PRIVATE.value.
 fun Int.removeFinal() = and(AccessFlags.FINAL.value.inv())
 fun Int.isAbstract() = !AccessFlags.INTERFACE.isSet(this) && AccessFlags.ABSTRACT.isSet(this)
 fun Int.isInterface() = AccessFlags.INTERFACE.isSet(this) && AccessFlags.ABSTRACT.isSet(this)
+fun Int.isNative() = AccessFlags.NATIVE.isSet(this)
 
 fun method(
     definingClass: String,
