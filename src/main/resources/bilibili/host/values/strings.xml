@@ -291,11 +291,9 @@
     <string name="biliroaming_remove_elec_button_title">移除充电按钮</string>
     <string name="biliroaming_block_live_order_title">屏蔽直播预约横幅</string>
     <string name="biliroaming_can_not_share_to_wx">修改版由于签名问题不能分享至微信，如有需要，请使用官方版本！</string>
-    <string name="biliroaming_coupon_receive_success">%1$d张卡券自动领取成功！</string>
-    <string name="biliroaming_experience_receive_success">大会员每日经验自动领取成功！</string>
-    <string name="biliroaming_all_receive_success">%1$d张卡券和大会员每日经验自动领取成功！</string>
+    <string name="biliroaming_coupon_receive_success">%s自动领取成功！</string>
     <string name="biliroaming_auto_receive_coupon_title">自动领取卡券及经验</string>
-    <string name="biliroaming_auto_receive_coupon_summary">大会员自动领取每月B币券、装扮体验卡、每日观看视频经验等</string>
+    <string name="biliroaming_auto_receive_coupon_summary">大会员自动领取每月B币券、装扮体验卡、每日观看及分享视频经验等</string>
     <string name="biliroaming_block_activity_tab_title">隐藏活动标签</string>
     <string name="biliroaming_block_activity_tab_summary">隐藏“一起聊”等活动标签</string>
     <string name="biliroaming_block_recommend_guidance_title">屏蔽个性化推荐指引</string>
