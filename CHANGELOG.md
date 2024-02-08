@@ -1,4 +1,4 @@
-# [2.192.0](https://github.com/ReVanced/revanced-patches/compare/v2.191.0...v2.192.0) (2023-10-05)
+# [2.192.1](https://github.com/ReVanced/revanced-patches/compare/v2.191.0...v2.192.0) (2023-10-05)
 
 
 ### Bug Fixes
