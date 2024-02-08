@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/ZCCtt/BiliRoamingX-patches/compare/v1.0.4...v1.1.0) (2024-02-08)
+
+
+### Features
+
+* **bilibili:** scale to switch aspect ratio ([220f0db](https://github.com/ZCCtt/BiliRoamingX-patches/commit/220f0db7bd160fd3e9aaae6aaa8dfd8ef15e2d88))
+
 # [2.192.1](https://github.com/ReVanced/revanced-patches/compare/v2.191.0...v2.192.0) (2023-10-05)
 
 
