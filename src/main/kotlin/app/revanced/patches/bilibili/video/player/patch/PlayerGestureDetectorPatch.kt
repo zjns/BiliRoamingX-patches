@@ -117,10 +117,12 @@ object PlayerGestureDetectorPatch : BytecodePatch(
                         }
                     } else null
                 }
-            val (getRenderServiceMethodName, renderServiceType) = onScaleMethodInstructions.firstNotNullOf {
-                if (it.opcode == Opcode.INVOKE_INTERFACE) {
-                    ((it as BuilderInstruction35c).reference as MethodReference).let { ref ->
-                        ref.name to ref.returnType
+            val (getRenderServiceMethodName, renderServiceType) = onScaleMethodInstructions.firstNotNullOf { inst ->
+                if (inst.opcode == Opcode.INVOKE_INTERFACE || inst.opcode == Opcode.INVOKE_VIRTUAL) {
+                    ((inst as BuilderInstruction35c).reference as MethodReference).let { ref ->
+                        if (ref.parameterTypes.isEmpty() && context.classes.find { it.type == ref.returnType }?.accessFlags?.isInterface() == true)
+                            ref.name to ref.returnType
+                        else null
                     }
                 } else null
             }
@@ -134,8 +136,9 @@ object PlayerGestureDetectorPatch : BytecodePatch(
             val restoreMethodName = renderServiceClass.methods.first {
                 it.parameterTypes == listOf("Z", "Landroid/animation/AnimatorListenerAdapter;")
             }.name
-            val playerInterfaceClass = context.classes.first { it.type == playerClassName }
-                .interfaces.first().let { type -> context.classes.first { it.type == type } }
+            val playerInterfaceClass = context.classes.first { it.type == playerClassName }.run {
+                if (superclass == "Ljava/lang/Object;") this else context.classes.first { it.type == superclass }
+            }.interfaces.first().let { type -> context.classes.first { it.type == type } }
             val getToastServiceMethodName = playerInterfaceClass.methods.first {
                 it.returnType == PlayerToastPatch.toastServiceInterfaceName
             }.name
