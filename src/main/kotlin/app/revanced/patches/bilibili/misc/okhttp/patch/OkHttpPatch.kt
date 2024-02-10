@@ -101,13 +101,13 @@ object OkHttpPatch : MultiMethodBytecodePatch(
             ?: throw RealCallFingerprint.exception
         val realCallClass = realCallResult.mutableClass
         val realCallGetMethod = realCallResult.mutableMethod
-        val hookMethod = method(
+        val hookMethod = Method(
             definingClass = realCallClass.type,
             name = "hook",
             returnType = "V",
-            parameters = listOf(methodParameter(responseClass.type)),
+            parameters = listOf(MethodParameter(responseClass.type)),
             accessFlags = AccessFlags.PRIVATE.value or AccessFlags.STATIC.value,
-            implementation = methodImplementation(registerCount = 21)
+            implementation = MethodImplementation(registerCount = 21)
         ).toMutable().apply {
             addInstructionsWithLabels(
                 0, """

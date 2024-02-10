@@ -69,12 +69,12 @@ object AppendExtraSearchTypePatch : BytecodePatch(
                         } else null
                     }
                 }
-                method(
+                Method(
                     definingClass = r.mutableClass.type,
                     name = "getTypeForBiliRoaming",
                     returnType = "I",
                     accessFlags = AccessFlags.PUBLIC.value,
-                    implementation = methodImplementation(2)
+                    implementation = MethodImplementation(2)
                 ).toMutable().apply {
                     addInstructions(
                         """
@@ -83,13 +83,13 @@ object AppendExtraSearchTypePatch : BytecodePatch(
                     """.trimIndent()
                     )
                 }.also { r.mutableClass.methods.add(it) }
-                method(
+                Method(
                     definingClass = r.mutableClass.type,
                     name = "setTypeForBiliRoaming",
                     returnType = "V",
-                    parameters = listOf(methodParameter(type = "I", name = "type")),
+                    parameters = listOf(MethodParameter(type = "I", name = "type")),
                     accessFlags = AccessFlags.PUBLIC.value,
-                    implementation = methodImplementation(2)
+                    implementation = MethodImplementation(2)
                 ).toMutable().apply {
                     addInstructions(
                         """

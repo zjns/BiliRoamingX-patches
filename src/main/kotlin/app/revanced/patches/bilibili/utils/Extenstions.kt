@@ -58,7 +58,7 @@ fun Int.isStatic() = AccessFlags.STATIC.isSet(this)
 fun Int.isPublic() = AccessFlags.PUBLIC.isSet(this)
 fun Int.isPrivate() = AccessFlags.PRIVATE.isSet(this)
 
-fun method(
+fun Method(
     definingClass: String,
     name: String,
     returnType: String,
@@ -78,33 +78,33 @@ fun method(
     implementation
 )
 
-fun methodParameter(
+fun MethodParameter(
     type: String,
     name: String? = null,
     annotations: Set<ImmutableAnnotation>? = null
 ) = ImmutableMethodParameter(type, annotations, name)
 
 val String.encodedValue: ImmutableStringEncodedValue
-    get() = stringEncodedValue(this)
+    get() = StringEncodedValue(this)
 
-fun stringEncodedValue(value: String) = ImmutableStringEncodedValue(value)
+fun StringEncodedValue(value: String) = ImmutableStringEncodedValue(value)
 
-fun arrayEncodedValue(
+fun ArrayEncodedValue(
     value: List<ImmutableEncodedValue>
 ) = ImmutableArrayEncodedValue(value)
 
-fun annotationElement(
+fun AnnotationElement(
     name: String,
     value: ImmutableEncodedValue
 ) = ImmutableAnnotationElement(name, value)
 
-fun annotation(
+fun Annotation(
     visibility: Int,
     type: String,
     elements: Set<ImmutableAnnotationElement>
 ) = ImmutableAnnotation(visibility, type, elements)
 
-fun methodImplementation(
+fun MethodImplementation(
     registerCount: Int,
     instructions: List<ImmutableInstruction>? = null,
     tryBlocks: List<ImmutableTryBlock>? = null,

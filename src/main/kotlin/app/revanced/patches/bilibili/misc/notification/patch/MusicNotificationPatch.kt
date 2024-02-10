@@ -1,6 +1,5 @@
 package app.revanced.patches.bilibili.misc.notification.patch
 
-import app.revanced.util.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
@@ -16,6 +15,7 @@ import app.revanced.patches.bilibili.misc.notification.fingerprints.LiveNotifica
 import app.revanced.patches.bilibili.misc.notification.fingerprints.MediaSessionCallbackApi21Fingerprint
 import app.revanced.patches.bilibili.misc.notification.fingerprints.NotificationStyleAbFingerprint
 import app.revanced.patches.bilibili.utils.*
+import app.revanced.util.exception
 import app.revanced.util.findMutableMethodOf
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.AnnotationVisibility
@@ -98,12 +98,12 @@ object MusicNotificationPatch : BytecodePatch(
                     (inst as Instruction22c).reference as FieldReference
                 } else null
             }
-        method(
+        Method(
             definingClass = playbackStateClass.type,
             name = "getActionsForBiliRoaming",
             returnType = "J",
             accessFlags = AccessFlags.PUBLIC.value,
-            implementation = methodImplementation(registerCount = 3),
+            implementation = MethodImplementation(registerCount = 3),
         ).toMutable().apply {
             addInstructions(
                 """
@@ -115,20 +115,20 @@ object MusicNotificationPatch : BytecodePatch(
             playbackStateClass.methods.add(it)
         }
         val customActionsField = playbackStateClass.fields.first { it.type == "Ljava/util/List;" }
-        method(
+        Method(
             definingClass = playbackStateClass.type,
             name = "getCustomActionsForBiliRoaming",
             returnType = "Ljava/util/List;",
             accessFlags = AccessFlags.PUBLIC.value,
-            implementation = methodImplementation(registerCount = 2),
+            implementation = MethodImplementation(registerCount = 2),
             annotations = setOf(
-                annotation(
+                Annotation(
                     visibility = AnnotationVisibility.SYSTEM,
                     type = "Ldalvik/annotation/Signature;",
                     elements = setOf(
-                        annotationElement(
+                        AnnotationElement(
                             name = "value",
-                            value = arrayEncodedValue(
+                            value = ArrayEncodedValue(
                                 value = listOf(
                                     "()".encodedValue,
                                     "Ljava/util/List<".encodedValue,
@@ -183,13 +183,13 @@ object MusicNotificationPatch : BytecodePatch(
         val onFastForwardMethodRef = mediaSessionCallbackApi21Class.methods.first { it.name == "onFastForward" }
             .implementation!!.instructions.last { it.opcode == Opcode.INVOKE_VIRTUAL }
             .let { (it as Instruction35c).reference as MethodReference }
-        method(
+        Method(
             definingClass = headsetMediaSessionCallbackClass.type,
             name = onCustomActionMethodRef.name,
             returnType = onCustomActionMethodRef.returnType,
             accessFlags = AccessFlags.PUBLIC.value,
-            parameters = onCustomActionMethodRef.parameterTypes.map { methodParameter(it.toString()) },
-            implementation = methodImplementation(registerCount = 4),
+            parameters = onCustomActionMethodRef.parameterTypes.map { MethodParameter(it.toString()) },
+            implementation = MethodImplementation(registerCount = 4),
         ).toMutable().apply {
             addInstructionsWithLabels(
                 0,

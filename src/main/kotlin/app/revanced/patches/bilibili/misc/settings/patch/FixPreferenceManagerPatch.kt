@@ -9,7 +9,7 @@ import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethodParameter.Companion.toMutable
 import app.revanced.patches.bilibili.misc.settings.fingerprints.PreferenceManagerFingerprint
 import app.revanced.patches.bilibili.utils.cloneMutable
-import app.revanced.patches.bilibili.utils.methodParameter
+import app.revanced.patches.bilibili.utils.MethodParameter
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction21c
 import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction35c
@@ -43,7 +43,7 @@ object FixPreferenceManagerPatch : BytecodePatch(setOf(PreferenceManagerFingerpr
             }.run {
                 remove(this)
                 cloneMutable(parameters = parameters.also {
-                    it[0] = methodParameter(preferenceManagerDef.type).toMutable()
+                    it[0] = MethodParameter(preferenceManagerDef.type).toMutable()
                 }).let { add(it) }
             }
             first { it.name == "notifyChanged" }.run {
@@ -70,7 +70,7 @@ object FixPreferenceManagerPatch : BytecodePatch(setOf(PreferenceManagerFingerpr
             first { it.name == "onPreferenceTreeClick" }.run {
                 remove(this)
                 cloneMutable(parameters = parameters.also {
-                    it[0] = methodParameter(preferenceManagerDef.type).toMutable()
+                    it[0] = MethodParameter(preferenceManagerDef.type).toMutable()
                 }).also { add(it) }
             }
         }

@@ -146,19 +146,19 @@ object OverridePlaybackSpeedPatch : MultiMethodBytecodePatch(
                 """.trimIndent()
                 )
             }
-            method(
+            Method(
                 definingClass = type,
                 name = "getSpeedNameListForBiliRoaming",
                 returnType = "Ljava/util/List;",
                 accessFlags = AccessFlags.PUBLIC.value,
                 annotations = setOf(
-                    annotation(
+                    Annotation(
                         visibility = AnnotationVisibility.SYSTEM,
                         type = "Ldalvik/annotation/Signature;",
                         elements = setOf(
-                            annotationElement(
+                            AnnotationElement(
                                 name = "value",
-                                value = arrayEncodedValue(
+                                value = ArrayEncodedValue(
                                     value = listOf(
                                         "()".encodedValue,
                                         "Ljava/util/List<".encodedValue,
@@ -172,20 +172,20 @@ object OverridePlaybackSpeedPatch : MultiMethodBytecodePatch(
                         )
                     )
                 ),
-                implementation = methodImplementation(2)
+                implementation = MethodImplementation(2)
             ).toMutable().also { methods.add(it) }.addInstructions(
                 """
                 iget-object v0, p0, $speedNameListField
                 return-object v0
             """.trimIndent()
             )
-            method(
+            Method(
                 definingClass = type,
                 name = "setSpeedArrayForBiliRoaming",
                 "V",
                 accessFlags = AccessFlags.PUBLIC.value,
-                parameters = listOf(methodParameter(type = "[F", name = "array")),
-                implementation = methodImplementation(registerCount = 2)
+                parameters = listOf(MethodParameter(type = "[F", name = "array")),
+                implementation = MethodImplementation(registerCount = 2)
             ).toMutable().also { methods.add(it) }.addInstructions(
                 """
                 iput-object p1, p0, $speedArrayField
