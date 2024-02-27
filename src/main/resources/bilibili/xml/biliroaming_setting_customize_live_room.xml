@@ -15,5 +15,9 @@
             android:key="purify_live_popups"
             android:title="@string/biliroaming_purify_live_popups_title"
             android:summary="@string/biliroaming_purify_live_popups_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="remove_live_mask"
+            android:title="@string/biliroaming_remove_live_mask_title"
+            android:summary="@string/biliroaming_remove_live_mask_summary" />
     </androidx.preference.PreferenceCategory>
 </androidx.preference.PreferenceScreen>

@@ -351,4 +351,6 @@
     <string name="biliroaming_scale_to_switch_ratio_summary">将双指缩放功能重定义为切换画面尺寸（适应/填充）</string>
     <string name="biliroaming_ratio_fill_done">已放大到填满整个屏幕</string>
     <string name="biliroaming_ratio_restore_done">原始大小</string>
+    <string name="biliroaming_remove_live_mask_title">移除马赛克遮罩</string>
+    <string name="biliroaming_remove_live_mask_summary">移除部分直播间官方添加的屏幕内容马赛克遮罩</string>
 </resources>
