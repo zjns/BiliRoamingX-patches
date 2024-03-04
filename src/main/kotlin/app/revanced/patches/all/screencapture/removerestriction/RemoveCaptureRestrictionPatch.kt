@@ -22,13 +22,14 @@ object RemoveCaptureRestrictionPatch : BaseTransformInstructionsPatch<Instructio
     private const val INTEGRATIONS_CLASS_DESCRIPTOR_PREFIX =
         "Lapp/revanced/integrations/all/screencapture/removerestriction/RemoveScreencaptureRestrictionPatch"
     private const val INTEGRATIONS_CLASS_DESCRIPTOR = "$INTEGRATIONS_CLASS_DESCRIPTOR_PREFIX;"
+
     // Information about method calls we want to replace
     enum class MethodCall(
         override val definedClassName: String,
         override val methodName: String,
         override val methodParams: Array<String>,
         override val returnType: String
-    ): IMethodCall {
+    ) : IMethodCall {
         SetAllowedCapturePolicySingle(
             "Landroid/media/AudioAttributes\$Builder;",
             "setAllowedCapturePolicy",
@@ -57,6 +58,11 @@ object RemoveCaptureRestrictionPatch : BaseTransformInstructionsPatch<Instructio
 
     override fun transform(mutableMethod: MutableMethod, entry: Instruction35cInfo) {
         val (methodType, instruction, instructionIndex) = entry
-        methodType.replaceInvokeVirtualWithIntegrations(INTEGRATIONS_CLASS_DESCRIPTOR, mutableMethod, instruction, instructionIndex)
+        methodType.replaceInvokeVirtualWithIntegrations(
+            INTEGRATIONS_CLASS_DESCRIPTOR,
+            mutableMethod,
+            instruction,
+            instructionIndex
+        )
     }
 }

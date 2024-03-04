@@ -17,7 +17,7 @@ object ExportAllActivitiesPatch : ResourcePatch() {
             val document = editor.file
             val activities = document.getElementsByTagName("activity")
 
-            for(i in 0..activities.length) {
+            for (i in 0..activities.length) {
                 activities.item(i)?.apply {
                     val exportedAttribute = attributes.getNamedItem(EXPORTED_FLAG)
 

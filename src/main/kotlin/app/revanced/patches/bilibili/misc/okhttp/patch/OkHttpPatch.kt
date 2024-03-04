@@ -1,6 +1,5 @@
 package app.revanced.patches.bilibili.misc.okhttp.patch
 
-import app.revanced.util.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
@@ -10,6 +9,7 @@ import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMu
 import app.revanced.patches.bilibili.misc.okhttp.fingerprints.*
 import app.revanced.patches.bilibili.patcher.patch.MultiMethodBytecodePatch
 import app.revanced.patches.bilibili.utils.*
+import app.revanced.util.exception
 import com.android.tools.smali.dexlib2.AccessFlags
 
 @Patch(

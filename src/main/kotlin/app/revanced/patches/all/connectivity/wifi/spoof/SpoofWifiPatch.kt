@@ -18,7 +18,8 @@ import com.android.tools.smali.dexlib2.iface.instruction.Instruction
 )
 @Suppress("unused")
 object SpoofWifiPatch : BaseTransformInstructionsPatch<Instruction35cInfo>() {
-    private const val INTEGRATIONS_CLASS_DESCRIPTOR_PREFIX = "Lapp/revanced/integrations/all/connectivity/wifi/spoof/SpoofWifiPatch"
+    private const val INTEGRATIONS_CLASS_DESCRIPTOR_PREFIX =
+        "Lapp/revanced/integrations/all/connectivity/wifi/spoof/SpoofWifiPatch"
     private const val INTEGRATIONS_CLASS_DESCRIPTOR = "$INTEGRATIONS_CLASS_DESCRIPTOR_PREFIX;"
 
     override fun filterMap(
@@ -35,7 +36,12 @@ object SpoofWifiPatch : BaseTransformInstructionsPatch<Instruction35cInfo>() {
 
     override fun transform(mutableMethod: MutableMethod, entry: Instruction35cInfo) {
         val (methodType, instruction, instructionIndex) = entry
-        methodType.replaceInvokeVirtualWithIntegrations(INTEGRATIONS_CLASS_DESCRIPTOR, mutableMethod, instruction, instructionIndex)
+        methodType.replaceInvokeVirtualWithIntegrations(
+            INTEGRATIONS_CLASS_DESCRIPTOR,
+            mutableMethod,
+            instruction,
+            instructionIndex
+        )
     }
 
 
@@ -45,7 +51,7 @@ object SpoofWifiPatch : BaseTransformInstructionsPatch<Instruction35cInfo>() {
         override val methodName: String,
         override val methodParams: Array<String>,
         override val returnType: String,
-    ): IMethodCall {
+    ) : IMethodCall {
         GetSystemService1(
             "Landroid/content/Context;",
             "getSystemService",
@@ -127,7 +133,11 @@ object SpoofWifiPatch : BaseTransformInstructionsPatch<Instruction35cInfo>() {
         RegisterBestMatchingNetworkCallback(
             "Landroid/net/ConnectivityManager;",
             "registerBestMatchingNetworkCallback",
-            arrayOf("Landroid/net/NetworkRequest;", "Landroid/net/ConnectivityManager\$NetworkCallback;", "Landroid/os/Handler;"),
+            arrayOf(
+                "Landroid/net/NetworkRequest;",
+                "Landroid/net/ConnectivityManager\$NetworkCallback;",
+                "Landroid/os/Handler;"
+            ),
             "V",
         ),
         RegisterDefaultNetworkCallback1(
@@ -157,7 +167,11 @@ object SpoofWifiPatch : BaseTransformInstructionsPatch<Instruction35cInfo>() {
         RegisterNetworkCallback3(
             "Landroid/net/ConnectivityManager;",
             "registerNetworkCallback",
-            arrayOf("Landroid/net/NetworkRequest;", "Landroid/net/ConnectivityManager\$NetworkCallback;", "Landroid/os/Handler;"),
+            arrayOf(
+                "Landroid/net/NetworkRequest;",
+                "Landroid/net/ConnectivityManager\$NetworkCallback;",
+                "Landroid/os/Handler;"
+            ),
             "V",
         ),
         RequestNetwork1(
@@ -175,7 +189,11 @@ object SpoofWifiPatch : BaseTransformInstructionsPatch<Instruction35cInfo>() {
         RequestNetwork3(
             "Landroid/net/ConnectivityManager;",
             "requestNetwork",
-            arrayOf("Landroid/net/NetworkRequest;", "Landroid/net/ConnectivityManager\$NetworkCallback;", "Landroid/os/Handler;"),
+            arrayOf(
+                "Landroid/net/NetworkRequest;",
+                "Landroid/net/ConnectivityManager\$NetworkCallback;",
+                "Landroid/os/Handler;"
+            ),
             "V",
         ),
         RequestNetwork4(
@@ -187,7 +205,12 @@ object SpoofWifiPatch : BaseTransformInstructionsPatch<Instruction35cInfo>() {
         RequestNetwork5(
             "Landroid/net/ConnectivityManager;",
             "requestNetwork",
-            arrayOf("Landroid/net/NetworkRequest;", "Landroid/net/ConnectivityManager\$NetworkCallback;", "Landroid/os/Handler;", "I"),
+            arrayOf(
+                "Landroid/net/NetworkRequest;",
+                "Landroid/net/ConnectivityManager\$NetworkCallback;",
+                "Landroid/os/Handler;",
+                "I"
+            ),
             "V",
         ),
         UnregisterNetworkCallback1(

@@ -1,7 +1,7 @@
 package app.revanced.util.patch
 
-import app.revanced.util.containsWideLiteralInstructionValue
 import app.revanced.patcher.fingerprint.MethodFingerprint
+import app.revanced.util.containsWideLiteralInstructionValue
 import com.android.tools.smali.dexlib2.Opcode
 
 /**

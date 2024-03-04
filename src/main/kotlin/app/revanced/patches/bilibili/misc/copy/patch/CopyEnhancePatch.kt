@@ -1,6 +1,5 @@
 package app.revanced.patches.bilibili.misc.copy.patch
 
-import app.revanced.util.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.annotation.CompatiblePackage
@@ -9,6 +8,7 @@ import app.revanced.patches.bilibili.misc.copy.fingerprints.*
 import app.revanced.patches.bilibili.patcher.patch.MultiMethodBytecodePatch
 import app.revanced.patches.bilibili.utils.cloneMutable
 import app.revanced.patches.bilibili.utils.exception
+import app.revanced.util.exception
 
 @Patch(
     name = "Copy enhance",

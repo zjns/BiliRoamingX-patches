@@ -1,6 +1,5 @@
 package app.revanced.patches.bilibili.misc.integrations.patch
 
-import app.revanced.util.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
@@ -8,6 +7,7 @@ import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.misc.integrations.fingerprints.BLKVFingerprint
 import app.revanced.patches.bilibili.utils.cloneMutable
+import app.revanced.util.exception
 import com.android.tools.smali.dexlib2.AccessFlags
 
 @Patch(

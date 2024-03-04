@@ -1,6 +1,5 @@
 package app.revanced.patches.bilibili.misc.protobuf.patch
 
-import app.revanced.util.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.extensions.InstructionExtensions.removeInstructions
@@ -9,6 +8,7 @@ import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.misc.protobuf.fingerprints.MossMiddlewareGaiaFingerprint
 import app.revanced.patches.bilibili.misc.protobuf.fingerprints.MossServiceFingerprint
+import app.revanced.util.exception
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 

@@ -95,18 +95,18 @@ object SpoofSimCountryPatch : BaseTransformInstructionsPatch<Pair<Int, String>>(
     ) {
         NetworkCountryIso(
             ImmutableMethodReference(
-            "Landroid/telephony/TelephonyManager;",
-            "getNetworkCountryIso",
-            emptyList(),
-            "Ljava/lang/String;"
+                "Landroid/telephony/TelephonyManager;",
+                "getNetworkCountryIso",
+                emptyList(),
+                "Ljava/lang/String;"
             )
         ),
         SimCountryIso(
             ImmutableMethodReference(
-            "Landroid/telephony/TelephonyManager;",
-            "getSimCountryIso",
-            emptyList(),
-            "Ljava/lang/String;"
+                "Landroid/telephony/TelephonyManager;",
+                "getSimCountryIso",
+                emptyList(),
+                "Ljava/lang/String;"
             )
         )
     }
