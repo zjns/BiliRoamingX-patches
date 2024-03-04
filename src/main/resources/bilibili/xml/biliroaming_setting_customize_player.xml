@@ -15,11 +15,20 @@
             android:fragment="app.revanced.bilibili.settings.fragments.FullScreenQualitySettingFragment"
             android:key="full_screen_quality"
             android:persistent="true"
-            android:title="@string/biliroaming_full_screen_quality_title"
+            android:title="@string/biliroaming_full_screen_quality_wifi_title"
             app:migration_settings_type="none"
             app:radioDefaultValue="0"
             app:radioEntries="@array/biliroaming_full_screen_quality_entries"
             app:radioEntryValues="@array/biliroaming_full_screen_quality_values" />
+        <tv.danmaku.bili.widget.preference.BLRadioGroupEntrancePreference
+          android:fragment="app.revanced.bilibili.settings.fragments.FullScreenQualityMobileSettingFragment"
+          android:key="full_screen_quality_mobile"
+          android:persistent="true"
+          android:title="@string/biliroaming_full_screen_quality_mobile_title"
+          app:migration_settings_type="none"
+          app:radioDefaultValue="0"
+          app:radioEntries="@array/biliroaming_full_screen_quality_entries"
+          app:radioEntryValues="@array/biliroaming_full_screen_quality_values" />
         <androidx.preference.Preference
             android:key="default_speed"
             android:title="@string/biliroaming_default_speed_title"

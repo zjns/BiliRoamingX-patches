@@ -26,7 +26,7 @@ object VideoQualityPatch : BytecodePatch(setOf(PlayerSettingHelperFingerprint)) 
             defaultQnMethod = it.method
         }?.mutableMethod?.addInstructionsWithLabels(
             0, """
-            invoke-static {}, Lapp/revanced/bilibili/patches/VideoQualityPatch;->fullScreenQuality()I
+            invoke-static {}, Lapp/revanced/bilibili/patches/VideoQualityPatch;->getMatchedFullScreenQuality()I
             move-result v0
             if-eqz v0, :jump
             return v0

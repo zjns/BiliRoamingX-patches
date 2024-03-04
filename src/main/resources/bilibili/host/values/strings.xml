@@ -2,7 +2,11 @@
 <resources>
     <string name="biliroaming_settings_title">哔哩漫游X</string>
     <string name="biliroaming_full_screen_quality_title">视频全屏清晰度</string>
+    <string name="biliroaming_full_screen_quality_wifi_title">Wi-Fi网络视频全屏清晰度</string>
+    <string name="biliroaming_full_screen_quality_mobile_title">移动网络视频全屏清晰度</string>
     <string name="biliroaming_full_screen_quality_summary">设置视频全屏播放时默认的清晰度，当播放器画质选项为自动时此选项不生效</string>
+    <string name="biliroaming_full_screen_quality_wifi_summary">设置Wi-Fi网络下视频全屏播放时默认的清晰度，当播放器画质选项为自动时此选项不生效</string>
+    <string name="biliroaming_full_screen_quality_mobile_summary">设置移动网络下视频全屏播放时默认的清晰度，当播放器画质选项为自动时此选项不生效</string>
     <string name="biliroaming_block_up_rcmd_ads_title">屏蔽UP主推荐广告</string>
     <string name="biliroaming_block_up_rcmd_ads_summary">屏蔽视频下方推荐栏及视频播放过程中，浮窗出现的UP主推荐广告，开启后会同时屏蔽评论区顶部推广横幅</string>
     <string name="biliroaming_half_screen_quality_title">视频半屏清晰度</string>

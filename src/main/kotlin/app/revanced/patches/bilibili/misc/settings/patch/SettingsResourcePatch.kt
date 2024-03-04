@@ -23,6 +23,7 @@ object SettingsResourcePatch : ResourcePatch() {
         "biliroaming_settings.xml",
         "biliroaming_setting_half_screen_quality.xml",
         "biliroaming_setting_full_screen_quality.xml",
+        "biliroaming_setting_full_screen_quality_mobile.xml",
         "biliroaming_setting_live_popups.xml",
         "biliroaming_setting_customize_mine.xml",
         "biliroaming_setting_customize_drawer.xml",
