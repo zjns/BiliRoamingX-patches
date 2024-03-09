@@ -6,9 +6,6 @@
             android:key="teenagers_mode_dialog"
             android:title="@string/biliroaming_teenagers_mode_dialog_title"
             android:summary="@string/biliroaming_teenagers_mode_dialog_summary" />
-        <androidx.preference.SwitchPreferenceCompat
-            android:key="block_update"
-            android:title="@string/biliroaming_block_update_title" />
         <androidx.preference.Preference
             android:fragment="app.revanced.bilibili.settings.fragments.BlockFollowFragment"
             android:key="follow_button"
@@ -108,6 +105,19 @@
             android:key="full_splash"
             android:title="@string/biliroaming_full_splash_title"
             android:summary="@string/biliroaming_full_splash_summary" />
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory
+        android:title="@string/biliroaming_update_title"
+        android:layout="@layout/bili_app_layout_preference_category_title">
+        <androidx.preference.SwitchPreferenceCompat
+          android:key="block_update"
+          android:title="@string/biliroaming_block_update_title" />
+        <androidx.preference.SwitchPreferenceCompat
+          android:defaultValue="true"
+          android:key="custom_update"
+          android:title="@string/biliroaming_custom_update_title"
+          android:summary="@string/biliroaming_custom_update_summary" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory>

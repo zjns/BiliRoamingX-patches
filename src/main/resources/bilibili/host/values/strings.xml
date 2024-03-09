@@ -206,7 +206,12 @@
     <string name="biliroaming_long_press_speed_title">长按播放速度</string>
     <string name="biliroaming_long_press_speed_summary">自定义播放器长按播放速度</string>
     <string name="biliroaming_speed_save_ok">保存成功，立即生效</string>
-    <string name="biliroaming_block_update_title">禁止 APP 检查更新</string>
+    <string name="biliroaming_update_title">更新</string>
+    <string name="biliroaming_block_update_title">禁止APP检查官方更新</string>
+    <string name="biliroaming_custom_update_title">允许检查预构建包更新</string>
+    <string name="biliroaming_custom_update_summary">允许APP检查作者官方项目提供的预构建漫游X集成包更新</string>
+    <string name="biliroaming_custom_update_only_64">仅支持64位系统</string>
+    <string name="biliroaming_custom_update_invalid_sig">当前APP非作者官方提供</string>
     <string name="biliroaming_video_detail_other_category_title">其它</string>
     <string name="biliroaming_disable_auto_select_title">禁止自动转到动态</string>
     <string name="biliroaming_disable_auto_select_summary">禁止评论带图时自动勾选转到动态</string>
