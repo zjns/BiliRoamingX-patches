@@ -2,10 +2,12 @@ package app.revanced.patches.bilibili.misc.darkswitch.patch
 
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
+import app.revanced.patcher.fingerprint.MethodFingerprint
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
+import app.revanced.patches.bilibili.misc.darkswitch.fingerprints.HdNewSwitchDarkModeFingerprint
 import app.revanced.patches.bilibili.misc.darkswitch.fingerprints.SwitchDarkModeFingerprint
 import app.revanced.patches.bilibili.utils.cloneMutable
 import app.revanced.patches.bilibili.utils.toPublic
@@ -24,7 +26,7 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
         CompatiblePackage(name = "com.bilibili.app.in")
     ]
 )
-object DarkSwitchPatch : BytecodePatch(setOf(SwitchDarkModeFingerprint)) {
+object DarkSwitchPatch : BytecodePatch(setOf(SwitchDarkModeFingerprint, HdNewSwitchDarkModeFingerprint)) {
     override fun execute(context: BytecodeContext) {
         fun Method.findIsNightFollowSystemMethod(): MethodReference? {
             return implementation!!.instructions.firstNotNullOfOrNull { inst ->
@@ -41,7 +43,8 @@ object DarkSwitchPatch : BytecodePatch(setOf(SwitchDarkModeFingerprint)) {
         val utilsGetContextMethod = utilsClass.methods.first { it.name == "getContext" }
         val isNightFollowSystemMethod = SwitchDarkModeFingerprint.result?.method?.findIsNightFollowSystemMethod()
             ?: throw PatchException("not found isNightFollowSystem method")
-        SwitchDarkModeFingerprint.result?.run {
+
+        fun MethodFingerprint.patch() = result?.run {
             mutableMethod.cloneMutable(registerCount = 2, clearImplementation = true).apply {
                 addInstructions(
                     """
@@ -54,7 +57,11 @@ object DarkSwitchPatch : BytecodePatch(setOf(SwitchDarkModeFingerprint)) {
                 mutableMethod.accessFlags = mutableMethod.accessFlags.toPublic()
                 mutableClass.methods.add(it)
             }
-        } ?: throw SwitchDarkModeFingerprint.exception
+        }
+
+        SwitchDarkModeFingerprint.patch() ?: throw SwitchDarkModeFingerprint.exception
+        HdNewSwitchDarkModeFingerprint.patch()
+
         utilsIsNightFollowSystemMethod.also { utilsClass.methods.remove(it) }.cloneMutable(
             registerCount = 1, clearImplementation = true
         ).apply {

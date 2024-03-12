@@ -10,3 +10,12 @@ object SwitchDarkModeFingerprint : MethodFingerprint(
         classDef.type.endsWith("HomeUserCenterFragment;")
     }
 )
+
+object HdNewSwitchDarkModeFingerprint : MethodFingerprint(
+    strings = listOf("default"),
+    returnType = "V",
+    parameters = listOf("Z"),
+    customFingerprint = { _, classDef ->
+        classDef.type == "Ltv/danmaku/bilibilihd/ui/main/mine/common/HdCommonBaseFragment;"
+    }
+)
