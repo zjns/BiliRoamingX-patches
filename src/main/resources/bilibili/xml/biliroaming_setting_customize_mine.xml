@@ -22,6 +22,10 @@
             android:fragment="app.revanced.bilibili.settings.fragments.CustomizeDrawerFragment"
             android:key="customize_drawer"
             android:title="@string/biliroaming_customize_drawer_title" />
+        <androidx.preference.SwitchPreferenceCompat
+          android:key="add_channel"
+          android:title="@string/biliroaming_add_channel_title"
+          android:summary="@string/biliroaming_add_channel_summary" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory>

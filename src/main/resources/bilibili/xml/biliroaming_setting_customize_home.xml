@@ -55,8 +55,5 @@
             android:key="disable_main_page_story"
             android:title="@string/biliroaming_disable_main_page_story_title"
             android:summary="@string/biliroaming_disable_main_page_story_summary" />
-        <androidx.preference.SwitchPreferenceCompat
-            android:key="add_channel"
-            android:title="@string/biliroaming_add_channel_title" />
     </androidx.preference.PreferenceCategory>
 </androidx.preference.PreferenceScreen>

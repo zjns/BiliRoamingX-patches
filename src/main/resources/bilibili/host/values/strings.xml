@@ -221,7 +221,8 @@
     <string name="biliroaming_block_bangumi_page_ads_summary">屏蔽番剧页面弹窗广告及会员购</string>
     <string name="biliroaming_block_follow_button_title">隐藏关注按钮</string>
     <string name="biliroaming_block_follow_button_summary">隐藏评论、动态等右上角的关注按钮</string>
-    <string name="biliroaming_add_channel_title">底栏添加频道按钮</string>
+    <string name="biliroaming_add_channel_title">添加频道中心</string>
+    <string name="biliroaming_add_channel_summary">“更多服务”添加“频道中心”选项，允许查看所有频道，启用后“我的收藏”页面同时添加“频道”标签</string>
     <string name="biliroaming_reboot_title">重启</string>
     <string name="biliroaming_custom_theme_title">自定义主题色</string>
     <string name="biliroaming_custom_theme_summary">添加自定义主题颜色的功能（需从我的右上角调色盘图标进入）</string>
