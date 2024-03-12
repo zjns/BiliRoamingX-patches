@@ -41,10 +41,6 @@
             android:fragment="app.revanced.bilibili.settings.fragments.CustomizeSearchFragment"
             android:key="search"
             android:title="@string/biliroaming_search_category_title" />
-        <androidx.preference.Preference
-            android:fragment="app.revanced.bilibili.settings.fragments.CustomizeSubtitleFragment"
-            android:key="customize_subtitle_category"
-            android:title="@string/biliroaming_customize_subtitle_title" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory>
