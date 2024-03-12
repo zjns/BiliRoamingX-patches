@@ -35,7 +35,7 @@
     <string name="biliroaming_purify_live_popups_summary">净化直播间各种浮窗</string>
     <string name="biliroaming_forbid_switch_live_room_title">禁止滑动切换直播间</string>
     <string name="biliroaming_forbid_switch_live_room_summary">禁止上下滑动切换直播间</string>
-    <string name="biliroaming_customize_mine_title">我的页面</string>
+    <string name="biliroaming_customize_mine_title">我的页</string>
     <string name="biliroaming_customize_drawer_title">需要展示的项目</string>
     <string name="biliroaming_drawer_style_title">页面样式</string>
     <string name="biliroaming_purify_drawer_reddot_title">净化红点</string>
@@ -363,4 +363,7 @@
     <string name="biliroaming_ratio_restore_done">原始大小</string>
     <string name="biliroaming_remove_live_mask_title">移除马赛克遮罩</string>
     <string name="biliroaming_remove_live_mask_summary">移除部分直播间官方添加的屏幕内容马赛克遮罩</string>
+    <string name="biliroaming_quality_title">清晰度</string>
+    <string name="biliroaming_playback_speed_title">速度</string>
+    <string name="biliroaming_other_title">其它</string>
 </resources>
