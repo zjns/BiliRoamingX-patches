@@ -15,6 +15,7 @@
             android:title="@string/biliroaming_purify_search_title"
             android:summary="@string/biliroaming_purify_search_summary" />
         <androidx.preference.Preference
+            android:key="search_type"
             android:fragment="app.revanced.bilibili.settings.fragments.FilterSearchTypeFragment"
             android:title="@string/biliroaming_filter_search_type_title" />
     </androidx.preference.PreferenceCategory>
