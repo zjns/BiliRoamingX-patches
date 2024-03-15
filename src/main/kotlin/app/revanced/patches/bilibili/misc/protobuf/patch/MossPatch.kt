@@ -1,9 +1,11 @@
 package app.revanced.patches.bilibili.misc.protobuf.patch
 
 import app.revanced.patcher.data.BytecodeContext
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.extensions.InstructionExtensions.removeInstructions
 import app.revanced.patcher.patch.BytecodePatch
+import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.misc.protobuf.fingerprints.MossMiddlewareGaiaFingerprint
@@ -114,5 +116,21 @@ object MossPatch : BytecodePatch(setOf(MossServiceFingerprint, MossMiddlewareGai
                 )
             }
         } ?: throw MossServiceFingerprint.exception
+        context.findClass("Lorg/chromium/net/impl/BidirectionalStreamBuilderImpl;")?.mutableClass?.run {
+            val urlField = fields.first { it.name == "mUrl" }
+            val requestHeadersField = fields.first { it.name == "mRequestHeaders" }
+            methods.first {
+                it.returnType == "Lorg/chromium/net/ExperimentalBidirectionalStream;" && it.parameterTypes.isEmpty()
+            }.addInstructions(
+                0,
+                """
+                iget-object v0, p0, $urlField
+                iget-object v1, p0, $requestHeadersField
+                invoke-static {v0, v1}, Lapp/revanced/bilibili/patches/protobuf/MossPatch;->hookBeforeRequest(Ljava/lang/String;Ljava/util/ArrayList;)Ljava/lang/String;
+                move-result-object v0
+                iput-object v0, p0, $urlField
+            """.trimIndent()
+            )
+        } ?: throw PatchException("not found BidirectionalStreamBuilderImpl class")
     }
 }

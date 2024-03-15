@@ -40,7 +40,9 @@ object OkHttpPatch : MultiMethodBytecodePatch(
             ?: throw HttpUrlFingerprint.exception
         val requestClass = RequestFingerprint.result?.mutableClass
             ?: throw RequestFingerprint.exception
-        requestClass.fields.forEach { it.accessFlags = it.accessFlags.toPublic() }
+        requestClass.fields.forEach {
+            it.accessFlags = it.accessFlags.toPublic().removeFinal()
+        }
         val urlField = requestClass.fields.first { it.type == httpUrlClass.type }
         val requestHeaderMethod = requestClass.methods.first {
             it.returnType == "Ljava/lang/String;" && it.parameterTypes == listOf("Ljava/lang/String;")
@@ -101,6 +103,18 @@ object OkHttpPatch : MultiMethodBytecodePatch(
             ?: throw RealCallFingerprint.exception
         val realCallClass = realCallResult.mutableClass
         val realCallGetMethod = realCallResult.mutableMethod
+        val realCallRequestField = realCallClass.fields.first {
+            it.type == requestClass.type
+        }
+        val requestHeadersField = requestClass.fields.first {
+            it.type == headersClass.type
+        }
+        val httpUrlGetMethod = httpUrlClass.methods.first {
+            it.parameterTypes == listOf("Ljava/lang/String;")
+                    && it.returnType == httpUrlClass.type
+                    && AccessFlags.STATIC.isSet(it.accessFlags)
+                    && it.implementation!!.tryBlocks.isEmpty()
+        }
         val hookMethod = Method(
             definingClass = realCallClass.type,
             name = "hook",
@@ -306,10 +320,70 @@ object OkHttpPatch : MultiMethodBytecodePatch(
             """.trimIndent()
             )
         }.also { realCallClass.methods.add(it) }
+        val hookBeforeMethod = Method(
+            definingClass = realCallClass.type,
+            name = "hookBefore",
+            returnType = "V",
+            parameters = listOf(MethodParameter(requestClass.type)),
+            accessFlags = AccessFlags.PRIVATE.value or AccessFlags.STATIC.value,
+            implementation = MethodImplementation(registerCount = 7)
+        ).toMutable().apply {
+            addInstructions(
+                """
+                iget-object v0, p0, $urlField
+            
+                invoke-virtual {v0}, Ljava/lang/Object;->toString()Ljava/lang/String;
+            
+                move-result-object v0
+            
+                iget-object v1, p0, $requestHeadersField
+            
+                iget-object v1, v1, $headersValueField
+            
+                invoke-static {v0, v1}, Lapp/revanced/bilibili/patches/okhttp/OkHttpPatch;->hookBefore(Ljava/lang/String;[Ljava/lang/String;)Landroid/util/Pair;
+            
+                move-result-object v2
+            
+                iget-object v3, v2, Landroid/util/Pair;->first:Ljava/lang/Object;
+            
+                check-cast v3, Ljava/lang/String;
+            
+                iget-object v4, v2, Landroid/util/Pair;->second:Ljava/lang/Object;
+            
+                check-cast v4, [Ljava/lang/String;
+            
+                invoke-virtual {v0, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+            
+                move-result v5
+            
+                if-nez v5, :comp_headers
+            
+                invoke-static {v3}, $httpUrlGetMethod
+            
+                move-result-object v5
+            
+                iput-object v5, p0, $urlField
+            
+                :comp_headers
+                if-eq v1, v4, :return
+            
+                new-instance v5, $headersClass
+            
+                invoke-direct {v5, v4}, $headersConstructor
+            
+                iput-object v5, p0, $requestHeadersField
+            
+                :return
+                return-void
+            """.trimIndent()
+            )
+        }.also { realCallClass.methods.add(it) }
         realCallGetMethod.cloneMutable(registerCount = 2, clearImplementation = true).apply {
             realCallGetMethod.name += "_Origin"
             addInstructions(
                 """
+                iget-object v0, p0, $realCallRequestField
+                invoke-static {v0}, $hookBeforeMethod
                 invoke-virtual {p0}, $realCallGetMethod
                 move-result-object v0
                 invoke-static {v0}, $hookMethod
