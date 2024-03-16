@@ -19,5 +19,9 @@
             android:key="remove_live_mask"
             android:title="@string/biliroaming_remove_live_mask_title"
             android:summary="@string/biliroaming_remove_live_mask_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="default_max_qn"
+            android:title="@string/biliroaming_default_max_qn_title"
+            android:summary="@string/biliroaming_default_max_qn_summary" />
     </androidx.preference.PreferenceCategory>
 </androidx.preference.PreferenceScreen>

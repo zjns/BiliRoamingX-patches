@@ -366,4 +366,6 @@
     <string name="biliroaming_quality_title">清晰度</string>
     <string name="biliroaming_playback_speed_title">速度</string>
     <string name="biliroaming_other_title">其它</string>
+    <string name="biliroaming_default_max_qn_title">默认原画</string>
+    <string name="biliroaming_default_max_qn_summary">进入直播间时默认选择原画画质，会降低直播间的加载速度</string>
 </resources>
