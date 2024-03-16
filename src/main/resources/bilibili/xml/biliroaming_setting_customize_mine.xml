@@ -26,6 +26,10 @@
           android:key="add_channel"
           android:title="@string/biliroaming_add_channel_title"
           android:summary="@string/biliroaming_add_channel_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="add_podcast"
+            android:title="@string/biliroaming_add_podcast_title"
+            android:summary="@string/biliroaming_add_podcast_summary" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory>
