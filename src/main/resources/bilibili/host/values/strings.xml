@@ -370,4 +370,6 @@
     <string name="biliroaming_default_max_qn_summary">进入直播间时默认选择原画画质，会降低直播间的加载速度</string>
     <string name="biliroaming_add_podcast_title">添加听视频</string>
     <string name="biliroaming_add_podcast_summary">Play版上“更多服务”添加“听视频”选项</string>
+    <string name="biliroaming_add_article_tab_title">添加专栏标签</string>
+    <string name="biliroaming_add_article_tab_summary">在投稿标签下的图文子标签前添加专栏标签，允许单独查看用户发布的专栏文章</string>
 </resources>
