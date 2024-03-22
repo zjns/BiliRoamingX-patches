@@ -25,6 +25,7 @@ repositories {
 
 dependencies {
     implementation(libs.revanced.patcher)
+    implementation(libs.revanced.patches)
     implementation(libs.smali)
 }
 
