@@ -84,7 +84,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/revanced/revanced-patches-template")
+            url = uri("https://maven.pkg.github.com/indranil012/BiliRoamingX-patches")
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
@@ -117,7 +117,7 @@ publishing {
                 scm {
                     connection = "scm:git:git://github.com/revanced/revanced-patches-template.git"
                     developerConnection = "scm:git:git@github.com:revanced/revanced-patches-template.git"
-                    url = "https://github.com/revanced/revanced-patches-template"
+                    url = "https://github.com/indranil012/BiliRoamingX-patches"
                 }
             }
         }
