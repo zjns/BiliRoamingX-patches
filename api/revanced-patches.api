@@ -1,0 +1,935 @@
+public final class app/revanced/patches/bilibili/ads/patch/UpRcmdAdsPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/ads/patch/UpRcmdAdsPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public class app/revanced/patches/bilibili/layout/fingerprints/FullStoryWidgetFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public fun <init> (Ljava/lang/String;)V
+}
+
+public final class app/revanced/patches/bilibili/layout/fingerprints/GeminiPlayerFullStoryWidgetFingerprint : app/revanced/patches/bilibili/layout/fingerprints/FullStoryWidgetFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/layout/fingerprints/GeminiPlayerFullStoryWidgetFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/layout/fingerprints/PlayerFullStoryWidgetFingerprint : app/revanced/patches/bilibili/layout/fingerprints/FullStoryWidgetFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/layout/fingerprints/PlayerFullStoryWidgetFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/layout/patch/FullStoryWidgetPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/layout/patch/FullStoryWidgetPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/layout/patch/HideFollowButtonPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/layout/patch/HideFollowButtonPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/layout/patch/RemoveVipSectionPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/layout/patch/RemoveVipSectionPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/appicon/AppIconPatch : app/revanced/patcher/patch/ResourcePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/appicon/AppIconPatch;
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+	public fun execute (Lapp/revanced/patcher/data/ResourceContext;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/config/fingerprints/ABSourceFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/config/fingerprints/ABSourceFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/config/fingerprints/ConfigSourceFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/config/fingerprints/ConfigSourceFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/config/patch/ConfigPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/config/patch/ConfigPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public class app/revanced/patches/bilibili/misc/copy/fingerprints/BaseCommentCopyFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public fun <init> (Ljava/lang/String;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/copy/fingerprints/Comment3CopyFingerprint : app/revanced/patches/bilibili/misc/copy/fingerprints/BaseCommentCopyFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/copy/fingerprints/Comment3CopyFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/copy/fingerprints/CommentCopyNewFingerprint : app/revanced/patches/bilibili/misc/copy/fingerprints/BaseCommentCopyFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/copy/fingerprints/CommentCopyNewFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/copy/fingerprints/CommentCopyOldFingerprint : app/revanced/patches/bilibili/misc/copy/fingerprints/BaseCommentCopyFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/copy/fingerprints/CommentCopyOldFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/copy/fingerprints/ConversationCopyFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/copy/fingerprints/ConversationCopyFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/copy/fingerprints/DescCopyFingerprint : app/revanced/patches/bilibili/patcher/fingerprint/MultiMethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/copy/fingerprints/DescCopyFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/copy/patch/CopyEnhancePatch : app/revanced/patches/bilibili/patcher/patch/MultiMethodBytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/copy/patch/CopyEnhancePatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/darkswitch/fingerprints/HdNewSwitchDarkModeFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/darkswitch/fingerprints/HdNewSwitchDarkModeFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/darkswitch/fingerprints/SwitchDarkModeFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/darkswitch/fingerprints/SwitchDarkModeFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/darkswitch/patch/DarkSwitchPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/darkswitch/patch/DarkSwitchPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/drawer/fingerprints/CloseDrawerControlFingerprint : app/revanced/patches/bilibili/misc/drawer/fingerprints/DrawerControlFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/drawer/fingerprints/CloseDrawerControlFingerprint;
+}
+
+public class app/revanced/patches/bilibili/misc/drawer/fingerprints/DrawerControlFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public fun <init> (Z)V
+}
+
+public final class app/revanced/patches/bilibili/misc/drawer/fingerprints/DrawerIsOpenFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/drawer/fingerprints/DrawerIsOpenFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/drawer/fingerprints/DrawerLayoutParamsFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/drawer/fingerprints/DrawerLayoutParamsFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/drawer/fingerprints/OpenDrawerControlFingerprint : app/revanced/patches/bilibili/misc/drawer/fingerprints/DrawerControlFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/drawer/fingerprints/OpenDrawerControlFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/drawer/patch/DrawerPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/drawer/patch/DrawerPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/integrations/fingerprints/AppCompatActivityFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/integrations/fingerprints/AppCompatActivityFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/integrations/fingerprints/BLKVFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/integrations/fingerprints/BLKVFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/integrations/fingerprints/BaseMainFrameFragmentFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/integrations/fingerprints/BaseMainFrameFragmentFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/integrations/fingerprints/BiliAuthFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/integrations/fingerprints/BiliAuthFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/integrations/fingerprints/BrotliFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/integrations/fingerprints/BrotliFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/integrations/fingerprints/DanmakuFontSwitchPreferenceFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/integrations/fingerprints/DanmakuFontSwitchPreferenceFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/integrations/fingerprints/DownloadingActivityFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/integrations/fingerprints/DownloadingActivityFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/integrations/fingerprints/InitFingerprint : app/revanced/patches/shared/misc/integrations/BaseIntegrationsPatch$IntegrationsFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/integrations/fingerprints/InitFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/integrations/patch/AccessKeyPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/integrations/patch/AccessKeyPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/integrations/patch/AccountInfoPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/integrations/patch/AccountInfoPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/integrations/patch/BLKVPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/integrations/patch/BLKVPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/integrations/patch/BiliAccountsPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/integrations/patch/BiliAccountsPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/integrations/patch/BrotliPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/integrations/patch/BrotliPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/integrations/patch/ConfigPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/integrations/patch/ConfigPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+	public final fun getConfigManagerType ()Ljava/lang/String;
+}
+
+public final class app/revanced/patches/bilibili/misc/integrations/patch/DpiPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/integrations/patch/DpiPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/integrations/patch/IntegrationsPatch : app/revanced/patches/shared/misc/integrations/BaseIntegrationsPatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/integrations/patch/IntegrationsPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/integrations/patch/LibBiliPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/integrations/patch/LibBiliPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/integrations/patch/MainActivityPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/integrations/patch/MainActivityPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/integrations/patch/ModifyModifierPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/integrations/patch/ModifyModifierPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/integrations/patch/ProtoBufPrintPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/integrations/patch/ProtoBufPrintPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/json/fingerprints/CardClickProcessorFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/json/fingerprints/CardClickProcessorFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/json/fingerprints/CardClickProcessorNewFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/json/fingerprints/CardClickProcessorNewFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/json/fingerprints/JSONFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/json/fingerprints/JSONFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/json/fingerprints/PegasusParserFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/json/fingerprints/PegasusParserFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/json/patch/JSONPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/json/patch/JSONPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/json/patch/PegasusPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/json/patch/PegasusPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/network/OverrideCertificatePinningPatch : app/revanced/patcher/patch/ResourcePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/network/OverrideCertificatePinningPatch;
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+	public fun execute (Lapp/revanced/patcher/data/ResourceContext;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/notification/fingerprints/HeadsetMediaSessionCallbackFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/notification/fingerprints/HeadsetMediaSessionCallbackFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/notification/fingerprints/LiveNotificationHelperFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/notification/fingerprints/LiveNotificationHelperFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/notification/fingerprints/MediaSessionCallbackApi21Fingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/notification/fingerprints/MediaSessionCallbackApi21Fingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/notification/fingerprints/NotificationStyleAbFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/notification/fingerprints/NotificationStyleAbFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/notification/patch/MusicNotificationPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/notification/patch/MusicNotificationPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/okhttp/fingerprints/BodyWrapperFingerprint : app/revanced/patches/bilibili/patcher/fingerprint/MultiMethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/okhttp/fingerprints/BodyWrapperFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/okhttp/fingerprints/BufferFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/okhttp/fingerprints/BufferFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/okhttp/fingerprints/HeadersFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/okhttp/fingerprints/HeadersFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/okhttp/fingerprints/HttpUrlFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/okhttp/fingerprints/HttpUrlFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/okhttp/fingerprints/MediaTypeGetFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/okhttp/fingerprints/MediaTypeGetFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/okhttp/fingerprints/RealCallFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/okhttp/fingerprints/RealCallFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/okhttp/fingerprints/RequestFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/okhttp/fingerprints/RequestFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/okhttp/fingerprints/ResponseBodyFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/okhttp/fingerprints/ResponseBodyFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/okhttp/fingerprints/ResponseFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/okhttp/fingerprints/ResponseFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/okhttp/patch/OkHttpPatch : app/revanced/patches/bilibili/patcher/patch/MultiMethodBytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/okhttp/patch/OkHttpPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/other/fingerprints/AppendTrackingInfoFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/fingerprints/AppendTrackingInfoFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/other/fingerprints/AttachChannelInfoFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/fingerprints/AttachChannelInfoFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/other/fingerprints/BLRouteBuilderFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/fingerprints/BLRouteBuilderFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/other/fingerprints/BangumiSearchResultFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/fingerprints/BangumiSearchResultFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/other/fingerprints/FavFolderOnDataSuccessFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/fingerprints/FavFolderOnDataSuccessFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/other/fingerprints/FavFolderOnDataSuccessNewFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/fingerprints/FavFolderOnDataSuccessNewFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/other/fingerprints/MineBindAccountStateFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/fingerprints/MineBindAccountStateFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/other/fingerprints/OgvSearchResultFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/fingerprints/OgvSearchResultFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/other/fingerprints/OgvSearchResultV2Fingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/fingerprints/OgvSearchResultV2Fingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/other/fingerprints/PublishToFollowingConfigFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/fingerprints/PublishToFollowingConfigFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/other/fingerprints/QualityViewHolderFingerprint : app/revanced/patches/bilibili/patcher/fingerprint/MultiMethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/fingerprints/QualityViewHolderFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/other/fingerprints/RouteRequestFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/fingerprints/RouteRequestFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/other/fingerprints/SectionFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/fingerprints/SectionFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/other/fingerprints/ShareToFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/fingerprints/ShareToFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/other/fingerprints/SpaceBindAccountStateFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/fingerprints/SpaceBindAccountStateFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/other/fingerprints/TeenagersModeFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/fingerprints/TeenagersModeFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/other/patch/AppendExtraSearchTypePatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/patch/AppendExtraSearchTypePatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/other/patch/AutoLikePatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/patch/AutoLikePatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/other/patch/BLRoutePatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/patch/BLRoutePatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/other/patch/BlockThaiCommentPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/patch/BlockThaiCommentPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/other/patch/CrashHandlerPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/patch/CrashHandlerPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/other/patch/CustomSplashPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/patch/CustomSplashPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/other/patch/FavFolderDialogPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/patch/FavFolderDialogPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/other/patch/ForbidSwitchLiveRoomPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/patch/ForbidSwitchLiveRoomPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/other/patch/InjectDataProviderPatch : app/revanced/patcher/patch/ResourcePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/patch/InjectDataProviderPatch;
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+	public fun execute (Lapp/revanced/patcher/data/ResourceContext;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/other/patch/LiveRoomPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/patch/LiveRoomPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/other/patch/NoManageSpaceActivityPatch : app/revanced/patcher/patch/ResourcePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/patch/NoManageSpaceActivityPatch;
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+	public fun execute (Lapp/revanced/patcher/data/ResourceContext;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/other/patch/NumberFormatPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/patch/NumberFormatPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/other/patch/PlayUpgradePatch : app/revanced/patcher/patch/ResourcePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/patch/PlayUpgradePatch;
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+	public fun execute (Lapp/revanced/patcher/data/ResourceContext;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/other/patch/PublishToFollowingPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/patch/PublishToFollowingPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/other/patch/SaveCommentImagePatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/patch/SaveCommentImagePatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/other/patch/SharePatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/patch/SharePatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/other/patch/SubtitlePatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/patch/SubtitlePatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/other/patch/TeenagerModePatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/patch/TeenagerModePatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/other/patch/TextFoldPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/patch/TextFoldPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/other/patch/TrialQualityPatch : app/revanced/patches/bilibili/patcher/patch/MultiMethodBytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/patch/TrialQualityPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/other/patch/UpgradePatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/other/patch/UpgradePatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/protobuf/fingerprints/MossMiddlewareGaiaFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/protobuf/fingerprints/MossMiddlewareGaiaFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/protobuf/fingerprints/MossServiceFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/protobuf/fingerprints/MossServiceFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/protobuf/patch/CommentReplyUrlPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/protobuf/patch/CommentReplyUrlPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/protobuf/patch/MossPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/protobuf/patch/MossPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/protobuf/patch/UnlockProtobufPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/protobuf/patch/UnlockProtobufPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/settings/fingerprints/HdOnContactClickFingerprint : app/revanced/patches/bilibili/misc/settings/fingerprints/HdOnPreferenceClickFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/settings/fingerprints/HdOnContactClickFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/settings/fingerprints/HdOnCourseClickFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/settings/fingerprints/HdOnCourseClickFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/settings/fingerprints/HdOnImClickFingerprint : app/revanced/patches/bilibili/misc/settings/fingerprints/HdOnPreferenceClickFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/settings/fingerprints/HdOnImClickFingerprint;
+}
+
+public class app/revanced/patches/bilibili/misc/settings/fingerprints/HdOnPreferenceClickFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public fun <init> (Ljava/lang/String;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/settings/fingerprints/HdOnSettingsClickFingerprint : app/revanced/patches/bilibili/misc/settings/fingerprints/HdOnPreferenceClickFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/settings/fingerprints/HdOnSettingsClickFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/settings/fingerprints/HdOnWatchLaterClickFingerprint : app/revanced/patches/bilibili/misc/settings/fingerprints/HdOnPreferenceClickFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/settings/fingerprints/HdOnWatchLaterClickFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/settings/fingerprints/PreferenceManagerFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/settings/fingerprints/PreferenceManagerFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/settings/patch/FixPreferenceManagerPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/settings/patch/FixPreferenceManagerPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/settings/patch/HdPreferenceClickFixPatch : app/revanced/patcher/patch/BytecodePatch {
+	public fun <init> ()V
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/settings/patch/HdPreferenceFragmentPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/settings/patch/HdPreferenceFragmentPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/settings/patch/SettingsResourcePatch : app/revanced/patcher/patch/ResourcePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/settings/patch/SettingsResourcePatch;
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+	public fun execute (Lapp/revanced/patcher/data/ResourceContext;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/splash/SplashPatch : app/revanced/patcher/patch/ResourcePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/splash/SplashPatch;
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+	public fun execute (Lapp/revanced/patcher/data/ResourceContext;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/theme/fingerprints/BuiltInThemesFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/theme/fingerprints/BuiltInThemesFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/theme/fingerprints/SkinListFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/theme/fingerprints/SkinListFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/theme/fingerprints/ThemeClickFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/theme/fingerprints/ThemeClickFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/theme/fingerprints/ThemeColorsFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/theme/fingerprints/ThemeColorsFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/theme/fingerprints/ThemeHelperFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/theme/fingerprints/ThemeHelperFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/theme/fingerprints/ThemeNameFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/theme/fingerprints/ThemeNameFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/theme/fingerprints/ThemeProcessorFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/theme/fingerprints/ThemeProcessorFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/theme/fingerprints/WebActivityBuildUriFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/theme/fingerprints/WebActivityBuildUriFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/theme/patch/CustomThemePatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/theme/patch/CustomThemePatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/toast/fingerprints/LessonsModeToastFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/toast/fingerprints/LessonsModeToastFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/misc/toast/patch/ToastPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/toast/patch/ToastPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/webview/patch/WebViewPatch : app/revanced/patches/all/misc/transformation/BaseTransformInstructionsPatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/misc/webview/patch/WebViewPatch;
+	public synthetic fun filterMap (Lcom/android/tools/smali/dexlib2/iface/ClassDef;Lcom/android/tools/smali/dexlib2/iface/Method;Lcom/android/tools/smali/dexlib2/iface/instruction/Instruction;I)Ljava/lang/Object;
+	public fun filterMap (Lcom/android/tools/smali/dexlib2/iface/ClassDef;Lcom/android/tools/smali/dexlib2/iface/Method;Lcom/android/tools/smali/dexlib2/iface/instruction/Instruction;I)Lkotlin/Triple;
+	public synthetic fun transform (Lapp/revanced/patcher/util/proxy/mutableTypes/MutableMethod;Ljava/lang/Object;)V
+	public fun transform (Lapp/revanced/patcher/util/proxy/mutableTypes/MutableMethod;Lkotlin/Triple;)V
+}
+
+public final class app/revanced/patches/bilibili/misc/webview/patch/WebViewPatch$MethodCall : java/lang/Enum, app/revanced/patches/all/misc/transformation/IMethodCall {
+	public static final field SetWebViewClient Lapp/revanced/patches/bilibili/misc/webview/patch/WebViewPatch$MethodCall;
+	public fun getDefinedClassName ()Ljava/lang/String;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public fun getMethodName ()Ljava/lang/String;
+	public fun getMethodParams ()[Ljava/lang/String;
+	public fun getReturnType ()Ljava/lang/String;
+	public fun replaceInvokeVirtualWithIntegrations (Ljava/lang/String;Lapp/revanced/patcher/util/proxy/mutableTypes/MutableMethod;Lcom/android/tools/smali/dexlib2/iface/instruction/formats/Instruction35c;I)V
+	public static fun valueOf (Ljava/lang/String;)Lapp/revanced/patches/bilibili/misc/webview/patch/WebViewPatch$MethodCall;
+	public static fun values ()[Lapp/revanced/patches/bilibili/misc/webview/patch/WebViewPatch$MethodCall;
+}
+
+public abstract class app/revanced/patches/bilibili/patcher/fingerprint/MultiMethodFingerprint {
+	public static final field Companion Lapp/revanced/patches/bilibili/patcher/fingerprint/MultiMethodFingerprint$Companion;
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Iterable;Ljava/lang/Iterable;Ljava/lang/Iterable;Lkotlin/jvm/functions/Function2;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Iterable;Ljava/lang/Iterable;Ljava/lang/Iterable;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAccessFlags ()Ljava/lang/Integer;
+	public final fun getCustomFingerprint ()Lkotlin/jvm/functions/Function2;
+	public final fun getOpcodes ()Ljava/lang/Iterable;
+	public final fun getParameters ()Ljava/lang/Iterable;
+	public final fun getResult ()Ljava/util/List;
+	public final fun getReturnType ()Ljava/lang/String;
+	public final fun getStrings ()Ljava/lang/Iterable;
+	public final fun setResult (Ljava/util/List;)V
+}
+
+public final class app/revanced/patches/bilibili/patcher/fingerprint/MultiMethodFingerprint$Companion {
+	public final fun resolve (Lapp/revanced/patches/bilibili/patcher/fingerprint/MultiMethodFingerprint;Lapp/revanced/patcher/data/BytecodeContext;Lcom/android/tools/smali/dexlib2/iface/ClassDef;)Z
+	public final fun resolve (Lapp/revanced/patches/bilibili/patcher/fingerprint/MultiMethodFingerprint;Lapp/revanced/patcher/data/BytecodeContext;Lcom/android/tools/smali/dexlib2/iface/Method;Lcom/android/tools/smali/dexlib2/iface/ClassDef;)Z
+	public final fun resolve (Ljava/lang/Iterable;Lapp/revanced/patcher/data/BytecodeContext;Ljava/lang/Iterable;)V
+}
+
+public abstract class app/revanced/patches/bilibili/patcher/patch/MultiMethodBytecodePatch : app/revanced/patcher/patch/BytecodePatch {
+	public fun <init> ()V
+	public fun <init> (Ljava/util/Set;Ljava/util/Set;)V
+	public synthetic fun <init> (Ljava/util/Set;Ljava/util/Set;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+	public final fun getFingerprints ()Ljava/util/Set;
+	public final fun getMultiFingerprints ()Ljava/util/Set;
+}
+
+public final class app/revanced/patches/bilibili/utils/ExtenstionsKt {
+	public static final fun Annotation (ILjava/lang/String;Ljava/util/Set;)Lcom/android/tools/smali/dexlib2/immutable/ImmutableAnnotation;
+	public static final fun AnnotationElement (Ljava/lang/String;Lcom/android/tools/smali/dexlib2/immutable/value/ImmutableEncodedValue;)Lcom/android/tools/smali/dexlib2/immutable/ImmutableAnnotationElement;
+	public static final fun ArrayEncodedValue (Ljava/util/List;)Lcom/android/tools/smali/dexlib2/immutable/value/ImmutableArrayEncodedValue;
+	public static final fun Method (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/util/List;Ljava/util/Set;Ljava/util/Set;Lcom/android/tools/smali/dexlib2/immutable/ImmutableMethodImplementation;)Lcom/android/tools/smali/dexlib2/immutable/ImmutableMethod;
+	public static synthetic fun Method$default (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/util/List;Ljava/util/Set;Ljava/util/Set;Lcom/android/tools/smali/dexlib2/immutable/ImmutableMethodImplementation;ILjava/lang/Object;)Lcom/android/tools/smali/dexlib2/immutable/ImmutableMethod;
+	public static final fun MethodImplementation (ILjava/util/List;Ljava/util/List;Ljava/util/List;)Lcom/android/tools/smali/dexlib2/immutable/ImmutableMethodImplementation;
+	public static synthetic fun MethodImplementation$default (ILjava/util/List;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lcom/android/tools/smali/dexlib2/immutable/ImmutableMethodImplementation;
+	public static final fun MethodParameter (Ljava/lang/String;Ljava/lang/String;Ljava/util/Set;)Lcom/android/tools/smali/dexlib2/immutable/ImmutableMethodParameter;
+	public static synthetic fun MethodParameter$default (Ljava/lang/String;Ljava/lang/String;Ljava/util/Set;ILjava/lang/Object;)Lcom/android/tools/smali/dexlib2/immutable/ImmutableMethodParameter;
+	public static final fun StringEncodedValue (Ljava/lang/String;)Lcom/android/tools/smali/dexlib2/immutable/value/ImmutableStringEncodedValue;
+	public static final fun clone (Lcom/android/tools/smali/dexlib2/iface/Method;IZLjava/lang/String;ILjava/util/List;)Lcom/android/tools/smali/dexlib2/immutable/ImmutableMethod;
+	public static synthetic fun clone$default (Lcom/android/tools/smali/dexlib2/iface/Method;IZLjava/lang/String;ILjava/util/List;ILjava/lang/Object;)Lcom/android/tools/smali/dexlib2/immutable/ImmutableMethod;
+	public static final fun cloneMutable (Lcom/android/tools/smali/dexlib2/iface/Method;IZLjava/lang/String;ILjava/util/List;)Lapp/revanced/patcher/util/proxy/mutableTypes/MutableMethod;
+	public static synthetic fun cloneMutable$default (Lcom/android/tools/smali/dexlib2/iface/Method;IZLjava/lang/String;ILjava/util/List;ILjava/lang/Object;)Lapp/revanced/patcher/util/proxy/mutableTypes/MutableMethod;
+	public static final fun getClassName (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun getEncodedValue (Ljava/lang/String;)Lcom/android/tools/smali/dexlib2/immutable/value/ImmutableStringEncodedValue;
+	public static final fun getException (Lapp/revanced/patches/bilibili/patcher/fingerprint/MultiMethodFingerprint;)Lapp/revanced/patcher/patch/PatchException;
+	public static final fun isAbstract (I)Z
+	public static final fun isInterface (I)Z
+	public static final fun isNative (I)Z
+	public static final fun isPrivate (I)Z
+	public static final fun isPublic (I)Z
+	public static final fun isStatic (I)Z
+	public static final fun removeFinal (I)I
+	public static final fun toPublic (I)I
+}
+
+public final class app/revanced/patches/bilibili/video/player/fingerprints/BangumiKeyDownHandlerFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/fingerprints/BangumiKeyDownHandlerFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/video/player/fingerprints/IjkMediaPlayerOptionsFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/fingerprints/IjkMediaPlayerOptionsFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/video/player/fingerprints/MenuFuncSegmentFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/fingerprints/MenuFuncSegmentFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/video/player/fingerprints/MusicPlayerPanelFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/fingerprints/MusicPlayerPanelFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/video/player/fingerprints/NewShareServiceFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/fingerprints/NewShareServiceFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/video/player/fingerprints/PlaybackSpeedSettingFingerprint : app/revanced/patches/bilibili/patcher/fingerprint/MultiMethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/fingerprints/PlaybackSpeedSettingFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/video/player/fingerprints/PlayerGestureListenerFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/fingerprints/PlayerGestureListenerFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/video/player/fingerprints/PlayerGestureRotateFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/fingerprints/PlayerGestureRotateFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/video/player/fingerprints/PlayerOnPreparedFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/fingerprints/PlayerOnPreparedFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/video/player/fingerprints/PlayerSpeedWidgetFingerprint : app/revanced/patches/bilibili/patcher/fingerprint/MultiMethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/fingerprints/PlayerSpeedWidgetFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/video/player/fingerprints/ResetResizeFunctionWidgetFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/fingerprints/ResetResizeFunctionWidgetFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/video/player/fingerprints/ShowPlayerToastFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/fingerprints/ShowPlayerToastFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/video/player/fingerprints/SpeedFunctionWidgetFingerprint : app/revanced/patches/bilibili/patcher/fingerprint/MultiMethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/fingerprints/SpeedFunctionWidgetFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/video/player/fingerprints/StoryMenuFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/fingerprints/StoryMenuFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/video/player/fingerprints/TripleSpeedServiceFingerprint : app/revanced/patches/bilibili/patcher/fingerprint/MultiMethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/fingerprints/TripleSpeedServiceFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/video/player/fingerprints/TripleSpeedServiceUniteFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/fingerprints/TripleSpeedServiceUniteFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/video/player/patch/BangumiKeyDownHandlerPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/patch/BangumiKeyDownHandlerPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/video/player/patch/DefaultPlaybackSpeedPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/patch/DefaultPlaybackSpeedPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/video/player/patch/HwCodecPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/patch/HwCodecPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/video/player/patch/LongPressPlaybackSpeedPatch : app/revanced/patches/bilibili/patcher/patch/MultiMethodBytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/patch/LongPressPlaybackSpeedPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/video/player/patch/OverridePlaybackSpeedPatch : app/revanced/patches/bilibili/patcher/patch/MultiMethodBytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/patch/OverridePlaybackSpeedPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/video/player/patch/PlayerGestureDetectorPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/patch/PlayerGestureDetectorPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/bilibili/video/player/patch/PlayerToastPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/player/patch/PlayerToastPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+	public final fun getShowToastMethodName ()Ljava/lang/String;
+	public final fun getToastServiceInterfaceName ()Ljava/lang/String;
+}
+
+public final class app/revanced/patches/bilibili/video/quality/fingerprints/PlayerSettingHelperFingerprint : app/revanced/patcher/fingerprint/MethodFingerprint {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/quality/fingerprints/PlayerSettingHelperFingerprint;
+}
+
+public final class app/revanced/patches/bilibili/video/quality/patch/VideoQualityPatch : app/revanced/patcher/patch/BytecodePatch {
+	public static final field INSTANCE Lapp/revanced/patches/bilibili/video/quality/patch/VideoQualityPatch;
+	public fun execute (Lapp/revanced/patcher/data/BytecodeContext;)V
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+}
+
+public final class app/revanced/patches/shared/misc/mapping/ResourceMappingPatch : app/revanced/patcher/patch/ResourcePatch {
+	public static final field INSTANCE Lapp/revanced/patches/shared/misc/mapping/ResourceMappingPatch;
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+	public fun execute (Lapp/revanced/patcher/data/ResourceContext;)V
+}
+
+public final class app/revanced/patches/shared/misc/mapping/ResourceMappingPatch$ResourceElement {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;J)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()J
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;J)Lapp/revanced/patches/shared/misc/mapping/ResourceMappingPatch$ResourceElement;
+	public static synthetic fun copy$default (Lapp/revanced/patches/shared/misc/mapping/ResourceMappingPatch$ResourceElement;Ljava/lang/String;Ljava/lang/String;JILjava/lang/Object;)Lapp/revanced/patches/shared/misc/mapping/ResourceMappingPatch$ResourceElement;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()J
+	public final fun getName ()Ljava/lang/String;
+	public final fun getType ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract class app/revanced/patches/shared/misc/settings/BaseSettingsResourcePatch : app/revanced/patcher/patch/ResourcePatch, java/io/Closeable, java/util/Set, kotlin/jvm/internal/markers/KMutableSet {
+	public fun <init> ()V
+	public fun <init> (Lkotlin/Pair;Ljava/util/Set;)V
+	public synthetic fun <init> (Lkotlin/Pair;Ljava/util/Set;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun add (Lapp/revanced/patches/shared/misc/settings/preference/BasePreference;)Z
+	public synthetic fun add (Ljava/lang/Object;)Z
+	public fun addAll (Ljava/util/Collection;)Z
+	public fun clear ()V
+	public fun close ()V
+	public fun contains (Lapp/revanced/patches/shared/misc/settings/preference/BasePreference;)Z
+	public final fun contains (Ljava/lang/Object;)Z
+	public fun containsAll (Ljava/util/Collection;)Z
+	public synthetic fun execute (Lapp/revanced/patcher/data/Context;)V
+	public fun execute (Lapp/revanced/patcher/data/ResourceContext;)V
+	public fun getSize ()I
+	public fun isEmpty ()Z
+	public fun iterator ()Ljava/util/Iterator;
+	public fun remove (Lapp/revanced/patches/shared/misc/settings/preference/BasePreference;)Z
+	public final fun remove (Ljava/lang/Object;)Z
+	public fun removeAll (Ljava/util/Collection;)Z
+	public fun retainAll (Ljava/util/Collection;)Z
+	public final fun size ()I
+	public fun toArray ()[Ljava/lang/Object;
+	public fun toArray ([Ljava/lang/Object;)[Ljava/lang/Object;
+}
+
+public final class app/revanced/util/BytecodeUtilsKt {
+	public static final fun containsWideLiteralInstructionValue (Lcom/android/tools/smali/dexlib2/iface/Method;J)Z
+	public static final fun findIndexForIdResource (Lcom/android/tools/smali/dexlib2/iface/Method;Ljava/lang/String;)I
+	public static final fun findMutableMethodOf (Lapp/revanced/patcher/util/proxy/mutableTypes/MutableClass;Lcom/android/tools/smali/dexlib2/iface/reference/MethodReference;)Lapp/revanced/patcher/util/proxy/mutableTypes/MutableMethod;
+	public static final fun getException (Lapp/revanced/patcher/fingerprint/MethodFingerprint;)Lapp/revanced/patcher/patch/PatchException;
+	public static final fun indexOfFirstInstruction (Lcom/android/tools/smali/dexlib2/iface/Method;Lkotlin/jvm/functions/Function1;)I
+	public static final fun indexOfFirstWideLiteralInstructionValue (Lcom/android/tools/smali/dexlib2/iface/Method;J)I
+	public static final fun injectHideViewCall (Lapp/revanced/patcher/util/proxy/mutableTypes/MutableMethod;IILjava/lang/String;Ljava/lang/String;)V
+	public static final fun returnEarly (Ljava/util/List;Z)V
+	public static synthetic fun returnEarly$default (Ljava/util/List;ZILjava/lang/Object;)V
+	public static final fun transformMethods (Lapp/revanced/patcher/util/proxy/mutableTypes/MutableClass;Lkotlin/jvm/functions/Function1;)V
+	public static final fun traverseClassHierarchy (Lapp/revanced/patcher/data/BytecodeContext;Lapp/revanced/patcher/util/proxy/mutableTypes/MutableClass;Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class app/revanced/util/ResourceGroup {
+	public fun <init> (Ljava/lang/String;[Ljava/lang/String;)V
+	public final fun getResourceDirectoryName ()Ljava/lang/String;
+	public final fun getResources ()[Ljava/lang/String;
+}
+
+public final class app/revanced/util/ResourceUtilsKt {
+	public static final fun appendChild (Lorg/w3c/dom/Element;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
+	public static final fun asSequence (Lorg/w3c/dom/NodeList;)Lkotlin/sequences/Sequence;
+	public static final fun bundledResource (Ljava/lang/String;)Ljava/io/InputStream;
+	public static final fun childElementsSequence (Lorg/w3c/dom/Node;)Lkotlin/sequences/Sequence;
+	public static final fun children (Lorg/w3c/dom/Node;)Lkotlin/sequences/Sequence;
+	public static final fun copyResources (Lapp/revanced/patcher/data/ResourceContext;Ljava/lang/String;[Lapp/revanced/util/ResourceGroup;)V
+	public static final fun copyXmlNode (Ljava/lang/String;Lapp/revanced/patcher/util/DomFileEditor;Lapp/revanced/patcher/util/DomFileEditor;)Ljava/lang/AutoCloseable;
+	public static final fun doRecursively (Lorg/w3c/dom/Node;Lkotlin/jvm/functions/Function1;)V
+	public static final fun forEachChildElement (Lorg/w3c/dom/Node;Lkotlin/jvm/functions/Function1;)V
+	public static final fun get (Lapp/revanced/patcher/util/DomFileEditor;Ljava/lang/String;)Lorg/w3c/dom/Element;
+	public static final fun get (Lorg/w3c/dom/Element;Ljava/lang/String;)Ljava/lang/String;
+	public static final fun insertBefore (Lorg/w3c/dom/Element;Lorg/w3c/dom/Node;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
+	public static final fun insertChild (Lorg/w3c/dom/Element;ILjava/lang/String;Lkotlin/jvm/functions/Function1;)V
+	public static final fun iterateXmlNodeChildren (Lapp/revanced/patcher/data/ResourceContext;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
+	public static final fun iterator (Lorg/w3c/dom/NodeList;)Ljava/util/Iterator;
+	public static final fun mergeXmlNodes (Lapp/revanced/patcher/data/ResourceContext;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)V
+	public static final fun set (Lorg/w3c/dom/Element;Ljava/lang/String;Ljava/lang/String;)V
+}
+
