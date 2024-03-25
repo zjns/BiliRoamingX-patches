@@ -140,7 +140,7 @@
     <string name="biliroaming_disable_main_page_story_summary">点击头像跳转至“我的”页面而不是快捷刷短视频。若启用“移动我的页面到侧边栏”则本项无效。</string>
     <string name="biliroaming_customize_subtitle_title">字幕</string>
     <string name="biliroaming_generate_subtitle_title">生成字幕</string>
-    <string name="biliroaming_generate_subtitle_summary">- 根据繁体字幕自动生成简体中文字幕\n- 在需要时使用谷歌翻译服务将英语字幕翻译为简体中文字幕</string>
+    <string name="biliroaming_generate_subtitle_summary">- 根据繁体字幕自动生成简体中文字幕\n- 在需要时使用三方翻译服务将英语字幕翻译为简体中文字幕</string>
     <string name="biliroaming_add_close_subtitle_title">添加“关闭”字幕</string>
     <string name="biliroaming_add_close_subtitle_summary">为有CC字幕的PGC视频添加“关闭”字幕选项，允许不显示字幕</string>
     <string name="biliroaming_subtitle_style_title">字幕样式</string>
@@ -372,4 +372,5 @@
     <string name="biliroaming_add_podcast_summary">Play版上“更多服务”添加“听视频”选项</string>
     <string name="biliroaming_add_article_tab_title">添加专栏标签</string>
     <string name="biliroaming_add_article_tab_summary">在投稿标签下的图文子标签前添加专栏标签，允许单独查看用户发布的专栏文章</string>
+    <string name="biliroaming_subtitle_translate_server_title">翻译服务提供商</string>
 </resources>

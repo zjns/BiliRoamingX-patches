@@ -40,6 +40,15 @@
           android:key="auto_generate_subtitle"
           android:title="@string/biliroaming_generate_subtitle_title"
           android:summary="@string/biliroaming_generate_subtitle_summary" />
+        <tv.danmaku.bili.widget.preference.BLRadioGroupEntrancePreference
+          android:fragment="app.revanced.bilibili.settings.fragments.SubtitleTranslateServerFragment"
+          android:key="subtitle_translate_server"
+          android:persistent="true"
+          android:title="@string/biliroaming_subtitle_translate_server_title"
+          app:migration_settings_type="none"
+          app:radioDefaultValue="microsoft"
+          app:radioEntries="@array/biliroaming_subtitle_translate_server_entries"
+          app:radioEntryValues="@array/biliroaming_subtitle_translate_server_values" />
         <androidx.preference.Preference
           android:fragment="app.revanced.bilibili.settings.fragments.CustomizeSubtitleStyleFragment"
           android:key="customize_subtitle_style"
