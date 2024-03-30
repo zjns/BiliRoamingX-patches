@@ -374,4 +374,6 @@
     <string name="biliroaming_add_article_tab_title">添加专栏标签</string>
     <string name="biliroaming_add_article_tab_summary">在投稿标签下的图文子标签前添加专栏标签，允许单独查看用户发布的专栏文章</string>
     <string name="biliroaming_subtitle_translate_server_title">翻译服务提供商</string>
+    <string name="biliroaming_disable_slide_left_title">禁止向左滑动弹出抽屉</string>
+    <string name="biliroaming_disable_slide_left_summary">侧滑返回时容易误触</string>
 </resources>
