@@ -376,4 +376,6 @@
     <string name="biliroaming_subtitle_translate_server_title">翻译服务提供商</string>
     <string name="biliroaming_disable_slide_left_title">禁止向左滑动弹出抽屉</string>
     <string name="biliroaming_disable_slide_left_summary">侧滑返回时容易误触</string>
+    <string name="biliroaming_disable_auto_float_title">禁止自动开启小窗播放</string>
+    <string name="biliroaming_disable_auto_float_summary">直播间点击小窗播放时禁止自动开启“播放被中断时自动小窗播放”选项</string>
 </resources>

@@ -27,5 +27,9 @@
             android:key="disable_slide_left"
             android:title="@string/biliroaming_disable_slide_left_title"
             android:summary="@string/biliroaming_disable_slide_left_summary" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="disable_auto_float"
+            android:title="@string/biliroaming_disable_auto_float_title"
+            android:summary="@string/biliroaming_disable_auto_float_summary" />
     </androidx.preference.PreferenceCategory>
 </androidx.preference.PreferenceScreen>
