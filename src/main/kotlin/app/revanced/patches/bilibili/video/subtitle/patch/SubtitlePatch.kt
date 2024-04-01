@@ -1,4 +1,4 @@
-package app.revanced.patches.bilibili.misc.other.patch
+package app.revanced.patches.bilibili.video.subtitle.patch
 
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
@@ -13,8 +13,8 @@ import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 
 @Patch(
-    name = "Subtitle",
-    description = "字幕相关补丁",
+    name = "Subtitle style",
+    description = "字幕样式相关补丁",
     compatiblePackages = [
         CompatiblePackage(name = "tv.danmaku.bili"),
         CompatiblePackage(name = "tv.danmaku.bilibilihd"),
