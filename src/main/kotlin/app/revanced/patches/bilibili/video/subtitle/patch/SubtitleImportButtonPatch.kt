@@ -34,7 +34,7 @@ object SubtitleImportButtonPatch : ResourcePatch() {
                     this["android:id"] = "@+id/biliroaming_import_subtitle"
                     this["android:layout_width"] = "wrap_content"
                     this["android:layout_height"] = "wrap_content"
-                    this["android:text"] = "导入字幕"
+                    this["android:text"] = "@string/biliroaming_import_subtitle"
                     this["android:layout_marginRight"] = "16dp"
                     this["android:visibility"] = "gone"
                     this["app:layout_constraintTop_toTopOf"] = "@id/subtitle_setting_text"
