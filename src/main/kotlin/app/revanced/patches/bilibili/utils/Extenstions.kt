@@ -101,7 +101,7 @@ fun AnnotationElement(
 fun Annotation(
     visibility: Int,
     type: String,
-    elements: Set<ImmutableAnnotationElement>
+    elements: Set<ImmutableAnnotationElement>? = null,
 ) = ImmutableAnnotation(visibility, type, elements)
 
 fun MethodImplementation(
@@ -120,3 +120,21 @@ val String.className: String
             substring(1, length - 1).replace('/', '.')
         else replace('/', '.')
     }
+
+fun Field(
+    definingClass: String,
+    name: String,
+    type: String,
+    accessFlags: Int,
+    initialValue: ImmutableEncodedValue? = null,
+    annotations: Set<ImmutableAnnotation>? = null,
+    hiddenApiRestrictions: Set<HiddenApiRestriction>? = null,
+) = ImmutableField(
+    definingClass,
+    name,
+    type,
+    accessFlags,
+    initialValue,
+    annotations,
+    hiddenApiRestrictions
+)

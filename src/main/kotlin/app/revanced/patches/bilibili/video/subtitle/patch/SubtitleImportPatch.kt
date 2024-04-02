@@ -5,11 +5,19 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
+import app.revanced.patcher.util.proxy.mutableTypes.MutableField.Companion.toMutable
 import app.revanced.patches.bilibili.patcher.patch.MultiMethodBytecodePatch
+import app.revanced.patches.bilibili.utils.Annotation
+import app.revanced.patches.bilibili.utils.Field
 import app.revanced.patches.bilibili.utils.cloneMutable
 import app.revanced.patches.bilibili.utils.exception
-import app.revanced.patches.bilibili.video.subtitle.fingerprints.*
+import app.revanced.patches.bilibili.video.subtitle.fingerprints.FunctionWidgetServiceFingerprint
+import app.revanced.patches.bilibili.video.subtitle.fingerprints.FunctionWidgetTokenFingerprint
+import app.revanced.patches.bilibili.video.subtitle.fingerprints.PlayerSubtitleFunctionWidgetFingerprint
+import app.revanced.patches.bilibili.video.subtitle.fingerprints.SetDmViewReplyFingerprint
 import app.revanced.util.exception
+import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.AnnotationVisibility
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
@@ -26,9 +34,7 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 object SubtitleImportPatch : MultiMethodBytecodePatch(
     fingerprints = setOf(
         FunctionWidgetServiceFingerprint,
-        PlayerContainerFingerprint,
         SetDmViewReplyFingerprint,
-        FunctionWidgetServiceFingerprint,
         FunctionWidgetTokenFingerprint,
     ),
     multiFingerprints = setOf(PlayerSubtitleFunctionWidgetFingerprint)
@@ -53,12 +59,6 @@ object SubtitleImportPatch : MultiMethodBytecodePatch(
                 )
             }.also { result.mutableClass.methods.add(it) }
         }
-        val playerResult = PlayerContainerFingerprint.result
-        val playerContainerClass = playerResult?.classDef?.superclass
-            ?: throw PlayerContainerFingerprint.exception
-        val playerContainerField = PlayerSubtitleFunctionWidgetFingerprint.result.firstNotNullOfOrNull { r ->
-            r.classDef.fields.find { it.type == playerContainerClass }?.name
-        } ?: throw PatchException("not found playerContainer field")
         val setDmResult = SetDmViewReplyFingerprint.result
         val setDmViewReplyMethod = setDmResult?.method?.name ?: throw SetDmViewReplyFingerprint.exception
         val (getDanmakuParamsMethod, danmakuParamsClass) = setDmResult.method.implementation!!.instructions.firstNotNullOfOrNull { inst ->
@@ -79,21 +79,35 @@ object SubtitleImportPatch : MultiMethodBytecodePatch(
             ) && it.returnType == "V"
         }.name
         val interactLayerServiceInterface = setDmResult.classDef.interfaces.first()
-        val interactLayerServiceField = PlayerSubtitleFunctionWidgetFingerprint.result.firstNotNullOfOrNull { r ->
-            r.classDef.fields.find { it.type == interactLayerServiceInterface }
-        }?.name ?: throw PatchException("not found interactLayerService field")
-        val getInteractLayerServiceMethod = playerResult.classDef.methods.first {
-            it.parameterTypes.isEmpty() && it.returnType == interactLayerServiceInterface
-        }.name
         val widgetResult = FunctionWidgetServiceFingerprint.result
         val widgetServiceInterface = widgetResult?.classDef?.interfaces?.first()
             ?: throw FunctionWidgetServiceFingerprint.exception
-        val widgetServiceField = PlayerSubtitleFunctionWidgetFingerprint.result.firstNotNullOfOrNull { r ->
-            r.classDef.fields.find { it.type == widgetServiceInterface }
-        }?.name ?: throw PatchException("not found widgetService field")
-        val getWidgetServiceMethod = playerResult.classDef.methods.first {
-            it.parameterTypes.isEmpty() && it.returnType == widgetServiceInterface
-        }.name
+        PlayerSubtitleFunctionWidgetFingerprint.result.forEach { result ->
+            Field(
+                definingClass = result.classDef.type,
+                name = "interactLayerServiceForBiliRoaming",
+                type = interactLayerServiceInterface,
+                accessFlags = AccessFlags.PUBLIC.value,
+                annotations = setOf(
+                    Annotation(
+                        visibility = AnnotationVisibility.RUNTIME,
+                        type = "Ltv/danmaku/biliplayerv2/injection/InjectPlayerService;"
+                    )
+                )
+            ).toMutable().let { result.mutableClass.fields.add(it) }
+            Field(
+                definingClass = result.classDef.type,
+                name = "widgetServiceForBiliRoaming",
+                type = widgetServiceInterface,
+                accessFlags = AccessFlags.PUBLIC.value,
+                annotations = setOf(
+                    Annotation(
+                        visibility = AnnotationVisibility.RUNTIME,
+                        type = "Ltv/danmaku/biliplayerv2/injection/InjectPlayerService;"
+                    )
+                )
+            ).toMutable().let { result.mutableClass.fields.add(it) }
+        }
         val absWidgetClass = PlayerSubtitleFunctionWidgetFingerprint.result.first().classDef.superclass
         val widgetTokenClass = FunctionWidgetTokenFingerprint.result?.classDef?.type
             ?: throw FunctionWidgetTokenFingerprint.exception
@@ -106,21 +120,6 @@ object SubtitleImportPatch : MultiMethodBytecodePatch(
         val hookInfoProviderClass = context.findClass(
             "Lapp/revanced/bilibili/patches/SubtitleImportPatch\$HookInfoProvider;"
         )!!.mutableClass
-        val playerContainerFieldHook = hookInfoProviderClass.fields.first {
-            it.name == "playerContainerField"
-        }
-        val interactLayerServiceFieldHook = hookInfoProviderClass.fields.first {
-            it.name == "interactLayerServiceField"
-        }
-        val widgetServiceFieldHook = hookInfoProviderClass.fields.first {
-            it.name == "widgetServiceField"
-        }
-        val getInteractLayerServiceMethodHook = hookInfoProviderClass.fields.first {
-            it.name == "getInteractLayerServiceMethod"
-        }
-        val getWidgetServiceMethodHook = hookInfoProviderClass.fields.first {
-            it.name == "getWidgetServiceMethod"
-        }
         val getDanmakuParamsMethodHook = hookInfoProviderClass.fields.first {
             it.name == "getDanmakuParamsMethod"
         }
@@ -143,21 +142,6 @@ object SubtitleImportPatch : MultiMethodBytecodePatch(
             .cloneMutable(registerCount = 1, clearImplementation = true).apply {
                 addInstructions(
                     0, """
-                    const-string v0, "$playerContainerField"
-                    sput-object v0, $playerContainerFieldHook
-                    
-                    const-string v0, "$interactLayerServiceField"
-                    sput-object v0, $interactLayerServiceFieldHook
-                    
-                    const-string v0, "$widgetServiceField"
-                    sput-object v0, $widgetServiceFieldHook
-                    
-                    const-string v0, "$getInteractLayerServiceMethod"
-                    sput-object v0, $getInteractLayerServiceMethodHook
-                    
-                    const-string v0, "$getWidgetServiceMethod"
-                    sput-object v0, $getWidgetServiceMethodHook
-                    
                     const-string v0, "$getDanmakuParamsMethod"
                     sput-object v0, $getDanmakuParamsMethodHook
                     
