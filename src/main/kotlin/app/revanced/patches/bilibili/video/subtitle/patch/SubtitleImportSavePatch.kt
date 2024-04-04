@@ -23,15 +23,15 @@ import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
 @Patch(
-    name = "Subtitle import",
-    description = "导入字幕相关功能补丁",
+    name = "Subtitle import and save",
+    description = "导入及保存字幕相关功能补丁",
     compatiblePackages = [
         CompatiblePackage(name = "tv.danmaku.bili"),
         CompatiblePackage(name = "tv.danmaku.bilibilihd"),
         CompatiblePackage(name = "com.bilibili.app.in")
     ]
 )
-object SubtitleImportPatch : MultiMethodBytecodePatch(
+object SubtitleImportSavePatch : MultiMethodBytecodePatch(
     fingerprints = setOf(
         FunctionWidgetServiceFingerprint,
         SetDmViewReplyFingerprint,
@@ -53,7 +53,7 @@ object SubtitleImportPatch : MultiMethodBytecodePatch(
                     0, """
                     invoke-virtual {p0, p1}, $stockMethod
                     move-result-object v0
-                    invoke-static {p0, v0}, Lapp/revanced/bilibili/patches/SubtitleImportPatch;->onCreateSubtitleWidget(Ljava/lang/Object;Landroid/view/View;)V
+                    invoke-static {p0, v0}, Lapp/revanced/bilibili/patches/SubtitleImportSavePatch;->onCreateSubtitleWidget(Ljava/lang/Object;Landroid/view/View;)V
                     return-object v0
                 """.trimIndent()
                 )
@@ -118,7 +118,7 @@ object SubtitleImportPatch : MultiMethodBytecodePatch(
             it.type == widgetTokenClass
         }.name
         val hookInfoProviderClass = context.findClass(
-            "Lapp/revanced/bilibili/patches/SubtitleImportPatch\$HookInfoProvider;"
+            "Lapp/revanced/bilibili/patches/SubtitleImportSavePatch\$HookInfo;"
         )!!.mutableClass
         val getDanmakuParamsMethodHook = hookInfoProviderClass.fields.first {
             it.name == "getDanmakuParamsMethod"

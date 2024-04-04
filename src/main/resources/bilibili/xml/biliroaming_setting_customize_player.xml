@@ -54,9 +54,9 @@
           android:key="customize_subtitle_style"
           android:title="@string/biliroaming_subtitle_style_title" />
         <androidx.preference.SwitchPreferenceCompat
-            android:key="subtitle_import"
-            android:title="@string/biliroaming_subtitle_import_title"
-            android:summary="@string/biliroaming_subtitle_import_summary" />
+            android:key="subtitle_import_save"
+            android:title="@string/biliroaming_subtitle_import_save_title"
+            android:summary="@string/biliroaming_subtitle_import_save_summary" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory

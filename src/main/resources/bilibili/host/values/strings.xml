@@ -378,7 +378,8 @@
     <string name="biliroaming_disable_slide_left_summary">侧滑返回时容易误触</string>
     <string name="biliroaming_disable_auto_float_title">禁止自动开启小窗播放</string>
     <string name="biliroaming_disable_auto_float_summary">直播间点击小窗播放时禁止自动开启“播放被中断时自动小窗播放”选项</string>
-    <string name="biliroaming_subtitle_import_title">导入字幕</string>
-    <string name="biliroaming_subtitle_import_summary">字幕选择面板添加导入字幕按钮，允许导入ass、srt、vtt、bcc(json)类型的字幕</string>
-    <string name="biliroaming_import_subtitle">导入字幕</string>
+    <string name="biliroaming_subtitle_import_save_title">导入及保存字幕</string>
+    <string name="biliroaming_subtitle_import_save_summary">字幕选择面板添加导入及保存字幕按钮，允许导入ass、srt、vtt、bcc(json)类型的字幕，以srt或bcc格式保存字幕</string>
+    <string name="biliroaming_import_subtitle">导入</string>
+    <string name="biliroaming_save_subtitle">保存</string>
 </resources>
