@@ -55,6 +55,7 @@ object SettingsResourcePatch : ResourcePatch() {
         "biliroaming_setting_filter_popular.xml",
         "biliroaming_setting_filter_comment.xml",
         "biliroaming_setting_subtitle_translate_server.xml",
+        "biliroaming_setting_external_downloader.xml",
     )
     private val layouts = arrayOf(
         "biliroaming_dialog_argb_color_choose.xml",

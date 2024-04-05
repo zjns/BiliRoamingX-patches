@@ -382,4 +382,12 @@
     <string name="biliroaming_subtitle_import_save_summary">字幕选择面板添加导入及保存字幕按钮，允许导入ass、srt、vtt、bcc(json)类型的字幕，以srt或bcc格式保存字幕</string>
     <string name="biliroaming_import_subtitle">导入</string>
     <string name="biliroaming_save_subtitle">保存</string>
+    <string name="biliroaming_external_downloader_title">外部视频下载器</string>
+    <string name="biliroaming_external_downloader_summary">启用选项后，点击播放页三点弹框缓存按钮时，询问是否使用外部视频下载器下载，需要先设置下载器包名并安装对应下载器。</string>
+    <string name="biliroaming_external_downloader_name_title">下载器包名</string>
+    <string name="biliroaming_external_downloader_name_tips">推荐使用 Seal，对应包名为 com.junkfood.seal</string>
+    <string name="biliroaming_external_downloader_name_summary">当前包名：%s</string>
+    <string name="biliroaming_external_downloader_name_hint">例如：com.junkfood.seal</string>
+    <string name="biliroaming_whether_use_external_downloader">是否使用外部视频下载器下载？</string>
+    <string name="biliroaming_external_downloader_not_installed">下载器未安装或未启用！</string>
 </resources>
