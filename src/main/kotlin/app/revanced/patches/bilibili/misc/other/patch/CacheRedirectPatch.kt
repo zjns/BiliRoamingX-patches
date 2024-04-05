@@ -2,10 +2,12 @@ package app.revanced.patches.bilibili.misc.other.patch
 
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
-import app.revanced.patcher.patch.BytecodePatch
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
+import app.revanced.patches.bilibili.misc.other.fingerprints.OnOgvDownloadFingerprint
 import app.revanced.patches.bilibili.misc.settings.patch.SettingsResourcePatch
+import app.revanced.patches.bilibili.patcher.patch.MultiMethodBytecodePatch
 import app.revanced.patches.bilibili.utils.*
 import app.revanced.patches.shared.misc.mapping.ResourceMappingPatch
 import com.android.tools.smali.dexlib2.Opcode
@@ -14,7 +16,7 @@ import com.android.tools.smali.dexlib2.iface.value.IntEncodedValue
 
 @Patch(
     name = "Cache redirect",
-    description = "详情页三点缓存菜单重定向，允许外部工具直接下载",
+    description = "缓存行为重定向，允许外部工具直接下载",
     compatiblePackages = [
         CompatiblePackage(name = "tv.danmaku.bili"),
         CompatiblePackage(name = "tv.danmaku.bilibilihd"),
@@ -22,8 +24,11 @@ import com.android.tools.smali.dexlib2.iface.value.IntEncodedValue
     ],
     dependencies = [ResourceMappingPatch::class, SettingsResourcePatch::class]
 )
-object CacheRedirectPatch : BytecodePatch() {
+object CacheRedirectPatch : MultiMethodBytecodePatch(
+    multiFingerprints = setOf(OnOgvDownloadFingerprint)
+) {
     override fun execute(context: BytecodeContext) {
+        super.execute(context)
         val packageName = SettingsResourcePatch.packageName
         val dialogMenuLayoutName = if (packageName == "tv.danmaku.bilibilihd") {
             "bili_app_list_item_super_menu_hd_right_dialog_menu"
@@ -64,6 +69,26 @@ object CacheRedirectPatch : BytecodePatch() {
                     )
                 }.also { methods.add(it) }
             }
+        }
+        OnOgvDownloadFingerprint.result.ifEmpty {
+            throw OnOgvDownloadFingerprint.exception
+        }.forEach { r ->
+            val originMethod = r.mutableMethod
+            originMethod.cloneMutable(registerCount = 4, clearImplementation = true).apply {
+                originMethod.name += "_Origin"
+                addInstructionsWithLabels(
+                    0, """
+                    const-string v0, "${originMethod.name}"
+                    invoke-static {p0, v0, p1, p2}, Lapp/revanced/bilibili/patches/CacheRedirectPatch;->onOgvDownload(Ljava/lang/Object;Ljava/lang/String;Landroid/content/Context;Ljava/lang/Enum;)Z
+                    move-result v0
+                    if-eqz v0, :invoke_origin
+                    return-void
+                    :invoke_origin
+                    invoke-virtual {p0, p1, p2}, $originMethod
+                    return-void
+                """.trimIndent()
+                )
+            }.also { r.mutableClass.methods.add(it) }
         }
     }
 }

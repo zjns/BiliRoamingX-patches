@@ -383,7 +383,7 @@
     <string name="biliroaming_import_subtitle">导入</string>
     <string name="biliroaming_save_subtitle">保存</string>
     <string name="biliroaming_external_downloader_title">外部视频下载器</string>
-    <string name="biliroaming_external_downloader_summary">启用选项后，点击播放页三点弹框缓存按钮时，询问是否使用外部视频下载器下载，需要先设置下载器包名并安装对应下载器。</string>
+    <string name="biliroaming_external_downloader_summary">启用选项后，点击缓存按钮时询问是否使用外部视频下载器下载，需要先设置下载器包名并安装对应下载器。</string>
     <string name="biliroaming_external_downloader_name_title">下载器包名</string>
     <string name="biliroaming_external_downloader_name_tips">推荐使用 Seal，对应包名为 com.junkfood.seal</string>
     <string name="biliroaming_external_downloader_name_summary">当前包名：%s</string>
