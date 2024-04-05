@@ -5,6 +5,7 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
+import app.revanced.patches.bilibili.misc.settings.patch.SettingsResourcePatch
 import app.revanced.patches.bilibili.utils.*
 import app.revanced.patches.shared.misc.mapping.ResourceMappingPatch
 import com.android.tools.smali.dexlib2.Opcode
@@ -19,12 +20,18 @@ import com.android.tools.smali.dexlib2.iface.value.IntEncodedValue
         CompatiblePackage(name = "tv.danmaku.bilibilihd"),
         CompatiblePackage(name = "com.bilibili.app.in")
     ],
-    dependencies = [ResourceMappingPatch::class]
+    dependencies = [ResourceMappingPatch::class, SettingsResourcePatch::class]
 )
 object CacheRedirectPatch : BytecodePatch() {
     override fun execute(context: BytecodeContext) {
+        val packageName = SettingsResourcePatch.packageName
+        val dialogMenuLayoutName = if (packageName == "tv.danmaku.bilibilihd") {
+            "bili_app_list_item_super_menu_hd_right_dialog_menu"
+        } else {
+            "bili_app_list_item_super_menu_dialog_menu"
+        }
         val dialogMenuLayoutId = ResourceMappingPatch.resourceMappings.first {
-            it.type == "layout" && it.name == "bili_app_list_item_super_menu_dialog_menu"
+            it.type == "layout" && it.name == dialogMenuLayoutName
         }.id.toInt()
         val dialogMenuLayoutIdField = context.classes.firstNotNullOf { c ->
             c.fields.find { f ->

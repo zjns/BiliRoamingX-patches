@@ -19,6 +19,9 @@ import app.revanced.util.*
     dependencies = [ResourceMappingPatch::class]
 )
 object SettingsResourcePatch : ResourcePatch() {
+    var packageName = ""
+        private set
+
     private val extraPreferences = arrayOf(
         "biliroaming_settings.xml",
         "biliroaming_setting_half_screen_quality.xml",
@@ -85,6 +88,7 @@ object SettingsResourcePatch : ResourcePatch() {
         context.xmlEditor["res/xml/main_preferences.xml"].use {
             it.addBiliRoamingEntrance()
         }
+        packageName = context.xmlEditor["AndroidManifest.xml"].use { it["manifest"]["package"] }
     }
 
     private fun DomFileEditor.addBiliRoamingEntrance() {
