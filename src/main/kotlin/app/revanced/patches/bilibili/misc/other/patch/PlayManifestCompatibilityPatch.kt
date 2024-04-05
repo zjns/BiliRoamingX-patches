@@ -10,20 +10,26 @@ import app.revanced.util.insertBefore
 import app.revanced.util.set
 
 @Patch(
-    name = "Play upgrade",
-    description = "Play版注入安装apk权限补丁",
+    name = "Play manifest compatibility",
+    description = "Play版 AndroidManifest 声明缺失补全",
     compatiblePackages = [CompatiblePackage(name = "com.bilibili.app.in")]
 )
-object PlayUpgradePatch : ResourcePatch() {
+object PlayManifestCompatibilityPatch : ResourcePatch() {
+    private val missingPerms = arrayOf(
+        "android.permission.REQUEST_INSTALL_PACKAGES",
+        "android.permission.QUERY_ALL_PACKAGES",
+    )
+
     override fun execute(context: ResourceContext) {
         context.xmlEditor["AndroidManifest.xml"].use { dom ->
             val manifest = dom["manifest"]
             val permTag = "uses-permission"
             val nameAttr = "android:name"
-            val permName = "android.permission.REQUEST_INSTALL_PACKAGES"
-            if (manifest.children().none { it.tagName == permTag && it[nameAttr] == permName }) {
-                manifest.insertBefore(dom["application"], permTag) {
-                    this[nameAttr] = permName
+            missingPerms.forEach { perm ->
+                if (manifest.children().none { it.tagName == permTag && it[nameAttr] == perm }) {
+                    manifest.insertBefore(dom["application"], permTag) {
+                        this[nameAttr] = perm
+                    }
                 }
             }
         }
