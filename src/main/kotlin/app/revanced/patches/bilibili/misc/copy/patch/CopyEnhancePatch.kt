@@ -2,6 +2,7 @@ package app.revanced.patches.bilibili.misc.copy.patch
 
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
+import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.bilibili.misc.copy.fingerprints.*
@@ -70,7 +71,10 @@ object CopyEnhancePatch : MultiMethodBytecodePatch(
             CommentCopyOldFingerprint.result to "message",
             CommentCopyNewFingerprint.result to "comment_message",
             Comment3CopyFingerprint.result to "comment_message"
-        ).forEach { (result, idName) ->
+        ).apply {
+            if (count { it.first != null } == 0)
+                throw PatchException("CopyLongClickListener not found")
+        }.forEach { (result, idName) ->
             result?.mutableClass?.interfaces?.add(onLongClickOriginListenerType)
             result?.mutableClass?.methods?.run {
                 result.mutableMethod.also { m ->

@@ -16,7 +16,7 @@ open class BaseCommentCopyFingerprint(identityType: String) : MethodFingerprint(
     ),
     customFingerprint = { methodDef, classDef ->
         methodDef.name == "onLongClick" && classDef.interfaces == listOf("Landroid/view/View\$OnLongClickListener;")
-                && classDef.fields.let { fields ->
+                && classDef.fields.toList().let { fields ->
             fields.count() == 2 && fields.all { AccessFlags.SYNTHETIC.isSet(it.accessFlags) }
                     && fields.any { it.type == identityType }
         }
