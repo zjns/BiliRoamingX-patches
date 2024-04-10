@@ -1,6 +1,7 @@
 package app.revanced.util
 
 import app.revanced.patcher.data.ResourceContext
+import app.revanced.patcher.util.Document
 import app.revanced.patcher.util.DomFileEditor
 import app.revanced.util.resource.BaseResource
 import org.w3c.dom.Element
@@ -127,6 +128,10 @@ internal fun DomFileEditor?.getNode(tagName: String) = this!!.file.getElementsBy
 operator fun DomFileEditor.get(tagName: String): Element =
     file.getElementsByTagName(tagName).item(0) as Element
 
+operator fun Document.get(tagName: String): Element {
+    return getElementsByTagName(tagName).item(0) as Element
+}
+
 fun Node.children(): Sequence<Element> =
     childNodes.iterator().asSequence().filterIsInstance<Element>()
 
@@ -149,6 +154,10 @@ fun Element.insertBefore(refChild: Node, tagName: String, build: Element.() -> U
 
 fun Element.insertChild(index: Int, tagName: String, build: Element.() -> Unit) {
     insertBefore(ownerDocument.createElement(tagName).apply(build), children().elementAt(index))
+}
+
+fun Element.removeChild(condition: Element.() -> Boolean) {
+    children().find(condition)?.also { removeChild(it) }
 }
 
 fun bundledResource(path: String) = classLoader.getResourceAsStream(path)!!

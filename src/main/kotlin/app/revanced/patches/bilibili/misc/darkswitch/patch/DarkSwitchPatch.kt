@@ -45,10 +45,12 @@ object DarkSwitchPatch : BytecodePatch(setOf(SwitchDarkModeFingerprint, HdNewSwi
             ?: throw PatchException("not found isNightFollowSystem method")
 
         fun MethodFingerprint.patch() = result?.run {
+            val listenerType = "Lapp/revanced/bilibili/widget/OnSwitchDarkModeOriginListener;"
+            mutableClass.interfaces.add(listenerType)
             mutableMethod.cloneMutable(registerCount = 2, clearImplementation = true).apply {
                 addInstructions(
                     """
-                    invoke-static {p0, p1}, Lapp/revanced/bilibili/patches/DarkSwitchPatch;->switchDarkMode(${mutableClass.type}Z)V
+                    invoke-static {p0, p1}, Lapp/revanced/bilibili/patches/DarkSwitchPatch;->switchDarkMode(${listenerType}Z)V
                     return-void
                 """.trimIndent()
                 )

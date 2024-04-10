@@ -385,9 +385,7 @@
     <string name="biliroaming_external_downloader_title">外部视频下载器</string>
     <string name="biliroaming_external_downloader_summary">启用选项后，点击缓存按钮时询问是否使用外部视频下载器下载，需要先设置下载器包名并安装对应下载器。</string>
     <string name="biliroaming_external_downloader_name_title">下载器包名</string>
-    <string name="biliroaming_external_downloader_name_tips">推荐使用 Seal，对应包名为 com.junkfood.seal</string>
-    <string name="biliroaming_external_downloader_name_summary">当前包名：%s</string>
-    <string name="biliroaming_external_downloader_name_hint">例如：com.junkfood.seal</string>
+    <string name="biliroaming_external_downloader_name_summary">推荐使用 Seal</string>
     <string name="biliroaming_whether_use_external_downloader">是否使用外部视频下载器下载？</string>
     <string name="biliroaming_external_downloader_not_installed">下载器未安装或未启用！</string>
     <string name="biliroaming_no_colorful_danmaku_title">去掉会员彩色弹幕多彩效果</string>
