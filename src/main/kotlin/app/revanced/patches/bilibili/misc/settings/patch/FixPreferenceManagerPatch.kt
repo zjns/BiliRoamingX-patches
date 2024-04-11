@@ -10,9 +10,6 @@ import app.revanced.patches.bilibili.misc.settings.fingerprints.PreferenceManage
 import app.revanced.patches.bilibili.utils.MethodParameter
 import app.revanced.patches.bilibili.utils.cloneMutable
 import app.revanced.util.exception
-import com.android.tools.smali.dexlib2.Opcode
-import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction21c
-import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction35c
 
 /**
  * TODO: better way to solve it?
@@ -60,120 +57,19 @@ object FixPreferenceManagerPatch : BytecodePatch(setOf(PreferenceManagerFingerpr
             }
         }
 
-        val ktUtilsClass = context.findClass("Lapp/revanced/bilibili/utils/KtUtils;")!!.mutableClass
-        ktUtilsClass.methods.first { it.name == "retrieveOnPreferenceTreeClickListenerField" }.replaceInstruction(
-            0, """
-            const-class v0, $preferenceManagerDef
-        """.trimIndent()
-        )
-        val onPreferenceTreeClickMethod = ktUtilsClass.methods.run {
-            first { it.name == "onPreferenceTreeClick" }.run {
-                remove(this)
-                cloneMutable(parameters = parameters.also {
-                    it[0] = MethodParameter(preferenceManagerDef.type).toMutable()
-                }).also { add(it) }
-            }
-        }
-
-        val settingsFragmentClass =
-            context.findClass("Lapp/revanced/bilibili/settings/fragments/BiliRoamingBaseSettingFragment;")!!.mutableClass
         val getSharedPreferencesMethod = preferenceManagerDef.methods.first {
             it.parameters.isEmpty() && it.returnType == "Landroid/content/SharedPreferences;"
         }
-        val setSharedPreferencesNameMethod = preferenceManagerDef.methods.first {
-            it.parameterTypes == listOf("Ljava/lang/String;") && it.returnType == "V"
-        }
-        settingsFragmentClass.methods.first { it.name == "fixPreferenceManager" }.run {
-            val (i1, r1) = implementation!!.instructions.withIndex().firstNotNullOf { (index, inst) ->
-                if (inst.opcode == Opcode.CONST_CLASS) {
-                    index to (inst as BuilderInstruction21c).registerA
-                } else null
-            }
-            replaceInstruction(i1, "const-class v$r1, $preferenceManagerDef")
-            val (i2, r2) = implementation!!.instructions.withIndex().firstNotNullOf { (index, inst) ->
-                if (inst.opcode == Opcode.NEW_INSTANCE) {
-                    index to (inst as BuilderInstruction21c).registerA
-                } else null
-            }
-            replaceInstruction(i2, "new-instance v$r2, $preferenceManagerDef")
-            val (index, registers) = implementation!!.instructions.withIndex().firstNotNullOf { (index, inst) ->
-                if (inst.opcode == Opcode.INVOKE_DIRECT && inst is BuilderInstruction35c && inst.registerCount == 2) {
-                    index to inst.let { arrayOf(it.registerC, it.registerD) }
-                } else null
-            }
-            replaceInstruction(
-                index, """
-                invoke-direct {${registers.joinToString(separator = ",") { "v$it" }}}, $preferenceManagerDef-><init>(Landroid/content/Context;)V
-            """.trimIndent()
-            )
-        }
-        settingsFragmentClass.methods.first { it.name == "onCreate" }.run {
-            replaceInstruction(
-                1, """
-                invoke-virtual {p0}, Lcom/bilibili/lib/ui/BasePreferenceFragment;->getPreferenceManager()$preferenceManagerDef
-            """.trimIndent()
-            )
-            replaceInstruction(
-                3, """
-                invoke-virtual {p1}, $getSharedPreferencesMethod
-            """.trimIndent()
-            )
-        }
-        settingsFragmentClass.methods.first { it.name == "onCreatePreferences" }.run {
-            replaceInstruction(
-                1, """
-                invoke-virtual {p0}, Lcom/bilibili/lib/ui/BasePreferenceFragment;->getPreferenceManager()$preferenceManagerDef
-            """.trimIndent()
-            )
-            replaceInstruction(
-                4, """
-                invoke-virtual {p1, p2}, $setSharedPreferencesNameMethod
-            """.trimIndent()
-            )
-        }
-        settingsFragmentClass.methods.first { it.name == "onDestroy" }.run {
-            replaceInstruction(
+        val modulePrefsManagerClass =
+            context.findClass("Lapp/revanced/bilibili/settings/ModulePreferenceManager;")!!.mutableClass
+        modulePrefsManagerClass.setSuperClass(preferenceManagerDef.type)
+        modulePrefsManagerClass.methods.run {
+            first { it.name == "getSharedPreferences" }.name = getSharedPreferencesMethod.name
+            first { it.name == "<init>" }.replaceInstruction(
                 0, """
-                invoke-virtual {p0}, Lcom/bilibili/lib/ui/BasePreferenceFragment;->getPreferenceManager()$preferenceManagerDef
+                invoke-direct {p0, p1}, $modulePrefsManagerClass-><init>(Landroid/content/Context;)V
             """.trimIndent()
             )
-            replaceInstruction(
-                2, """
-                invoke-virtual {v0}, $getSharedPreferencesMethod
-            """.trimIndent()
-            )
-        }
-        settingsFragmentClass.methods.first { it.name == "onStart" }.run {
-            implementation!!.instructions.indexOfFirst { it.opcode == Opcode.INVOKE_VIRTUAL }.run {
-                replaceInstruction(
-                    this, """
-                    invoke-virtual {p0}, Lcom/bilibili/lib/ui/BasePreferenceFragment;->getPreferenceManager()$preferenceManagerDef
-                """.trimIndent()
-                )
-            }
-            implementation!!.instructions.indexOfLast { it.opcode == Opcode.INVOKE_STATIC }.run {
-                replaceInstruction(
-                    this, """
-                    invoke-static {v0, p0}, $onPreferenceTreeClickMethod
-                """.trimIndent()
-                )
-            }
-        }
-        settingsFragmentClass.methods.first { it.name == "onStop" }.run {
-            implementation!!.instructions.indexOfFirst { it.opcode == Opcode.INVOKE_VIRTUAL }.run {
-                replaceInstruction(
-                    this, """
-                    invoke-virtual {p0}, Lcom/bilibili/lib/ui/BasePreferenceFragment;->getPreferenceManager()$preferenceManagerDef
-                """.trimIndent()
-                )
-            }
-            implementation!!.instructions.indexOfLast { it.opcode == Opcode.INVOKE_STATIC }.run {
-                replaceInstruction(
-                    this, """
-                    invoke-static {v0, p0}, $onPreferenceTreeClickMethod
-                """.trimIndent()
-                )
-            }
         }
     }
 }
