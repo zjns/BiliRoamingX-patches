@@ -67,7 +67,7 @@ object FixPreferenceManagerPatch : BytecodePatch(setOf(PreferenceManagerFingerpr
             first { it.name == "getSharedPreferences" }.name = getSharedPreferencesMethod.name
             first { it.name == "<init>" }.replaceInstruction(
                 0, """
-                invoke-direct {p0, p1}, $modulePrefsManagerClass-><init>(Landroid/content/Context;)V
+                invoke-direct {p0, p1}, $preferenceManagerDef-><init>(Landroid/content/Context;)V
             """.trimIndent()
             )
         }
