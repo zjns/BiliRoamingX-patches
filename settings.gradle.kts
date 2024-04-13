@@ -1,1 +1,1 @@
-rootProject.name = "revanced-patches"
+rootProject.name = "BiliRoamingX-patches"

@@ -1,11 +1,13 @@
 import org.gradle.kotlin.dsl.support.listFilesOrdered
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    kotlin("jvm") version "1.9.22"
+    alias(libs.plugins.kotlin)
     `maven-publish`
+    signing
 }
 
-group = "app.revanced"
+group = "app.revanced.bilibili"
 
 repositories {
     mavenCentral()
@@ -30,74 +32,91 @@ dependencies {
 }
 
 kotlin {
-    jvmToolchain(11)
-}
-
-tasks.withType(Jar::class) {
-    exclude("app/revanced/meta")
-
-    manifest {
-        attributes["Name"] = "ReVanced Patches"
-        attributes["Description"] = "Patches for ReVanced."
-        attributes["Version"] = version
-        attributes["Timestamp"] = System.currentTimeMillis().toString()
-        attributes["Source"] = "git@github.com:revanced/revanced-patches.git"
-        attributes["Author"] = "ReVanced"
-        attributes["Contact"] = "contact@revanced.app"
-        attributes["Origin"] = "https://revanced.app"
-        attributes["License"] = "GNU General Public License v3.0"
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_11)
     }
 }
 
+java {
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
 tasks {
-    register<DefaultTask>("generateBundle") {
-        description = "Generate dex files from build and bundle them in the jar file"
+    withType(Jar::class) {
+        exclude("app/revanced/generator")
+
+        manifest {
+            attributes["Name"] = "BiliRoamingX Patches"
+            attributes["Description"] = "Patches for BiliRoamingX."
+            attributes["Version"] = version
+            attributes["Timestamp"] = System.currentTimeMillis().toString()
+            attributes["Source"] = "git@github.com:zjns/BiliRoamingX-patches.git"
+            attributes["Author"] = "Kofua"
+            attributes["License"] = "GNU General Public License v3.0"
+        }
+    }
+
+    register("buildDexJar") {
+        description = "Build and add a DEX to the JAR file"
+        group = "build"
+
         dependsOn(build)
 
         doLast {
             val d8 = File(System.getenv("ANDROID_HOME")).resolve("build-tools")
                 .listFilesOrdered().last().resolve("d8").absolutePath
 
-            val artifacts = configurations.archives.get().allArtifacts.files.files.first().absolutePath
+            val patchesJar = configurations.archives.get().allArtifacts.files.files.first().absolutePath
             val workingDirectory = layout.buildDirectory.dir("libs").get().asFile
 
             exec {
                 workingDir = workingDirectory
-                commandLine = listOf(d8, artifacts)
+                commandLine = listOf(d8, "--release", patchesJar)
             }
 
             exec {
                 workingDir = workingDirectory
-                commandLine = listOf("zip", "-u", artifacts, "classes.dex")
+                commandLine = listOf("zip", "-u", patchesJar, "classes.dex")
             }
         }
     }
 
-    register<JavaExec>("generateMeta") {
-        description = "Generate metadata for this bundle"
+    register<JavaExec>("generatePatchesFiles") {
+        description = "Generate patches files"
+
         dependsOn(build)
 
         classpath = sourceSets["main"].runtimeClasspath
-        mainClass.set("app.revanced.meta.IPatchesFileGenerator")
+        mainClass.set("app.revanced.generator.Main")
     }
 
-    // Required to run tasks because Gradle semantic-release plugin runs the publish task.
+    // Needed by gradle-semantic-release-plugin.
     // Tracking: https://github.com/KengoTODA/gradle-semantic-release-plugin/issues/435
-    named("publish") {
-        dependsOn("generateBundle")
-        dependsOn("generateMeta")
+    publish {
+        dependsOn("buildDexJar")
+        dependsOn("generatePatchesFiles")
     }
 }
 
 publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/zjns/BiliRoamingX-patches")
+            credentials {
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_ACTOR")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+
     publications {
         create<MavenPublication>("revanced-patches-publication") {
             from(components["java"])
 
             pom {
-                name = "ReVanced Patches"
-                description = "Patches for ReVanced."
-                url = "https://revanced.app"
+                name = "BiliRoamingX Patches"
+                description = "Patches for BiliRoamingX."
 
                 licenses {
                     license {
@@ -107,17 +126,22 @@ publishing {
                 }
                 developers {
                     developer {
-                        id = "ReVanced"
-                        name = "ReVanced"
-                        email = "contact@revanced.app"
+                        id = "zjns"
+                        name = "Kofua"
                     }
                 }
                 scm {
-                    connection = "scm:git:git://github.com/revanced/revanced-patches.git"
-                    developerConnection = "scm:git:git@github.com:revanced/revanced-patches.git"
-                    url = "https://github.com/revanced/revanced-patches"
+                    connection = "scm:git:git://github.com/zjns/BiliRoamingX-patches.git"
+                    developerConnection = "scm:git:git@github.com:zjns/BiliRoamingX-patches.git"
+                    url = "https://github.com/zjns/BiliRoamingX-patches"
                 }
             }
         }
     }
+}
+
+signing {
+    useGpgCmd()
+
+    sign(publishing.publications["revanced-patches-publication"])
 }
