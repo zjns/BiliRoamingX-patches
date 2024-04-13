@@ -4,10 +4,12 @@ import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
+import app.revanced.util.get
+import app.revanced.util.set
 
 @Patch(
     name = "Override certificate pinning",
-    description = "Overrides certificate pinning, allowing to inspect traffic via a proxy.",
+    description = "覆盖哔哩哔哩的证书固定配置，允许抓包",
     compatiblePackages = [
         CompatiblePackage(name = "tv.danmaku.bili"),
         CompatiblePackage(name = "tv.danmaku.bilibilihd"),
@@ -16,9 +18,10 @@ import app.revanced.patcher.patch.annotation.Patch
 )
 object OverrideCertificatePinningPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
-        context["res/xml/network_security_config.xml"].apply {
-            delete()
-            createNewFile()
+        context.document["AndroidManifest.xml"].use { dom ->
+            dom["application"]["android:networkSecurityConfig"] = "@xml/network_security_config"
+        }
+        context["res/xml/network_security_config.xml", false].apply {
             writeText(
                 """
                 <?xml version="1.0" encoding="utf-8"?>

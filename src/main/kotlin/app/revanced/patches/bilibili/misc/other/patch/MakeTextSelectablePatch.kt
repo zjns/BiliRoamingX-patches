@@ -45,7 +45,7 @@ object MakeTextSelectablePatch : ResourcePatch() {
         )
         headlineLayouts.forEach {
             runCatching {
-                context.xmlEditor["res/layout/$it.xml"].use { dom ->
+                context.document["res/layout/$it.xml"].use { dom ->
                     dom["androidx.constraintlayout.widget.ConstraintLayout"].children().first {
                         it.androidId == "@id/season_title"
                     }["android:textIsSelectable"] = "true"
@@ -54,7 +54,7 @@ object MakeTextSelectablePatch : ResourcePatch() {
         }
         nameLayouts.forEach {
             runCatching {
-                context.xmlEditor["res/layout/$it.xml"].use { dom ->
+                context.document["res/layout/$it.xml"].use { dom ->
                     dom["LinearLayout"].children().first {
                         it.androidId == "@id/tv_origin_name"
                     }["android:textIsSelectable"] = "true"
@@ -63,14 +63,14 @@ object MakeTextSelectablePatch : ResourcePatch() {
         }
         rolesInfoLayouts.forEach {
             runCatching {
-                context.xmlEditor["res/layout/$it.xml"].use { dom ->
+                context.document["res/layout/$it.xml"].use { dom ->
                     dom["TextView"]["android:textIsSelectable"] = "true"
                 }
             }
         }
         introInfoLayouts.forEach {
             runCatching {
-                context.xmlEditor["res/layout/$it.xml"].use { dom ->
+                context.document["res/layout/$it.xml"].use { dom ->
                     dom["LinearLayout"].children().first {
                         it.androidId == "@id/tv_intro"
                     }["android:textIsSelectable"] = "true"
@@ -79,7 +79,7 @@ object MakeTextSelectablePatch : ResourcePatch() {
         }
         actorInfoLayouts.forEach {
             runCatching {
-                context.xmlEditor["res/layout/$it.xml"].use { dom ->
+                context.document["res/layout/$it.xml"].use { dom ->
                     dom["androidx.constraintlayout.widget.ConstraintLayout"].children().filter {
                         it.androidId == "@id/tv_actor_name" || it.androidId == "@id/tv_actor_name_eng"
                     }.forEach { it["android:textIsSelectable"] = "true" }

@@ -21,7 +21,7 @@ object PlayManifestCompatibilityPatch : ResourcePatch() {
     )
 
     override fun execute(context: ResourceContext) {
-        context.xmlEditor["AndroidManifest.xml"].use { dom ->
+        context.document["AndroidManifest.xml"].use { dom ->
             val manifest = dom["manifest"]
             val permTag = "uses-permission"
             val nameAttr = "android:name"

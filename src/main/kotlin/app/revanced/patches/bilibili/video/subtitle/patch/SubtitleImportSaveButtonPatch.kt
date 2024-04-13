@@ -26,7 +26,7 @@ object SubtitleImportSaveButtonPatch : ResourcePatch() {
         arrayOf("res/layout", "res/layout-land").flatMap { dir ->
             subtitleLayouts.map { "$dir/$it.xml" }
         }.forEach {
-            context.xmlEditor[it].use { dom ->
+            context.document[it].use { dom ->
                 val rootNode = dom["androidx.constraintlayout.widget.ConstraintLayout"]
                 rootNode.appendChild("com.bilibili.magicasakura.widgets.TintTextView") {
                     this["android:textSize"] = "12sp"

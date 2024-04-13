@@ -17,7 +17,7 @@ import app.revanced.util.get
 )
 object NoManageSpaceActivityPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
-        context.xmlEditor["AndroidManifest.xml"].use {
+        context.document["AndroidManifest.xml"].use {
             it["application"].removeAttribute("android:manageSpaceActivity")
         }
     }

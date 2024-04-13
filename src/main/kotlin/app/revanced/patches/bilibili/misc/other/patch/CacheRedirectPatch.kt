@@ -37,7 +37,7 @@ object CacheRedirectPatch : MultiMethodBytecodePatch(
         }
         val dialogMenuLayoutId = ResourceMappingPatch.resourceMappings.first {
             it.type == "layout" && it.name == dialogMenuLayoutName
-        }.id.toInt()
+        }.id
         val dialogMenuLayoutIdField = context.classes.firstNotNullOf { c ->
             c.fields.find { f ->
                 f.accessFlags.let { it.isPublic() && it.isStatic() }

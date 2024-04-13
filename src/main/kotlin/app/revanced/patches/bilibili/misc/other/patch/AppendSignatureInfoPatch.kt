@@ -19,7 +19,7 @@ import app.revanced.util.set
 )
 object AppendSignatureInfoPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
-        context.xmlEditor["AndroidManifest.xml"].use { dom ->
+        context.document["AndroidManifest.xml"].use { dom ->
             dom["application"].apply {
                 insertChild(0, "meta-data") {
                     this["android:name"] = "lspatch"

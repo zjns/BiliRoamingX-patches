@@ -72,7 +72,7 @@ fun MutableMethod.injectHideViewCall(
 fun Method.findIndexForIdResource(resourceName: String): Int {
     fun getIdResourceId(resourceName: String) = ResourceMappingPatch.resourceMappings.single {
         it.type == "id" && it.name == resourceName
-    }.id
+    }.id.toLong()
 
     return indexOfFirstWideLiteralInstructionValue(getIdResourceId(resourceName))
 }
@@ -117,7 +117,7 @@ fun BytecodeContext.traverseClassHierarchy(targetClass: MutableClass, callback: 
  * if the [Instruction] is not a [ReferenceInstruction] or the [Reference] is not of type [T].
  * @see ReferenceInstruction
  */
-inline fun <reified T : Reference> Instruction.getReference() = (this as? ReferenceInstruction)?.reference as? T
+inline fun <reified T : Reference> Instruction.getReference() = (this as ReferenceInstruction).reference as T
 
 /**
  * Get the index of the first [Instruction] that matches the predicate.

@@ -4,13 +4,13 @@ import app.revanced.patcher.data.ResourceContext
 import app.revanced.patcher.patch.ResourcePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
-import app.revanced.patcher.util.DomFileEditor
+import app.revanced.patcher.util.Document
 import app.revanced.patches.shared.misc.mapping.ResourceMappingPatch
 import app.revanced.util.*
 
 @Patch(
-    name = "Settings resource patch",
-    description = "哔哩漫游设置入口",
+    name = "BiliRoamingX settings entrance",
+    description = "哔哩漫游X设置入口",
     compatiblePackages = [
         CompatiblePackage(name = "tv.danmaku.bili"),
         CompatiblePackage(name = "tv.danmaku.bilibilihd"),
@@ -85,13 +85,13 @@ object SettingsResourcePatch : ResourcePatch() {
             "res/values/arrays.xml",
             "bilibili/host/values/arrays.xml"
         )
-        context.xmlEditor["res/xml/main_preferences.xml"].use {
+        context.document["res/xml/main_preferences.xml"].use {
             it.addBiliRoamingEntrance()
         }
-        packageName = context.xmlEditor["AndroidManifest.xml"].use { it["manifest"]["package"] }
+        packageName = context.document["AndroidManifest.xml"].use { it["manifest"]["package"] }
     }
 
-    private fun DomFileEditor.addBiliRoamingEntrance() {
+    private fun Document.addBiliRoamingEntrance() {
         this["androidx.preference.PreferenceScreen"].run {
             insertBefore(firstChild, "androidx.preference.PreferenceCategory") {
                 appendChild("androidx.preference.PreferenceScreen") {

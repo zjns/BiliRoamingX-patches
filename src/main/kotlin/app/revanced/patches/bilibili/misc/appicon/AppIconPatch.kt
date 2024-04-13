@@ -34,14 +34,13 @@ object AppIconPatch : ResourcePatch() {
             "mipmap-xxxhdpi"
         )
         iconPaths.forEach {
-            ResourceGroup(it, *iconFiles).run {
-                context.copyResources("bilibili/appicon", this)
-            }
+            context.copyResources("bilibili/appicon", ResourceGroup(it, *iconFiles))
         }
         ResourceGroup(
-            "mipmap-anydpi-v26", "ic_launcher.xml", "ic_launcher_round.xml"
-        ).run {
-            context.copyResources("bilibili/appicon", this)
+            "mipmap-anydpi-v26",
+            "ic_launcher.xml", "ic_launcher_round.xml"
+        ).let {
+            context.copyResources("bilibili/appicon", it)
         }
     }
 }

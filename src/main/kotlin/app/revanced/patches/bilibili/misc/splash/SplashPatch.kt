@@ -78,15 +78,15 @@ object SplashPatch : ResourcePatch() {
             context, "res/values-night/colors.xml",
             COLOR_NAME_BILIROAMING_BG_SPLASH, darkThemeBackgroundColor!!
         )
-        context.xmlEditor["res/drawable/layerlist_splash.xml"].use { dom ->
+        context.document["res/drawable/layerlist_splash.xml"].use { dom ->
             dom["layer-list"].children().flatMap { it.children() }
                 .first { it.tagName == "color" }["android:color"] = "@color/$COLOR_NAME_BILIROAMING_BG_SPLASH"
         }
-        context.xmlEditor["res/drawable/safe_mode_layerlist_splash.xml"].use { dom ->
+        context.document["res/drawable/safe_mode_layerlist_splash.xml"].use { dom ->
             dom["layer-list"].children().flatMap { it.children() }
                 .first { it.tagName == "color" }["android:color"] = "@color/$COLOR_NAME_BILIROAMING_BG_SPLASH"
         }
-        context.xmlEditor["res/layout/bili_app_layout_brand_splash_fragment.xml"].use { dom ->
+        context.document["res/layout/bili_app_layout_brand_splash_fragment.xml"].use { dom ->
             dom["androidx.constraintlayout.widget.ConstraintLayout"]["android:background"] =
                 "@color/$COLOR_NAME_BILIROAMING_BG_SPLASH"
         }
@@ -98,7 +98,7 @@ object SplashPatch : ResourcePatch() {
         styleName: String,
         name: String,
         value: String,
-    ) = context.xmlEditor[resourceFile].use { dom ->
+    ) = context.document[resourceFile].use { dom ->
         dom["resources"].children().find {
             it.tagName == "style" && it["name"] == styleName
         }?.appendChild("item") {
@@ -112,7 +112,7 @@ object SplashPatch : ResourcePatch() {
         resourceFile: String,
         name: String,
         value: String
-    ) = context.xmlEditor[resourceFile].use {
+    ) = context.document[resourceFile].use {
         it["resources"].appendChild("color") {
             this["name"] = name
             textContent = value

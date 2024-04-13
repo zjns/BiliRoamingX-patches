@@ -19,7 +19,7 @@ import app.revanced.util.set
 )
 object InjectDataProviderPatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
-        context.xmlEditor["AndroidManifest.xml"].use { dom ->
+        context.document["AndroidManifest.xml"].use { dom ->
             val packageName = dom["manifest"]["package"]
             dom["application"].appendChild("provider") {
                 this["android:name"] = "app.revanced.bilibili.content.BiliDocumentsProvider"
