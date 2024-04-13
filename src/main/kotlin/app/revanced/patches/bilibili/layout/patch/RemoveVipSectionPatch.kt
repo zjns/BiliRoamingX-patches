@@ -1,12 +1,13 @@
 package app.revanced.patches.bilibili.layout.patch
 
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchException
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
-import com.android.tools.smali.dexlib2.Opcode
+import app.revanced.patches.bilibili.utils.cloneMutable
+import app.revanced.util.findMutableMethodOf
 
 @Patch(
     name = "Remove vip section",
@@ -15,29 +16,37 @@ import com.android.tools.smali.dexlib2.Opcode
 )
 object RemoveVipSectionPatch : BytecodePatch() {
     override fun execute(context: BytecodeContext) {
-        val homeUserCenterFragmentClass = context.findClass("Ltv/danmaku/bili/ui/main2/mine/HomeUserCenterFragment;")
+        val userCenterFragmentType = "Ltv/danmaku/bili/ui/main2/mine/HomeUserCenterFragment;"
+        val homeUserCenterFragmentClass = context.findClass(userCenterFragmentType)
             ?: throw PatchException("not found HomeUserCenterFragment")
-        homeUserCenterFragmentClass.mutableClass.let { clazz ->
-            val viewField = clazz.fields.find {
-                it.type == "Ltv/danmaku/bili/ui/main2/mine/widgets/MineVipEntranceView;"
-            } ?: throw PatchException("not found field of type MineVipEntranceView")
-            val method = clazz.methods.first { it.name == "onCreateView" }
-            val insertIndex = method.implementation!!.instructions.indexOfLast { it.opcode == Opcode.RETURN_OBJECT }
-            method.addInstructionsWithLabels(
-                insertIndex, """
-                invoke-static {}, Lapp/revanced/bilibili/patches/RemoveVipSectionPatch;->removeVipSection()Z
-                move-result v0
-                if-eqz v0, :jump
-                iget-object v0, p0, $viewField
-                if-eqz v0, :jump
-                const/16 p2, 0x8
-                invoke-virtual {v0, p2}, Landroid/widget/FrameLayout;->setVisibility(I)V
-                const/4 p2, 0x0
-                iput-object p2, p0, $viewField
-                :jump
-                nop
-            """.trimIndent()
-            )
+        homeUserCenterFragmentClass.mutableClass.run {
+            val method = methods.first { it.name == "onResume" }
+            method.cloneMutable(registerCount = 1, clearImplementation = true).apply {
+                method.name += "_Origin"
+                addInstructions(
+                    """
+                    invoke-virtual {p0}, $method
+                    invoke-static {p0}, Lapp/revanced/bilibili/patches/RemoveVipSectionPatch;->onUserCenterFragmentResume($userCenterFragmentType)V
+                    return-void
+                """.trimIndent()
+                )
+            }.also { methods.add(it) }
+            val iOnSkinChangeMethod = interfaces.firstNotNullOf { c ->
+                context.classes.find { it.type == c }?.methods?.singleOrNull()?.takeIf {
+                    it.parameterTypes == listOf("Lcom/bilibili/lib/ui/garb/Garb;") && it.returnType == "V"
+                }
+            }
+            val onSkinChangeMethod = findMutableMethodOf(iOnSkinChangeMethod)
+            onSkinChangeMethod.cloneMutable(registerCount = 2, clearImplementation = true).apply {
+                onSkinChangeMethod.name += "_Origin"
+                addInstructions(
+                    """
+                    invoke-virtual {p0, p1}, $onSkinChangeMethod    
+                    invoke-static {p0}, Lapp/revanced/bilibili/patches/RemoveVipSectionPatch;->onUserCenterFragmentSkinChanged($userCenterFragmentType)V
+                    return-void
+                """.trimIndent()
+                )
+            }.also { methods.add(it) }
         }
     }
 }
