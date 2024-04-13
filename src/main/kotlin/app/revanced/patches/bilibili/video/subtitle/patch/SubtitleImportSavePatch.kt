@@ -16,11 +16,13 @@ import app.revanced.patches.bilibili.video.subtitle.fingerprints.FunctionWidgetT
 import app.revanced.patches.bilibili.video.subtitle.fingerprints.PlayerSubtitleFunctionWidgetFingerprint
 import app.revanced.patches.bilibili.video.subtitle.fingerprints.SetDmViewReplyFingerprint
 import app.revanced.util.exception
+import app.revanced.util.getReference
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.AnnotationVisibility
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
+import com.android.tools.smali.dexlib2.iface.reference.StringReference
 
 @Patch(
     name = "Subtitle import and save",
@@ -112,7 +114,9 @@ object SubtitleImportSavePatch : MultiMethodBytecodePatch(
         val widgetTokenClass = FunctionWidgetTokenFingerprint.result?.classDef?.type
             ?: throw FunctionWidgetTokenFingerprint.exception
         val hideWidgetMethod = widgetResult.classDef.methods.first {
-            it.parameterTypes == listOf(widgetTokenClass) && it.returnType == "V"
+            it.parameterTypes == listOf(widgetTokenClass) && it.returnType == "V" && it.implementation!!.instructions.any { inst ->
+                inst.opcode == Opcode.CONST_STRING && (inst.getReference<StringReference>().string.contains("hide widget"))
+            }
         }.name
         val widgetTokenField = context.classes.first { it.type == absWidgetClass }.fields.first {
             it.type == widgetTokenClass
