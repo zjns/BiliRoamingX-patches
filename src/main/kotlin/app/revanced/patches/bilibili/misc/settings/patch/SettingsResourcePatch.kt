@@ -62,8 +62,8 @@ object SettingsResourcePatch : ResourcePatch() {
     )
     private val layouts = arrayOf(
         "biliroaming_dialog_argb_color_choose.xml",
-        "biliroaming_dialog_customize_backup.xml",
         "biliroaming_dialog_color_choose.xml",
+        "biliroaming_dialog_area_server.xml",
     )
 
     override fun execute(context: ResourceContext) {
