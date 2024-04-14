@@ -5,7 +5,6 @@ import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
-import app.revanced.patches.bilibili.misc.integrations.patch.BiliAccountsPatch
 import app.revanced.patches.bilibili.misc.other.fingerprints.MineBindAccountStateFingerprint
 import app.revanced.patches.bilibili.misc.other.fingerprints.SpaceBindAccountStateFingerprint
 import app.revanced.patches.bilibili.utils.cloneMutable
@@ -14,7 +13,6 @@ import app.revanced.util.exception
 @Patch(
     name = "Number format",
     description = "数字格式化补丁",
-    dependencies = [BiliAccountsPatch::class],
     compatiblePackages = [
         CompatiblePackage(name = "tv.danmaku.bili"),
         CompatiblePackage(name = "tv.danmaku.bilibilihd"),

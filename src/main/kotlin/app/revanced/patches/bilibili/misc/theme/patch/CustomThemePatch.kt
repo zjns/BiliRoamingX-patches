@@ -11,9 +11,9 @@ import app.revanced.patches.bilibili.utils.cloneMutable
 import app.revanced.patches.bilibili.utils.removeFinal
 import app.revanced.patches.bilibili.utils.toPublic
 import app.revanced.util.exception
+import app.revanced.util.getReference
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
-import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
 @Patch(
@@ -166,12 +166,10 @@ object CustomThemePatch : BytecodePatch(
         } ?: throw ThemeProcessorFingerprint.exception
 
         WebActivityBuildUriFingerprint.result?.method?.implementation?.instructions?.firstNotNullOfOrNull { inst ->
-            if (inst.opcode == Opcode.INVOKE_STATIC && inst is Instruction35c) {
-                (inst.reference as MethodReference).let {
-                    if (it.parameterTypes.isEmpty() && it.returnType == "I") it.definingClass else null
-                }
+            if (inst.opcode == Opcode.INVOKE_STATIC) inst.getReference<MethodReference>().let {
+                if (it.parameterTypes.isEmpty() && it.returnType == "I") it.definingClass else null
             } else null
-        }?.let { context.findClass(it)!! }?.mutableClass?.fields?.find {
+        }?.let { context.findClass(it) }?.mutableClass?.fields?.find {
             it.type == "Landroid/util/SparseArray;"
         }?.let { field ->
             field.accessFlags = field.accessFlags.toPublic().removeFinal()
