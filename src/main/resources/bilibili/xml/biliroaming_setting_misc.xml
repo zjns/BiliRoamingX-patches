@@ -59,8 +59,11 @@
             android:summary="@string/biliroaming_custom_theme_summary" />
         <androidx.preference.SwitchPreferenceCompat
             android:key="skin"
-            android:title="@string/biliroaming_skin_title"
-            android:summary="@string/biliroaming_skin_summary" />
+            android:title="@string/biliroaming_skin_title" />
+        <androidx.preference.Preference
+          android:key="skin_json_pref"
+          android:dependency="skin"
+          android:title="@string/biliroaming_skin_json_pref_title" />
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory
